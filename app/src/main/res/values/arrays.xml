@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_of_friend">
+        <item>엄마</item>
+        <item>아빠</item>
+        <item>동생</item>
+        <item>형/오빠</item>
+        <item>언니/누나</item>
+        <item>친구</item>
+        <item>연인</item>
+        <item>소중한 사람</item>
+    </string-array>
+
+
+
+</resources>
