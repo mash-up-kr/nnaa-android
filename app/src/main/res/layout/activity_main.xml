@@ -21,6 +21,7 @@
         android:foregroundGravity="center"
         android:src="@drawable/main_fab"
         android:backgroundTint="@android:color/white"
+        app:borderWidth="0dp"
         app:layout_anchor="@id/layout_bottomBar" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
