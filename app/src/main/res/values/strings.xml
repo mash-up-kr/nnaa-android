@@ -11,7 +11,7 @@
     <string name="lover">Lover</string>
     <string name="vip">VIP</string>
     <string name="next">Next</string>
-    <string name="youaremy">To me,\n%s is my</string>
+    <string name="you_are_my">To me,\n%s is my</string>
 
 
 </resources>
