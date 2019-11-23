@@ -11,7 +11,9 @@
     <string name="lover">Lover</string>
     <string name="vip">VIP</string>
     <string name="next">Next</string>
-    <string name="you_are_my">To me,\n%s is my</string>
+    <string name="you_are_my">I will ask to <bold>%s</bold>\nTo me, %s is my</string>
+    <string name="cancle">cancle</string>
+    <string name="lets_start">Let\'s Start</string>
 
 
 </resources>
