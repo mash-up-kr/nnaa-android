@@ -30,8 +30,8 @@ public class SetTypeOfFriendActivity extends AppCompatActivity {
         Button nextbtninTOF = findViewById(R.id.next_btn_in_type_of_friend);
 
         Resources res = getResources();
-        String yourname = "Seulgi";
-        String iswhom = String.format(res.getString(R.string.you_are_my), yourname);
+        String yourname = "슬기짱짱";
+        String iswhom = String.format(res.getString(R.string.you_are_my), yourname, yourname);
         TextView youaremy = findViewById(R.id.you_are_my);
         youaremy.setText(iswhom);
     }
