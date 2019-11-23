@@ -6,4 +6,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
 
+    <!-- Main -->
+    <color name="main_tab">#2a4bff</color>
 </resources>
