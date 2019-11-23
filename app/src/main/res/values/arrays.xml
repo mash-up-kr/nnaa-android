@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_of_friend">
+        <item>@string/mother</item>
+        <item>@string/father</item>
+        <item>@string/younger</item>
+        <item>@string/sister</item>
+        <item>@string/brother</item>
+        <item>@string/friend</item>
+        <item>@string/lover</item>
+        <item>@string/vip</item>
+    </string-array>
+
+
+
+</resources>

@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">NNAA</string>
+
+    <!-- 답변자 종류 -->
+    <string name="mother">Mother</string>
+    <string name="father">Father</string>
+    <string name="younger">Younger</string>
+    <string name="brother">Brother</string>
+    <string name="sister">Sister</string>
+    <string name="friend">Friend</string>
+    <string name="lover">Lover</string>
+    <string name="vip">VIP</string>
+    <string name="next">Next</string>
+    <string name="youaremy">To me,\n%s is my</string>
+
+
 </resources>

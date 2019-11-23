@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SetTypeOfFriendActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:paddingTop="80dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/profileimage"/>
+
+            <TextView
+                android:id="@+id/youaremy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youaremy"
+                android:textColor="@color/colorBlack"
+                android:textSize="40sp"
+                android:paddingTop="20dp"/>
+
+            <!--TODO : 드롭다운 뜨는거 next버튼 위로만 뜨게하고싶음-->
+            <Spinner
+                android:id="@+id/spnTypeOfFriend"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <Button
+                android:id="@+id/nextbtninTOF"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/next"
+                android:textColor="@color/colorWhite"
+                android:textSize="40sp"
+                android:background="@color/colorBlack">
+
+            </Button>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
