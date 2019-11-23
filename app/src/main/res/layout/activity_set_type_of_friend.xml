@@ -16,9 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:paddingTop="80dp"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp"
-
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
             android:orientation="vertical">
 
             <ImageView
@@ -28,12 +27,13 @@
                 android:src="@drawable/profileimage"/>
 
             <TextView
+                android:id="@+id/youaremy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ㅇㅇ님은 나에게"
+                android:text="@string/youaremy"
                 android:textColor="@color/colorBlack"
-                android:paddingTop="20dp"
-                android:textSize="40sp"/>
+                android:textSize="40sp"
+                android:paddingTop="20dp"/>
 
             <!--TODO : 드롭다운 뜨는거 next버튼 위로만 뜨게하고싶음-->
             <Spinner
@@ -44,16 +44,14 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="3">
 
-            <!-- TODO : 버튼 크기 레이아웃 크기에 맞춰서 줄이고 싶음 -->
             <Button
                 android:id="@+id/nextbtninTOF"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                android:text="다음으로"
+                android:text="@string/next"
                 android:textColor="@color/colorWhite"
                 android:textSize="40sp"
                 android:background="@color/colorBlack">
