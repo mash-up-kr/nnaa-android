@@ -7,4 +7,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlue">#2a4bff</color>
 
+    <!-- Main -->
+    <color name="main_tab">#2a4bff</color>
 </resources>

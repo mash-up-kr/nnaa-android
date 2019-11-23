@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Main Activity -->
+    <dimen name="main_qa_btn_width">195dp</dimen>
+    <dimen name="main_qa_btn_height">94dp</dimen>
+    <dimen name="main_qa_btn_txt_size_big">20sp</dimen>
+    <dimen name="main_qa_btn_txt_size_mid">13sp</dimen>
+    <dimen name="main_qa_btn_txt_size_small">11sp</dimen>
+
+</resources>
