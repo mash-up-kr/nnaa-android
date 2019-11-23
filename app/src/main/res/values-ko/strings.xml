@@ -11,6 +11,6 @@
     <string name="father">아빠</string>
     <string name="brother">오빠/형</string>
     <string name="next">다음으로</string>
-    <string name="youaremy">%s님은\n나에게</string>
+    <string name="you_are_my">%s님은\n나에게</string>
 
 </resources>
