@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.data.HowQuestionItem;
@@ -119,13 +120,16 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         TextView txt_long;
         Button img_long;
+        CardView card_view2;
 
         SecondViewHolder(View itemView) {
             super(itemView);
 
             txt_long = itemView.findViewById(R.id.txt_long);
             img_long = itemView.findViewById(R.id.img_long);
-            img_long.setOnClickListener(this);
+            card_view2 = itemView.findViewById(R.id.card_view2);
+           // img_long.setOnClickListener(this);
+            card_view2.setOnClickListener(this);
         }
 
         public void onClick(View v) {
