@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">NNAA</string>
+    <string name="app_name">너나알아?</string>
+
+    <string-array name="questionlist">
+        <item>(선택없음)</item>
+        <item>아빠</item>
+        <item>동생</item>
+        <item>누나/언니</item>
+        <item>형/오빠</item>
+        <item>소중한 사람</item>
+        <item>연인</item>
+    </string-array>
+
 </resources>
