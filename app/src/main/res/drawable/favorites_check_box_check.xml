@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:height="25dp"
+                android:width="25dp" />
+            <solid android:color="#e3e3e3" />
+        </shape>
+    </item>
+    <item
+        >
+        <shape android:shape="oval">
+            <size
+                android:width="25dp"
+                android:height="25dp" />
+            <solid android:color="#e3e3e3" />
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/star_favorite_1498_copy"
+        android:width="25dp"
+        android:height="25dp"></item>
+</layer-list>
