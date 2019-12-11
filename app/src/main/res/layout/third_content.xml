@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <!-- A CardView that contains a TextView -->
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/card_view3"
+        android:layout_width="327dp"
+        android:layout_height="139dp"
+        android:layout_marginBottom="8dp"
+        card_view:cardCornerRadius="20dp"
+        >
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/txt_ox"
+            android:layout_width="36dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginRight="271dp"
+            android:layout_marginBottom="102dp"
+            android:textColor="#2d2e35"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/img_good"
+            android:textStyle="bold"
+            android:text="O"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginLeft="102dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/img_corner" />
+
+        <Button
+            android:id="@+id/img_bad"
+            android:text="X"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginLeft="171dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/img_corner" />
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
