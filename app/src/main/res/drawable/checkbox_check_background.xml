@@ -8,24 +8,9 @@
             <solid android:color="#ff6356" />
         </shape>
     </item>
+
     <item
-        android:bottom="2dp"
-        android:left="2dp"
-        android:right="2dp"
-        android:top="2dp">
-        <shape android:shape="oval">
-            <size
-                android:width="25dp"
-                android:height="25dp" />
-            <solid android:color="#ff6356" />
-        </shape>
-    </item>
-    <item
-        android:bottom="2dp"
-        android:left="2dp"
-        android:right="2dp"
-        android:top="2dp"
         android:drawable="@drawable/ic_check_white"
-        android:width="25dp"
-        android:height="25dp"></item>
+        android:width="10dp"
+        android:height="8dp"></item>
 </layer-list>

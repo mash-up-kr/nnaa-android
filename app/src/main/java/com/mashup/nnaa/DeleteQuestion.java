@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.data.DeleteQuestionItem;
+import com.mashup.nnaa.util.DeleteAdapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,8 +28,8 @@ public class DeleteQuestion extends AppCompatActivity {
         setContentView(R.layout.activity_delete_question);
 
 
-        btn_delete = (Button) findViewById(R.id.btn_delete);
-        btn_delete_cancel = (Button) findViewById(R.id.btn_delete_cancel);
+        btn_delete = findViewById(R.id.btn_delete);
+        btn_delete_cancel = findViewById(R.id.btn_delete_cancel);
 
         btn_delete_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

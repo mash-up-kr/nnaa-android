@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.util;
 
 
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.DeleteQuestionItem;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
         return deleteData.size();
     }
 
-    void addItem(DeleteQuestionItem deleteitem) {
+    public void addItem(DeleteQuestionItem deleteitem) {
         deleteData.add(deleteitem);
     }
 

@@ -1,17 +1,15 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.util;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.FavoritesItem;
 
 import java.util.ArrayList;
@@ -42,7 +40,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     }
 
-    void addItem(FavoritesItem fitem) {
+    public void addItem(FavoritesItem fitem) {
 
         fDataset.add(fitem);
     }
