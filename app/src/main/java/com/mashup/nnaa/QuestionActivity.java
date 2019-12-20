@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.util.QuestionAdapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,8 +31,8 @@ public class QuestionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        btn_next = (Button) findViewById(R.id.btn_next);
-        btn_cancel = (Button) findViewById(R.id.btn_cancel);
+        btn_next = findViewById(R.id.btn_next);
+        btn_cancel = findViewById(R.id.btn_cancel);
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +41,7 @@ public class QuestionActivity extends AppCompatActivity {
                 startActivity(cancel_intent);
             }
         });
-        img_delete = (ImageView) findViewById(R.id.img_delete);
+        img_delete = findViewById(R.id.img_delete);
 
         img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-        img_add = (ImageView) findViewById(R.id.img_add);
+        img_add = findViewById(R.id.img_add);
 
         img_add.setOnClickListener(new View.OnClickListener() {
             @Override

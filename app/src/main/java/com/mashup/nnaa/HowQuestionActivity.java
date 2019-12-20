@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
 
 import com.mashup.nnaa.data.HowQuestionItem;
+import com.mashup.nnaa.util.HowQuestionAdapter;
 
 import java.util.ArrayList;
 
-import static com.mashup.nnaa.HowQuestionAdapter.FIRST_CONTENT;
-import static com.mashup.nnaa.HowQuestionAdapter.SECOND_CONTENT;
-import static com.mashup.nnaa.HowQuestionAdapter.THIRD_CONTENT;
+import static com.mashup.nnaa.util.HowQuestionAdapter.FIRST_CONTENT;
+import static com.mashup.nnaa.util.HowQuestionAdapter.SECOND_CONTENT;
+import static com.mashup.nnaa.util.HowQuestionAdapter.THIRD_CONTENT;
 
 public class HowQuestionActivity extends AppCompatActivity {
 

@@ -1,8 +1,9 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.util;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.QuestionActivity;
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.HowQuestionItem;
 
 import java.util.ArrayList;
@@ -25,9 +28,9 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public static final int THIRD_CONTENT = 2;
 
     Context context;
-    private ArrayList<HowQuestionItem> nDataset = null;
+    private ArrayList<HowQuestionItem> nDataset;
 
-    HowQuestionAdapter(ArrayList<HowQuestionItem> hItems) {
+    public HowQuestionAdapter(ArrayList<HowQuestionItem> hItems) {
         nDataset = hItems;
     }
 
@@ -62,24 +65,17 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((FirstViewHolder) viewHolder).img_how_item1.setId(nDataset.get(position).getImgbtn());
             ((FirstViewHolder) viewHolder).img_how_item2.setId(nDataset.get(position).getImgbtn());
             ((FirstViewHolder) viewHolder).img_how_item3.setId(nDataset.get(position).getImgbtn());
-//            ((FirstViewHolder) viewHolder).img_how_item.setOnClickListener((View.OnClickListener) nDataset.get(position).getImgbtn());
-//            ((FirstViewHolder) viewHolder).img_how_item1.setOnClickListener((View.OnClickListener) nDataset.get(position).getImgbtn());
-//            ((FirstViewHolder) viewHolder).img_how_item2.setOnClickListener((View.OnClickListener) nDataset.get(position).getImgbtn());
-//            ((FirstViewHolder) viewHolder).img_how_item3.setOnClickListener((View.OnClickListener) nDataset.get(position).getImgbtn());
 
 
         } else if (viewHolder instanceof SecondViewHolder) {
             ((SecondViewHolder) viewHolder).txt_long.setText(nDataset.get(position).getQuestionary2());
             ((SecondViewHolder) viewHolder).img_long.setId(nDataset.get(position).getImgbtn());
-//            ((SecondViewHolder) viewHolder).img_long.setOnClickListener((View.OnClickListener) nDataset.get(position).getImgbtn());
 
 
         } else {
             ((ThirdViewHolder) viewHolder).txt_ox.setText(nDataset.get(position).getQuestionary2());
             ((ThirdViewHolder) viewHolder).img_good.setId(nDataset.get(position).getImgbtn());
             ((ThirdViewHolder) viewHolder).img_bad.setId(nDataset.get(position).getImgbtn());
-//            ((ThirdViewHolder) viewHolder).img_good.setOnClickListener((View.OnClickListener) nDataset.get(position).getImgbtn());
-//            ((ThirdViewHolder) viewHolder).img_bad.setOnClickListener((View.OnClickListener) nDataset.get(position).getImgbtn());
 
 
         }
@@ -116,7 +112,7 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    public class SecondViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class SecondViewHolder extends RecyclerView.ViewHolder {
 
         TextView txt_long;
         Button img_long;
@@ -128,15 +124,29 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             txt_long = itemView.findViewById(R.id.txt_long);
             img_long = itemView.findViewById(R.id.img_long);
             card_view2 = itemView.findViewById(R.id.card_view2);
-           // img_long.setOnClickListener(this);
-            card_view2.setOnClickListener(this);
-        }
 
-        public void onClick(View v) {
+            card_view2.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
 
-            Toast.makeText(v.getContext(), "주관식 질문으로 넘어갈게요!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(v.getContext(), QuestionActivity.class);
-            v.getContext().startActivity(intent);
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            Toast.makeText(view.getContext(), "주관식 질문으로 넘어갈게요!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(view.getContext(), QuestionActivity.class);
+                            img_long.setBackgroundColor(view.getContext().getResources().getColor(R.color.blue));
+                            view.getContext().startActivity(intent);
+
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+
+                            img_long.setBackgroundColor(view.getContext().getResources().getColor(R.color.grey));
+                            break;
+                        }
+                    }
+                    return false;
+                }
+            });
         }
     }
 

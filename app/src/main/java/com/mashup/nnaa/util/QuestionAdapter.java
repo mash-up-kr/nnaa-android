@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.util;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.QuestionItem;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         return mDataset.size();
     }
 
-    void addItem(QuestionItem aitem) {
+    public void addItem(QuestionItem aitem) {
 
         mDataset.add(aitem);
     }
