@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.media.Image;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.mashup.nnaa.R;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initFragments() {
-        fragmentMap.put(Page.HOME, MaimHomeFragment.newInstance());
+        fragmentMap.put(Page.HOME, MainHomeFragment.newInstance());
         fragmentMap.put(Page.ALARM, MainAlarmFragment.newInstance());
         fragmentMap.put(Page.MY_LIST, MainMyListFragment.newInstance());
         fragmentMap.put(Page.SETTINGS, MainSettingFragment.newInstance());

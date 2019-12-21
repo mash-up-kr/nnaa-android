@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import com.mashup.nnaa.R;
 
-public class MaimHomeFragment extends Fragment {
-    public static MaimHomeFragment newInstance() {
-        MaimHomeFragment fragment = new MaimHomeFragment();
+public class MainHomeFragment extends Fragment {
+    public static MainHomeFragment newInstance() {
+        MainHomeFragment fragment = new MainHomeFragment();
 
         return fragment;
     }
