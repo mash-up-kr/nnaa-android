@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">너나알아?</string>
 
+    <string name="StringValue">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">
         <item>(선택없음)</item>
         <item>아빠</item>
@@ -11,6 +12,19 @@
         <item>연인</item>
     </string-array>
 
+    <!-- 답변자 종류 -->
+    <string name="mother">Mother</string>
+    <string name="father">Father</string>
+    <string name="younger">Younger</string>
+    <string name="brother">Brother</string>
+    <string name="sister">Sister</string>
+    <string name="friend">Friend</string>
+    <string name="lover">Lover</string>
+    <string name="vip">VIP</string>
+    <string name="next">Next</string>
+    <string name="you_are_my">I will ask to <bold>%s</bold>\nTo me, %s is my</string>
+    <string name="cancle">cancle</string>
+    <string name="lets_start">Let\'s Start</string>
 
 
 </resources>
