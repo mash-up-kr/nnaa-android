@@ -17,7 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SetTypeOfFriendActivity"></activity>
+        <activity android:name=".FavoritesActivity" />
+        <activity android:name=".DeleteQuestion" />
+        <activity android:name=".QuestionActivity" />
+        <activity android:name=".HowQuestionActivity"/>
+        <activity android:name=".SetTypeOfFriendActivity"/>
     </application>
 
 </manifest>

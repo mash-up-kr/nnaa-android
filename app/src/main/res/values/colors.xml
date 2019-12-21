@@ -6,7 +6,8 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlue">#2a4bff</color>
-
+    <color name="grey">#d8d8d8</color>
     <!-- Main -->
     <color name="main_tab">#2a4bff</color>
+
 </resources>

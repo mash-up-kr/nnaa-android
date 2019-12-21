@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2d2e35"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_recycler"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="160dp"
+        android:contentDescription="@string/StringValue"
+        android:background="@drawable/corner_shape"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favorites_recycler"
+        android:layout_below="@id/img_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:background="#ffffff"
+        android:scrollbars="vertical" />
+
+
+    <ImageButton
+        android:id="@+id/imgbtn_past"
+        android:layout_width="13dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="59dp"
+        android:background="#ffffff"
+        android:src="@drawable/arrow_left_335"
+        />
+
+    <ImageButton
+        android:id="@+id/imgbtn_cancel"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="#ffffff"
+        android:layout_marginLeft="312dp"
+        android:layout_marginTop="57dp"
+        android:src="@drawable/cancel_img" />
+
+    <EditText
+        android:id="@+id/edit_custom"
+        android:layout_width="309dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginRight="23dp"
+        android:background="#efefef"
+        android:hint="          질문을 직접 입력해보세요"
+        android:textColorHint="#2d2e35"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/img_favorites"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="168dp"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/star_favorite_1498" />
+
+    <TextView
+        android:id="@+id/txt_favorites"
+        android:layout_width="159dp"
+        android:layout_height="14dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="166dp"
+        android:text="즐겨 찾기에 추가된 질문"
+        android:textColor="#2d2e35"
+        android:textSize="13sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#2a4bff"
+        android:text="입력 완료"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+</RelativeLayout>
