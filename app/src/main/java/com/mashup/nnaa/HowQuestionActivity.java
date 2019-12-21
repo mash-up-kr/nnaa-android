@@ -22,7 +22,6 @@ public class HowQuestionActivity extends AppCompatActivity {
     private HowQuestionAdapter adapter2;
     private ArrayList<HowQuestionItem> mList;
 
-    //   ArrayList<HowQuestionItem> mList = new ArrayList<HowQuestionItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +49,7 @@ public class HowQuestionActivity extends AppCompatActivity {
         //여기서 int 값을 뭐를 주던 뷰타입에따라 화면이 보여짐(null 제외)
         mList.add(new HowQuestionItem("객관식", R.id.img_how_item, FIRST_CONTENT));
 
-        mList.add(new HowQuestionItem("주관식",R.id.img_long, SECOND_CONTENT));
-
+        mList.add(new HowQuestionItem("주관식", R.id.img_long, SECOND_CONTENT));
 
         mList.add(new HowQuestionItem("O/X", R.id.img_good, THIRD_CONTENT));
 

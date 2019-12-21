@@ -8,13 +8,13 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        card_view:cardElevation="0dp"
         android:id="@+id/my_card_view"
         android:layout_width="359dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        card_view:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
