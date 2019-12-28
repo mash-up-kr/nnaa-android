@@ -26,16 +26,53 @@
                 android:id="@+id/you_are_my"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="103dp"
+                android:paddingTop="93dp"
                 android:text="@string/you_are_my"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:lineSpacingExtra="6sp"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <ImageButton
+                    android:id="@+id/rel_btn_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/rel_btn_arr_l"/>
+
+                <TextView
+                    android:id="@+id/type_of_friend"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/mother"
+                    android:textSize="30sp"
+                    android:textAlignment="center"
+                    android:textColor="#2d2e35"/>
+
+                <ImageButton
+                    android:id="@+id/rel_btn_r"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/rel_btn_arr_r"
+                    android:background="@android:color/transparent"/>
+
+
+            </LinearLayout>
+
+            <!--
             <Spinner
                 android:id="@+id/spinner_type_of_friend"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"/>
+                android:layout_height="80dp"/>-->
 
         </LinearLayout>
         <FrameLayout
