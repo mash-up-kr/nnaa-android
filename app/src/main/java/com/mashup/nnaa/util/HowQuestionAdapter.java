@@ -133,7 +133,7 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         case MotionEvent.ACTION_DOWN: {
                             Toast.makeText(view.getContext(), "주관식 질문으로 넘어갈게요!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(view.getContext(), QuestionActivity.class);
-                            img_long.setBackgroundColor(view.getContext().getResources().getColor(R.color.blue));
+                            img_long.setBackgroundColor(view.getContext().getResources().getColor(R.color.colorBlue));
                             view.getContext().startActivity(intent);
 
                             break;
