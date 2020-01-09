@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">NNAA</string>
 
-    <string name="StringValue">이미지가 열리지 않습니다.</string>
+    <string name="StringValue" translatable="false">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">
         <item>(선택없음)</item>
         <item>아빠</item>
@@ -26,4 +26,9 @@
     <string name="cancle">cancle</string>
     <string name="lets_start">Let\'s Start</string>
 
+    <!--페이스북 앱 id-->
+    <string name="facebook_app_key" translatable="false">2479070769047146</string>
+
+    <!--카카오 앱 키-->
+    <string name="kakao_app_key" translatable="false">cc5cc66f93ddfc88c141def9dbe6934a</string>
 </resources>
