@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.SetTypeOfFriendActivity;
+import com.mashup.nnaa.main.home.MainHomeFragment;
 
 import java.util.HashMap;
 

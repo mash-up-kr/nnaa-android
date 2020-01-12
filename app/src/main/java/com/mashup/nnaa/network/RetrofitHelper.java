@@ -42,4 +42,10 @@ public class RetrofitHelper {
         Call<UserInfo> userInfo = service.getUserInfo();
         userInfo.enqueue(callback);
     }
+
+    public void getReceivedQuestionnaire(Callback<List<QuestionnaireDto>> callback) {
+        QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
+        Call<List<QuestionnaireDto>> receivedQuestionnaire = service.getReceiveQuestionnaires();
+        receivedQuestionnaire.enqueue(callback);
+    }
 }
