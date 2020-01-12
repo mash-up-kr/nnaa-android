@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Main page -->
+    <string name="main_welcome">오늘도 더 알고싣은\n<b>%s님</b> 안녕하세요.</string>
+    <string name="name_sent_this_questions">%s님이 이 질문을 보냈어요.</string>
+
     <string name="app_name">NNAA</string>
     <string name="mother">엄마</string>
     <string name="younger">동생</string>
