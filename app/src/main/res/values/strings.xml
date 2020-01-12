@@ -3,7 +3,8 @@
 
     <!-- Main page -->
     <string name="main_welcome">Glad to see you,\nWelcome <b>%s</b>.</string>
-    <string name="name_sent_this_questions">%s has sent questions.</string>
+    <string name="main_home_name_sent_this_questions">%s has sent questions.</string>
+    <string name="main_home_no_questionnaires">There are no received questions.</string>
 
     <string name="StringValue">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">
