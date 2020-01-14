@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
     private Retrofit retrofit;
-    public final String ENTRY_URL = "http://52.78.191.221:8080/";
+    public final String ENTRY_URL = "https://thisisyourbackend.kr/";
 
     // singleton
     private static final RetrofitHelper _instance = new RetrofitHelper();
