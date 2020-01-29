@@ -25,6 +25,9 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
     ArrayList<String> type = new ArrayList<>();
     Button cancleBtn, nextBtn;
 
+    String name = "";
+    String number = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +52,12 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         type.add(res.getString(R.string.lover));
         type.add(res.getString(R.string.vip));
 
+        // load friend info
+        name = getIntent().getStringExtra("name");
+        number = getIntent().getStringExtra("number");
 
-        String yourname = "슬기짱짱";
-        String iswhom = String.format(res.getString(R.string.you_are_my), yourname, yourname);
+
+        String iswhom = String.format(res.getString(R.string.you_are_my), name, name);
         TextView youaremy = findViewById(R.id.you_are_my);
         youaremy.setText(iswhom);
 
