@@ -2,10 +2,12 @@ package com.mashup.nnaa.network;
 
 import com.mashup.nnaa.network.model.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -18,7 +20,7 @@ public interface QuestionControllerService {
                                                @Path("type") String type);
 
     @POST("question")
-    Call<Question> postQuestion(NewQuestionDto newQuestionDto);
+    Call<Question> postQuestion(@Body HashMap<String, String> body);
 
     @GET("question/bookmark")
     Call<List<Question>> getBookmarkQuestions();
