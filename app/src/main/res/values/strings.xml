@@ -9,6 +9,14 @@
     <string name="main_home_name_sent_this_questions">%s has sent questions.</string>
     <string name="main_home_no_questionnaires">There are no received questions.</string>
 
+    <!-- Setting page -->
+    <string name="setting_title">Setting page\nfor %s</string>
+    <string-array name="settings">
+        <item>Sign out</item>
+        <item>Delete account</item>
+        <item>Blocked users</item>
+    </string-array>
+
     <string name="StringValue">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">
         <item>(선택없음)</item>
