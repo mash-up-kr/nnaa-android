@@ -24,9 +24,9 @@
         <activity android:name=".QuestionActivity" />
         <activity android:name=".HowQuestionActivity"/>
         <activity android:name=".SetTypeOfFriendActivity"/>
-        <activity android:name=".SelectRelationActivity">
-
-        </activity>
+        <activity android:name=".SelectRelationActivity"/>
+        <activity android:name=".AnswerTextActivity"/>
+        <activity android:name=".AnswerMultipleChoiceActivity"/>
     </application>
 
 </manifest>
