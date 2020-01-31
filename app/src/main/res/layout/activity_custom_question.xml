@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2d2e35"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/corner_shape"
+        android:contentDescription="@string/StringValue" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/custom_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="98dp"
+        android:layout_marginBottom="60dp"
+        android:layout_gravity="bottom"
+        android:background="#ffffff"
+        android:scrollbars="vertical" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_past"
+        android:layout_width="13dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="59dp"
+        android:background="#ffffff"
+        android:src="@drawable/arrow_left_335"
+        android:contentDescription="@string/StringValue" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_cancel"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="312dp"
+        android:layout_marginTop="57dp"
+        android:background="#ffffff"
+        android:src="@drawable/cancel_img"
+        android:contentDescription="@string/StringValue" />
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="#2d2e35"
+        android:text="@string/btn_done"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+</FrameLayout>
