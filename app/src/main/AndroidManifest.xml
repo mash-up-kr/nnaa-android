@@ -17,7 +17,8 @@
         <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->
+            android:value="@string/facebook_app_key" />
+        <!-- 카카오톡 메타데이터 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
@@ -35,6 +36,10 @@
         <activity android:name=".QuestionActivity" />
         <activity android:name=".HowQuestionActivity" />
         <activity android:name=".SetTypeOfFriendActivity" />
+
+        <activity
+            android:name=".CustomQuestionActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

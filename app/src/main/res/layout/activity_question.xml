@@ -32,7 +32,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="21dp"
         android:contentDescription="@string/StringValue"
-        android:src="@drawable/plus_1512" />
+        android:src="@drawable/plus_white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler1"
@@ -64,6 +64,5 @@
         android:text="next"
         android:textColor="#ffffff"
         android:textSize="14sp" />
-
 
 </FrameLayout>

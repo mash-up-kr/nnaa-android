@@ -39,9 +39,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.+'
     implementation 'com.googlecode.android-query:android-query:0.25.9' //AQuery
     implementation 'de.hdodenhof:circleimageview:1.2.1' // CircleImageView
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt',
             version: project.KAKAO_SDK_VERSION
 }
+
+apply plugin: 'com.google.gms.google-services'

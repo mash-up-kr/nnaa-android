@@ -31,4 +31,10 @@
 
     <!--카카오 앱 키-->
     <string name="kakao_app_key" translatable="false">cc5cc66f93ddfc88c141def9dbe6934a</string>
+
+    <string name="btn_done" translatable="false">입력 완료</string>
+    <string name="txt_j" translatable="false">주관식</string>
+    <string name="txt_g" translatable="false">객관식</string>
+    <string name="txt_o" translatable="false">O X</string>
+    <string name="four_txt" translatable="false">최대 4개 까지 가능</string>
 </resources>

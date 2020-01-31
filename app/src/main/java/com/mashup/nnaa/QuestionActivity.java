@@ -37,7 +37,7 @@ public class QuestionActivity extends AppCompatActivity {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cancel_intent = new Intent(QuestionActivity.this, HowQuestionActivity.class);
+                Intent cancel_intent = new Intent(QuestionActivity.this, SetTypeOfFriendActivity.class);
                 startActivity(cancel_intent);
             }
         });

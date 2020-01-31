@@ -1,21 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rectangle"
-    tools:ignore="NamespaceTypo">
-    <stroke
-        android:width="2dp"
-        android:color="#ffffff" />
-    <padding
-        android:bottom="10dp"
-        android:left="20dp"
-        android:right="20dp"
-        android:top="10dp" />
-    <corners
-        android:bottomLeftRadius="30dp"
-        android:bottomRightRadius="30dp"
-        android:topLeftRadius="30dp"
-        android:topRightRadius="30dp" />
-
-    <solid android:color="#ffffff" />
-</shape>
+<?xml version="1.0" encoding="utf-8"?><shape xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"    android:id="@+id/rectangle"    tools:ignore="NamespaceTypo">    <stroke        android:width="2dp"        android:color="#ffffff" />    <padding        android:bottom="10dp"        android:left="20dp"        android:right="20dp"        android:top="10dp" />    <corners        android:bottomLeftRadius="30dp"        android:bottomRightRadius="30dp"        android:topLeftRadius="30dp"        android:topRightRadius="30dp" />    <solid android:color="#ffffff" /></shape>

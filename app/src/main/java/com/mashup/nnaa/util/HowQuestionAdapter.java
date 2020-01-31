@@ -66,18 +66,14 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((FirstViewHolder) viewHolder).img_how_item2.setId(nDataset.get(position).getImgbtn());
             ((FirstViewHolder) viewHolder).img_how_item3.setId(nDataset.get(position).getImgbtn());
 
-
         } else if (viewHolder instanceof SecondViewHolder) {
             ((SecondViewHolder) viewHolder).txt_long.setText(nDataset.get(position).getQuestionary2());
             ((SecondViewHolder) viewHolder).img_long.setId(nDataset.get(position).getImgbtn());
-
 
         } else {
             ((ThirdViewHolder) viewHolder).txt_ox.setText(nDataset.get(position).getQuestionary2());
             ((ThirdViewHolder) viewHolder).img_good.setId(nDataset.get(position).getImgbtn());
             ((ThirdViewHolder) viewHolder).img_bad.setId(nDataset.get(position).getImgbtn());
-
-
         }
     }
 
@@ -111,7 +107,6 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         }
     }
-
     public class SecondViewHolder extends RecyclerView.ViewHolder {
 
         TextView txt_long;
@@ -133,7 +128,11 @@ public class HowQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         case MotionEvent.ACTION_DOWN: {
                             Toast.makeText(view.getContext(), "주관식 질문으로 넘어갈게요!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(view.getContext(), QuestionActivity.class);
-                            img_long.setBackgroundColor(view.getContext().getResources().getColor(R.color.blue));
+
+                            //img_long.setBackgroundColor(view.getContext().getResources().getColor(R.color.blue));
+
+                            img_long.setBackgroundColor(view.getContext().getResources().getColor(R.color.colorBlue));
+
                             view.getContext().startActivity(intent);
 
                             break;

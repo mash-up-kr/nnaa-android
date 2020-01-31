@@ -2,9 +2,11 @@ package com.mashup.nnaa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -28,6 +30,13 @@ public class SetTypeOfFriendActivity extends AppCompatActivity {
 
         //NextButton
         Button nextbtninTOF = findViewById(R.id.next_btn_in_type_of_friend);
+        nextbtninTOF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SetTypeOfFriendActivity.this, QuestionActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Resources res = getResources();
         String yourname = "슬기짱짱";

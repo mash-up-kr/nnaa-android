@@ -22,7 +22,6 @@ import java.util.List;
 
 public class FavoritesActivity extends AppCompatActivity {
 
-
     private FavoritesAdapter adapter3;
     private ArrayList<FavoritesItem> fList;
     Button btn_favorites;
@@ -54,10 +53,32 @@ public class FavoritesActivity extends AppCompatActivity {
             }
         });
 
+
         init();
 
         getItem();
 
+
+        imgbtn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cancel_intent = new Intent(FavoritesActivity.this, QuestionActivity.class);
+                startActivity(cancel_intent);
+            }
+        });
+
+        init();
+
+        getItem();
+
+        edit_custom.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent edit_intent = new Intent(FavoritesActivity.this, CustomQuestionActivity.class);
+                startActivity(edit_intent);
+            }
+        });
 
     }
 
@@ -98,10 +119,6 @@ public class FavoritesActivity extends AppCompatActivity {
 
             adapter3.addItem(fitem);
         }
-
         adapter3.notifyDataSetChanged();
-
-
     }
-
 }
