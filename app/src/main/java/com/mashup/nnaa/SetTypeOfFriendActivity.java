@@ -2,6 +2,7 @@ package com.mashup.nnaa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.icu.text.Edits;
 import android.os.Bundle;
@@ -41,7 +42,14 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
 
         cancleBtn = findViewById(R.id.cancle_btn_in_type_of_friend);
         nextBtn = findViewById(R.id.next_btn_in_type_of_friend);
-
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SetTypeOfFriendActivity.this, QuestionActivity.class);
+                startActivity(intent);
+            }
+        });
+      
         Resources res = getResources();
         type.add(res.getString(R.string.mother));
         type.add(res.getString(R.string.father));

@@ -49,8 +49,9 @@
         android:layout_marginLeft="28dp"
         android:layout_marginTop="96dp"
         android:layout_marginRight="23dp"
-        android:background="#efefef"
-        android:hint="          질문을 직접 입력해보세요"
+        android:background="@drawable/question_corner"
+        android:drawableLeft="@drawable/edit_1482"
+        android:hint=" 질문을 직접 입력해보세요"
         android:textColorHint="#2d2e35"
         android:textSize="13sp"
         android:textStyle="bold" />

@@ -30,7 +30,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.ViewHolder holder, int position) {
 
-
         holder.onBind(fDataset.get(position));
     }
 
@@ -59,7 +58,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             check_box_favorites = itemView.findViewById(R.id.check_box_favorites);
 
             check_box_favorites.setButtonDrawable(R.drawable.favorites_check_box);
-
 
         }
 

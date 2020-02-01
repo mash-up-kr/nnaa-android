@@ -22,7 +22,6 @@ public class HowQuestionActivity extends AppCompatActivity {
     private HowQuestionAdapter adapter2;
     private ArrayList<HowQuestionItem> mList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +51,9 @@ public class HowQuestionActivity extends AppCompatActivity {
         mList.add(new HowQuestionItem("주관식", R.id.img_long, SECOND_CONTENT));
 
         mList.add(new HowQuestionItem("O/X", R.id.img_good, THIRD_CONTENT));
-
-
     }
-
-
 }
+
+
 
 

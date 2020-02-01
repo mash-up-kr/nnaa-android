@@ -36,7 +36,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     }
 
 
-
     @Override
     public int getItemCount() {
         return mDataset.size();
@@ -64,5 +63,4 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             mName.setText(aitem.getQuestionary());
         }
     }
-
 }
