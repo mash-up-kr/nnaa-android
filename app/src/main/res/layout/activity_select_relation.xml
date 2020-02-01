@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlue"
+    tools:context=".SelectRelationActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayout1_in_relation"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/corner_shape">
+
+        <TextView
+            android:id="@+id/you_are_my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="6sp"
+            android:text="@string/you_are_my"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/you_are_my">
+
+            <ImageButton
+                android:id="@+id/rel_btn_l"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/rel_btn_arr_l" />
+
+            <TextView
+                android:id="@+id/type_of_friend"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/mother"
+                android:textAlignment="center"
+                android:textColor="#2d2e35"
+                android:textSize="30sp" />
+
+            <ImageButton
+                android:id="@+id/rel_btn_r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/rel_btn_arr_r" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/rel_img_back"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_above="@+id/under_bar_in_select_relation"
+        android:layout_below="@+id/ConstraintLayout1_in_relation"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/rel_img_back" />
+
+    <LinearLayout
+        android:id="@+id/under_bar_in_select_relation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancle_btn_in_select_relation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:text="@string/cancle"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/next_btn_in_select_relation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/blue_rect_rad_51"
+            android:text="@string/lets_start"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

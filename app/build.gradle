@@ -6,7 +6,6 @@ android {
 
     defaultConfig {
         applicationId "com.mashup.nnaa"
-        //승윤 device 버전 19라 수정
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
@@ -47,6 +46,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt',
             version: project.KAKAO_SDK_VERSION
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

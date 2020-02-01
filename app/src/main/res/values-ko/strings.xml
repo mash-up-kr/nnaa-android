@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Splash -->
+    <string name="splash_permission_error">모든 권한이 승인되어야합니다.\n앱을 다시 실행 후 권한을 승인해주세요.</string>
+
+    <!-- Main page -->
+    <string name="main_welcome">오늘도 더 알고싣은\n<b>%s님</b> 안녕하세요.</string>
+    <string name="main_home_name_sent_this_questions">%s님이 이 질문을 보냈어요.</string>
+
+    <!-- Setting page -->
+    <string name="setting_title">%s님의\n설정 페이지</string>
+    <string-array name="settings">
+        <item>로그아웃</item>
+        <item>탈퇴하기</item>
+        <item>차단하기</item>
+    </string-array>
+
     <string name="app_name">NNAA</string>
     <string name="mother">엄마</string>
     <string name="younger">동생</string>
@@ -14,6 +29,6 @@
     <string name="you_are_my"><bold>%s님</bold>께 질문할게요\n%s님은 저의</string>
     <string name="cancle">cancel</string>
     <string name="lets_start">Let\'s Start</string>
-
+    <string name="main_home_no_questionnaires">도착한 질문이 없어요.</string>
 
 </resources>

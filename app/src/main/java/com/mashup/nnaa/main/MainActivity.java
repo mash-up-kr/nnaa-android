@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.SelectFriendActivity;
+import com.mashup.nnaa.main.home.MainHomeFragment;
+import com.mashup.nnaa.main.setting.MainSettingFragment;
 
 import java.util.HashMap;
 
@@ -23,8 +28,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initFragments();
-        setMainTabBtnsOnClick();
 
+        setOnMainTabBtnsClicked();
+        setOnMakeQuestionBtnClicked();
+
+        // Load HOME fragment page
         onMainTabClicked(Page.HOME);
     }
 
@@ -35,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentMap.put(Page.SETTINGS, MainSettingFragment.newInstance());
     }
 
-    private void setMainTabBtnsOnClick() {
+    private void setOnMainTabBtnsClicked() {
         ImageView ivHome = findViewById(R.id.tv_tab_home);
         ImageView ivAlarm = findViewById(R.id.tv_tab_alarm);
         ImageView ivMyList = findViewById(R.id.tv_tab_myList);
@@ -52,5 +60,13 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.layout_main, fragmentMap.get(page));
         transaction.commitAllowingStateLoss();
+    }
+
+    private void setOnMakeQuestionBtnClicked() {
+        FloatingActionButton btn = findViewById(R.id.btn_make_question);
+        btn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SelectFriendActivity.class);
+            startActivity(intent);
+        });
     }
 }

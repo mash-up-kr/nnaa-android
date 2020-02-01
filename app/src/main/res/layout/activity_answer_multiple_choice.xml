@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnswerMultipleChoiceActivity"
+    >
+
+    <ImageView
+        android:id="@+id/answer_multiple_background"
+        android:layout_width="match_parent"
+        android:layout_height="308dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/img_back_with" />
+
+    <TextView
+        android:id="@+id/stop_answer_multiple_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/stop_answer_multiple_btn"
+        android:lineSpacingExtra="10sp"
+        android:textColor="#686868"
+        android:textSize="14sp"
+        android:text="답변 중단하기" />
+
+    <ImageButton
+        android:id="@+id/stop_answer_multiple_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/cancel_img" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/white_rect_rad_34">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:lineSpacingExtra="12sp"
+            android:text="01/20"
+            android:textColor="#2a4bff"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="22dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
+                android:lineSpacingExtra="11sp"
+                android:text="엄마는 현재 삶에 만족하나요?"
+                android:textColor="#2d2e35"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/choice_btn_heart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="0dp"
+                app:srcCompat="@drawable/choice_btn_heart" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="280dp"
+            android:layout_below="@+id/RelativeLayout_question"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/multiple_choice_btn_A"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@drawable/multiple_choice_button_background">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:background="@drawable/multiple_chioce_button"
+                    android:text="A"
+                    android:textColor="@drawable/multiple_choice_button_text"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="매우 그렇다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/multiple_choice_btn_B"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/multiple_choice_button_background">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:background="@drawable/multiple_chioce_button"
+                    android:text="B"
+                    android:textColor="@drawable/multiple_choice_button_text"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="매우 그렇다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/multiple_choice_btn_C"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/multiple_choice_button_background">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:background="@drawable/multiple_chioce_button"
+                    android:text="C"
+                    android:textColor="@drawable/multiple_choice_button_text"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="매우 그렇다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/multiple_choice_btn_D"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/multiple_choice_button_background">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:background="@drawable/multiple_chioce_button"
+                    android:text="D"
+                    android:textColor="@drawable/multiple_choice_button_text"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="매우 그렇다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/under_bar_in_multiple_choice"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="0dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/undo_btn_in_multiple_chioce"
+            android:layout_width="93dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/choice_btn_arr_l" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/next_btn_in_multiple_chioce"
+            android:layout_width="267dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/blue_rect_rad_51"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/next_btn_text_in_multiple_chioce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif"
+                android:text="Next Question"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:id="@+id/choice_btn_arr_r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="false"
+                android:layout_marginEnd="18dp"
+                app:srcCompat="@drawable/choice_btn_arr_r" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

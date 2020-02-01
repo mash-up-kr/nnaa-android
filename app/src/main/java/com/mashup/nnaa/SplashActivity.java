@@ -1,13 +1,17 @@
 package com.mashup.nnaa;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
-import android.media.Image;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.mashup.nnaa.main.MainActivity;
+import com.mashup.nnaa.util.PermissionHelper;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -16,19 +20,39 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getBaseContext(), SetTypeOfFriendActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        PermissionHelper permissionHelper = new PermissionHelper();
 
-        }, 2000);
-
-
-
+        if (permissionHelper.checkPermission(
+                this,
+                Manifest.permission.READ_CONTACTS)) {
+            launchMainActivity();
+        } else {
+            permissionHelper.requestPermissions(this);
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == PermissionHelper.REQUEST_READ_CONTACTS) {
+            if (grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                launchMainActivity();
+            } else {
+                // Contact permission is not granted, terminate application
+                Toast.makeText(this, R.string.splash_permission_error, Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+    }
+
+    private void launchMainActivity() {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }, 1000);
+    }
 }
