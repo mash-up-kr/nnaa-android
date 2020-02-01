@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".SNSApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,7 +25,7 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity" />
           
         <activity android:name=".SelectFriendActivity" />
         <activity android:name=".main.MainActivity" />
@@ -37,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" />
         <activity android:name=".FavoritesActivity" />
         <activity android:name=".DeleteQuestion" />
         <activity android:name=".QuestionActivity" />
