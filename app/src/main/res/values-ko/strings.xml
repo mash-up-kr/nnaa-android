@@ -31,5 +31,7 @@
     <string name="lets_start">Let\'s Start</string>
     <string name="main_home_no_questionnaires">도착한 질문이 없어요.</string>
     <string name="noti_no_notifications">받은 알림이 없어요.</string>
+    <string name="mylist_tab_received">받은 질문</string>
+    <string name="mylist_tab_sent">보낸 질문</string>
 
 </resources>
