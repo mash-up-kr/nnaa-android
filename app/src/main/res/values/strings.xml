@@ -12,6 +12,10 @@
     <!-- Notifications page -->
     <string name="noti_no_notifications">There are no received notifications.</string>
 
+    <!-- MyList page -->
+    <string name="mylist_tab_received">Received</string>
+    <string name="mylist_tab_sent">Sent</string>
+
     <!-- Setting page -->
     <string name="setting_title">Setting page\nfor %s</string>
     <string-array name="settings">

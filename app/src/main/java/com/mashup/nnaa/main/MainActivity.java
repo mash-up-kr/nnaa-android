@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.SelectFriendActivity;
 import com.mashup.nnaa.main.home.MainHomeFragment;
+import com.mashup.nnaa.main.mylist.MainMyListFragment;
 import com.mashup.nnaa.main.notifications.MainNotificationsFragment;
 import com.mashup.nnaa.main.setting.MainSettingFragment;
 
