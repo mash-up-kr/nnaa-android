@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.SelectFriendActivity;
 import com.mashup.nnaa.main.home.MainHomeFragment;
+import com.mashup.nnaa.main.notifications.MainNotificationsFragment;
 import com.mashup.nnaa.main.setting.MainSettingFragment;
 
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragments() {
         fragmentMap.put(Page.HOME, MainHomeFragment.newInstance());
-        fragmentMap.put(Page.ALARM, MainAlarmFragment.newInstance());
+        fragmentMap.put(Page.ALARM, MainNotificationsFragment.newInstance());
         fragmentMap.put(Page.MY_LIST, MainMyListFragment.newInstance());
         fragmentMap.put(Page.SETTINGS, MainSettingFragment.newInstance());
     }
