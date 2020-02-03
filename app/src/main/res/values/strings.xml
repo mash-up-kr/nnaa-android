@@ -9,6 +9,9 @@
     <string name="main_home_name_sent_this_questions">%s has sent questions.</string>
     <string name="main_home_no_questionnaires">There are no received questions.</string>
 
+    <!-- Notifications page -->
+    <string name="noti_no_notifications">There are no received notifications.</string>
+
     <!-- Setting page -->
     <string name="setting_title">Setting page\nfor %s</string>
     <string-array name="settings">
