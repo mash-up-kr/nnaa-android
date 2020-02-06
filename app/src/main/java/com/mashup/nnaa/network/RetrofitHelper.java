@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.mashup.nnaa.BuildConfig;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.UserInfo;
+import com.mashup.nnaa.util.AccountManager;
 
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class RetrofitHelper {
     private static final RetrofitHelper _instance = new RetrofitHelper();
     public static RetrofitHelper getInstance() { return _instance; }
 
-    private UserAuthHeaderInfo userAuthHeaderInfo;
 
     private RetrofitHelper() {
         refreshRetrofit();
@@ -37,7 +37,9 @@ public class RetrofitHelper {
                 .addConverterFactory(GsonConverterFactory.create());
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-        clientBuilder.addInterceptor(getUserAuthHeaderInterceptor(userAuthHeaderInfo));
+        clientBuilder.addInterceptor(
+                getUserAuthHeaderInterceptor(AccountManager.getInstance().getUserAuthHeaderInfo())
+        );
 
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
