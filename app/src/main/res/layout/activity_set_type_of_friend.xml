@@ -4,23 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBlue"
     tools:context=".SetTypeOfFriendActivity">
 
-    <LinearLayout
-        android:background="@color/colorBlue"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="50dp"
+        android:background="@drawable/white_rect_rad_34"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- image -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/rel_img_back"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="11"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:background="@drawable/white_rect_rad_34">
-
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,57 +87,46 @@
                     android:src="@drawable/rel_btn_arr_r"
                     android:background="@android:color/transparent"/>
 
-
             </LinearLayout>
-
-            <!--
-            <Spinner
-                android:id="@+id/spinner_type_of_friend"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"/>-->
-
         </LinearLayout>
-        <FrameLayout
+        <!--
+        <Spinner
+            android:id="@+id/spinner_type_of_friend"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="80dp"/>-->
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/rel_img_back"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_height="70dp"
-                android:background="@color/colorWhite"
-                android:orientation="horizontal">
+    <!-- bottom buttons -->
+    <LinearLayout
+        android:id="@+id/layout_bottom_buttons"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="70dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-                <Button
-                    android:id="@+id/cancle_btn_in_type_of_friend"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/cancle"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorBlack"
-                    android:background="@color/colorWhite"/>
+        <Button
+            android:id="@+id/cancle_btn_in_type_of_friend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cancle"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:background="@color/colorWhite"/>
 
-                <Button
-                    android:id="@+id/next_btn_in_type_of_friend"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="@drawable/blue_rect_rad_51"
-                    android:text="@string/lets_start"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp"/>
-
-            </LinearLayout>
-        </FrameLayout>
-
+        <Button
+            android:id="@+id/next_btn_in_type_of_friend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/blue_rect_rad_51"
+            android:text="@string/lets_start"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
