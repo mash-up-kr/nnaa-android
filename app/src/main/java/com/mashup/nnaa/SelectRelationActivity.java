@@ -43,9 +43,9 @@ public class SelectRelationActivity extends AppCompatActivity implements View.On
 
 
         String yourname = "슬기";
-        String iswhom = String.format(res.getString(R.string.you_are_my), yourname, yourname);
+        //String iswhom = String.format(res.getString(R.string.you_are_my), yourname, yourname);
         TextView youaremy = findViewById(R.id.you_are_my);
-        youaremy.setText(iswhom);
+        //youaremy.setText(iswhom);
 
         cancleBtn.setOnClickListener((view)-> {
             finish();

@@ -17,17 +17,32 @@
             android:layout_height="wrap_content"
             android:layout_weight="11"
             android:layout_marginTop="50dp"
-            android:paddingLeft="93dp"
-            android:paddingRight="93dp"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:background="@drawable/white_rect_rad_34">
 
             <TextView
-                android:id="@+id/you_are_my"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="93dp"
-                android:text="@string/you_are_my"
+                android:layout_marginTop="93dp"
+                android:text="@string/to_me"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:lineSpacingExtra="6sp"/>
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="Name"
+                android:textAlignment="center"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/is_my"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"
                 android:textAlignment="center"

@@ -4,21 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.icu.text.Edits;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class SetTypeOfFriendActivity extends AppCompatActivity implements View.OnClickListener{
     TextView friendType;
@@ -26,8 +20,7 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
     ArrayList<String> type = new ArrayList<>();
     Button cancleBtn, nextBtn;
 
-    String name = "";
-    String number = "";
+    EditText etName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +33,20 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         selectBtnLeft.setOnClickListener(this);
         selectBtnRight.setOnClickListener(this);
 
+        etName = findViewById(R.id.et_name);
+
         cancleBtn = findViewById(R.id.cancle_btn_in_type_of_friend);
         nextBtn = findViewById(R.id.next_btn_in_type_of_friend);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SetTypeOfFriendActivity.this, QuestionActivity.class);
-                startActivity(intent);
+        nextBtn.setOnClickListener(view -> {
+            String name = etName.getText().toString().trim();
+            if (name.isEmpty()) {
+                Toast.makeText(this, R.string.plz_enter_name, Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            Intent intent = new Intent(SetTypeOfFriendActivity.this, QuestionActivity.class);
+            intent.putExtra("name", name);
+            startActivity(intent);
         });
       
         Resources res = getResources();
@@ -59,15 +58,6 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         type.add(res.getString(R.string.friend));
         type.add(res.getString(R.string.lover));
         type.add(res.getString(R.string.vip));
-
-        // load friend info
-        name = getIntent().getStringExtra("name");
-        number = getIntent().getStringExtra("number");
-
-
-        String iswhom = String.format(res.getString(R.string.you_are_my), name, name);
-        TextView youaremy = findViewById(R.id.you_are_my);
-        youaremy.setText(iswhom);
 
         cancleBtn.setOnClickListener((view)-> {
             finish();

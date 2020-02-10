@@ -20,15 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        PermissionHelper permissionHelper = new PermissionHelper();
-
-        if (permissionHelper.checkPermission(
-                this,
-                Manifest.permission.READ_CONTACTS)) {
-            launchMainActivity();
-        } else {
-            permissionHelper.requestPermissions(this);
-        }
+        launchMainActivity();
     }
 
     @Override
