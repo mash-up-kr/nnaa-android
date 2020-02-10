@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.SelectFriendActivity;
+import com.mashup.nnaa.SetTypeOfFriendActivity;
 import com.mashup.nnaa.main.home.MainHomeFragment;
 import com.mashup.nnaa.main.mylist.MainMyListFragment;
 import com.mashup.nnaa.main.notifications.MainNotificationsFragment;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private void setOnMakeQuestionBtnClicked() {
         FloatingActionButton btn = findViewById(R.id.btn_make_question);
         btn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SelectFriendActivity.class);
+            Intent intent = new Intent(this, SetTypeOfFriendActivity.class);
             startActivity(intent);
         });
     }
