@@ -7,11 +7,14 @@ import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.UserInfo;
 import com.mashup.nnaa.util.AccountManager;
 
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,9 +69,14 @@ public class RetrofitHelper {
         };
     }
 
-    public void getUserInfo(Callback<UserInfo> callback) {
+    public void signInOrRegEmail(String email, String encPw, Callback<ResponseBody> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<UserInfo> userInfo = service.getUserInfo();
+        Call<ResponseBody> userInfo = service.signInOrRegEmail(
+                new HashMap<String, String>() {{
+                    put("email", email);
+                    put("password", encPw);
+                }}
+        );
         userInfo.enqueue(callback);
     }
 

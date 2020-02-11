@@ -2,10 +2,17 @@ package com.mashup.nnaa.network;
 
 import com.mashup.nnaa.network.model.UserInfo;
 
+import java.util.HashMap;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 public interface UserControllerService {
-    @GET("user/login")
-    Call<UserInfo> getUserInfo();
+    @POST("user/email")
+    Call<ResponseBody> signInOrRegEmail(@Body HashMap<String, String> body);
+
+    @POST("user/social")
+    Call<ResponseBody> signInOrRegSocial(@Body HashMap<String, String> body);
 }
