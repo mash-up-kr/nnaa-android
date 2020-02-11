@@ -11,7 +11,10 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.mashup.nnaa.main.MainActivity;
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.PermissionHelper;
+import com.mashup.nnaa.util.SharedPrefHelper;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -20,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        launchMainActivity();
+        checkLogin();
     }
 
     @Override
@@ -39,12 +42,31 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    private void checkLogin() {
+        AccountManager.getInstance().executeAutoSignIn(new AccountManager.ISignInResultListener() {
+            @Override
+            public void onSignInSuccess(String id, String token) {
+                launchMainActivity();
+            }
+
+            @Override
+            public void onSignInFail() {
+                launchSignInActivity();
+            }
+        });
+    }
+
     private void launchMainActivity() {
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
-        }, 1000);
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void launchSignInActivity() {
+        Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+        intent.putExtra("email",
+                SharedPrefHelper.getInstance().getString(AccountManager.SHARED_PREF_LAST_ACCOUNT_EMAIL));
+        startActivity(intent);
+        finish();
     }
 }
