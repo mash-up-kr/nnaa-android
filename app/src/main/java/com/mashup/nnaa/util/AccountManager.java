@@ -14,6 +14,7 @@ import retrofit2.Response;
 public class AccountManager {
     public static final String SHARED_PREF_LAST_ACCOUNT_EMAIL = "last_account_email";
     public static final String SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW = "last_account_pw";
+    public static Object ISignInResultListener;
 
     private static AccountManager instance = new AccountManager();
     public static AccountManager getInstance() { return instance; }

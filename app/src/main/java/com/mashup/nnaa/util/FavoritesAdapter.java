@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,11 +53,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         ViewHolder(View itemView) {
             super(itemView);
 
-
             txt_favorites_question = itemView.findViewById(R.id.txt_favorites_question);
 
             check_box_favorites = itemView.findViewById(R.id.check_box_favorites);
-
             check_box_favorites.setButtonDrawable(R.drawable.favorites_check_box);
 
         }
@@ -65,6 +64,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
             txt_favorites_question.setText(fitem.getFavoritesQuestion());
             check_box_favorites.setId((fitem.getFavoritesImg()));
+
         }
     }
 }

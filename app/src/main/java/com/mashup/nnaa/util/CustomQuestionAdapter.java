@@ -195,7 +195,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             plus_btn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    plus_btn4.setVisibility(View.VISIBLE);
+                    minus_btn4.setVisibility(View.VISIBLE);
                     edit4.setVisibility(View.VISIBLE);
                     plus_btn3.setVisibility(View.GONE);
                     minus_btn3.setVisibility(View.VISIBLE);
@@ -208,7 +208,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     minus_btn3.setVisibility(View.GONE);
                 }
             });
-            plus_btn4.setOnClickListener(new View.OnClickListener() {
+            minus_btn4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     plus_btn4.setVisibility(View.GONE);

@@ -2,6 +2,7 @@ package com.mashup.nnaa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,9 +28,16 @@ public class DeleteQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_question);
 
+        Intent intent = getIntent();
+
+        init();
+
+        getData();
 
         btn_delete = findViewById(R.id.btn_delete);
         btn_delete_cancel = findViewById(R.id.btn_delete_cancel);
+
+
 
         btn_delete_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,11 +46,6 @@ public class DeleteQuestion extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Intent intent = getIntent();
-
-        init();
-
-        getData();
     }
 
     private void init() {
@@ -50,6 +53,7 @@ public class DeleteQuestion extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler3);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         deleteAdapter = new DeleteAdapter();
@@ -57,7 +61,6 @@ public class DeleteQuestion extends AppCompatActivity {
     }
 
     private void getData() {
-
 
         List<String> list = Arrays.asList("엄마가 가장 좋아하는 음식은?",
                 "엄마가 가장 좋아하는 음식은?",

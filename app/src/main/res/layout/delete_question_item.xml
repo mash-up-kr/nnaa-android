@@ -14,9 +14,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="#ffffff"
-        card_view:cardPreventCornerOverlap="true"
-        card_view:cardElevation="0dp">
-
+        card_view:cardElevation="1dp"
+        card_view:cardPreventCornerOverlap="true">
 
         <CheckBox
             android:id="@+id/check_box"
@@ -29,9 +28,9 @@
         <TextView
             android:id="@+id/txt_check"
             android:layout_width="159dp"
-            android:layout_height="14dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="79dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:text="엄마가 가장 좋아하는 음식은?"
             android:textColor="#2d2e35"
             android:textSize="13sp" />
