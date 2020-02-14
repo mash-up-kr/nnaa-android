@@ -60,13 +60,26 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_signIn = findViewById(R.id.btn_signIn);
 
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                AccountManager.getInstance().executeSignIn("email", "pw", false, false, (AccountManager.ISignInResultListener) AccountManager.ISignInResultListener);
+                AccountManager.getInstance().executeSignIn("ko@naver.com", "123",
+                        false, false, new AccountManager.ISignInResultListener() {
+                    @Override
+                    public void onSignInSuccess(String id, String token) {
+                        launchMainActivity();
+                    }
+
+                    @Override
+                    public void onSignInFail() {
+                        Log.d("LoginActivity", "ddddddddddddd");
+                    }
+                });
             }
         });
+
 
         btn_signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +232,12 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, "카카오 로그아웃 onSuccess");
             }
         });
+    }
+
+    private void launchMainActivity() {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
 
