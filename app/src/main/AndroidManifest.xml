@@ -29,7 +29,7 @@
           
         <activity android:name=".SelectFriendActivity" />
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".AnswerMultipleChoiceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
