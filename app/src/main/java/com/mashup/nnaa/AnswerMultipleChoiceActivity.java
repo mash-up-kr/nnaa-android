@@ -87,11 +87,11 @@ public class AnswerMultipleChoiceActivity extends AppCompatActivity {
         }
 
         /************버튼 클릭************/
-        for(int i=0;i<4;i++)
-            multiple_choice[i].setOnClickListener(view -> {
+        for(LinearLayout a : multiple_choice)
+            a.setOnClickListener(view -> {
                 if(view.isPressed()) {
-                    for (int j = 0; j < 4; j++)
-                        multiple_choice[j].setSelected(false);
+                    for (LinearLayout b : multiple_choice)
+                        b.setSelected(false);
                     view.setSelected(true);
 
                     qitem.completeFlag = true;
