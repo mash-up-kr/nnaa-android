@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,14 +56,18 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
             super(itemView);
 
             check_box = itemView.findViewById(R.id.check_box);
+
             check_box.setButtonDrawable(R.drawable.check_box);
+
             txt_check = itemView.findViewById(R.id.txt_check);
+
+
+
         }
 
         void onBind(DeleteQuestionItem deleteitem) {
-//            check_box.setText(deleteitem.getCheckBox());
-//            txt_check.setText(deleteitem.getQuestion_Txt());
+            check_box.setText(deleteitem.getCheckBox());
+            txt_check.setText(deleteitem.getQuestion_Txt());
         }
-
     }
 }

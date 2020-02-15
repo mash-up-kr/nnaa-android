@@ -42,9 +42,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="72dp"
-        android:background="@drawable/oval_custom_plus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
-         />
+        android:src="@drawable/plus_1512" />
 
     <ImageButton
         android:id="@+id/minus_btn1"
@@ -52,8 +52,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="72dp"
-        android:background="@drawable/oval_custom_minus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
+        android:src="@drawable/minus_1512"
         android:visibility="gone" />
 
 
@@ -77,8 +78,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="139dp"
-        android:background="@drawable/oval_custom_plus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
+        android:src="@drawable/plus_1512"
         android:visibility="gone" />
 
     <ImageButton
@@ -87,8 +89,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="139dp"
-        android:background="@drawable/oval_custom_minus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
+        android:src="@drawable/minus_1512"
         android:visibility="gone" />
 
 
@@ -112,8 +115,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="206dp"
-        android:background="@drawable/oval_custom_plus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
+        android:src="@drawable/plus_1512"
         android:visibility="gone" />
 
     <ImageButton
@@ -122,8 +126,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="206dp"
-        android:background="@drawable/oval_custom_minus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
+        android:src="@drawable/minus_1512"
         android:visibility="gone" />
 
 
@@ -147,8 +152,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="273dp"
-        android:background="@drawable/oval_custom_plus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
+        android:src="@drawable/plus_1512"
         android:visibility="gone" />
 
     <ImageButton
@@ -157,8 +163,9 @@
         android:layout_height="44dp"
         android:layout_marginStart="291dp"
         android:layout_marginTop="273dp"
-        android:background="@drawable/oval_custom_minus"
+        android:background="@drawable/oval_custom"
         android:contentDescription="@string/StringValue"
+        android:src="@drawable/minus_1512"
         android:visibility="gone" />
 
 </FrameLayout>

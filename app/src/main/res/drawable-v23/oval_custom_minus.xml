@@ -13,7 +13,7 @@
     <item
         android:width="11dp"
         android:height="11dp"
-        android:drawable="@drawable/plus_1512"
+        android:drawable="@drawable/minus_1512"
         android:gravity="center"
         tools:targetApi="m">
 
