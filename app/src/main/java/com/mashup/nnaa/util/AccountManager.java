@@ -88,7 +88,7 @@ public class AccountManager {
                 ResponseBody body = response.body();
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(token)) {
-                    Log.v("SignIn", "Sign in fail (not enough): " + email);
+                    Log.v("SignIn", "Sign in fail (no id or token value received): " + email);
                     resultListener.onSignInFail();
                 } else {
                     Log.v("SignIn", "Sign in success: " + email);

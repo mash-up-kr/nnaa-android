@@ -61,25 +61,23 @@ public class LoginActivity extends AppCompatActivity {
         btn_signIn = findViewById(R.id.btn_signIn);
 
         //email login
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_login.setOnClickListener(view ->
+                AccountManager.getInstance().executeSignIn(
+                    email_edit.getText().toString(),
+                    password_edit.getText().toString(),
+                    false, false,
+                    new AccountManager.ISignInResultListener() {
+                        @Override
+                        public void onSignInSuccess(String id, String token) {
+                            launchMainActivity();
+                        }
 
-                AccountManager.getInstance().execute
-                    ("ko@naver.com", "123",
-                        false, false, new AccountManager.ISignInResultListener() {
-                    @Override
-                    public void onSignInSuccess(String id, String token) {
-                        launchMainActivity();
+                        @Override
+                        public void onSignInFail() {
+                            Log.d("LoginActivity", "Fail to login");
+                        }
                     }
-
-                    @Override
-                    public void onSignInFail() {
-                        Log.d("LoginActivity", "ddddddddddddd");
-                    }
-                });
-            }
-        });
+            ));
 
         //email signIn
         btn_signIn.setOnClickListener(new View.OnClickListener() {
