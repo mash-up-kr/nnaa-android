@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".SignInActivity" /> <!-- 페이스북 메타데이터 -->
+        <activity android:name=".RegisterActivity" /> <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->
@@ -24,7 +24,15 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
+
         <activity android:name=".SplashActivity">
+
+        <activity android:name=".LoginActivity" />
+          
+        <activity android:name=".SelectFriendActivity" />
+        <activity android:name=".main.MainActivity" />
+        <activity android:name=".AnswerMultipleChoiceActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
