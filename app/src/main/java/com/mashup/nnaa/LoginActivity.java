@@ -3,28 +3,15 @@ package com.mashup.nnaa;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.textservice.SpellCheckerService;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.Task;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -33,26 +20,22 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
+import com.mashup.nnaa.main.MainActivity;
+import com.mashup.nnaa.util.AccountManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+public class LoginActivity extends AppCompatActivity {
 
-    //구글 로그인 뺴자
-    public static final int RC_SIGN_IN = 1;
-
-    private GoogleApiClient mGoogleApiClient;
 
     private String TAG = "LoginActivity";
     private SessionCallback callback;
 
-    private Context mContext;
-
-
-    private Button btn_facebook_login, btn_facebook_logout, btn_google_logout;
+    private Button btn_facebook_login, btn_facebook_logout, btn_login, btn_signIn;
+    private EditText email_edit, password_edit;
 
     private LoginCallback mLoginCallback;
 
@@ -72,39 +55,44 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         setContentView(R.layout.activity_login);
 
-        btn_google_logout = findViewById(R.id.btn_google_logout);
+        email_edit = findViewById(R.id.email_edit);
+        password_edit = findViewById(R.id.password_edit);
+        btn_login = findViewById(R.id.btn_login);
+        btn_signIn = findViewById(R.id.btn_signIn);
 
-        //google login
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-
-        //  mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-
-        SignInButton google_login = findViewById(R.id.google_login);
-
-        google_login.setOnClickListener(new View.OnClickListener() {
+        //email login
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent signIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signIntent, RC_SIGN_IN);
+                AccountManager.getInstance().executeSignIn("ko@naver.com", "123",
+                        false, false, new AccountManager.ISignInResultListener() {
+                    @Override
+                    public void onSignInSuccess(String id, String token) {
+                        launchMainActivity();
+                    }
 
+                    @Override
+                    public void onSignInFail() {
+                        Log.d("LoginActivity", "ddddddddddddd");
+                    }
+                });
             }
         });
 
+        //email signIn
+        btn_signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignInActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //kakao login
         kakaoData();
 
-        mContext = getApplicationContext();
+        Context mContext = getApplicationContext();
 
         //facebook login
         mCallbackManager = CallbackManager.Factory.create();
@@ -113,6 +101,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         btn_facebook_login = findViewById(R.id.btn_facebook_login);
         btn_facebook_logout = findViewById(R.id.btn_facebook_logout);
+
 
         btn_facebook_login.setOnClickListener(new View.OnClickListener() {
 
@@ -128,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                 loginManager.registerCallback(mCallbackManager, mLoginCallback);
 
-                Intent intent = new Intent(LoginActivity.this, SetTypeOfFriendActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 
             }
@@ -141,7 +130,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
     }
-
 
     /**
      * 카카오톡
@@ -175,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             Log.e(TAG, "카카오 로그인 성공 ");
             requestMe();
 
-            Intent intent = new Intent(LoginActivity.this, SetTypeOfFriendActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
 
@@ -219,7 +207,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onSuccess(MeV2Response result) {
                 Log.e(TAG, "requestMe onSuccess message : " + result.getKakaoAccount().getEmail() + " " + result.getId() + " " + result.getNickname());
             }
-
         });
     }
 
@@ -247,53 +234,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-
-            Intent intent = new Intent(LoginActivity.this, SetTypeOfFriendActivity.class);
-            startActivity(intent);
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                GoogleSignInAccount account = result.getSignInAccount();
-
-
-            }
-
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
+    private void launchMainActivity() {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            String email = account.getEmail();
-            String m = account.getFamilyName();
-            String m2 = account.getGivenName();
-            String m3 = account.getDisplayName();
-            Log.d("Name : ", m);
-            Log.d("Name2:", m2);
-            Log.d("Name3:", m3);
-            Log.d("Email: ", email);
-
-        } catch (ApiException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-
 }
 
 

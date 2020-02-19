@@ -1,7 +1,5 @@
 package com.mashup.nnaa.network;
 
-import com.mashup.nnaa.network.model.UserInfo;
-
 import java.util.HashMap;
 
 import okhttp3.ResponseBody;
@@ -10,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface UserControllerService {
+
     @POST("user/email")
     Call<ResponseBody> signInOrRegEmail(@Body HashMap<String, String> body);
 
