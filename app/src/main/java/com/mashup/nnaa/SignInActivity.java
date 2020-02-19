@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SignInActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText email_edit, password_edit, password_edit_confirm;
 
