@@ -59,31 +59,31 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(email_edit.getText().toString().length()==0) {
-                    Toast.makeText(SignInActivity.this, "Email을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Email을 입력해주세요!", Toast.LENGTH_SHORT).show();
                     email_edit.requestFocus();
                     return;
                 }
 
                 if(password_edit.getText().toString().length()==0) {
-                    Toast.makeText(SignInActivity.this, "Password를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Password를 입력해주세요!", Toast.LENGTH_SHORT).show();
                     password_edit.requestFocus();
                     return;
                 }
                 if(password_edit_confirm.getText().toString().length()==0) {
-                    Toast.makeText(SignInActivity.this, "Password Confirm을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Password Confirm을 입력해주세요!", Toast.LENGTH_SHORT).show();
                     password_edit_confirm.requestFocus();
                     return;
                 }
 
                 if(!password_edit.getText().toString().equals(password_edit_confirm.getText().toString())) {
-                    Toast.makeText(SignInActivity.this, "Password가 일치하지 않습니다!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Password가 일치하지 않습니다!",Toast.LENGTH_SHORT).show();
                     password_edit.setText("");
                     password_edit_confirm.setText("");
                     password_edit.requestFocus();
                     return;
                 }
 
-                Intent doneIntent = new Intent(SignInActivity.this, LoginActivity.class);
+                Intent doneIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(doneIntent);
             }
         });
@@ -91,20 +91,20 @@ public class RegisterActivity extends AppCompatActivity {
         btn_signIn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignInActivity.this);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RegisterActivity.this);
                 alertDialogBuilder.setMessage("회원가입을 취소하시겠습니까?");
                 alertDialogBuilder.setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(SignInActivity.this, "회원가입을 취소하였습니다.", Toast.LENGTH_SHORT).show();
-                        Intent backIntent = new Intent(SignInActivity.this, LoginActivity.class);
+                        Toast.makeText(RegisterActivity.this, "회원가입을 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                        Intent backIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(backIntent);
                     }
                 });
                 alertDialogBuilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(SignInActivity.this, "회원가입을 작성해주세요!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "회원가입을 작성해주세요!", Toast.LENGTH_SHORT).show();
 
                     }
                 });
