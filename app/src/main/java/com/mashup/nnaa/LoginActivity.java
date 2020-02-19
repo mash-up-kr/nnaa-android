@@ -65,7 +65,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                AccountManager.getInstance().executeSignIn("ko@naver.com", "123",
+                AccountManager.getInstance().execute
+                    ("ko@naver.com", "123",
                         false, false, new AccountManager.ISignInResultListener() {
                     @Override
                     public void onSignInSuccess(String id, String token) {
@@ -84,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignInActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
