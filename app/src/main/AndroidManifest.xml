@@ -27,7 +27,7 @@
             android:value="@string/kakao_app_key" />
 
 
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"/>
 
         <activity android:name=".LoginActivity" />
           
