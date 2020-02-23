@@ -112,6 +112,14 @@ public class AccountManager {
         });
     }
 
+    public void executeSignOut(ISignOutResultListener listener) {
+        SharedPrefHelper.getInstance().put(SHARED_PREF_LAST_ACCOUNT_EMAIL, "");
+        SharedPrefHelper.getInstance().put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, "");
+        userAuthHeaderInfo = null;
+        Log.v("SignOut", "Signed out");
+        listener.onSignOut();
+    }
+
     public static boolean isValidEmailAddress(String email) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -122,5 +130,8 @@ public class AccountManager {
     public interface ISignInResultListener {
         void onSignInSuccess(String id, String token);
         void onSignInFail();
+    }
+    public interface ISignOutResultListener {
+        void onSignOut();
     }
 }
