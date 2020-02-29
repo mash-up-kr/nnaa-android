@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">NNAA</string>
+    <!-- Common -->
+    <string name="common_yes">Yes</string>
+    <string name="common_no">No</string>
 
     <!-- Splash -->
     <string name="splash_permission_error">All permission should be granted.\nPlease rerun app and grand permissions.</string>
@@ -15,14 +18,16 @@
     <!-- MyList page -->
     <string name="mylist_tab_received">Received</string>
     <string name="mylist_tab_sent">Sent</string>
+    <string name="mylist_no_items">No items</string>
+    <string name="mylist_fail_to_load">Fail to load the list</string>
 
     <!-- Setting page -->
     <string name="setting_title">Setting page\nfor %s</string>
-    <string-array name="settings">
-        <item>Sign out</item>
-        <item>Delete account</item>
-        <item>Blocked users</item>
-    </string-array>
+    <string name="setting_sign_out">Sign out</string>
+    <string name="setting_del_account">Delete account</string>
+    <string name="setting_blocked_users">Blocked users</string>
+
+    <string name="setting_want_to_sign_out">Do you really want to sign out?</string>
 
     <string name="StringValue">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">

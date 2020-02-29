@@ -29,12 +29,6 @@
 
         <activity android:name=".SplashActivity">
 
-        <activity android:name=".LoginActivity" />
-          
-        <activity android:name=".SelectFriendActivity" />
-        <activity android:name=".main.MainActivity" />
-        <activity android:name=".AnswerMultipleChoiceActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,8 +37,13 @@
         </activity>
 
         <activity android:name=".LoginActivity" />
+          
         <activity android:name=".SelectFriendActivity" />
         <activity android:name=".main.MainActivity" />
+        <activity android:name=".AnswerMultipleChoiceActivity">
+
+        </activity>
+
         <activity android:name=".FavoritesActivity" />
         <activity android:name=".DeleteQuestion" />
         <activity android:name=".QuestionActivity" />

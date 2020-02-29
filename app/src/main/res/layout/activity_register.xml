@@ -131,32 +131,44 @@
             android:textAlignment="center"
             tools:ignore="HardcodedText" />
 
-    <EditText
-        android:id="@+id/password_edit_confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Password Confirm"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="494dp"
+            android:lineHeight="27sp"
+            android:text="비밀번호 확인"
+            android:textColor="#2d2e35"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/edit_password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="528dp"
+            android:layout_marginRight="18dp"
+            android:textAlignment="center"
+            android:background="@drawable/password_confirm_change"
+            android:hint="***"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            tools:ignore="HardcodedText" />
+
 
         <Button
-            android:id="@+id/btn_signIn_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="30dp"
-            android:text="회원가입"
-            tools:ignore="ButtonStyle,HardcodedText" />
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="658dp"
+            android:background="#2a4bff"
+            android:lineHeight="27sp"
+            android:text="회원 가입 완료"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
 
     </FrameLayout>

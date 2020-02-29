@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -66,10 +68,6 @@ public class MainMyListSubFragment extends Fragment {
         RetrofitHelper.getInstance().getReceivedQuestionnaire(new Callback<List<QuestionnaireDto>>() {
             @Override
             public void onResponse(Call<List<QuestionnaireDto>> call, Response<List<QuestionnaireDto>> response) {
-                if (response.body() == null) {
-                    onLoadDataFailure();
-                }
-
                 onLoadDataSuccess(response.body());
             }
 
@@ -84,10 +82,6 @@ public class MainMyListSubFragment extends Fragment {
         RetrofitHelper.getInstance().getSendQuestionnaire(new Callback<List<QuestionnaireDto>>() {
             @Override
             public void onResponse(Call<List<QuestionnaireDto>> call, Response<List<QuestionnaireDto>> response) {
-                if (response.body() == null) {
-                    onLoadDataFailure();
-                }
-
                 onLoadDataSuccess(response.body());
             }
 
@@ -99,10 +93,21 @@ public class MainMyListSubFragment extends Fragment {
     }
 
     private void onLoadDataSuccess(List<QuestionnaireDto> data) {
+        MainMyListDataAdapter adapter = (MainMyListDataAdapter) rvMyList.getAdapter();
+        if (adapter == null)
+            return;
 
+        if (data == null)
+            data = new ArrayList<>();
+
+        if (data.size() == 0) {
+            Toast.makeText(getContext(), R.string.mylist_no_items, Toast.LENGTH_SHORT).show();
+        }
+
+        adapter.setData((ArrayList<QuestionnaireDto>) data);
     }
 
     private void onLoadDataFailure() {
-
+        Toast.makeText(getContext(), R.string.mylist_fail_to_load, Toast.LENGTH_SHORT).show();
     }
 }
