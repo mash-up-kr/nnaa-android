@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.mashup.nnaa.BuildConfig;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
+import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.UserInfo;
 import com.mashup.nnaa.util.AccountManager;
 
@@ -79,6 +80,19 @@ public class RetrofitHelper {
         );
         userInfo.enqueue(callback);
     }
+
+    public void registerEmail(String email, String password, String name, Callback<SignUpDto> callback) {
+        UserControllerService service = retrofit.create(UserControllerService.class);
+        Call<SignUpDto> signUpDtoCall = service.registerEmail(
+                new HashMap<String, String>() {{
+                    put("email", email);
+                    put("password",password);
+                    put("name", name);
+                }}
+        );
+        signUpDtoCall.enqueue(callback);
+    }
+
 
     public void getReceivedQuestionnaire(Callback<List<QuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);

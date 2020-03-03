@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.UserAuthHeaderInfo;
+import com.mashup.nnaa.network.model.SignUpDto;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -17,11 +18,19 @@ public class AccountManager {
     public static Object ISignInResultListener;
 
     private static AccountManager instance = new AccountManager();
-    public static AccountManager getInstance() { return instance; }
-    private AccountManager() {}
+
+    public static AccountManager getInstance() {
+        return instance;
+    }
+
+    private AccountManager() {
+    }
 
     private UserAuthHeaderInfo userAuthHeaderInfo;
-    public UserAuthHeaderInfo getUserAuthHeaderInfo() { return userAuthHeaderInfo; }
+
+    public UserAuthHeaderInfo getUserAuthHeaderInfo() {
+        return userAuthHeaderInfo;
+    }
 
     public void setUserAuthHeaderInfo(UserAuthHeaderInfo info) {
         this.userAuthHeaderInfo = info;
@@ -37,7 +46,7 @@ public class AccountManager {
         String lastEncPw =
                 SharedPrefHelper.getInstance().getString(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW);
 
-        executeSignIn(lastEmail, lastEncPw,true, true, new ISignInResultListener() {
+        executeSignIn(lastEmail, lastEncPw, true, true, new ISignInResultListener() {
             @Override
             public void onSignInSuccess(String id, String token) {
                 setUserAuthHeaderInfo(id, token);
@@ -103,11 +112,48 @@ public class AccountManager {
                     resultListener.onSignInSuccess(id, token);
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.v("SignIn", "Sign in fail: " + email);
                 resultListener.onSignInFail();
+            }
+        });
+    }
+
+    public void executeRegister(String email, String password, String name,
+                                ISignInResultListener resultListener) {
+
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Log.v("Register", "Register in fail (not enough): " + email);
+            resultListener.onSignInFail();
+            return;
+        }
+
+        if (!isValidEmailAddress(email)) {
+            Log.v("Register", "Register in fail (wrong email address): " + email);
+            resultListener.onSignInFail();
+            return;
+        }
+
+        RetrofitHelper.getInstance().registerEmail(email, password, name, new Callback<SignUpDto>() {
+            @Override
+            public void onResponse(Call<SignUpDto> call, Response<SignUpDto> response) {
+                String id = response.headers().get("id");
+                String token = response.headers().get("token");
+               SignUpDto body = response.body();
+
+                if (TextUtils.isEmpty(id) || TextUtils.isEmpty(token)) {
+                    Log.v("Register", "Reigster in fail (no id or token value received): " + email);
+                    resultListener.onSignInFail();
+                } else {
+                    Log.v("Register", "Register in success: " + email);
+                    resultListener.onSignInSuccess(id, token);
+                }
+            }
+            @Override
+            public void onFailure(Call<SignUpDto> call, Throwable t) {
+                Log.v("Register", "Register in fail: " + t.getMessage());
+
             }
         });
     }
@@ -129,8 +175,10 @@ public class AccountManager {
 
     public interface ISignInResultListener {
         void onSignInSuccess(String id, String token);
+
         void onSignInFail();
     }
+
     public interface ISignOutResultListener {
         void onSignOut();
     }

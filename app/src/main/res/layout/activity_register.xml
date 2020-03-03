@@ -63,7 +63,6 @@
             android:layout_marginRight="18dp"
             android:background="@drawable/login_shape"
             android:hint="이름을 알려주세요!"
-            android:importantForAutofill="no"
             android:inputType="textPersonName"
             tools:ignore="HardcodedText" />
 
@@ -81,30 +80,30 @@
 
         <EditText
             android:id="@+id/edit_email"
-            android:layout_width="162dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="306dp"
-            android:background="@drawable/login_shape"
-            android:hint="이메일 아이디"
-            android:importantForAutofill="no"
-            android:inputType="textEmailSubject"
-            android:textAlignment="center"
-            tools:ignore="HardcodedText" />
-
-        <EditText
-            android:id="@+id/edit_email_address"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_marginStart="188dp"
-            android:layout_marginTop="306dp"
+            android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
+            android:layout_marginTop="306dp"
             android:background="@drawable/login_shape"
-            android:hint=" @naver.com"
-            android:importantForAutofill="no"
+            android:hint="이메일 아이디@naver.com"
             android:inputType="textEmailAddress"
             android:textAlignment="center"
             tools:ignore="HardcodedText" />
+
+<!--        <EditText-->
+<!--            android:id="@+id/edit_email_address"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="54dp"-->
+<!--            android:layout_marginStart="188dp"-->
+<!--            android:layout_marginTop="306dp"-->
+<!--            android:layout_marginEnd="18dp"-->
+<!--            android:background="@drawable/login_shape"-->
+<!--            android:hint=" @naver.com"-->
+<!--            android:importantForAutofill="no"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            android:textAlignment="center"-->
+<!--            tools:ignore="HardcodedText" />-->
 
         <TextView
             android:layout_width="wrap_content"
