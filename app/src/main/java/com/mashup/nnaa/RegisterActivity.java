@@ -59,7 +59,6 @@ public class RegisterActivity extends AppCompatActivity {
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         });
-
         if (edit_name.getText().toString().length() == 0) {
             Toast.makeText(RegisterActivity.this, "이름을 입력해주세요!", Toast.LENGTH_SHORT).show();
             edit_name.requestFocus();
@@ -90,28 +89,30 @@ public class RegisterActivity extends AppCompatActivity {
             edit_password.requestFocus();
             return;
         }
+            btn_register.setOnClickListener(view -> AccountManager.getInstance().executeRegister(edit_email.getText().toString(),
+                    edit_password.getText().toString(),
+                    edit_name.getText().toString(),
+                    new AccountManager.ISignInResultListener() {
 
-        btn_register.setOnClickListener(view -> AccountManager.getInstance().executeRegister(edit_email.getText().toString(),
-                edit_password.getText().toString(),
-                edit_name.getText().toString(),
-                new AccountManager.ISignInResultListener() {
+                        @Override
+                        public void onSignInSuccess(String id, String token) {
+                            Log.v("Register", "Success");
+                            launchLoginActivity();
+                        }
 
-                    @Override
-                    public void onSignInSuccess(String id, String token) {
-                        Log.v("Register", "Success");
-                        launchLoginActivity();
-                    }
+                        @Override
+                        public void onSignInFail() {
+                            Log.v("########", "Fail");
+                        }
+                    }));
+        }
 
-                    @Override
-                    public void onSignInFail() {
-                        Log.v("########", "Fail");
-                    }
-                }));
+
+        private void launchLoginActivity () {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
     }
-
-    private void launchLoginActivity() {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-}

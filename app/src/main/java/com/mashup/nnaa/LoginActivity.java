@@ -82,6 +82,11 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // 비밀번호 찾기
+        txt_forget_password.setOnClickListener(view -> {
+
+        });
+
         //kakao login
          kakaoData();
 

@@ -124,13 +124,13 @@ public class AccountManager {
                                 ISignInResultListener resultListener) {
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Log.v("Register", "Register in fail (not enough): " + email);
+            Log.v("Register", "Register fail (not enough): " + email);
             resultListener.onSignInFail();
             return;
         }
 
         if (!isValidEmailAddress(email)) {
-            Log.v("Register", "Register in fail (wrong email address): " + email);
+            Log.v("Register", "Register fail (wrong email address): " + email);
             resultListener.onSignInFail();
             return;
         }
@@ -143,7 +143,7 @@ public class AccountManager {
                SignUpDto body = response.body();
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(token)) {
-                    Log.v("Register", "Reigster in fail (no id or token value received): " + email);
+                    Log.v("Register", "Reigster fail (no id or token value received): " + email);
                     resultListener.onSignInFail();
                 } else {
                     Log.v("Register", "Register in success: " + email);

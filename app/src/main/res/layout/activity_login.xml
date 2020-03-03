@@ -15,7 +15,8 @@
         android:text="로그인"
         android:textColor="#2d2e35"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,17 +26,19 @@
         android:lineHeight="27sp"
         android:text="로그인 후 너나알아를 이용해보세요!"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="169dp"
         android:lineHeight="27sp"
         android:text="이메일"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
     <EditText
         android:id="@+id/edit_email"
@@ -59,7 +62,8 @@
         android:lineHeight="27sp"
         android:text="비밀번호"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
     <EditText
         android:id="@+id/edit_password"
@@ -85,52 +89,57 @@
         android:text="회원 가입"
         android:textColor="#2d2e35"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
 
     <TextView
         android:id="@+id/txt_forget_password"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_marginLeft="205dp"
+        android:layout_marginStart="205dp"
         android:layout_marginTop="454dp"
         android:lineHeight="27sp"
         android:text="비밀번호 찾기"
         android:textColor="#2d2e35"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
     <Button
         android:id="@+id/btn_facebook_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="500dp"
-        android:text="페이스북으로 로그인" />
+        android:text="페이스북으로 로그인"
+        tools:ignore="HardcodedText" />
 
 
     <Button
         android:id="@+id/btn_facebook_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="550dp"
-        android:text="페이스북 로그아웃" />
+        android:text="페이스북 로그아웃"
+        tools:ignore="HardcodedText" />
 
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/com_kakao_login"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="500dp" />
 
     <Button
         android:id="@+id/kakaoLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="550dp"
-        android:text="카톡 로그아웃" />
+        android:text="카톡 로그아웃"
+        tools:ignore="HardcodedText" />
 
 
     <Button
@@ -144,6 +153,7 @@
         android:text="로그인 하기"
         android:textColor="#ffffff"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
 
 </FrameLayout>
