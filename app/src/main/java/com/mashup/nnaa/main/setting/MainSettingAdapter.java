@@ -14,13 +14,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainSettingAdapter extends RecyclerView.Adapter<MainSettingViewHolder> {
-    private ArrayList<String> items;
+    public enum SettingList {
+        SIGN_OUT(R.string.setting_sign_out),
+        DELETE_ACCOUNT(R.string.setting_del_account),
+        BLOCKED_USERS(R.string.setting_blocked_users);
+
+        private int textResId;
+        public String getText() {
+            return NnaaApplication.getAppContext().getString(textResId);
+        }
+        SettingList(int textResId) {
+            this.textResId = textResId;
+        }
+    }
+
+    private ArrayList<SettingList> items = new ArrayList<>(Arrays.asList(SettingList.values()));
 
     public MainSettingAdapter() {
-        String[] itemArr =
-                NnaaApplication.getAppContext().getResources()
-                        .getStringArray(R.array.settings);
-        items = new ArrayList<>(Arrays.asList(itemArr));
     }
 
     @NonNull

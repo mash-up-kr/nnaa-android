@@ -29,20 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initFragments();
-
         setOnMainTabBtnsClicked();
         setOnMakeQuestionBtnClicked();
 
         // Load HOME fragment page
         onMainTabClicked(Page.HOME);
-    }
-
-    private void initFragments() {
-        fragmentMap.put(Page.HOME, MainHomeFragment.newInstance());
-        fragmentMap.put(Page.ALARM, MainNotificationsFragment.newInstance());
-        fragmentMap.put(Page.MY_LIST, MainMyListFragment.newInstance());
-        fragmentMap.put(Page.SETTINGS, MainSettingFragment.newInstance());
     }
 
     private void setOnMainTabBtnsClicked() {
@@ -60,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
     private void onMainTabClicked(Page page) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.layout_main, fragmentMap.get(page));
-        transaction.commitAllowingStateLoss();
+
+        transaction.replace(R.id.layout_main, getFragment(page));
+        transaction.commitNowAllowingStateLoss();
     }
 
     private void setOnMakeQuestionBtnClicked() {
@@ -70,5 +62,35 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SetTypeOfFriendActivity.class);
             startActivity(intent);
         });
+    }
+
+    private Fragment getFragment(Page page) {
+        Fragment returnFragment = fragmentMap.get(page);
+
+        if (returnFragment == null
+                || getSupportFragmentManager().findFragmentById(returnFragment.getId()) == null) {
+            switch (page) {
+                case HOME:
+                    fragmentMap.put(Page.HOME, MainHomeFragment.newInstance());
+                        break;
+
+                case ALARM:
+                    fragmentMap.put(Page.ALARM, MainNotificationsFragment.newInstance());
+                    break;
+
+                case MY_LIST:
+                    fragmentMap.put(Page.MY_LIST, MainMyListFragment.newInstance());
+                    break;
+
+                case SETTINGS:
+                    fragmentMap.put(Page.SETTINGS, MainSettingFragment.newInstance());
+                    break;
+            }
+
+            returnFragment = fragmentMap.get(page);
+
+        }
+
+        return returnFragment;
     }
 }

@@ -18,7 +18,8 @@
         android:id="@+id/favorites_recycler"
         android:layout_below="@id/img_recycler"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         android:background="#ffffff"
         android:scrollbars="vertical" />
 

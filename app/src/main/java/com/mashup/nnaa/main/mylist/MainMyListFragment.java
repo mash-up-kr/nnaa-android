@@ -44,7 +44,7 @@ public class MainMyListFragment extends Fragment {
         // ViewPager
         ViewPager2 vpMyList = parent.findViewById(R.id.vp_mylist);
         vpMyList.setAdapter(new MainMyListPagerAdapter(
-                getActivity().getSupportFragmentManager(),
+                getChildFragmentManager(),
                 getLifecycle())
         );
         vpMyList.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
