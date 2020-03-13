@@ -1,10 +1,15 @@
 package com.mashup.nnaa;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,14 +21,15 @@ import com.mashup.nnaa.util.QuestionAdapter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class QuestionActivity extends AppCompatActivity {
 
     ImageView img_delete, img_add;
+    TextView txt_name;
     Button btn_cancel, btn_next;
 
     private QuestionAdapter adapter;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,38 +37,49 @@ public class QuestionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        txt_name = findViewById(R.id.txt_name);
+
+        // setTypeActivity에서 타입, 이름 받아오자
+        if (intent != null) {
+            if (intent.getExtras() != null) {
+                String name = intent.getStringExtra("name");
+                String type = intent.getStringExtra("typename");
+
+                txt_name.setText(String.format("%s인 , ", type));
+                txt_name.append(name + "님 께");
+            }
+        }
+
         btn_next = findViewById(R.id.btn_next);
+
+        btn_next.setOnClickListener(view -> {
+            // 보낸 질문함으로 넘어감
+        });
         btn_cancel = findViewById(R.id.btn_cancel);
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent cancel_intent = new Intent(QuestionActivity.this, SetTypeOfFriendActivity.class);
-                startActivity(cancel_intent);
-            }
+        btn_cancel.setOnClickListener(view -> {
+            Intent cancel_intent = new Intent(getApplicationContext(), SetTypeOfFriendActivity.class);
+            startActivity(cancel_intent);
         });
+
         img_delete = findViewById(R.id.img_delete);
 
-        img_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(QuestionActivity.this, "질문을 삭제하러 갈게용", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(QuestionActivity.this, DeleteQuestion.class);
-                startActivity(intent);
-            }
+        String name = txt_name.getText().toString();
+
+        img_delete.setOnClickListener(view -> {
+            Toast.makeText(QuestionActivity.this, "질문삭제 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
+            Intent deleteintent = new Intent(getApplicationContext(), DeleteQuestion.class);
+            deleteintent.putExtra("name", name);
+            startActivity(deleteintent);
         });
 
         img_add = findViewById(R.id.img_add);
 
-        img_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(QuestionActivity.this, "다음 화면으로 넘어갈게", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(QuestionActivity.this, FavoritesActivity.class);
-                startActivity(intent);
-            }
+        img_add.setOnClickListener(view -> {
+            Toast.makeText(QuestionActivity.this, "즐겨찾기 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
+            Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
+            startActivity(bookmarkintent);
         });
-
 
         init();
 
@@ -71,13 +88,13 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void init() {
 
-        RecyclerView recycler1 = findViewById(R.id.recycler1);
+        RecyclerView recyclerQuestion = findViewById(R.id.recycler_question);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recycler1.setLayoutManager(linearLayoutManager);
+        recyclerQuestion.setLayoutManager(linearLayoutManager);
 
         adapter = new QuestionAdapter();
-        recycler1.setAdapter(adapter);
+        recyclerQuestion.setAdapter(adapter);
 
     }
 
@@ -109,7 +126,6 @@ public class QuestionActivity extends AppCompatActivity {
 
             adapter.addItem(aitem);
         }
-
         adapter.notifyDataSetChanged();
     }
 }

@@ -1,9 +1,11 @@
 package com.mashup.nnaa.main.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,7 @@ import retrofit2.Response;
 
 public class MainHomeFragment extends Fragment {
     private RecyclerView rvQuestionnaires;
+    private TextView tvWelcome;
 
     public static MainHomeFragment newInstance() {
         MainHomeFragment fragment = new MainHomeFragment();
@@ -42,6 +45,16 @@ public class MainHomeFragment extends Fragment {
                 new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         rvQuestionnaires.setAdapter(new MainQuestionnaireAdapter());
 
+        tvWelcome = view.findViewById(R.id.tv_welcome);
+
+        // activity->fragment 데이터 받아오기 오류있음
+        Bundle bundle = getArguments();
+        if(bundle!=null) {
+            bundle = getArguments();
+            String name= bundle.getString("RegisterName");
+            tvWelcome.setText(name);
+            Toast.makeText(getActivity(),name,Toast.LENGTH_LONG).show();
+        }
 
         return view;
     }
@@ -51,6 +64,7 @@ public class MainHomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         requestReceivedQuestionnaires();
+
     }
 
 

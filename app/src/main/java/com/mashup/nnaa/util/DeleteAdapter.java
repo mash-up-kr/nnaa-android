@@ -47,7 +47,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
         deleteData.add(deleteitem);
     }
 
-    class DeleteViewHolder extends RecyclerView.ViewHolder {
+    static class DeleteViewHolder extends RecyclerView.ViewHolder {
 
         private CheckBox check_box;
         private TextView txt_check;
@@ -62,12 +62,13 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
             txt_check = itemView.findViewById(R.id.txt_check);
 
 
-
         }
 
         void onBind(DeleteQuestionItem deleteitem) {
             check_box.setText(deleteitem.getCheckBox());
             txt_check.setText(deleteitem.getQuestion_Txt());
+
+
         }
     }
 }

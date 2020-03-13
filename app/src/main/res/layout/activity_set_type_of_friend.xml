@@ -21,7 +21,8 @@
             android:adjustViewBounds="true"
             android:src="@drawable/rel_img_back"
             android:layout_marginBottom="70dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="93dp"
+                android:layout_marginTop="53dp"
                 android:text="@string/to_me"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"
@@ -44,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Name"
                 android:textAlignment="center"
-                android:inputType="text" />
+                android:inputType="text"
+                tools:ignore="LabelFor" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/rel_btn_arr_l"/>
+                    android:src="@drawable/rel_btn_arr_l"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/type_of_friend"
@@ -116,7 +119,8 @@
             android:text="@string/cancle"
             android:textSize="14sp"
             android:textColor="@color/colorBlack"
-            android:background="@color/colorWhite"/>
+            android:background="@color/colorWhite"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/next_btn_in_type_of_friend"
