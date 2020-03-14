@@ -40,14 +40,13 @@ public class QuestionActivity extends AppCompatActivity {
         txt_name = findViewById(R.id.txt_name);
 
         // setTypeActivity에서 타입, 이름 받아오자
-        if (intent != null) {
-            if (intent.getExtras() != null) {
-                String name = intent.getStringExtra("name");
-                String type = intent.getStringExtra("typename");
+        if (intent != null && intent.getExtras() != null) {
+            String name = intent.getStringExtra("name");
+            String type = intent.getStringExtra("typename");
 
-                txt_name.setText(String.format("%s인 , ", type));
-                txt_name.append(name + "님 께");
-            }
+            txt_name.setText(String.format("%s인 , ", type));
+            txt_name.append(name + "님 께");
+
         }
 
         btn_next = findViewById(R.id.btn_next);
