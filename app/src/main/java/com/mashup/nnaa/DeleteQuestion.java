@@ -42,12 +42,10 @@ public class DeleteQuestion extends AppCompatActivity {
         Intent intent = getIntent();
 
         // QuestionActivity 에서 type, name 받아오자
-        if (intent != null) {
-            if (intent.getExtras() != null) {
-                String name = intent.getStringExtra("name");
+        if (intent != null && intent.getExtras() != null) {
+            String name = intent.getStringExtra("name");
 
-                txt_delete_name.setText(name);
-            }
+            txt_delete_name.setText(name);
         }
 
         init();
