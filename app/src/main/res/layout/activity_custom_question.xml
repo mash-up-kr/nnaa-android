@@ -18,31 +18,33 @@
         android:id="@+id/custom_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="bottom"
         android:layout_marginTop="98dp"
         android:layout_marginBottom="60dp"
-        android:layout_gravity="bottom"
         android:background="#ffffff"
         android:scrollbars="vertical" />
 
     <ImageButton
         android:id="@+id/imgbtn_past"
-        android:layout_width="13dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="59dp"
+        android:adjustViewBounds="true"
         android:background="#ffffff"
-        android:src="@drawable/arrow_left_335"
-        android:contentDescription="@string/StringValue" />
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/arrow_left_335" />
 
     <ImageButton
         android:id="@+id/imgbtn_cancel"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="312dp"
         android:layout_marginTop="57dp"
+        android:adjustViewBounds="true"
         android:background="#ffffff"
-        android:src="@drawable/cancel_img"
-        android:contentDescription="@string/StringValue" />
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/cancel_img" />
 
     <Button
         android:id="@+id/btn_done"

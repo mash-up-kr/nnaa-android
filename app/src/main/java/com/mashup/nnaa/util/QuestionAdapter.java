@@ -1,5 +1,6 @@
 package com.mashup.nnaa.util;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import com.mashup.nnaa.data.QuestionItem;
 
 import java.util.ArrayList;
 
+import static android.view.LayoutInflater.from;
+
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
 
@@ -22,7 +25,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public QuestionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_item, parent, false);
+        View view = from(parent.getContext()).inflate(R.layout.question_item, parent, false);
 
 
         return new ViewHolder(view);
@@ -46,7 +49,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         mDataset.add(aitem);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mQ, mName;
 

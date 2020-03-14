@@ -4,22 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.data.DeleteQuestionItem;
 import com.mashup.nnaa.util.DeleteAdapter;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class DeleteQuestion extends AppCompatActivity {
 
-
     DeleteAdapter deleteAdapter;
-
+    TextView txt_delete_name;
     Button btn_delete, btn_delete_cancel;
 
     @Override
@@ -27,18 +30,23 @@ public class DeleteQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_question);
 
-
         btn_delete = findViewById(R.id.btn_delete);
         btn_delete_cancel = findViewById(R.id.btn_delete_cancel);
+        txt_delete_name = findViewById(R.id.txt_delete_name);
 
-        btn_delete_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DeleteQuestion.this, QuestionActivity.class);
-                startActivity(intent);
-            }
+        btn_delete_cancel.setOnClickListener(view -> {
+            Intent intent = new Intent(DeleteQuestion.this, QuestionActivity.class);
+            startActivity(intent);
         });
+
         Intent intent = getIntent();
+
+        // QuestionActivity 에서 type, name 받아오자
+        if (intent != null && intent.getExtras() != null) {
+            String name = intent.getStringExtra("name");
+
+            txt_delete_name.setText(name);
+        }
 
         init();
 
@@ -47,13 +55,13 @@ public class DeleteQuestion extends AppCompatActivity {
 
     private void init() {
 
-        RecyclerView recyclerView = findViewById(R.id.recycler3);
+        RecyclerView recyclerDelete = findViewById(R.id.recycler_delete);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerDelete.setLayoutManager(linearLayoutManager);
 
         deleteAdapter = new DeleteAdapter();
-        recyclerView.setAdapter(deleteAdapter);
+        recyclerDelete.setAdapter(deleteAdapter);
     }
 
     private void getData() {

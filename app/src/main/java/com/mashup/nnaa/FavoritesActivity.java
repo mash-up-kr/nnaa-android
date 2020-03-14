@@ -1,17 +1,22 @@
 package com.mashup.nnaa;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.mashup.nnaa.data.FavoritesItem;
 import com.mashup.nnaa.util.FavoritesAdapter;
@@ -35,8 +40,6 @@ public class FavoritesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
 
-        Intent intent = getIntent();
-
         btn_favorites = findViewById(R.id.btn_favorites);
         imgbtn_past = findViewById(R.id.imgbtn_past);
         imgbtn_cancel = findViewById(R.id.imgbtn_cancel);
@@ -45,12 +48,9 @@ public class FavoritesActivity extends AppCompatActivity {
         txt_favorites = findViewById(R.id.txt_favorites);
         img_recycler = findViewById(R.id.img_recycler);
 
-        imgbtn_past.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent past_intent = new Intent(FavoritesActivity.this, QuestionActivity.class);
-                startActivity(past_intent);
-            }
+
+        imgbtn_past.setOnClickListener(view -> {
+            finish();
         });
 
 
@@ -59,25 +59,17 @@ public class FavoritesActivity extends AppCompatActivity {
         getItem();
 
 
-        imgbtn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent cancel_intent = new Intent(FavoritesActivity.this, QuestionActivity.class);
-                startActivity(cancel_intent);
-            }
+        imgbtn_cancel.setOnClickListener(view -> {
+            finish();
         });
 
         init();
 
         getItem();
 
-        edit_custom.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent edit_intent = new Intent(FavoritesActivity.this, CustomQuestionActivity.class);
-                startActivity(edit_intent);
-            }
+        edit_custom.setOnClickListener(view -> {
+            Intent edit_intent = new Intent(FavoritesActivity.this, CustomQuestionActivity.class);
+            startActivity(edit_intent);
         });
 
     }
