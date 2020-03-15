@@ -50,7 +50,6 @@ public class MainHomeFragment extends Fragment {
         // activity->fragment 데이터 받아오기 오류있음
         Bundle bundle = getArguments();
         if(bundle!=null) {
-            bundle = getArguments();
             String name= bundle.getString("RegisterName");
             tvWelcome.setText(name);
             Toast.makeText(getActivity(),name,Toast.LENGTH_LONG).show();

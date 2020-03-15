@@ -1,12 +1,7 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.question;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,17 +11,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.R;
+import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.QuestionAdapter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class QuestionActivity extends AppCompatActivity {
 
     ImageView img_delete, img_add;
-    TextView txt_name;
+    TextView txt_name, txt_type;
     Button btn_cancel, btn_next;
 
     private QuestionAdapter adapter;
@@ -38,22 +35,25 @@ public class QuestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         txt_name = findViewById(R.id.txt_name);
+        txt_type = findViewById(R.id.txt_type);
+        btn_next = findViewById(R.id.btn_next);
 
         // setTypeActivity에서 타입, 이름 받아오자
-        if (intent != null) {
-            if (intent.getExtras() != null) {
-                String name = intent.getStringExtra("name");
-                String type = intent.getStringExtra("typename");
+        if (intent != null && intent.getExtras() != null) {
+            String name = intent.getStringExtra("name");
+            String type = intent.getStringExtra("typename");
 
-                txt_name.setText(String.format("%s인 , ", type));
-                txt_name.append(name + "님 께");
-            }
+            txt_type.setText(String.format("%s인 , ", type));
+            txt_name.setText(name + "께");
         }
-
-        btn_next = findViewById(R.id.btn_next);
 
         btn_next.setOnClickListener(view -> {
             // 보낸 질문함으로 넘어감
+            String replyname = txt_name.getText().toString();
+            Intent reply_intent = new Intent(QuestionActivity.this, ReplyActivity.class);
+            reply_intent.putExtra("reply name", replyname);
+            startActivity(reply_intent);
+
         });
         btn_cancel = findViewById(R.id.btn_cancel);
 

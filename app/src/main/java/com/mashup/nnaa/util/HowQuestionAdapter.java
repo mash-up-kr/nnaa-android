@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mashup.nnaa.QuestionActivity;
+import com.mashup.nnaa.question.QuestionActivity;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.HowQuestionItem;
 

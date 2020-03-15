@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.question;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,10 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.CustomQuestionItem;
 import com.mashup.nnaa.util.CustomQuestionAdapter;
 

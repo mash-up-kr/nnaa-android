@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,32 +34,43 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @Override
     public FavoritesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorites_question_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorites_question_item, parent, false);
 
-        return new ViewHolder(view);
+        ViewHolder vh = new ViewHolder(view);
+
+        // check box 리스너
+        preferences = vh.check_box_favorites.getContext().getSharedPreferences("check", Context.MODE_PRIVATE);
+        vh.check_box_favorites.setOnCheckedChangeListener(null);
+        vh.check_box_favorites.setChecked(vh.check_box_favorites.isSelected());
+
+        vh.check_box_favorites.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                Toast.makeText(view.getContext(), "즐겨찾기",Toast.LENGTH_LONG).show();
+                preferences = buttonView.getContext().getSharedPreferences("check",MODE_PRIVATE);
+                editor = preferences.edit();
+                editor.putBoolean("check", vh.check_box_favorites.isChecked());
+                editor.apply();
+                Log.v("즐겨찾기", "Click!");
+            }
+        });
+        return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.ViewHolder holder, int position) {
-
         holder.onBind(fDataset.get(position));
-
-
     }
 
     @Override
     public int getItemCount() {
         return fDataset.size();
-
     }
 
     public void addItem(FavoritesItem fitem) {
-
         fDataset.add(fitem);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txt_favorites_question;
         private CheckBox check_box_favorites;
@@ -66,38 +78,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         ViewHolder(View itemView) {
             super(itemView);
 
-
             txt_favorites_question = itemView.findViewById(R.id.txt_favorites_question);
-
             check_box_favorites = itemView.findViewById(R.id.check_box_favorites);
-            preferences = check_box_favorites.getContext().getSharedPreferences("check", Context.MODE_PRIVATE);
-
-
         }
 
         void onBind(FavoritesItem fitem) {
-
             txt_favorites_question.setText(fitem.getFavoritesQuestion());
             check_box_favorites.setChecked(fitem.isFavoirtesCheck());
-
-            check_box_favorites.setOnCheckedChangeListener(null);
-            check_box_favorites.setChecked(check_box_favorites.isSelected());
-
-            check_box_favorites.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked) {
-                    //preferences = mContext.getApplicationContext().getSharedPreferences("check", MODE_PRIVATE);
-                    preferences = buttonView.getContext().getSharedPreferences("check",MODE_PRIVATE);
-                    editor = preferences.edit();
-                    editor.putBoolean("check", true);
-                    preferences.getBoolean("check", true);
-                    editor.apply();
-                    Log.d("즐겨찾기", "Click!");
-                }
-            });
-
         }
-
     }
-
-
 }

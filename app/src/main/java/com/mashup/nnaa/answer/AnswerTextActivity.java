@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.answer;
 
 
 import android.app.AlertDialog;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.QuestionnaireItem;
 import com.mashup.nnaa.main.MainActivity;
 
