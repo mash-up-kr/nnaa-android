@@ -44,7 +44,7 @@ public class QuestionActivity extends AppCompatActivity {
             String type = intent.getStringExtra("typename");
 
             txt_type.setText(String.format("%s인 , ", type));
-            txt_name.setText(name + "께");
+            txt_name.setText(String.format("%s께", name));
         }
 
         btn_next.setOnClickListener(view -> {
