@@ -1,3 +1,71 @@
+
 <resources>
     <string name="app_name">NNAA</string>
+    <!-- Common -->
+    <string name="common_yes">Yes</string>
+    <string name="common_no">No</string>
+
+    <!-- Splash -->
+    <string name="splash_permission_error">All permission should be granted.\nPlease rerun app and grand permissions.</string>
+
+    <!-- Main page -->
+    <string name="main_welcome">Glad to see you,\nWelcome <b>%s</b>.</string>
+    <string name="main_home_name_sent_this_questions">%s has sent questions.</string>
+    <string name="main_home_no_questionnaires">There are no received questions.</string>
+
+    <!-- Notifications page -->
+    <string name="noti_no_notifications">There are no received notifications.</string>
+
+    <!-- MyList page -->
+    <string name="mylist_tab_received">Received</string>
+    <string name="mylist_tab_sent">Sent</string>
+    <string name="mylist_no_items">No items</string>
+    <string name="mylist_fail_to_load">Fail to load the list</string>
+
+    <!-- Setting page -->
+    <string name="setting_title">Setting page\nfor %s</string>
+    <string name="setting_sign_out">Sign out</string>
+    <string name="setting_del_account">Delete account</string>
+    <string name="setting_blocked_users">Blocked users</string>
+
+    <string name="setting_want_to_sign_out">Do you really want to sign out?</string>
+
+    <string name="StringValue">이미지가 열리지 않습니다.</string>
+    <string-array name="questionlist">
+        <item>(선택없음)</item>
+        <item>아빠</item>
+        <item>동생</item>
+        <item>누나/언니</item>
+        <item>형/오빠</item>
+        <item>소중한 사람</item>
+        <item>연인</item>
+    </string-array>
+
+    <!-- 답변자 종류 -->
+    <string name="mother">Mother</string>
+    <string name="father">Father</string>
+    <string name="younger">Younger</string>
+    <string name="brother">Brother</string>
+    <string name="sister">Sister</string>
+    <string name="friend">Friend</string>
+    <string name="lover">Lover</string>
+    <string name="vip">VIP</string>
+    <string name="next">Next</string>
+    <string name="to_me">To me,</string>
+    <string name="is_my">is my</string>
+    <string name="plz_enter_name">Please enter the name</string>
+    <string name="cancle">cancle</string>
+    <string name="lets_start">Let\'s Start</string>
+
+    <!--페이스북 앱 id-->
+    <string name="facebook_app_key" translatable="false">2479070769047146</string>
+
+    <!--카카오 앱 키-->
+    <string name="kakao_app_key" translatable="false">cc5cc66f93ddfc88c141def9dbe6934a</string>
+
+    <string name="btn_done" translatable="false">입력 완료</string>
+    <string name="txt_j" translatable="false">주관식</string>
+    <string name="txt_g" translatable="false">객관식</string>
+    <string name="txt_o" translatable="false">O X</string>
+    <string name="four_txt" translatable="false">최대 4개 까지 가능</string>
 </resources>
