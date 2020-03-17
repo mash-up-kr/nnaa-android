@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="44dp"
+                android:height="44dp" />
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+
+    <item
+        android:width="11dp"
+        android:height="11dp"
+        android:drawable="@drawable/minus_1512"
+        android:gravity="center"
+        tools:targetApi="m">
+
+    </item>
+</layer-list>

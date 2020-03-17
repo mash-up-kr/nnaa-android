@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "500905832639",
+    "firebase_url": "https://nnaa-790c3.firebaseio.com",
+    "project_id": "nnaa-790c3",
+    "storage_bucket": "nnaa-790c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500905832639:android:580ddd8bde2df04c4fd60a",
+        "android_client_info": {
+          "package_name": "com.mashup.nnaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500905832639-5v700v5rkf5p605fun7f03a8957lmn2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApVZX2sY2Rk4BSke6l49GS1PPqWFCZv3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500905832639-5v700v5rkf5p605fun7f03a8957lmn2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

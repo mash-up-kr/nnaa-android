@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="common_yes">네</string>
+    <string name="common_no">아니오</string>
+
+    <!-- Splash -->
+    <string name="splash_permission_error">모든 권한이 승인되어야합니다.\n앱을 다시 실행 후 권한을 승인해주세요.</string>
+
+    <!-- Main page -->
+    <string name="main_welcome">오늘도 더 알고싣은\n<b>%s님</b> 안녕하세요.</string>
+    <string name="main_home_name_sent_this_questions">%s님이 이 질문을 보냈어요.</string>
+
+    <!-- Setting page -->
+    <string name="setting_title">%s님의\n설정 페이지</string>
+    <string name="setting_sign_out">로그아웃</string>
+    <string name="setting_del_account">탈퇴하기</string>
+    <string name="setting_blocked_users">차단하기</string>
+    <string name="setting_want_to_sign_out">정말 로그아웃 하시겠습니까?</string>
+
+    <string name="app_name">NNAA</string>
+    <string name="mother">엄마</string>
+    <string name="younger">동생</string>
+    <string name="vip">소중한 사람</string>
+    <string name="sister">언니/누나</string>
+    <string name="lover">연인</string>
+    <string name="friend">친구</string>
+    <string name="father">아빠</string>
+    <string name="brother">오빠/형</string>
+    <string name="next">다음으로</string>
+    <string name="cancle">cancel</string>
+    <string name="lets_start">Let\'s Start</string>
+    <string name="main_home_no_questionnaires">도착한 질문이 없어요.</string>
+    <string name="noti_no_notifications">받은 알림이 없어요.</string>
+    <string name="mylist_tab_received">받은 질문</string>
+    <string name="mylist_tab_sent">보낸 질문</string>
+    <string name="to_me">나에게</string>
+    <string name="is_my">은(는) 나의</string>
+    <string name="plz_enter_name">이름을 입력해주세요.</string>
+
+
+</resources>
