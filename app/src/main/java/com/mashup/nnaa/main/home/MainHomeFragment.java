@@ -54,7 +54,6 @@ public class MainHomeFragment extends Fragment {
             tvWelcome.setText(name);
             Toast.makeText(getActivity(),name,Toast.LENGTH_LONG).show();
         }
-
         return view;
     }
 
