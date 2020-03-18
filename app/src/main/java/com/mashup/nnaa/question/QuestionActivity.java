@@ -2,6 +2,7 @@ package com.mashup.nnaa.question;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,13 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.network.QuestionControllerService;
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.select.SetTypeOfFriendActivity;
-import com.mashup.nnaa.data.QuestionItem;
 import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.QuestionAdapter;
 
-import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -26,7 +32,9 @@ public class QuestionActivity extends AppCompatActivity {
     TextView txt_name, txt_type;
     Button btn_cancel, btn_next;
 
-    private QuestionAdapter adapter;
+    QuestionAdapter questionAdapter;
+    List<Question> questionList;
+    private QuestionControllerService questionControllerService = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +52,7 @@ public class QuestionActivity extends AppCompatActivity {
             String type = intent.getStringExtra("typename");
 
             txt_type.setText(String.format("%s인 , ", type));
-            txt_name.setText(name + "께");
+            txt_name.setText(String.format("%s께", name));
         }
 
         btn_next.setOnClickListener(view -> {
@@ -68,7 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         img_delete.setOnClickListener(view -> {
             Toast.makeText(QuestionActivity.this, "질문삭제 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
-            Intent deleteintent = new Intent(getApplicationContext(), DeleteQuestion.class);
+            Intent deleteintent = new Intent(getApplicationContext(), DeleteQuestionActivity.class);
             deleteintent.putExtra("name", name);
             startActivity(deleteintent);
         });
@@ -83,7 +91,6 @@ public class QuestionActivity extends AppCompatActivity {
 
         init();
 
-        getItem();
     }
 
     private void init() {
@@ -92,40 +99,27 @@ public class QuestionActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerQuestion.setLayoutManager(linearLayoutManager);
+        questionAdapter = new QuestionAdapter(getApplicationContext(), questionList);
+        recyclerQuestion.setAdapter(questionAdapter);
 
-        adapter = new QuestionAdapter();
-        recyclerQuestion.setAdapter(adapter);
+        questionControllerService = RetrofitHelper.getInstance().getQuestion(new Callback<List<Question>>() {
+            @Override
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                questionList = response.body();
+                if(questionList!=null) {
+                    Log.v("QuestionRandom", "성공:" + "code : " + response.code());
+                    questionAdapter.setQuestionList(questionList);
+                }
+                else {
+                    Log.v("QuestionRandom", "No Question");
+                }
+            }
 
-    }
+            @Override
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+                Log.v("QuestionRandom", "에러:" + t.getMessage());
+            }
+        });
 
-    private void getItem() {
-
-        List<String> listInitial = Arrays.asList("Q.", "Q.", "Q.", "Q.", "Q.", "Q.", "Q.",
-                "Q.", "Q.", "Q.", "Q.", "Q.", "Q.", "Q.");
-
-        List<String> listContent = Arrays.asList("엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?",
-                "엄마가 가장 좋아하는 음식은?");
-
-        for (int i = 0; i < listInitial.size(); i++) {
-
-            QuestionItem aitem = new QuestionItem();
-            aitem.setMainQ(listInitial.get(i));
-            aitem.setQuestionary(listContent.get(i));
-
-            adapter.addItem(aitem);
-        }
-        adapter.notifyDataSetChanged();
     }
 }
