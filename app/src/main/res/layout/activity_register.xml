@@ -8,6 +8,7 @@
     tools:context=".RegisterActivity">
 
     <FrameLayout
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,7 +19,8 @@
             android:layout_marginStart="314dp"
             android:layout_marginTop="33dp"
             android:layout_marginEnd="18dp"
-            android:src="@drawable/quiz_btn_close" />
+            android:src="@drawable/quiz_btn_close"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +31,8 @@
             android:text="회원가입"
             android:textColor="#2d2e35"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +43,8 @@
             android:text="회원가입 후 정확한 정보를 받아보세요!"
             android:textColor="#2d2e35"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +55,8 @@
             android:text="이름"
             android:textColor="#2d2e35"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
         <EditText
             android:id="@+id/edit_name"
@@ -59,13 +64,12 @@
             android:layout_height="54dp"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="203dp"
-            android:textAlignment="center"
             android:layout_marginRight="18dp"
             android:background="@drawable/login_shape"
             android:hint="이름을 알려주세요!"
-            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            tools:ignore="HardcodedText" />
+            android:textAlignment="center"
+            tools:ignore="Autofill,HardcodedText" />
 
 
         <TextView
@@ -77,34 +81,21 @@
             android:text="이메일"
             android:textColor="#2d2e35"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
         <EditText
             android:id="@+id/edit_email"
-            android:layout_width="162dp"
+            android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="306dp"
-            android:background="@drawable/login_shape"
-            android:hint="이메일 아이디"
-            android:importantForAutofill="no"
-            android:inputType="textEmailSubject"
-            android:textAlignment="center"
-            tools:ignore="HardcodedText" />
-
-        <EditText
-            android:id="@+id/edit_email_address"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginStart="188dp"
-            android:layout_marginTop="306dp"
             android:layout_marginEnd="18dp"
             android:background="@drawable/login_shape"
-            android:hint=" @naver.com"
-            android:importantForAutofill="no"
+            android:hint="이메일 아이디@naver.com"
             android:inputType="textEmailAddress"
             android:textAlignment="center"
-            tools:ignore="HardcodedText" />
+            tools:ignore="Autofill,HardcodedText" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,7 +106,8 @@
             android:text="비밀번호"
             android:textColor="#2d2e35"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
         <EditText
             android:id="@+id/edit_password"
@@ -140,7 +132,8 @@
             android:text="비밀번호 확인"
             android:textColor="#2d2e35"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
         <EditText
             android:id="@+id/edit_password_confirm"
@@ -149,11 +142,11 @@
             android:layout_marginLeft="18dp"
             android:layout_marginTop="528dp"
             android:layout_marginRight="18dp"
-            android:textAlignment="center"
             android:background="@drawable/password_confirm_change"
             android:hint="***"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:textAlignment="center"
             tools:ignore="HardcodedText" />
 
 
@@ -168,8 +161,8 @@
             android:text="회원 가입 완료"
             android:textColor="#ffffff"
             android:textSize="14sp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
 
     </FrameLayout>
 </ScrollView>

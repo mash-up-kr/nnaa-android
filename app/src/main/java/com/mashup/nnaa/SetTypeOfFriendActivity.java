@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class SetTypeOfFriendActivity extends AppCompatActivity implements View.OnClickListener{
+public class SetTypeOfFriendActivity extends AppCompatActivity implements View.OnClickListener {
     TextView friendType;
     ImageButton selectBtnLeft, selectBtnRight;
     ArrayList<String> type = new ArrayList<>();
@@ -37,18 +37,22 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
 
         cancleBtn = findViewById(R.id.cancle_btn_in_type_of_friend);
         nextBtn = findViewById(R.id.next_btn_in_type_of_friend);
+
         nextBtn.setOnClickListener(view -> {
             String name = etName.getText().toString().trim();
+            String typename = friendType.getText().toString();
             if (name.isEmpty()) {
                 Toast.makeText(this, R.string.plz_enter_name, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Intent intent = new Intent(SetTypeOfFriendActivity.this, QuestionActivity.class);
+            Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
             intent.putExtra("name", name);
+            intent.putExtra("typename", typename);
             startActivity(intent);
+
         });
-      
+
         Resources res = getResources();
         type.add(res.getString(R.string.mother));
         type.add(res.getString(R.string.father));
@@ -59,7 +63,7 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         type.add(res.getString(R.string.lover));
         type.add(res.getString(R.string.vip));
 
-        cancleBtn.setOnClickListener((view)-> {
+        cancleBtn.setOnClickListener((view) -> {
             finish();
         });
     }
@@ -68,15 +72,15 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         int ind = type.indexOf(friendType.getText());
 
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.rel_btn_l:
-                if(ind==0) ind = type.size()-1;
-                else ind = ind-1;
+                if (ind == 0) ind = type.size() - 1;
+                else ind = ind - 1;
                 friendType.setText(type.get(ind));
                 break;
             case R.id.rel_btn_r:
-                if(ind==type.size()-1) ind = 0;
-                else ind = ind+1;
+                if (ind == type.size() - 1) ind = 0;
+                else ind = ind + 1;
                 friendType.setText(type.get(ind));
                 break;
             default:

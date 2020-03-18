@@ -2,13 +2,8 @@ package com.mashup.nnaa.data;
 
 public class FavoritesItem {
 
-    String favoritesQuestion;
-    int favoritesImg;
-
-    public FavoritesItem() {
-        this.favoritesQuestion = favoritesQuestion;
-        this.favoritesImg = favoritesImg;
-    }
+    private String favoritesQuestion;
+    private boolean favoirtesCheck;
 
     public String getFavoritesQuestion() {
         return favoritesQuestion;
@@ -18,11 +13,16 @@ public class FavoritesItem {
         this.favoritesQuestion = favoritesQuestion;
     }
 
-    public int getFavoritesImg() {
-        return favoritesImg;
+    public boolean isFavoirtesCheck() {
+        return favoirtesCheck;
     }
 
-    public void setFavoritesImg(int favoritesImg) {
-        this.favoritesImg = favoritesImg;
+    public void setFavoirtesCheck(boolean favoirtesCheck) {
+        this.favoirtesCheck = favoirtesCheck;
+    }
+
+    public FavoritesItem() {
+        this.favoritesQuestion = favoritesQuestion;
+        this.favoirtesCheck = favoirtesCheck;
     }
 }
