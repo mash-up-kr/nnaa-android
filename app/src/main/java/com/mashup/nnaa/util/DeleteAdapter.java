@@ -61,7 +61,6 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
 
             txt_check = itemView.findViewById(R.id.txt_check);
 
-
         }
 
         void onBind(DeleteQuestionItem deleteitem) {

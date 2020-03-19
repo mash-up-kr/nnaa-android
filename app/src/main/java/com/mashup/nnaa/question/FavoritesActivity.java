@@ -1,23 +1,18 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.question;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.FavoritesItem;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
@@ -47,7 +42,6 @@ public class FavoritesActivity extends AppCompatActivity {
         img_favorites = findViewById(R.id.img_favorites);
         txt_favorites = findViewById(R.id.txt_favorites);
         img_recycler = findViewById(R.id.img_recycler);
-
 
         imgbtn_past.setOnClickListener(view -> {
             finish();

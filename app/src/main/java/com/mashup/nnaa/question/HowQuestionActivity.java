@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.question;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.HowQuestionItem;
 import com.mashup.nnaa.util.HowQuestionAdapter;
 

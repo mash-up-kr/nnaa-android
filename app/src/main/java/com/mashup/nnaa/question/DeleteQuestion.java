@@ -1,20 +1,17 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.question;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.DeleteQuestionItem;
 import com.mashup.nnaa.util.DeleteAdapter;
-
-import org.w3c.dom.Text;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,6 +48,7 @@ public class DeleteQuestion extends AppCompatActivity {
         init();
 
         getData();
+
     }
 
     private void init() {
