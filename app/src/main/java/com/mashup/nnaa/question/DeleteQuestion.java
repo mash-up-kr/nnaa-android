@@ -16,7 +16,7 @@ import com.mashup.nnaa.util.DeleteAdapter;
 import java.util.Arrays;
 import java.util.List;
 
-public class DeleteQuestion extends AppCompatActivity {
+public class DeleteQuestionActivity extends AppCompatActivity {
 
     DeleteAdapter deleteAdapter;
     TextView txt_delete_name;
@@ -32,7 +32,7 @@ public class DeleteQuestion extends AppCompatActivity {
         txt_delete_name = findViewById(R.id.txt_delete_name);
 
         btn_delete_cancel.setOnClickListener(view -> {
-            Intent intent = new Intent(DeleteQuestion.this, QuestionActivity.class);
+            Intent intent = new Intent(DeleteQuestionActivity.this, QuestionActivity.class);
             startActivity(intent);
         });
 
