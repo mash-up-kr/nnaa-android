@@ -40,7 +40,7 @@
         <activity android:name=".main.MainActivity" />
         <activity android:name=".answer.AnswerMultipleChoiceActivity" />
         <activity android:name=".question.FavoritesActivity" />
-        <activity android:name=".question.DeleteQuestion" />
+        <activity android:name=".question.DeleteQuestionActivity" />
         <activity android:name=".question.QuestionActivity" />
         <activity android:name=".question.HowQuestionActivity" />
         <activity android:name=".select.SetTypeOfFriendActivity" />
