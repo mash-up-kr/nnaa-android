@@ -37,6 +37,8 @@
     <string name="to_me">나에게</string>
     <string name="is_my">은(는) 나의</string>
     <string name="plz_enter_name">이름을 입력해주세요.</string>
+    <string name="mylist_no_items">보여줄게 없습니다.</string>
+    <string name="mylist_fail_to_load">불러오지 못했습니다.</string>
 
 
 </resources>
