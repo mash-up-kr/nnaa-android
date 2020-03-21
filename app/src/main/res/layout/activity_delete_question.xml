@@ -8,12 +8,24 @@
 
 
     <TextView
-        android:id="@+id/txt_delete_name"
+        android:id="@+id/txt_delete_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="30dp"
         android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="엄마인 , " />
+
+    <TextView
+        android:id="@+id/txt_delete_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#ffffff"
+        tools:text="승윤님께"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -43,7 +55,7 @@
 
     <Button
         android:id="@+id/btn_delete_cancel"
-        android:layout_width="163dp"
+        android:layout_width="150dp"
         android:layout_height="70dp"
         android:layout_gravity="bottom"
         android:background="#fefefe"
@@ -54,11 +66,11 @@
 
     <Button
         android:id="@+id/btn_delete"
-        android:layout_width="240dp"
+        android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_gravity="bottom|end"
         android:background="@drawable/delete_button_shape"
-        android:text="delete"
+        android:text="Swipe to Delete"
         android:textColor="#fefefe"
         android:textSize="14sp"
         tools:ignore="HardcodedText" />

@@ -91,6 +91,7 @@ public class QuestionActivity extends AppCompatActivity {
         list.add(new QuestionItem("Q.", "dd"));
         list.add(new QuestionItem("Q.", "dd"));
         list.add(new QuestionItem("Q.", "dd"));
+
         questionList = list;
         questionAdapter = new QuestionAdapter(this, list);
         recyclerQuestion.setAdapter(questionAdapter);
@@ -98,10 +99,12 @@ public class QuestionActivity extends AppCompatActivity {
         questionAdapter.notifyDataSetChanged();
 
         String name = txt_name.getText().toString();
+        String type = txt_type.getText().toString();
         img_delete.setOnClickListener(view -> {
             Toast.makeText(QuestionActivity.this, "질문삭제 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent deleteintent = new Intent(getApplicationContext(), DeleteQuestionActivity.class);
             deleteintent.putExtra("name", name);
+            deleteintent.putExtra("type",type);
             deleteintent.putExtra("list", list);
             startActivity(deleteintent);
         });

@@ -24,7 +24,7 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
     private DeleteAdapter deleteAdapter;
     private ItemTouchHelper helper;
-    private TextView txt_delete_name;
+    private TextView txt_delete_name, txt_delete_type;
     private Button btn_delete, btn_delete_cancel;
     private ArrayList<QuestionItem> dArrayList;
 
@@ -36,6 +36,7 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         btn_delete = findViewById(R.id.btn_delete);
         btn_delete_cancel = findViewById(R.id.btn_delete_cancel);
         txt_delete_name = findViewById(R.id.txt_delete_name);
+        txt_delete_type = findViewById(R.id.txt_delete_type);
 
         btn_delete_cancel.setOnClickListener(view -> {
             Intent intent = new Intent(DeleteQuestionActivity.this, QuestionActivity.class);
@@ -46,8 +47,9 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         // QuestionActivity 에서 type, name 받아오자
         if (intent != null && intent.getExtras() != null) {
             String name = intent.getStringExtra("name");
-
+            String type = intent.getStringExtra("type");
             txt_delete_name.setText(name);
+            txt_delete_type.setText(type);
         }
 
         RecyclerView recyclerDelete = findViewById(R.id.recycler_delete);
