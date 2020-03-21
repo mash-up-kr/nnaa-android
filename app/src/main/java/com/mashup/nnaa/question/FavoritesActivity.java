@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.FavoritesItem;
+import com.mashup.nnaa.data.QuestionItem;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ import java.util.List;
 
 public class FavoritesActivity extends AppCompatActivity {
 
-    private FavoritesAdapter adapter3;
-    private ArrayList<FavoritesItem> fList;
+    private FavoritesAdapter favoritesAdapter;
+    private ArrayList<QuestionItem> fList;
     Button btn_favorites;
     ImageButton imgbtn_past, imgbtn_cancel;
     EditText edit_custom;
@@ -47,64 +48,30 @@ public class FavoritesActivity extends AppCompatActivity {
             finish();
         });
 
-
-        init();
-
-        getItem();
-
-
         imgbtn_cancel.setOnClickListener(view -> {
             finish();
         });
 
-        init();
-
-        getItem();
 
         edit_custom.setOnClickListener(view -> {
             Intent edit_intent = new Intent(FavoritesActivity.this, CustomQuestionActivity.class);
             startActivity(edit_intent);
         });
 
-    }
-
-    private void init() {
 
         RecyclerView favorites_recycler = findViewById(R.id.favorites_recycler);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         favorites_recycler.setLayoutManager(linearLayoutManager);
 
-        adapter3 = new FavoritesAdapter();
-        favorites_recycler.setAdapter(adapter3);
 
-    }
+        Intent intent = getIntent();
+        ArrayList<QuestionItem> list = (ArrayList<QuestionItem>) intent.getSerializableExtra("flist");
 
-    private void getItem() {
+        fList = list;
+        favoritesAdapter = new FavoritesAdapter(this, list);
+        favorites_recycler.setAdapter(favoritesAdapter);
+        favoritesAdapter.notifyDataSetChanged();
 
-        List<String> listQuestion = Arrays.asList("로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?");
-
-
-        for (int i = 0; i < listQuestion.size(); i++) {
-
-            FavoritesItem fitem = new FavoritesItem();
-            fitem.setFavoritesQuestion(listQuestion.get(i));
-
-            adapter3.addItem(fitem);
-        }
-        adapter3.notifyDataSetChanged();
     }
 }

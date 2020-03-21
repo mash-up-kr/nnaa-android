@@ -20,15 +20,15 @@ import static android.view.LayoutInflater.from;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-    List<Question> questionList;
-    Context context;
+    List<QuestionItem> questionList;
+    Context Qcontext;
 
-    public QuestionAdapter(Context context, List<Question> questionList) {
-        this.context = context;
+    public QuestionAdapter(Context context, ArrayList<QuestionItem> questionList) {
+        this.Qcontext = context;
         this.questionList = questionList;
     }
 
-    public void setQuestionList(List<Question> questionList) {
+    public void setQuestionList(ArrayList<QuestionItem> questionList) {
         this.questionList = questionList;
         notifyDataSetChanged();
     }
@@ -46,8 +46,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.ViewHolder holder, int position) {
 
-        holder.mName.setText(questionList.get(position).getContent());
-        holder.mQ.setText(questionList.get(position).getId());
+        holder.mName.setText(questionList.get(position).getQuestion_content());
+        holder.mQ.setText(questionList.get(position).getQeustion_num());
     }
 
 
