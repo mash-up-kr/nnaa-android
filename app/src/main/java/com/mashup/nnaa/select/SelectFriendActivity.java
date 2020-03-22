@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.select;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.ContactItem;
 import com.mashup.nnaa.util.SelectFriendAdapter;
 

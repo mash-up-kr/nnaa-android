@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ import retrofit2.Response;
 public class MainMyListSubFragment extends Fragment {
     private MainMyListPagerAdapter.MyListType type;
     private RecyclerView rvMyList;
-
+    private TextView tvNoItem;
 
     public static MainMyListSubFragment newInstance(MainMyListPagerAdapter.MyListType type) {
         MainMyListSubFragment fragment = new MainMyListSubFragment();
@@ -41,7 +42,7 @@ public class MainMyListSubFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_mylist_sublist, container, false);
-
+        tvNoItem = view.findViewById(R.id.tv_no_item_myList);
         rvMyList = view.findViewById(R.id.rv_myList);
         rvMyList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMyList.setAdapter(new MainMyListDataAdapter());
@@ -101,7 +102,11 @@ public class MainMyListSubFragment extends Fragment {
             data = new ArrayList<>();
 
         if (data.size() == 0) {
-            Toast.makeText(getContext(), R.string.mylist_no_items, Toast.LENGTH_SHORT).show();
+            rvMyList.setVisibility(View.GONE);
+            tvNoItem.setVisibility(View.VISIBLE);
+        } else {
+            rvMyList.setVisibility(View.VISIBLE);
+            tvNoItem.setVisibility(View.GONE);
         }
 
         adapter.setData((ArrayList<QuestionnaireDto>) data);

@@ -15,42 +15,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".reply.MultiReplyActivity"/>
 
+        <activity android:name=".reply.ReplyActivity" />
         <activity android:name=".RegisterActivity" />
         <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_key" /> 
+            android:value="@string/facebook_app_key" />
         <!-- 카카오톡 메타데이터 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-
         <activity android:name=".SplashActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".LoginActivity" />
-          
-        <activity android:name=".SelectFriendActivity" />
+        <activity android:name=".select.SelectFriendActivity" />
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".AnswerMultipleChoiceActivity">
-
-        </activity>
-
-        <activity android:name=".FavoritesActivity" />
-        <activity android:name=".DeleteQuestion" />
-        <activity android:name=".QuestionActivity" />
-        <activity android:name=".HowQuestionActivity" />
-        <activity android:name=".SetTypeOfFriendActivity" />
+        <activity android:name=".answer.AnswerMultipleChoiceActivity" />
+        <activity android:name=".question.FavoritesActivity" />
+        <activity android:name=".question.DeleteQuestionActivity" />
+        <activity android:name=".question.QuestionActivity" />
+        <activity android:name=".question.HowQuestionActivity" />
+        <activity android:name=".select.SetTypeOfFriendActivity" />
         <activity
-            android:name=".CustomQuestionActivity"
+            android:name=".question.CustomQuestionActivity"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

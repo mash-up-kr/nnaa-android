@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reply.MultiReplyActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="이미지가 열리지 않습니다"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_back_with"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="33dp"
+        android:lineSpacingExtra="10sp"
+        android:text="답변 중단하기"
+        android:textColor="#686868"
+        android:textSize="14sp"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/reply_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="36dp"
+        android:background="#4Dffffff"
+        android:src="@drawable/cancel_img"
+        tools:ignore="ContentDescription" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_corner"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="263dp"
+            android:background="@drawable/corner_shape"
+            android:contentDescription="@string/StringValue" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_multi_reply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/reply_question_name"
+            android:layout_marginTop="37dp"
+            android:layout_marginBottom="70dp" />
+
+        <TextView
+            android:text="01 / 20"
+            android:id="@+id/reply_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="297dp"
+            android:lineSpacingExtra="12sp"
+            android:textColor="#2a4bff"
+            android:textSize="15sp"
+            tools:text="01 / 20" />
+
+        <TextView
+            android:id="@+id/reply_question_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="328dp"
+            android:lineSpacingExtra="11sp"
+            android:textColor="#2d2e35"
+            android:textSize="16sp"
+            android:text="엄마는 현재 삶에 만족하나요?"
+            tools:text="엄마는 현재 삶에 만족하나요?"
+            tools:ignore="HardcodedText" />
+
+        <ImageButton
+            android:id="@+id/reply_choice"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="290dp"
+            android:layout_marginTop="317dp"
+            android:background="@color/colorWhite"
+            android:src="@drawable/choice_btn_heart"
+            android:contentDescription="@string/StringValue" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/btn_past"
+        android:layout_width="143dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorWhite"
+        android:elevation="3dp"
+        android:src="@drawable/ic_arrow_left"
+        tools:ignore="HardcodedText"
+        android:contentDescription="@string/StringValue" />
+
+    <Button
+        android:id="@+id/btn_next_question"
+        android:layout_width="267dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/delete_button_shape"
+        android:text="Next Question"
+        android:textColor="#fefefe"
+        android:textSize="14sp"
+        tools:ignore="HardcodedText" />
+
+
+</FrameLayout>

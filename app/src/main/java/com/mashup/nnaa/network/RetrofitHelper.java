@@ -3,9 +3,9 @@ package com.mashup.nnaa.network;
 import android.text.TextUtils;
 
 import com.mashup.nnaa.BuildConfig;
+import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.SignUpDto;
-import com.mashup.nnaa.network.model.UserInfo;
 import com.mashup.nnaa.util.AccountManager;
 
 import java.util.HashMap;
@@ -14,7 +14,6 @@ import java.util.List;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -28,7 +27,10 @@ public class RetrofitHelper {
 
     // singleton
     private static final RetrofitHelper _instance = new RetrofitHelper();
-    public static RetrofitHelper getInstance() { return _instance; }
+
+    public static RetrofitHelper getInstance() {
+        return _instance;
+    }
 
 
     private RetrofitHelper() {
@@ -48,7 +50,6 @@ public class RetrofitHelper {
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-            //loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             clientBuilder.addInterceptor(loggingInterceptor);
         }
 
@@ -71,6 +72,7 @@ public class RetrofitHelper {
         };
     }
 
+    // 로그인
     public void signInOrRegEmail(String email, String encPw, Callback<ResponseBody> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
         Call<ResponseBody> userInfo = service.signInOrRegEmail(
@@ -82,18 +84,26 @@ public class RetrofitHelper {
         userInfo.enqueue(callback);
     }
 
+    // 회원가입
     public void registerEmail(String email, String password, String name, Callback<SignUpDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
         Call<SignUpDto> signUpDtoCall = service.registerEmail(
                 new HashMap<String, String>() {{
                     put("email", email);
-                    put("password",password);
+                    put("password", password);
                     put("name", name);
                 }}
         );
         signUpDtoCall.enqueue(callback);
     }
 
+    // 문제지 첫 기본세팅
+    public QuestionControllerService getQuestion(Callback<List<Question>> callback) {
+        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
+        Call<List<Question>> getQuestionRandom = service.getQuestion();
+        getQuestionRandom.enqueue(callback);
+        return service;
+    }
 
     public void getReceivedQuestionnaire(Callback<List<QuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
@@ -104,5 +114,6 @@ public class RetrofitHelper {
     public void getSendQuestionnaire(Callback<List<QuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
         Call<List<QuestionnaireDto>> sendQuestionnaire = service.getSendQuestionnaires();
-        sendQuestionnaire.enqueue(callback);    }
+        sendQuestionnaire.enqueue(callback);
+    }
 }

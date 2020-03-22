@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.answer;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,8 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.mashup.nnaa.R;
 
 public class AnswerOxChoiceActivity extends AppCompatActivity {
     ImageButton stopBtn;

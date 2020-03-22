@@ -1,24 +1,20 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.question;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.FavoritesItem;
+import com.mashup.nnaa.data.QuestionItem;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
@@ -27,8 +23,8 @@ import java.util.List;
 
 public class FavoritesActivity extends AppCompatActivity {
 
-    private FavoritesAdapter adapter3;
-    private ArrayList<FavoritesItem> fList;
+    private FavoritesAdapter favoritesAdapter;
+    private ArrayList<QuestionItem> fList;
     Button btn_favorites;
     ImageButton imgbtn_past, imgbtn_cancel;
     EditText edit_custom;
@@ -48,69 +44,34 @@ public class FavoritesActivity extends AppCompatActivity {
         txt_favorites = findViewById(R.id.txt_favorites);
         img_recycler = findViewById(R.id.img_recycler);
 
-
         imgbtn_past.setOnClickListener(view -> {
             finish();
         });
-
-
-        init();
-
-        getItem();
-
 
         imgbtn_cancel.setOnClickListener(view -> {
             finish();
         });
 
-        init();
-
-        getItem();
 
         edit_custom.setOnClickListener(view -> {
             Intent edit_intent = new Intent(FavoritesActivity.this, CustomQuestionActivity.class);
             startActivity(edit_intent);
         });
 
-    }
-
-    private void init() {
 
         RecyclerView favorites_recycler = findViewById(R.id.favorites_recycler);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         favorites_recycler.setLayoutManager(linearLayoutManager);
 
-        adapter3 = new FavoritesAdapter();
-        favorites_recycler.setAdapter(adapter3);
 
-    }
+        Intent intent = getIntent();
+        ArrayList<QuestionItem> list = (ArrayList<QuestionItem>) intent.getSerializableExtra("flist");
 
-    private void getItem() {
+        fList = list;
+        favoritesAdapter = new FavoritesAdapter(this, list);
+        favorites_recycler.setAdapter(favoritesAdapter);
+        favoritesAdapter.notifyDataSetChanged();
 
-        List<String> listQuestion = Arrays.asList("로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?",
-                "로또에 당첨된다면 하고 싶은 일이 있나요?");
-
-
-        for (int i = 0; i < listQuestion.size(); i++) {
-
-            FavoritesItem fitem = new FavoritesItem();
-            fitem.setFavoritesQuestion(listQuestion.get(i));
-
-            adapter3.addItem(fitem);
-        }
-        adapter3.notifyDataSetChanged();
     }
 }

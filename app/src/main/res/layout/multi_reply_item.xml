@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/multi_btn_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue"
+        android:text="A" />
+
+    <TextView
+        android:id="@+id/mutli_txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="14dp"
+        android:lineSpacingExtra="11sp"
+        android:text="매우 그렇다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="매우 그렇다" />
+
+    <ImageView
+        android:id="@+id/multi_img1"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/multi_reply_corner" />
+
+
+    <ImageView
+        android:id="@+id/multi_img2"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/multi_reply_corner" />
+
+    <TextView
+        android:id="@+id/mutli_txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="82dp"
+        android:lineSpacingExtra="11sp"
+        android:text="그렇다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="그렇다" />
+
+    <Button
+        android:id="@+id/multi_btn_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="71dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue"
+        android:text="B" />
+
+
+    <ImageView
+        android:id="@+id/multi_img3"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="136dp"
+        android:src="@drawable/multi_reply_corner" />
+
+    <TextView
+        android:id="@+id/mutli_txt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="150dp"
+        android:lineSpacingExtra="11sp"
+        android:text="아니다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="아니다" />
+
+    <Button
+        android:id="@+id/multi_btn_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="139dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue"
+        android:text="C" />
+
+
+    <ImageView
+        android:id="@+id/multi_img4"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="204dp"
+        android:src="@drawable/multi_reply_corner" />
+
+    <Button
+        android:id="@+id/multi_btn_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="207dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue"
+        android:text="D" />
+
+    <TextView
+        android:id="@+id/mutli_txt4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="221dp"
+        android:lineSpacingExtra="11sp"
+        android:text="매우 아니다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="매우 아니다" />
+
+</FrameLayout>
