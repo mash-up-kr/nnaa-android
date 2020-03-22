@@ -39,7 +39,7 @@ public class AccountManager {
     public void setUserAuthHeaderInfo(String userId, String token) {
         this.userAuthHeaderInfo = new UserAuthHeaderInfo(userId, token);
     }
-
+    // login
     public void executeAutoSignIn(ISignInResultListener resultListener) {
         String lastEmail =
                 SharedPrefHelper.getInstance().getString(SHARED_PREF_LAST_ACCOUNT_EMAIL);
@@ -119,7 +119,7 @@ public class AccountManager {
             }
         });
     }
-
+    // Register
     public void executeRegister(String email, String password, String name,
                                 ISignInResultListener resultListener) {
 
@@ -157,7 +157,7 @@ public class AccountManager {
             }
         });
     }
-
+    // sign out
     public void executeSignOut(ISignOutResultListener listener) {
         SharedPrefHelper.getInstance().put(SHARED_PREF_LAST_ACCOUNT_EMAIL, "");
         SharedPrefHelper.getInstance().put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, "");
