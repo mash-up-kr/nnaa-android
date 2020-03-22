@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.CustomQuestionItem;
+import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.question.QuestionActivity;
 
 import java.util.ArrayList;
 
@@ -28,11 +30,12 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static final int THIRD_CONTENT = 2;
     public static final int FORTH_CONTENT = 3;
 
-    Context context;
-    private ArrayList<CustomQuestionItem> DataSet;
+    Context cContext;
+    private ArrayList<QuestionItem> customQuestionItems;
 
-    public CustomQuestionAdapter(ArrayList<CustomQuestionItem> cItems) {
-        DataSet = cItems;
+    public CustomQuestionAdapter(Context context, ArrayList<QuestionItem> list) {
+        this.customQuestionItems = list;
+        this.cContext = context;
     }
 
     @NonNull
@@ -66,58 +69,61 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof FirstCustomHolder) {
-            ((FirstCustomHolder) holder).first_txt.setText(DataSet.get(position).getTxt_question());
-            ((FirstCustomHolder) holder).edit_custom.setText(DataSet.get(position).getEditText());
+            ((FirstCustomHolder) holder).first_txt.setText(customQuestionItems.get(position).getQeustion_num());
+            ((FirstCustomHolder) holder).first_edit.setText(customQuestionItems.get(position).getQuestion_content());
+
         } else if (holder instanceof SecondCustomHolder) {
-            ((SecondCustomHolder) holder).second_txt.setText(DataSet.get(position).getTxt_question());
-            ((SecondCustomHolder) holder).btn_j.setId(DataSet.get(position).getCustom_img());
-            ((SecondCustomHolder) holder).btn_g.setId(DataSet.get(position).getCustom_img());
-            ((SecondCustomHolder) holder).btn_o.setId(DataSet.get(position).getCustom_img());
+            ((SecondCustomHolder) holder).second_txt.setText(customQuestionItems.get(position).getQeustion_num());
+            ((SecondCustomHolder) holder).btn_j.setId(customQuestionItems.get(position).getQuestion_img());
+            ((SecondCustomHolder) holder).btn_g.setId(customQuestionItems.get(position).getQuestion_img());
+            ((SecondCustomHolder) holder).btn_o.setId(customQuestionItems.get(position).getQuestion_img());
         } else if (holder instanceof ThirdCustomHolder) {
-            ((ThirdCustomHolder) holder).third_txt.setText(DataSet.get(position).getTxt_question());
-            ((ThirdCustomHolder) holder).edit1.setText(DataSet.get(position).getEditText());
-            ((ThirdCustomHolder) holder).edit2.setText(DataSet.get(position).getEditText());
-            ((ThirdCustomHolder) holder).edit3.setText(DataSet.get(position).getEditText());
-            ((ThirdCustomHolder) holder).edit4.setText(DataSet.get(position).getEditText());
-            ((ThirdCustomHolder) holder).plus_btn1.setId(DataSet.get(position).getCustom_img());
-            ((ThirdCustomHolder) holder).plus_btn2.setId(DataSet.get(position).getCustom_img());
-            ((ThirdCustomHolder) holder).plus_btn3.setId(DataSet.get(position).getCustom_img());
-            ((ThirdCustomHolder) holder).plus_btn4.setId(DataSet.get(position).getCustom_img());
-            ((ThirdCustomHolder) holder).minus_btn1.setId(DataSet.get(position).getCustom_img());
-            ((ThirdCustomHolder) holder).minus_btn2.setId(DataSet.get(position).getCustom_img());
-            ((ThirdCustomHolder) holder).minus_btn3.setId(DataSet.get(position).getCustom_img());
-            ((ThirdCustomHolder) holder).minus_btn4.setId(DataSet.get(position).getCustom_img());
+            ((ThirdCustomHolder) holder).third_txt.setText(customQuestionItems.get(position).getQeustion_num());
+            ((ThirdCustomHolder) holder).edit1.setText(customQuestionItems.get(position).getQuestion_content());
+            ((ThirdCustomHolder) holder).edit2.setText(customQuestionItems.get(position).getQuestion_content());
+            ((ThirdCustomHolder) holder).edit3.setText(customQuestionItems.get(position).getQuestion_content());
+            ((ThirdCustomHolder) holder).edit4.setText(customQuestionItems.get(position).getQuestion_content());
+            ((ThirdCustomHolder) holder).plus_btn1.setId(customQuestionItems.get(position).getQuestion_img());
+            ((ThirdCustomHolder) holder).plus_btn2.setId(customQuestionItems.get(position).getQuestion_img());
+            ((ThirdCustomHolder) holder).plus_btn3.setId(customQuestionItems.get(position).getQuestion_img());
+            ((ThirdCustomHolder) holder).plus_btn4.setId(customQuestionItems.get(position).getQuestion_img());
+            ((ThirdCustomHolder) holder).minus_btn1.setId(customQuestionItems.get(position).getQuestion_img());
+            ((ThirdCustomHolder) holder).minus_btn2.setId(customQuestionItems.get(position).getQuestion_img());
+            ((ThirdCustomHolder) holder).minus_btn3.setId(customQuestionItems.get(position).getQuestion_img());
+            ((ThirdCustomHolder) holder).minus_btn4.setId(customQuestionItems.get(position).getQuestion_img());
         } else {
-            ((ForthCustomHolder) holder).forth_txt.setText(DataSet.get(position).getTxt_question());
-            ((ForthCustomHolder) holder).forth_img.setId(DataSet.get(position).getCustom_img());
+            ((ForthCustomHolder) holder).forth_txt.setText(customQuestionItems.get(position).getQeustion_num());
+            ((ForthCustomHolder) holder).forth_img.setId(customQuestionItems.get(position).getQuestion_img());
         }
     }
 
     @Override
     public int getItemCount() {
-        return DataSet.size();
+        if (customQuestionItems != null) {
+            return customQuestionItems.size();
+        } else return 0;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return DataSet.get(position).getViewType();
+        return customQuestionItems.get(position).getViewType();
     }
 
-    public class FirstCustomHolder extends RecyclerView.ViewHolder {
+    public static class FirstCustomHolder extends RecyclerView.ViewHolder {
 
         TextView first_txt;
-        EditText edit_custom;
+        EditText first_edit;
 
         FirstCustomHolder(@NonNull View itemView) {
             super(itemView);
 
             first_txt = itemView.findViewById(R.id.first_txt);
-            edit_custom = itemView.findViewById(R.id.edit_custom);
+            first_edit = itemView.findViewById(R.id.first_edit_custom);
 
         }
     }
 
-    public class SecondCustomHolder extends RecyclerView.ViewHolder {
+    public static class SecondCustomHolder extends RecyclerView.ViewHolder {
 
         TextView second_txt;
         ImageButton btn_j, btn_g, btn_o;
@@ -133,7 +139,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    private class ThirdCustomHolder extends RecyclerView.ViewHolder {
+    private static class ThirdCustomHolder extends RecyclerView.ViewHolder {
 
         TextView third_txt;
         EditText edit1, edit2, edit3, edit4;
@@ -156,71 +162,50 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             minus_btn3 = itemView.findViewById(R.id.minus_btn3);
             minus_btn4 = itemView.findViewById(R.id.minus_btn4);
 
-            plus_btn1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    plus_btn2.setVisibility(View.VISIBLE);
-                    edit2.setVisibility(View.VISIBLE);
-                    plus_btn1.setVisibility(View.GONE);
-                    minus_btn1.setVisibility(View.VISIBLE);
-                }
+            plus_btn1.setOnClickListener(view -> {
+                plus_btn2.setVisibility(View.VISIBLE);
+                edit2.setVisibility(View.VISIBLE);
+                plus_btn1.setVisibility(View.GONE);
+                minus_btn1.setVisibility(View.VISIBLE);
             });
 
-            minus_btn1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // plus_btn1.setVisibility(View.GONE);
-                    edit1.setVisibility(View.GONE);
-                    minus_btn1.setVisibility(View.GONE);
-                }
+            minus_btn1.setOnClickListener(view -> {
+                // plus_btn1.setVisibility(View.GONE);
+                edit1.setVisibility(View.GONE);
+                minus_btn1.setVisibility(View.GONE);
             });
 
-            plus_btn2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    plus_btn3.setVisibility(View.VISIBLE);
-                    edit3.setVisibility(View.VISIBLE);
-                    plus_btn2.setVisibility(View.GONE);
-                    minus_btn2.setVisibility(View.VISIBLE);
-                }
+            plus_btn2.setOnClickListener(view -> {
+                plus_btn3.setVisibility(View.VISIBLE);
+                edit3.setVisibility(View.VISIBLE);
+                plus_btn2.setVisibility(View.GONE);
+                minus_btn2.setVisibility(View.VISIBLE);
             });
 
-            minus_btn2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    edit2.setVisibility(View.GONE);
-                    minus_btn2.setVisibility(View.GONE);
-                }
+            minus_btn2.setOnClickListener(view -> {
+                edit2.setVisibility(View.GONE);
+                minus_btn2.setVisibility(View.GONE);
             });
-            plus_btn3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    minus_btn4.setVisibility(View.VISIBLE);
-                    edit4.setVisibility(View.VISIBLE);
-                    plus_btn3.setVisibility(View.GONE);
-                    minus_btn3.setVisibility(View.VISIBLE);
-                }
+            plus_btn3.setOnClickListener(view -> {
+                minus_btn4.setVisibility(View.VISIBLE);
+                edit4.setVisibility(View.VISIBLE);
+                plus_btn3.setVisibility(View.GONE);
+                minus_btn3.setVisibility(View.VISIBLE);
             });
-            minus_btn3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    edit3.setVisibility(View.GONE);
-                    minus_btn3.setVisibility(View.GONE);
-                }
+            minus_btn3.setOnClickListener(view -> {
+                edit3.setVisibility(View.GONE);
+                minus_btn3.setVisibility(View.GONE);
             });
-            minus_btn4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    plus_btn4.setVisibility(View.GONE);
-                    edit4.setVisibility(View.GONE);
-                    plus_btn4.setVisibility(View.GONE);
-                    minus_btn4.setVisibility(View.GONE);
-                }
+            minus_btn4.setOnClickListener(view -> {
+                plus_btn4.setVisibility(View.GONE);
+                edit4.setVisibility(View.GONE);
+                plus_btn4.setVisibility(View.GONE);
+                minus_btn4.setVisibility(View.GONE);
             });
         }
     }
 
-    private class ForthCustomHolder extends RecyclerView.ViewHolder {
+    private static class ForthCustomHolder extends RecyclerView.ViewHolder {
 
         TextView forth_txt;
         ImageView forth_img;

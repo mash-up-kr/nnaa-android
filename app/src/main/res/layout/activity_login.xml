@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="52dp"
         android:lineHeight="27sp"
         android:text="로그인"
         android:textColor="#2d2e35"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="103dp"
+        android:layout_marginTop="83dp"
         android:lineHeight="27sp"
         android:text="로그인 후 너나알아를 이용해보세요!"
         android:textSize="14sp"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="169dp"
+        android:layout_marginTop="149dp"
         android:lineHeight="27sp"
         android:text="이메일"
         android:textSize="15sp"
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginLeft="18dp"
-        android:layout_marginTop="203dp"
+        android:layout_marginTop="183dp"
         android:layout_marginRight="18dp"
         android:background="@drawable/login_shape"
         android:hint="이메일을 입력해주세요"
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="260dp"
         android:lineHeight="27sp"
         android:text="비밀번호"
         android:textSize="15sp"
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginLeft="18dp"
-        android:layout_marginTop="314dp"
+        android:layout_marginTop="294dp"
         android:layout_marginRight="18dp"
         android:background="@drawable/login_shape"
         android:hint="비밀번호를 입력해주세요"
@@ -79,12 +79,20 @@
         android:textAlignment="center"
         tools:ignore="HardcodedText" />
 
+    <CheckBox
+        android:id="@+id/auto_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="350dp"
+        android:text="자동 로그인" />
+
     <TextView
         android:id="@+id/txt_register"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="454dp"
+        android:layout_marginTop="400dp"
         android:lineHeight="27sp"
         android:text="회원 가입"
         android:textColor="#2d2e35"
@@ -98,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="205dp"
-        android:layout_marginTop="454dp"
+        android:layout_marginTop="400dp"
         android:lineHeight="27sp"
         android:text="비밀번호 찾기"
         android:textColor="#2d2e35"
@@ -106,46 +114,28 @@
         android:textStyle="bold"
         tools:ignore="HardcodedText,UnusedAttribute" />
 
-    <Button
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_facebook_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="500dp"
-        android:text="페이스북으로 로그인"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="430dp"
+        android:text="페이스북 로그인"
         tools:ignore="HardcodedText" />
 
-
-    <Button
-        android:id="@+id/btn_facebook_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="550dp"
-        android:text="페이스북 로그아웃"
-        tools:ignore="HardcodedText" />
 
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/com_kakao_login"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="500dp" />
-
-    <Button
-        android:id="@+id/kakaoLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="550dp"
-        android:text="카톡 로그아웃"
-        tools:ignore="HardcodedText" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="480dp" />
 
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="70dp"
         android:layout_gravity="bottom"
         android:layout_marginTop="658dp"
         android:background="#2a4bff"

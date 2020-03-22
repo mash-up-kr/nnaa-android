@@ -1,13 +1,19 @@
 package com.mashup.nnaa;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,22 +29,24 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.mashup.nnaa.main.MainActivity;
 import com.mashup.nnaa.util.AccountManager;
+import com.mashup.nnaa.util.SharedPrefHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     private String TAG = "LoginActivity";
     private SessionCallback callback;
-
     private Button btn_facebook_login, btn_facebook_logout, btn_login;
+    private CheckBox autoLogin;
     private EditText edit_email, edit_password;
     private TextView txt_register, txt_forget_password;
-
     private LoginCallback mLoginCallback;
-
     private CallbackManager mCallbackManager;
+    private SharedPreferences setting;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onDestroy() {
@@ -56,7 +64,31 @@ public class LoginActivity extends AppCompatActivity {
         txt_forget_password = findViewById(R.id.txt_forget_password);
         btn_login = findViewById(R.id.btn_login);
         btn_facebook_login = findViewById(R.id.btn_facebook_login);
-        btn_facebook_logout = findViewById(R.id.btn_facebook_logout);
+        autoLogin = findViewById(R.id.auto_login);
+
+        setting = getSharedPreferences("setting", MODE_PRIVATE);
+        editor = setting.edit();
+
+        if (setting.getBoolean("auto_login", false)) {
+            edit_email.setText(setting.getString("ID", ""));
+            edit_password.setText(setting.getString("PW", ""));
+            autoLogin.setChecked(true);
+        }
+        // auto login
+        autoLogin.setOnClickListener(view -> {
+            if (autoLogin.isChecked()) {
+                Toast.makeText(this, "자동 로그인", Toast.LENGTH_SHORT).show();
+                String ID = edit_email.getText().toString();
+                String PW = edit_password.getText().toString();
+                editor.putString("ID", ID);
+                editor.putString("PW", PW);
+                editor.putBoolean("auto_login", true);
+                editor.apply();
+            } else {
+                editor.clear();
+                editor.apply();
+            }
+        });
 
         //email login
         btn_login.setOnClickListener(view -> AccountManager.getInstance().executeSignIn(
@@ -67,12 +99,13 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSignInSuccess(String id, String token) {
                         launchMainActivity();
-                        Log.d(TAG,"id: " + id);
+                        Log.d(TAG, "id: " + id);
                     }
 
                     @Override
                     public void onSignInFail() {
-                        Log.d(TAG, "Fail to login");
+                        Log.v(TAG, "Fail to login");
+                        Toast.makeText(LoginActivity.this, "(로그인 실패) 이메일과 비밀번호를 다시 확인해주세요!", Toast.LENGTH_SHORT).show();
                     }
                 }));
 
@@ -82,47 +115,42 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
         // 비밀번호 찾기
         txt_forget_password.setOnClickListener(view -> {
 
         });
 
         //kakao login
-         kakaoData();
-
-        Context mContext = getApplicationContext();
+        kakaoData();
 
         //facebook login
         mCallbackManager = CallbackManager.Factory.create();
 
         mLoginCallback = new LoginCallback();
 
-        btn_facebook_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_facebook_login.setOnClickListener(view -> {
 
-                LoginManager loginManager = LoginManager.getInstance();
+            LoginManager loginManager = LoginManager.getInstance();
 
-                loginManager.logInWithReadPermissions(LoginActivity.this,
+            loginManager.logInWithReadPermissions(LoginActivity.this,
 
-                        Arrays.asList("public_profile", "email"));
+                    Arrays.asList("public_profile", "email"));
 
-                loginManager.registerCallback(mCallbackManager, mLoginCallback);
+            loginManager.registerCallback(mCallbackManager, mLoginCallback);
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
-        btn_facebook_logout.setOnClickListener(view -> LoginManager.getInstance().logOut());
+        //  btn_facebook_logout.setOnClickListener(view -> LoginManager.getInstance().logOut());
     }
 
     /**
      * 카카오톡
      **/
     private void kakaoData() {
-        findViewById(R.id.kakaoLogout).setOnClickListener(view -> onClickLogout());
+        // findViewById(R.id.kakaoLogout).setOnClickListener(view -> onClickLogout());
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
@@ -195,27 +223,26 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * 로그아웃시
      **/
-    private void onClickLogout() {
-
-        UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
-            @Override
-            public void onSessionClosed(ErrorResult errorResult) {
-                Log.e(TAG, "카카오 로그아웃 onSessionClosed");
-
-            }
-
-            @Override
-            public void onNotSignedUp() {
-                Log.e(TAG, "카카오 로그아웃 onNotSignedUp");
-            }
-
-            @Override
-            public void onSuccess(Long result) {
-                Log.e(TAG, "카카오 로그아웃 onSuccess");
-            }
-        });
-    }
-
+//    private void onClickLogout() {
+//
+//        UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+//            @Override
+//            public void onSessionClosed(ErrorResult errorResult) {
+//                Log.e(TAG, "카카오 로그아웃 onSessionClosed");
+//
+//            }
+//
+//            @Override
+//            public void onNotSignedUp() {
+//                Log.e(TAG, "카카오 로그아웃 onNotSignedUp");
+//            }
+//
+//            @Override
+//            public void onSuccess(Long result) {
+//                Log.e(TAG, "카카오 로그아웃 onSuccess");
+//            }
+//        });
+//    }
     private void launchMainActivity() {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(intent);
