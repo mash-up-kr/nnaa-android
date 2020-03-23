@@ -4,19 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.mashup.nnaa.R;
 
 import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.util.CustomQuestionAdapter;
 
 import java.util.ArrayList;
@@ -26,7 +32,7 @@ import static com.mashup.nnaa.util.CustomQuestionAdapter.FORTH_CONTENT;
 import static com.mashup.nnaa.util.CustomQuestionAdapter.SECOND_CONTENT;
 import static com.mashup.nnaa.util.CustomQuestionAdapter.THIRD_CONTENT;
 
-public class CustomQuestionActivity extends AppCompatActivity {
+public class CustomQuestionActivity extends AppCompatActivity  {
 
     ImageButton imgbtn_past, imgbtn_cancel;
     Button btn_done;
@@ -56,17 +62,19 @@ public class CustomQuestionActivity extends AppCompatActivity {
             startActivity(cancel_intent);
         });
 
-        // test
-        btn_done.setOnClickListener(view -> {
-            btn_done.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-
+        btn_done.setOnClickListener(view-> {
+           btn_done.setBackgroundColor(Color.BLUE);
         });
+
         this.initializeData();
+
+
     }
 
     private void initializeData() {
 
         RecyclerView recyclerCustom = findViewById(R.id.custom_recycler);
+        recyclerCustom.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerCustom.setLayoutManager(linearLayoutManager);
         cArrayList = new ArrayList<>();
@@ -80,4 +88,5 @@ public class CustomQuestionActivity extends AppCompatActivity {
         cArrayList.add(new QuestionItem("세번째, 보기를 설정해주세요", "", R.id.img_add, THIRD_CONTENT));
         cArrayList.add(new QuestionItem("짝짝짝 질문 생성 완료!", "", R.id.img_bad, FORTH_CONTENT));
     }
+
 }

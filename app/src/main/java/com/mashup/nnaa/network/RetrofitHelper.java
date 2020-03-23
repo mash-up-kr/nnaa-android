@@ -3,11 +3,13 @@ package com.mashup.nnaa.network;
 import android.text.TextUtils;
 
 import com.mashup.nnaa.BuildConfig;
+import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.util.AccountManager;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -103,6 +105,20 @@ public class RetrofitHelper {
         Call<List<Question>> getQuestionRandom = service.getQuestion();
         getQuestionRandom.enqueue(callback);
         return service;
+    }
+
+    // 직접 질문 입력해서 질문 추가
+    public void postQuestion(String category, String[] choices, String content, String type, Callback<NewQuestionDto> callback) {
+        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
+        Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(
+                new HashMap<String, String>() {{
+                    put("category", category);
+                    put("choices", Arrays.toString(choices));
+                    put("content", content);
+                    put("type", type);
+                }}
+        );
+        newQuestionDtoCall.enqueue(callback);
     }
 
     public void getReceivedQuestionnaire(Callback<List<QuestionnaireDto>> callback) {

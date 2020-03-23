@@ -84,7 +84,8 @@ public class QuestionActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerQuestion.setLayoutManager(linearLayoutManager);
 
-        //ArrayList<QuestionItem> list = (ArrayList<QuestionItem>) test.getSerializableExtra("test");
+        //ArrayList<QuestionItem> list = (ArrayList<QuestionItem>)test.getSerializableExtra("test");
+
 
         ArrayList<QuestionItem> list = new ArrayList<>();
         list.add(new QuestionItem("Q.", "dd",0,0));

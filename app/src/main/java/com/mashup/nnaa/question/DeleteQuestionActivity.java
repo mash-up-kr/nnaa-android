@@ -2,6 +2,7 @@ package com.mashup.nnaa.question;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
     private DeleteAdapter deleteAdapter;
     private ItemTouchHelper helper;
-    private TextView txt_delete_name, txt_delete_type;
+    private TextView txt_delete_name, txt_delete_type, marquee;
     private Button btn_delete, btn_delete_cancel;
     private ArrayList<QuestionItem> dArrayList;
 
@@ -37,10 +38,11 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         btn_delete_cancel = findViewById(R.id.btn_delete_cancel);
         txt_delete_name = findViewById(R.id.txt_delete_name);
         txt_delete_type = findViewById(R.id.txt_delete_type);
+        marquee = findViewById(R.id.marquee);
+        marquee.setSelected(true);
 
         btn_delete_cancel.setOnClickListener(view -> {
-            Intent intent = new Intent(DeleteQuestionActivity.this, QuestionActivity.class);
-            startActivity(intent);
+            finish();
         });
 
         Intent intent = getIntent();
@@ -61,7 +63,7 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
         ArrayList<QuestionItem> list = (ArrayList<QuestionItem>) question_intent.getSerializableExtra("list");
         dArrayList = list;
-        deleteAdapter = new DeleteAdapter(this,list);
+        deleteAdapter = new DeleteAdapter(this, list);
         recyclerDelete.setAdapter(deleteAdapter);
 
         helper = new ItemTouchHelper(new ItemTouchHelperCallback(deleteAdapter));
@@ -69,4 +71,6 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
         deleteAdapter.notifyDataSetChanged();
     }
+
+
 }
