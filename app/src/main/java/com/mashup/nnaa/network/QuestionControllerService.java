@@ -25,7 +25,7 @@ public interface QuestionControllerService {
     Call<List<Question>> getQuestion();
 
     @POST("question")
-    Call<Question> postQuestion(@Body HashMap<String, String> body);
+    Call<NewQuestionDto> postQuestion(@Body HashMap<String, String> body);
 
     @GET("question/bookmark")
     Call<List<Question>> getBookmarkQuestions();

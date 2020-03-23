@@ -2,23 +2,23 @@ package com.mashup.nnaa.util;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.CustomQuestionItem;
 import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.question.CustomQuestionActivity;
 import com.mashup.nnaa.question.QuestionActivity;
 
 import java.util.ArrayList;
@@ -33,10 +33,12 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     Context cContext;
     private ArrayList<QuestionItem> customQuestionItems;
 
-    public CustomQuestionAdapter(Context context, ArrayList<QuestionItem> list) {
+    public CustomQuestionAdapter(Context context, ArrayList<QuestionItem> list){
         this.customQuestionItems = list;
         this.cContext = context;
     }
+
+
 
     @NonNull
     @Override
@@ -71,7 +73,6 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (holder instanceof FirstCustomHolder) {
             ((FirstCustomHolder) holder).first_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((FirstCustomHolder) holder).first_edit.setText(customQuestionItems.get(position).getQuestion_content());
-
         } else if (holder instanceof SecondCustomHolder) {
             ((SecondCustomHolder) holder).second_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((SecondCustomHolder) holder).btn_j.setId(customQuestionItems.get(position).getQuestion_img());
@@ -109,7 +110,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return customQuestionItems.get(position).getViewType();
     }
 
-    public static class FirstCustomHolder extends RecyclerView.ViewHolder {
+    public class FirstCustomHolder extends RecyclerView.ViewHolder {
 
         TextView first_txt;
         EditText first_edit;
@@ -120,13 +121,14 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             first_txt = itemView.findViewById(R.id.first_txt);
             first_edit = itemView.findViewById(R.id.first_edit_custom);
 
+
         }
     }
 
     public static class SecondCustomHolder extends RecyclerView.ViewHolder {
 
         TextView second_txt;
-        ImageButton btn_j, btn_g, btn_o;
+        ImageButton btn_j, btn_g, btn_o, btn_j_blue, btn_o_blue, btn_g_blue;
 
 
         SecondCustomHolder(@NonNull View itemView) {
@@ -134,8 +136,51 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             second_txt = itemView.findViewById(R.id.second_txt);
             btn_j = itemView.findViewById(R.id.btn_j);
+            btn_j_blue = itemView.findViewById(R.id.btn_j_blue);
             btn_g = itemView.findViewById(R.id.btn_g);
+            btn_g_blue = itemView.findViewById(R.id.btn_g_blue);
             btn_o = itemView.findViewById(R.id.btn_o);
+            btn_o_blue = itemView.findViewById(R.id.btn_o_blue);
+
+            btn_j.setOnClickListener(view -> {
+                btn_j.setVisibility(View.INVISIBLE);
+                btn_j_blue.setVisibility(View.VISIBLE);
+                btn_o.setEnabled(false);
+                btn_g.setEnabled(false);
+                Toast.makeText(view.getContext(), "주관식 선택!", Toast.LENGTH_SHORT).show();
+            });
+            btn_j_blue.setOnClickListener(view -> {
+                btn_j_blue.setVisibility(View.INVISIBLE);
+                btn_j.setVisibility(View.VISIBLE);
+                btn_o_blue.setEnabled(true);
+                btn_g.setEnabled(true);
+            });
+            btn_g.setOnClickListener(view -> {
+                btn_g.setVisibility(View.INVISIBLE);
+                btn_g_blue.setVisibility(View.VISIBLE);
+                btn_j.setEnabled(false);
+                btn_o.setEnabled(false);
+                Toast.makeText(view.getContext(), "객관식 선택!", Toast.LENGTH_SHORT).show();
+            });
+            btn_g_blue.setOnClickListener(view -> {
+                btn_g_blue.setVisibility(View.INVISIBLE);
+                btn_g.setVisibility(View.VISIBLE);
+                btn_j.setEnabled(true);
+                btn_o.setEnabled(true);
+            });
+            btn_o.setOnClickListener(view -> {
+                btn_o.setVisibility(View.INVISIBLE);
+                btn_o_blue.setVisibility(View.VISIBLE);
+                btn_g.setEnabled(false);
+                btn_j.setEnabled(false);
+                Toast.makeText(view.getContext(), "O X 선택!", Toast.LENGTH_SHORT).show();
+            });
+            btn_o_blue.setOnClickListener(view -> {
+                btn_o_blue.setVisibility(View.INVISIBLE);
+                btn_o.setVisibility(View.VISIBLE);
+                btn_j.setEnabled(true);
+                btn_g.setEnabled(true);
+            });
         }
     }
 

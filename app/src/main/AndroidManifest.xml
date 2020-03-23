@@ -15,8 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".reply.MultiReplyActivity"/>
-
+        <activity android:name=".reply.MultiReplyActivity" />
         <activity android:name=".reply.ReplyActivity" />
         <activity android:name=".RegisterActivity" />
         <!-- 페이스북 메타데이터 -->
@@ -37,7 +36,8 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".select.SelectFriendActivity" />
-        <activity android:name=".main.MainActivity" />
+        <activity android:name=".main.MainActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
         <activity android:name=".answer.AnswerMultipleChoiceActivity" />
         <activity android:name=".question.FavoritesActivity" />
         <activity android:name=".question.DeleteQuestionActivity" />

@@ -25,9 +25,9 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="30dp"
         android:textColor="#ffffff"
-        tools:text="승윤님께"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="승윤님께" />
 
     <TextView
         android:id="@+id/txt_delete_title"
@@ -41,21 +41,35 @@
         android:textSize="18sp"
         tools:ignore="HardcodedText" />
 
+    <TextView
+        android:id="@+id/marquee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="35dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="질문을 좌우로 움직여\n삭제해보세요!"
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_delete"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/delete_question_item"
         android:layout_marginTop="137dp"
         android:layout_marginBottom="70dp"
         android:background="@drawable/corner_shape"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        tools:listitem="@layout/delete_question_item" />
 
 
     <Button
         android:id="@+id/btn_delete_cancel"
-        android:layout_width="150dp"
+        android:layout_width="163dp"
         android:layout_height="70dp"
         android:layout_gravity="bottom"
         android:background="#fefefe"
@@ -66,7 +80,7 @@
 
     <Button
         android:id="@+id/btn_delete"
-        android:layout_width="300dp"
+        android:layout_width="240dp"
         android:layout_height="70dp"
         android:layout_gravity="bottom|end"
         android:background="@drawable/delete_button_shape"
