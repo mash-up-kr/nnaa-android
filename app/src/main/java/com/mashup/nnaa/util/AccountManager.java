@@ -89,7 +89,6 @@ public class AccountManager {
         }
         pwForSignIn = EncryptUtil.doubleEncryptForSignIn(pwEnc);
 
-
         RetrofitHelper.getInstance().signInOrRegEmail(email, pwForSignIn, new Callback<LoginDto>() {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
@@ -107,7 +106,7 @@ public class AccountManager {
                         SharedPrefHelper.getInstance()
                                 .put(SHARED_PREF_LAST_ACCOUNT_EMAIL, email);
                         SharedPrefHelper.getInstance()
-                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, EncryptUtil.encrypt(pwEnc));
+                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEnc);
                     }
 
                     resultListener.onSignInSuccess(id, token);

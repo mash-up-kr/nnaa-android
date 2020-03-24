@@ -39,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView txt_register, txt_forget_password;
     private LoginCallback mLoginCallback;
     private CallbackManager mCallbackManager;
-    private SharedPreferences setting;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onDestroy() {
@@ -60,36 +58,11 @@ public class LoginActivity extends AppCompatActivity {
         btn_facebook_login = findViewById(R.id.btn_facebook_login);
         autoLogin = findViewById(R.id.auto_login);
 
-
-        setting = getSharedPreferences("setting", MODE_PRIVATE);
-        editor = setting.edit();
-
-        if (setting.getBoolean("auto_login", false)) {
-            edit_email.setText(setting.getString("ID", ""));
-            edit_password.setText(setting.getString("PW", ""));
-            autoLogin.setChecked(true);
-        }
-        // auto login
-        autoLogin.setOnClickListener(view -> {
-            if (autoLogin.isChecked()) {
-                Toast.makeText(this, "자동 로그인", Toast.LENGTH_SHORT).show();
-                String ID = edit_email.getText().toString();
-                String PW = edit_password.getText().toString();
-                editor.putString("ID", ID);
-                editor.putString("PW", PW);
-                editor.putBoolean("auto_login", true);
-                editor.apply();
-            } else {
-                editor.clear();
-                editor.apply();
-            }
-        });
-
         //email login
         btn_login.setOnClickListener(view -> AccountManager.getInstance().executeSignIn(
                 edit_email.getText().toString(),
                 edit_password.getText().toString(),
-                false, false,
+                false, autoLogin.isChecked(),
                 new AccountManager.ISignInResultListener() {
                     @Override
                     public void onSignInSuccess(String id, String token) {
@@ -106,13 +79,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }));
 
-
         //email signIn
         txt_register.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
-
 
         // 비밀번호 찾기
         txt_forget_password.setOnClickListener(view -> {
