@@ -31,8 +31,8 @@ import java.util.List;
 public class MultiReplyActivity extends AppCompatActivity {
 
     TextView reply_number, reply_question_name;
-    ImageButton reply_cancel, reply_choice, btn_past;
-    Button btn_next_question;
+    ImageButton reply_cancel, reply_choice;
+    Button btn_next_question, btn_past;
     private ReplySubjectAdapter subjectAdapter;
 
     @Override
@@ -49,8 +49,7 @@ public class MultiReplyActivity extends AppCompatActivity {
 
         // 이전문제
         btn_past.setOnClickListener(view -> {
-//            Intent pastintent = new Intent(getApplicationContext(), ReplyActivity.class);
-//            startActivity(pastintent);
+
 
         });
 
@@ -70,13 +69,13 @@ public class MultiReplyActivity extends AppCompatActivity {
             builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(getApplicationContext(),"계속 답변해주세요~",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "계속 답변해주세요~", Toast.LENGTH_SHORT).show();
                 }
             });
             builder.show();
         });
         // 다음 문제
-        btn_next_question.setOnClickListener(view-> {
+        btn_next_question.setOnClickListener(view -> {
 
         });
 
@@ -97,6 +96,7 @@ public class MultiReplyActivity extends AppCompatActivity {
 
 
     }
+
     private void getSubjectItem() {
         List<String> listInitial = Collections.singletonList("답변을 입력해주세요");
 

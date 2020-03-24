@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.data.CustomQuestionItem;
 import com.mashup.nnaa.data.QuestionItem;
 import com.mashup.nnaa.network.QuestionControllerService;
 import com.mashup.nnaa.network.RetrofitHelper;
@@ -76,21 +77,26 @@ public class QuestionActivity extends AppCompatActivity {
             startActivity(cancel_intent);
         });
 
+        Intent test = getIntent();
+
         RecyclerView recyclerQuestion = findViewById(R.id.recycler_question);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerQuestion.setLayoutManager(linearLayoutManager);
 
+        //ArrayList<QuestionItem> list = (ArrayList<QuestionItem>)test.getSerializableExtra("test");
+
+
         ArrayList<QuestionItem> list = new ArrayList<>();
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
-        list.add(new QuestionItem("Q.", "dd"));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd",0,0));
 
         questionList = list;
         questionAdapter = new QuestionAdapter(this, list);

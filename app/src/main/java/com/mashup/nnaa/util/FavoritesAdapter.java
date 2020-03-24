@@ -27,7 +27,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
     private ArrayList<QuestionItem> fList;
-    public Context fContext;
+    private Context fContext;
     private SharedPreferences preferences = null;
     private SharedPreferences.Editor editor = null;
 
@@ -89,6 +89,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         void onBind(QuestionItem questionItem) {
             txt_favorites_question.setText(questionItem.getQuestion_content());
             check_box_favorites.setChecked(Boolean.parseBoolean(questionItem.getQeustion_num()));
+
         }
     }
 }

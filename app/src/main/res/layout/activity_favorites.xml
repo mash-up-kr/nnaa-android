@@ -53,7 +53,6 @@
         android:background="@drawable/question_corner"
         android:drawableStart="@drawable/edit_1482"
         android:hint=" 질문을 직접 입력해보세요"
-        android:textColorHint="#2d2e35"
         android:textSize="13sp"
         android:textStyle="bold"
         android:inputType="textAutoComplete" />

@@ -1,4 +1,3 @@
-
 <resources>
     <string name="app_name">NNAA</string>
     <!-- Common -->
@@ -30,7 +29,7 @@
 
     <string name="setting_want_to_sign_out">Do you really want to sign out?</string>
 
-    <string name="StringValue">이미지가 열리지 않습니다.</string>
+    <string name="StringValue" translatable="false">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">
         <item>(선택없음)</item>
         <item>아빠</item>
@@ -54,7 +53,7 @@
     <string name="to_me">To me,</string>
     <string name="is_my">is my</string>
     <string name="plz_enter_name">Please enter the name</string>
-    <string name="cancle">cancle</string>
+    <string name="cancle">cancel</string>
     <string name="lets_start">Let\'s Start</string>
 
     <!--페이스북 앱 id-->

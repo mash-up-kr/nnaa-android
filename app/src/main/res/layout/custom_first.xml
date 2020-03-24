@@ -11,17 +11,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:textColor="#2d2e35"
+        android:text="첫번째, 원하는 질문을 입력해주세요"
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/edit_custom"
+        android:id="@+id/first_edit_custom"
         android:layout_width="324dp"
         android:layout_height="54dp"
         android:layout_below="@id/first_txt"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="18dp"
         android:layout_marginRight="18dp"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:background="@drawable/question_corner"
         android:drawableStart="@drawable/edit_1482"
         android:focusableInTouchMode="true"
