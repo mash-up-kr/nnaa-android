@@ -3,6 +3,7 @@ package com.mashup.nnaa.network;
 import android.text.TextUtils;
 
 import com.mashup.nnaa.BuildConfig;
+import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
@@ -75,9 +76,9 @@ public class RetrofitHelper {
     }
 
     // 로그인
-    public void signInOrRegEmail(String email, String encPw, Callback<ResponseBody> callback) {
+    public void signInOrRegEmail(String email, String encPw, Callback<LoginDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<ResponseBody> userInfo = service.signInOrRegEmail(
+        Call<LoginDto> userInfo = service.signInOrRegEmail(
                 new HashMap<String, String>() {{
                     put("email", email);
                     put("password", encPw);
@@ -85,6 +86,7 @@ public class RetrofitHelper {
         );
         userInfo.enqueue(callback);
     }
+
 
     // 회원가입
     public void registerEmail(String email, String password, String name, Callback<SignUpDto> callback) {

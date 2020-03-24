@@ -39,7 +39,6 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
 
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -73,6 +72,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (holder instanceof FirstCustomHolder) {
             ((FirstCustomHolder) holder).first_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((FirstCustomHolder) holder).first_edit.setText(customQuestionItems.get(position).getQuestion_content());
+
         } else if (holder instanceof SecondCustomHolder) {
             ((SecondCustomHolder) holder).second_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((SecondCustomHolder) holder).btn_j.setId(customQuestionItems.get(position).getQuestion_img());
@@ -120,8 +120,6 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             first_txt = itemView.findViewById(R.id.first_txt);
             first_edit = itemView.findViewById(R.id.first_edit_custom);
-
-
         }
     }
 

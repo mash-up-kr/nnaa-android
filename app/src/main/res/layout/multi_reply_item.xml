@@ -6,10 +6,10 @@
 
     <Button
         android:id="@+id/multi_btn_a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="3dp"
+        android:padding="5dp"
         android:background="@drawable/multi_reply_oval"
         android:contentDescription="@string/StringValue"
         android:text="A" />
@@ -56,8 +56,8 @@
 
     <Button
         android:id="@+id/multi_btn_b"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="71dp"
         android:background="@drawable/multi_reply_oval"
@@ -87,8 +87,8 @@
 
     <Button
         android:id="@+id/multi_btn_c"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="139dp"
         android:background="@drawable/multi_reply_oval"
@@ -106,8 +106,8 @@
 
     <Button
         android:id="@+id/multi_btn_d"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="207dp"
         android:background="@drawable/multi_reply_oval"

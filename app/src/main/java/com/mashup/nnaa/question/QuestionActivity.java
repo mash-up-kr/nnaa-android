@@ -60,6 +60,7 @@ public class QuestionActivity extends AppCompatActivity {
 
             txt_type.setText(String.format("%s인 , ", type));
             txt_name.setText(String.format("%s께", name));
+
         }
 
         btn_next.setOnClickListener(view -> {
@@ -84,19 +85,19 @@ public class QuestionActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerQuestion.setLayoutManager(linearLayoutManager);
 
-        //ArrayList<QuestionItem> list = (ArrayList<QuestionItem>)test.getSerializableExtra("test");
+      //  ArrayList<QuestionItem> list = (ArrayList<QuestionItem>)test.getSerializableExtra("test");
 
 
         ArrayList<QuestionItem> list = new ArrayList<>();
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
-        list.add(new QuestionItem("Q.", "dd",0,0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
+        list.add(new QuestionItem("Q.", "dd", 0, 0));
 
         questionList = list;
         questionAdapter = new QuestionAdapter(this, list);
@@ -110,7 +111,7 @@ public class QuestionActivity extends AppCompatActivity {
             Toast.makeText(QuestionActivity.this, "질문삭제 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent deleteintent = new Intent(getApplicationContext(), DeleteQuestionActivity.class);
             deleteintent.putExtra("name", name);
-            deleteintent.putExtra("type",type);
+            deleteintent.putExtra("type", type);
             deleteintent.putExtra("list", list);
             startActivity(deleteintent);
         });
