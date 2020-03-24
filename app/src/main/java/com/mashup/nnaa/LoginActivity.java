@@ -28,6 +28,7 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
 import com.mashup.nnaa.main.MainActivity;
+import com.mashup.nnaa.main.home.MainHomeFragment;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.SharedPrefHelper;
 
@@ -65,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_facebook_login = findViewById(R.id.btn_facebook_login);
         autoLogin = findViewById(R.id.auto_login);
+
 
         setting = getSharedPreferences("setting", MODE_PRIVATE);
         editor = setting.edit();
@@ -105,9 +107,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSignInFail() {
                         Log.v(TAG, "Fail to login");
-                        Toast.makeText(LoginActivity.this, "(로그인 실패) 이메일과 비밀번호를 다시 확인해주세요!", Toast.LENGTH_SHORT).show();
+                        edit_email.setText("");
+                        edit_password.setText("");
+                        Toast.makeText(LoginActivity.this, "(로그인 실패) 이메일 또는 비밀번호를 다시 확인해주세요!", Toast.LENGTH_SHORT).show();
                     }
                 }));
+
 
         //email signIn
         txt_register.setOnClickListener(view -> {

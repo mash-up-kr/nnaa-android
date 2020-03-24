@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.mashup.nnaa.data.FavoritesItem;
 import com.mashup.nnaa.data.QuestionItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -28,8 +30,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     private ArrayList<QuestionItem> fList;
     private Context fContext;
-    private SharedPreferences preferences = null;
-    private SharedPreferences.Editor editor = null;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     public FavoritesAdapter(Context context, ArrayList<QuestionItem> list) {
         this.fList = list;
@@ -56,9 +58,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 editor = preferences.edit();
                 editor.putBoolean("check", vh.check_box_favorites.isChecked());
                 editor.apply();
+
                 Log.v("즐겨찾기", "Click!");
             }
         });
+
         return vh;
     }
 

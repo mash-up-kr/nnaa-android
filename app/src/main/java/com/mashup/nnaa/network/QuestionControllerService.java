@@ -21,19 +21,14 @@ public interface QuestionControllerService {
     Call<List<QuestionDto>> getPresetQuestions(@Path("category") String category,
                                                @Path("type") String type);
 
+    // 문제지 첫 기본세팅
     @GET("question/random")
     Call<List<Question>> getQuestion();
 
+    // 직접 질문 입력해서 질문 추가하기
     @POST("question")
     Call<NewQuestionDto> postQuestion(@Body HashMap<String, String> body);
 
-    @GET("question/bookmark")
-    Call<List<Question>> getBookmarkQuestions();
 
-    @POST("question/bookmark/{questionId}")
-    Call<ResponseBody> postBookmarkQuestion(@Path("questionId") String questionId);
-
-    @DELETE("question/bookmark/{questionId}")
-    Call<ResponseBody> deleteBookmarkQuestion(@Path("questionId") String questionId);
 
 }

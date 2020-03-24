@@ -47,12 +47,6 @@ public class MultiReplyActivity extends AppCompatActivity {
         reply_choice = findViewById(R.id.reply_choice);
         btn_next_question = findViewById(R.id.btn_next_question);
 
-        // 이전문제
-        btn_past.setOnClickListener(view -> {
-
-
-        });
-
         reply_cancel.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("답변 중단하기");
@@ -61,8 +55,6 @@ public class MultiReplyActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Toast.makeText(getApplicationContext(), "답변을 중단하겠습니다.", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getApplicationContext(), ReplyActivity.class);
-//                    startActivity(intent);
                     finish();
                 }
             });
@@ -73,6 +65,11 @@ public class MultiReplyActivity extends AppCompatActivity {
                 }
             });
             builder.show();
+        });
+        // 이전문제
+        btn_past.setOnClickListener(view -> {
+
+
         });
         // 다음 문제
         btn_next_question.setOnClickListener(view -> {

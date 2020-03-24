@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.UserAuthHeaderInfo;
+import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 
 import okhttp3.ResponseBody;
@@ -39,7 +40,7 @@ public class AccountManager {
     public void setUserAuthHeaderInfo(String userId, String token) {
         this.userAuthHeaderInfo = new UserAuthHeaderInfo(userId, token);
     }
-    // login
+
     public void executeAutoSignIn(ISignInResultListener resultListener) {
         String lastEmail =
                 SharedPrefHelper.getInstance().getString(SHARED_PREF_LAST_ACCOUNT_EMAIL);
@@ -61,12 +62,12 @@ public class AccountManager {
             }
         });
     }
-
-    public void executeSignIn(String email, String pw,
+    // login
+    public void executeSignIn(String email, String password,
                               boolean isGivenPwEncrypted,
                               boolean saveForAutoSignIn,
                               ISignInResultListener resultListener) {
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pw)) {
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Log.v("SignIn", "Sign in fail (not enough): " + email);
             resultListener.onSignInFail();
             return;
@@ -82,19 +83,19 @@ public class AccountManager {
         final String pwForSignIn;
 
         if (isGivenPwEncrypted) {
-            pwEnc = pw;
+            pwEnc = password;
         } else {
-            pwEnc = EncryptUtil.encrypt(pw);
+            pwEnc = EncryptUtil.encrypt(password);
         }
         pwForSignIn = EncryptUtil.doubleEncryptForSignIn(pwEnc);
 
 
-        RetrofitHelper.getInstance().signInOrRegEmail(email, pwForSignIn, new Callback<ResponseBody>() {
+        RetrofitHelper.getInstance().signInOrRegEmail(email, pwForSignIn, new Callback<LoginDto>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
                 String token = response.headers().get("token");
-                ResponseBody body = response.body();
+                LoginDto body = response.body();
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(token)) {
                     Log.v("SignIn", "Sign in fail (no id or token value received): " + email);
@@ -113,12 +114,13 @@ public class AccountManager {
                 }
             }
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<LoginDto> call, Throwable t) {
                 Log.v("SignIn", "Sign in fail: " + email);
                 resultListener.onSignInFail();
             }
         });
     }
+
     // Register
     public void executeRegister(String email, String password, String name,
                                 ISignInResultListener resultListener) {
