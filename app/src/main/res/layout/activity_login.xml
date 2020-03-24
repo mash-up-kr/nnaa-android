@@ -94,7 +94,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
         android:layout_marginTop="361dp"
-        android:text="자동 로그인" />
+        android:text="자동 로그인"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/txt_register"
@@ -114,7 +115,8 @@
         android:layout_height="19dp"
         android:layout_marginStart="169dp"
         android:layout_marginTop="402dp"
-        android:background="#2d2e35" />
+        android:background="#2d2e35"
+        android:contentDescription="@string/StringValue" />
 
     <TextView
         android:id="@+id/txt_forget_password"
