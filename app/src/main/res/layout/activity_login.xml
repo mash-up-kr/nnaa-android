@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:layout_width="wrap_content"
@@ -84,7 +86,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="135dp"
-        android:layout_marginTop="362dp"
+        android:layout_marginTop="360dp"
         android:background="@drawable/login_checkbox"
         android:button="@android:color/transparent"
         android:checked="false" />
@@ -92,44 +94,53 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
         android:layout_marginTop="361dp"
+        android:layout_gravity="center_horizontal"
         android:text="자동 로그인"
         tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/txt_register"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="400dp"
-        android:lineHeight="27sp"
-        android:text="회원 가입"
-        android:textColor="#2d2e35"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        tools:ignore="HardcodedText,UnusedAttribute" />
 
-    <ImageView
-        android:layout_width="2dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="169dp"
-        android:layout_marginTop="402dp"
-        android:background="#2d2e35"
-        android:contentDescription="@string/StringValue" />
-
-    <TextView
-        android:id="@+id/txt_forget_password"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginStart="191dp"
-        android:layout_marginTop="400dp"
-        android:lineHeight="27sp"
-        android:text="비밀번호 찾기"
-        android:textColor="#2d2e35"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        tools:ignore="HardcodedText,UnusedAttribute" />
+        android:layout_height="40dp"
+        android:layout_marginTop="380dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/txt_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:lineHeight="27sp"
+            android:text="회원 가입"
+            android:textColor="#2d2e35"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+        <ImageView
+            android:layout_width="2dp"
+            android:layout_height="19dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:background="#2d2e35"
+            android:contentDescription="@string/StringValue" />
+
+        <TextView
+            android:id="@+id/txt_forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="center_vertical"
+            android:lineHeight="27sp"
+            android:text="비밀번호 찾기"
+            android:textColor="#2d2e35"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+    </LinearLayout>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_facebook_login"
