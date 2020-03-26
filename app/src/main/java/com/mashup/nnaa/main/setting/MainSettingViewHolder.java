@@ -39,14 +39,6 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
             case SIGN_OUT:
                 callSignOut();
                 break;
-
-            case DELETE_ACCOUNT:
-
-                break;
-
-            case BLOCKED_USERS:
-
-                break;
         }
     }
 
