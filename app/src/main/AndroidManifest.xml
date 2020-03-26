@@ -15,14 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".FindPwActivity"></activity>
         <activity android:name=".reply.MultiReplyActivity" />
         <activity android:name=".reply.ReplyActivity" />
-        <activity android:name=".RegisterActivity" />
-        <!-- 페이스북 메타데이터 -->
+        <activity android:name=".RegisterActivity" /> <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_key" />
-        <!-- 카카오톡 메타데이터 -->
+            android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
@@ -36,13 +35,13 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".select.SelectFriendActivity" />
-        <activity android:name=".main.MainActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+        <activity
+            android:name=".main.MainActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity android:name=".answer.AnswerMultipleChoiceActivity" />
         <activity android:name=".question.FavoritesActivity" />
         <activity android:name=".question.DeleteQuestionActivity" />
         <activity android:name=".question.QuestionActivity" />
-        <activity android:name=".question.HowQuestionActivity" />
         <activity android:name=".select.SetTypeOfFriendActivity" />
         <activity
             android:name=".question.CustomQuestionActivity"
