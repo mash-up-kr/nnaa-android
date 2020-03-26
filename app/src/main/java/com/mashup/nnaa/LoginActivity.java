@@ -27,7 +27,11 @@ import com.mashup.nnaa.util.AccountManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -116,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // 비밀번호 찾기
         txt_forget_password.setOnClickListener(view -> {
-
+            Intent intent = new Intent(LoginActivity.this, FindPwActivity.class);
+            startActivity(intent);
         });
 
         //kakao login
