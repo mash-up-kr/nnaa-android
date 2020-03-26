@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
@@ -34,6 +35,34 @@ public class MainActivity extends AppCompatActivity {
 
         // Load HOME fragment page
         onMainTabClicked(Page.HOME);
+
+        Intent kakao = getIntent();
+        if (kakao != null) {
+            String kakao_name = kakao.getStringExtra("kakao");
+            MainHomeFragment mainHomeFragment = new MainHomeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, mainHomeFragment).commit();
+            Bundle kakao_bundle = new Bundle();
+            kakao_bundle.putString("kakao", kakao_name);
+            mainHomeFragment.setArguments(kakao_bundle);
+        }
+        Intent facebook = getIntent();
+        if(facebook!=null) {
+            String text = facebook.getStringExtra("facebook");
+            MainHomeFragment mainHomeFragment = new MainHomeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, mainHomeFragment).commit();
+            Bundle facebook_bundle = new Bundle();
+            facebook_bundle.putString("facebook", text);
+            mainHomeFragment.setArguments(facebook_bundle);
+        }
+        Intent login = getIntent();
+        if(login!=null) {
+            String text = login.getStringExtra("Register");
+            MainHomeFragment mainHomeFragment = new MainHomeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, mainHomeFragment).commit();
+            Bundle login_bundle = new Bundle();
+            login_bundle.putString("Register", text);
+            mainHomeFragment.setArguments(login_bundle);
+        }
     }
 
     private void setOnMainTabBtnsClicked() {
@@ -72,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             switch (page) {
                 case HOME:
                     fragmentMap.put(Page.HOME, MainHomeFragment.newInstance());
-                        break;
+                    break;
 
                 case ALARM:
                     fragmentMap.put(Page.ALARM, MainNotificationsFragment.newInstance());

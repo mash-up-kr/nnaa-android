@@ -3,6 +3,7 @@ package com.mashup.nnaa.util;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.facebook.login.LoginManager;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.UserAuthHeaderInfo;
 import com.mashup.nnaa.network.model.LoginDto;
@@ -166,6 +167,7 @@ public class AccountManager {
         userAuthHeaderInfo = null;
         Log.v("SignOut", "Signed out");
         listener.onSignOut();
+        LoginManager.getInstance().logOut();
     }
 
     public static boolean isValidEmailAddress(String email) {

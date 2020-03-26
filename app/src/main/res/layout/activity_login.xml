@@ -140,10 +140,10 @@
         android:text="페이스북 로그인"
         tools:ignore="HardcodedText" />
 
-    <Button
+    <com.kakao.usermgmt.LoginButton
         android:id="@+id/com_kakao_login"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="470dp"
         android:background="@drawable/kakao_account_login_btn_medium_narrow" />

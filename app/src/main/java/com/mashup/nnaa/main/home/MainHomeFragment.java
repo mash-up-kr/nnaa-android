@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 public class MainHomeFragment extends Fragment {
     private RecyclerView rvQuestionnaires;
-    private TextView tvWelcome;
+    private TextView tvWelcome, tvName;
 
     public static MainHomeFragment newInstance() {
         MainHomeFragment fragment = new MainHomeFragment();
@@ -46,13 +46,22 @@ public class MainHomeFragment extends Fragment {
         rvQuestionnaires.setAdapter(new MainQuestionnaireAdapter());
 
         tvWelcome = view.findViewById(R.id.tv_welcome);
+        tvName = view.findViewById(R.id.tv_name);
 
-        // activity->fragment 데이터 받아오기 오류있음
-        Bundle extra = this.getArguments();
-        if(extra!=null) {
-            String name= extra.getString("RegisterName");
-            tvWelcome.setText(name);
-            Toast.makeText(getActivity(),name,Toast.LENGTH_LONG).show();
+        Bundle kakao_bundle = this.getArguments();
+        if (kakao_bundle != null) {
+            String kakao_name = kakao_bundle.getString("kakao");
+            tvName.setText(kakao_name);
+        }
+        Bundle facebook_bundle = this.getArguments();
+        if (facebook_bundle != null) {
+            String facebook_name = facebook_bundle.getString("facebook");
+            tvName.setText(facebook_name);
+        }
+        Bundle login_bundle = this.getArguments();
+        if (login_bundle != null) {
+            String login_name = login_bundle.getString("Register");
+            tvName.setText(login_name);
         }
         return view;
     }
