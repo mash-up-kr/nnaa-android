@@ -77,11 +77,10 @@ public class RegisterActivity extends AppCompatActivity {
                         startActivity(intent);
 
                         // activity->fragment 데이터 보내기
-                        String test = edit_name.getText().toString();
-                        MainHomeFragment mainHomeFragment = new MainHomeFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("RegisterName", test);
-                        mainHomeFragment.setArguments(bundle);
+                        String name = edit_name.getText().toString();
+                        Intent login_intent = new Intent(getBaseContext(), MainActivity.class);
+                        login_intent.putExtra("Register",name);
+                        startActivity(login_intent);
 
                         Toast.makeText(RegisterActivity.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
 
