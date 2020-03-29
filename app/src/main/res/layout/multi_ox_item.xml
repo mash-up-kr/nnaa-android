@@ -23,10 +23,10 @@
 
     <ImageButton
         android:id="@+id/reply_x_btn"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:layout_marginStart="215dp"
         android:background="#f3f3f3"
-        android:src="@drawable/quiz_btn_o"
+        android:src="@drawable/quiz_btn_x"
         android:contentDescription="@string/StringValue" />
 </RelativeLayout>
