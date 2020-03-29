@@ -86,7 +86,7 @@ public class CustomQuestionActivity extends AppCompatActivity  {
         cArrayList.add(new QuestionItem("첫번쨰, 원하는 질문을 입력해주세요", "", R.id.img_add, FIRST_CONTENT));
         cArrayList.add(new QuestionItem("두번째, 문제 형식을 설정해주세요", "", R.id.img_how_item, SECOND_CONTENT));
         cArrayList.add(new QuestionItem("세번째, 보기를 설정해주세요", "", R.id.img_add, THIRD_CONTENT));
-        cArrayList.add(new QuestionItem("짝짝짝 질문 생성 완료!", "", R.id.img_bad, FORTH_CONTENT));
+        cArrayList.add(new QuestionItem("짝짝짝 질문 생성 완료!", "", R.id.img_add, FORTH_CONTENT));
     }
 
 }
