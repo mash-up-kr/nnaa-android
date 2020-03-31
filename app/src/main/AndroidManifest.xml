@@ -33,7 +33,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+                android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".select.SelectFriendActivity" />
         <activity
             android:name=".main.MainActivity"
