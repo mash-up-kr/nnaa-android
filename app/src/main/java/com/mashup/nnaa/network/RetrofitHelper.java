@@ -2,14 +2,23 @@ package com.mashup.nnaa.network;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mashup.nnaa.BuildConfig;
+import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
+import com.mashup.nnaa.network.model.QuestionDto;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.util.AccountManager;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +44,6 @@ public class RetrofitHelper {
         return _instance;
     }
 
-
     private RetrofitHelper() {
         refreshRetrofit();
     }
@@ -53,9 +61,9 @@ public class RetrofitHelper {
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             clientBuilder.addInterceptor(loggingInterceptor);
         }
-
         builder.client(clientBuilder.build());
         retrofit = builder.build();
     }
@@ -102,26 +110,30 @@ public class RetrofitHelper {
     }
 
     // 문제지 첫 기본세팅
-    public QuestionControllerService getQuestion(Callback<List<Question>> callback) {
+    public void getQuestion(Callback<List<Question>> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
         Call<List<Question>> getQuestionRandom = service.getQuestion();
         getQuestionRandom.enqueue(callback);
-        return service;
+
     }
 
     // 직접 질문 입력해서 질문 추가
-    public void postQuestion(String category, String[] choices, String content, String type, Callback<NewQuestionDto> callback) {
+    public void postQuestion(NewQuestionDto newQuestionDto, Callback<NewQuestionDto> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(
+
+     /*   Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(
                 new HashMap<String, String>() {{
                     put("category", category);
-                    put("choices", Arrays.toString(choices));
+                    put("choices", choices);
                     put("content", content);
                     put("type", type);
                 }}
-        );
+        );*/
+        Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(newQuestionDto);
+
         newQuestionDtoCall.enqueue(callback);
     }
+
 
     public void getReceivedQuestionnaire(Callback<List<QuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);

@@ -53,9 +53,9 @@
         android:background="@drawable/question_corner"
         android:drawableStart="@drawable/edit_1482"
         android:hint=" 질문을 직접 입력해보세요"
+        android:inputType="textAutoComplete"
         android:textSize="13sp"
-        android:textStyle="bold"
-        android:inputType="textAutoComplete" />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -82,6 +82,15 @@
             android:textColor="#2d2e35"
             android:textSize="13sp"
             tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/get_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="166dp"
+            tools:text="type" />
     </LinearLayout>
 
     <Button

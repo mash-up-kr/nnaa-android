@@ -2,6 +2,7 @@ package com.mashup.nnaa.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +17,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonObject;
+import com.mashup.nnaa.FindPwActivity;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.question.CustomQuestionActivity;
 import com.mashup.nnaa.question.QuestionActivity;
+import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -33,7 +45,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     Context cContext;
     private ArrayList<QuestionItem> customQuestionItems;
 
-    public CustomQuestionAdapter(Context context, ArrayList<QuestionItem> list){
+    public CustomQuestionAdapter(Context context, ArrayList<QuestionItem> list) {
         this.customQuestionItems = list;
         this.cContext = context;
     }
@@ -96,7 +108,44 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ((ForthCustomHolder) holder).forth_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((ForthCustomHolder) holder).forth_img.setId(customQuestionItems.get(position).getQuestion_img());
         }
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("b", "b");
+
+        NewQuestionDto newQuestionDto = new NewQuestionDto();
+        newQuestionDto.setCategory("친구");
+        newQuestionDto.setChoices(jsonObject);
+        if (holder instanceof FirstCustomHolder) {
+            String edit = ((FirstCustomHolder)holder).first_edit.getText().toString();
+            newQuestionDto.setContent(edit);
+        }
+        //newQuestionDto.setContent(edit);
+        newQuestionDto.setType("객관식");
+       /* ((CustomQuestionActivity) cContext).findViewById(R.id.btn_done).setOnClickListener(view -> {
+            RetrofitHelper.getInstance().postQuestion(newQuestionDto,
+                    new Callback<NewQuestionDto>() {
+                        @Override
+                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                            Toast.makeText(((CustomQuestionActivity) cContext).getBaseContext(), "질문 생성 완료!", Toast.LENGTH_SHORT).show();
+                            Log.v("질문 직접 생성", String.valueOf(response.code()));
+                            ((CustomQuestionActivity) cContext).findViewById(R.id.btn_done).setBackgroundColor(Color.BLUE);
+                        }
+                        @Override
+                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                            Log.v("질문 직접 생성 실패", t.getMessage());
+                        }
+                    });
+        });*/
     }
+
+
+//            Intent intent = new Intent(cContext.getApplicationContext(), FindPwActivity.class);
+//            if (holder instanceof FirstCustomHolder) {
+//                intent.putExtra("edit", ((FirstCustomHolder) holder).first_edit.getText().toString());
+//                Log.v("@@@@@@@@@@@@@@@@", "sdf");
+//            }
+//            cContext.startActivity(intent);
+//            Log.v("@@@@@@@@@@@@@@@@", "Ddddddd");
 
     @Override
     public int getItemCount() {
@@ -120,6 +169,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             first_txt = itemView.findViewById(R.id.first_txt);
             first_edit = itemView.findViewById(R.id.first_edit_custom);
+
         }
     }
 
@@ -127,6 +177,7 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         TextView second_txt;
         ImageButton btn_j, btn_g, btn_o, btn_j_blue, btn_o_blue, btn_g_blue;
+        TextView txtJ, txtG, txtOX;
 
 
         SecondCustomHolder(@NonNull View itemView) {
@@ -139,6 +190,32 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             btn_g_blue = itemView.findViewById(R.id.btn_g_blue);
             btn_o = itemView.findViewById(R.id.btn_o);
             btn_o_blue = itemView.findViewById(R.id.btn_o_blue);
+            txtJ = itemView.findViewById(R.id.txt_j);
+            txtG = itemView.findViewById(R.id.txt_g);
+            txtOX = itemView.findViewById(R.id.txt_o);
+
+//            txtJ.setOnClickListener(view -> {
+//                btn_j.setVisibility(View.INVISIBLE);
+//                btn_j_blue.setVisibility(View.VISIBLE);
+//                txtG.setEnabled(false);
+//                txtOX.setEnabled(false);
+//                Toast.makeText(view.getContext(), "주관식 선택!", Toast.LENGTH_SHORT).show();
+//            });
+//
+//            txtG.setOnClickListener(view -> {
+//                btn_g.setVisibility(View.INVISIBLE);
+//                btn_g_blue.setVisibility(View.VISIBLE);
+//                txtJ.setEnabled(false);
+//                txtOX.setEnabled(false);
+//                Toast.makeText(view.getContext(), "객관식 선택!", Toast.LENGTH_SHORT).show();
+//            });
+//            txtOX.setOnClickListener(view -> {
+//                btn_o.setVisibility(View.INVISIBLE);
+//                btn_o_blue.setVisibility(View.VISIBLE);
+//                txtG.setEnabled(false);
+//                txtJ.setEnabled(false);
+//                Toast.makeText(view.getContext(), "O X 선택!", Toast.LENGTH_SHORT).show();
+//            });
 
             btn_j.setOnClickListener(view -> {
                 btn_j.setVisibility(View.INVISIBLE);

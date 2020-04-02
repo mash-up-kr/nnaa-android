@@ -88,4 +88,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="HardcodedText" />
 
+    <TextView
+        android:id="@+id/text_pw"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="dd"
+        app:layout_constraintTop_toBottomOf="@id/edit_find"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
