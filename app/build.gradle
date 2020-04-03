@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     implementation "com.airbnb.android:lottie:3.3.1"
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,16 +1,12 @@
 package com.mashup.nnaa.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,15 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.FavoritesItem;
 import com.mashup.nnaa.data.QuestionItem;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
+public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder>{
 
     private ArrayList<QuestionItem> fList;
     private Context fContext;
@@ -45,6 +39,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorites_question_item, parent, false);
 
         ViewHolder vh = new ViewHolder(view);
+
 
         // check box 리스너
         preferences = vh.check_box_favorites.getContext().getSharedPreferences("check", Context.MODE_PRIVATE);
@@ -69,6 +64,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.ViewHolder holder, int position) {
         holder.onBind(fList.get(position));
+
     }
 
     @Override
@@ -78,7 +74,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         } else return 0;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txt_favorites_question;
         private CheckBox check_box_favorites;
@@ -88,6 +84,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
             txt_favorites_question = itemView.findViewById(R.id.txt_favorites_question);
             check_box_favorites = itemView.findViewById(R.id.check_box_favorites);
+
         }
 
         void onBind(QuestionItem questionItem) {

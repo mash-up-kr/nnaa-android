@@ -1,7 +1,9 @@
 package com.mashup.nnaa.network;
 
+import com.google.gson.JsonObject;
 import com.mashup.nnaa.network.model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,8 +29,6 @@ public interface QuestionControllerService {
 
     // 직접 질문 입력해서 질문 추가하기
     @POST("question")
-    Call<NewQuestionDto> postQuestion(@Body HashMap<String, String> body);
-
-
+    Call<NewQuestionDto> postQuestion(@Body NewQuestionDto body);
 
 }

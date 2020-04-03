@@ -60,8 +60,8 @@ public class QuestionActivity extends AppCompatActivity {
 
             txt_type.setText(String.format("%s인 , ", type));
             txt_name.setText(String.format("%s께", name));
-
         }
+        String get_type = intent.getStringExtra("typename");
 
         btn_next.setOnClickListener(view -> {
             // 보낸 질문함으로 넘어감
@@ -85,19 +85,19 @@ public class QuestionActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerQuestion.setLayoutManager(linearLayoutManager);
 
-      //  ArrayList<QuestionItem> list = (ArrayList<QuestionItem>)test.getSerializableExtra("test");
+       ArrayList<QuestionItem> list = (ArrayList<QuestionItem>)test.getSerializableExtra("edit");
 
-
-        ArrayList<QuestionItem> list = new ArrayList<>();
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
-        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//
+//        ArrayList<QuestionItem> list = new ArrayList<>();
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
+//        list.add(new QuestionItem("Q.", "dd", 0, 0));
 
         questionList = list;
         questionAdapter = new QuestionAdapter(this, list);
@@ -120,6 +120,7 @@ public class QuestionActivity extends AppCompatActivity {
             Toast.makeText(QuestionActivity.this, "즐겨찾기 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
             bookmarkintent.putExtra("flist", list);
+            bookmarkintent.putExtra("type",get_type);
             startActivity(bookmarkintent);
         });
 

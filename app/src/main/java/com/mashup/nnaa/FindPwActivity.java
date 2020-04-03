@@ -6,9 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class FindPwActivity extends AppCompatActivity {
@@ -30,7 +32,7 @@ public class FindPwActivity extends AppCompatActivity {
 
         String email = editFind.getText().toString();
 
-         btnFind.setOnClickListener(view -> {
+        btnFind.setOnClickListener(view -> {
             if (editFind.getText().toString().isEmpty()) {
                 Toast.makeText(FindPwActivity.this, "가입하신 이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
             } else {
@@ -40,7 +42,7 @@ public class FindPwActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_SUBJECT, "NNAA 비밀번호 찾기메일입니다.");
                 intent.putExtra(Intent.EXTRA_TEXT, "비밀번호");
                 startActivity(intent);
-                Log.v("@@@@@@@@@@@","mail");
+                Log.v("@@@@@@@@@@@", "mail");
                 btnFind.setBackgroundColor(Color.BLUE);
 
                 progressDialog.setMessage("메일을 보내는중입니다..");
@@ -50,7 +52,17 @@ public class FindPwActivity extends AppCompatActivity {
                 Toast.makeText(FindPwActivity.this, "이메일로 비밀번호를 보냈습니다!", Toast.LENGTH_SHORT).show();
             }
 
-           // progressDialog.dismiss();
+            // progressDialog.dismiss();
         });
+
+        TextView textView = findViewById(R.id.text_pw);
+        Intent intent = getIntent();
+        if (intent != null && intent.getExtras() != null) {
+            String test = intent.getStringExtra("edit");
+            String t = intent.getStringExtra("btn");
+
+            textView.setText(test);
+            textView.append(t);
+        }
     }
 }
