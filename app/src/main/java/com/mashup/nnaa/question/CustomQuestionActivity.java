@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mashup.nnaa.CustomQuestionCallback;
 import com.mashup.nnaa.R;
 
 import com.mashup.nnaa.data.Choices;
@@ -63,7 +66,10 @@ public class CustomQuestionActivity extends AppCompatActivity {
     ImageView img_recycler;
     private CustomQuestionAdapter customQuestionAdapter;
     private ArrayList<QuestionItem> cArrayList;
+    private NewQuestionDto newQu = new NewQuestionDto();
     Context mContext;
+    private CustomQuestionCallback callback =
+            pos -> Toast.makeText(CustomQuestionActivity.this, "클릭", Toast.LENGTH_SHORT).show();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,25 +98,12 @@ public class CustomQuestionActivity extends AppCompatActivity {
             startActivity(cancel_intent);
         });
 
-
-        View v = LayoutInflater.from(CustomQuestionActivity.this).inflate(R.layout.custom_first, null, false);
-        final EditText edit = v.findViewById(R.id.first_edit_custom);
-        String content = edit.getText().toString();
-
-        EditText editText1 = v.findViewById(R.id.edit1);
-        EditText editText2 = v.findViewById(R.id.edit2);
-        EditText editText3 = v.findViewById(R.id.edit3);
-        EditText editText4 = v.findViewById(R.id.edit4);
-
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("b", "b");
-        jsonObject.addProperty("c","c");
-        jsonObject.addProperty("d","d");
-        jsonObject.addProperty("a","a");
+        jsonObject.addProperty("a", "a");
 
         btn_done.setOnClickListener(view -> {
             NewQuestionDto newQu = new NewQuestionDto();
-            newQu.setContent("테스트");
+            newQu.setContent(String.valueOf(callback));
             newQu.setCategory("친구");
             newQu.setChoices(jsonObject);
             newQu.setType("객관식");
@@ -130,6 +123,7 @@ public class CustomQuestionActivity extends AppCompatActivity {
                 }
         );
     }
+
     private void initializeData() {
 
         RecyclerView recyclerCustom = findViewById(R.id.custom_recycler);
@@ -139,6 +133,8 @@ public class CustomQuestionActivity extends AppCompatActivity {
         cArrayList = new ArrayList<>();
         customQuestionAdapter = new CustomQuestionAdapter(this, cArrayList);
         recyclerCustom.setAdapter(customQuestionAdapter);
+
+        customQuestionAdapter.setCallback(callback);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 

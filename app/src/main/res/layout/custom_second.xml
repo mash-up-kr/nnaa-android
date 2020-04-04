@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/second_txt"
-        tools:text="두번째, 문제 형식을 설정해주세요"
+        android:text="두번째, 문제 형식을 설정해주세요"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"

@@ -15,13 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FindPwActivity"></activity>
+        <activity android:name=".MakeQuestionActivity"></activity>
+        <activity android:name=".FindPwActivity" />
         <activity android:name=".reply.MultiReplyActivity" />
         <activity android:name=".reply.ReplyActivity" />
-        <activity android:name=".RegisterActivity" /><!-- 페이스북 메타데이터 -->
+        <activity android:name=".RegisterActivity" /> <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_key" /><!-- 카카오톡 메타데이터 -->
+            android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
@@ -33,8 +34,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-                android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".select.SelectFriendActivity" />
         <activity
             android:name=".main.MainActivity"

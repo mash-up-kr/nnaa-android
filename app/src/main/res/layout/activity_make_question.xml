@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/custom_done"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@android:color/black"
+        android:text="입력 완료"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
+        ads:layout_constraintBottom_toTopOf="@id/custom_done">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/custom_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                ads:layout_constraintStart_toEndOf="@id/custom_first_txt"
+                ads:layout_constraintTop_toTopOf="parent"
+                tools:text="category" />
+
+            <TextView
+                android:id="@+id/custom_first_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="100dp"
+                android:text="첫번째, 원하는 질문을 입력해주세요"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/custom_first_edit"
+                android:layout_width="324dp"
+                android:layout_height="54dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:focusableInTouchMode="true"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_first_txt"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/custom_second_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="28dp"
+                android:text="두번째, 문제 형식을 설정해주세요"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_first_edit"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/custom_btn_j"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="28dp"
+                android:background="@drawable/custom_question_img"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="center"
+                android:src="@drawable/text_style_1210"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_second_txt" />
+
+            <ImageButton
+                android:id="@+id/custom_btn_j_blue"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="28dp"
+                android:background="@drawable/custom_question_blue"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="center"
+                android:src="@drawable/btn_txt_sel"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_second_txt" />
+
+            <TextView
+                android:id="@+id/txt_j"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="27dp"
+                android:text="@string/txt_j"
+                android:textSize="13sp"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_btn_j" />
+
+            <ImageButton
+                android:id="@+id/custom_btn_g"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="28dp"
+                android:background="@drawable/custom_question_img"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="center"
+                android:src="@drawable/list_1497"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                ads:layout_constraintStart_toEndOf="@id/custom_btn_j"
+                ads:layout_constraintTop_toBottomOf="@id/custom_second_txt" />
+
+            <ImageButton
+                android:id="@+id/custom_btn_g_blue"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="28dp"
+                android:background="@drawable/custom_question_blue"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="center"
+                android:src="@drawable/btn_list_sel"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                ads:layout_constraintStart_toEndOf="@id/custom_btn_j"
+                ads:layout_constraintTop_toBottomOf="@id/custom_second_txt" />
+
+            <TextView
+                android:id="@+id/txt_g"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="71dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="27dp"
+                android:text="@string/txt_g"
+                android:textSize="13sp"
+                ads:layout_constraintStart_toEndOf="@id/txt_j"
+                ads:layout_constraintTop_toBottomOf="@id/custom_btn_g" />
+
+            <ImageButton
+                android:id="@+id/custom_btn_ox"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="28dp"
+                android:background="@drawable/custom_question_img"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="center"
+                android:src="@drawable/btn_ox_un"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                ads:layout_constraintStart_toEndOf="@id/custom_btn_g"
+                ads:layout_constraintTop_toBottomOf="@id/custom_second_txt" />
+
+            <ImageButton
+                android:id="@+id/custom_btn_ox_blue"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="28dp"
+                android:background="@drawable/custom_question_blue"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="center"
+                android:src="@drawable/btn_ox_sel"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                ads:layout_constraintStart_toEndOf="@id/custom_btn_g"
+                ads:layout_constraintTop_toBottomOf="@id/custom_second_txt" />
+
+            <TextView
+                android:id="@+id/txt_o"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="77dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="27dp"
+                android:text="@string/txt_o"
+                android:textSize="13sp"
+                ads:layout_constraintStart_toEndOf="@id/txt_g"
+                ads:layout_constraintTop_toBottomOf="@id/custom_btn_ox" />
+
+
+            <TextView
+                android:id="@+id/custom_third_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="18dp"
+                android:text="세번째, 보기를 설정해주세요"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/txt_g"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="22dp"
+                android:text="@string/four_txt"
+                android:textColor="#2a4bff"
+                android:textSize="12sp"
+                ads:layout_constraintStart_toEndOf="@id/custom_third_txt"
+                ads:layout_constraintTop_toBottomOf="@id/txt_g" />
+
+            <EditText
+                android:id="@+id/custom_choice_edit1"
+                android:layout_width="324dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:importantForAutofill="no"
+                android:inputType="textAutoCorrect"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_third_txt"
+                tools:ignore="LabelFor" />
+
+
+            <EditText
+                android:id="@+id/custom_choice_edit2"
+                android:layout_width="324dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:importantForAutofill="no"
+                android:inputType="textAutoCorrect"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_choice_edit1"
+                tools:ignore="LabelFor" />
+
+
+            <EditText
+                android:id="@+id/custom_choice_edit3"
+                android:layout_width="324dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:importantForAutofill="no"
+                android:inputType="textAutoCorrect"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_choice_edit2"
+                tools:ignore="LabelFor" />
+
+
+            <EditText
+                android:id="@+id/custom_choice_edit4"
+                android:layout_width="324dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="29dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:importantForAutofill="no"
+                android:inputType="textAutoCorrect"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_choice_edit3"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/custom_forth_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="111dp"
+                android:layout_marginTop="92dp"
+                android:layout_marginEnd="110dp"
+                android:text="짝짝짝 질문 생성 완료!"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_choice_edit4"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/custom_img"
+                android:layout_width="244dp"
+                android:layout_height="137dp"
+                android:layout_below="@id/custom_forth_txt"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="87dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_background"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toBottomOf="@id/custom_forth_txt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

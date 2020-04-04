@@ -13,7 +13,7 @@
         android:layout_marginEnd="110dp"
         android:textColor="#2d2e35"
         android:textSize="15sp"
-        tools:text="짝짝짝 질문 생성 완료!" />
+        android:text="짝짝짝 질문 생성 완료!" />
 
     <ImageView
         android:id="@+id/forth_img"
