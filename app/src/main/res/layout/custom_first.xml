@@ -30,6 +30,7 @@
         android:focusableInTouchMode="true"
         android:textSize="14sp"
         android:inputType="textPersonName"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
 </RelativeLayout>

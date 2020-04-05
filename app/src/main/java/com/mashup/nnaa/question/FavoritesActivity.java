@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,14 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.FavoritesItem;
+import com.mashup.nnaa.MakeQuestionActivity;
 import com.mashup.nnaa.data.QuestionItem;
-import com.mashup.nnaa.network.UserControllerService;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class FavoritesActivity extends AppCompatActivity {
 
@@ -31,7 +27,7 @@ public class FavoritesActivity extends AppCompatActivity {
     ImageButton imgbtn_past, imgbtn_cancel;
     EditText edit_custom;
     ImageView img_favorites, img_recycler;
-    TextView txt_favorites ,getType;
+    TextView txt_favorites, getType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +44,7 @@ public class FavoritesActivity extends AppCompatActivity {
         getType = findViewById(R.id.get_type);
 
         Intent typeintent = getIntent();
-        if(typeintent!=null && typeintent.getExtras()!=null) {
+        if (typeintent != null && typeintent.getExtras() != null) {
             String type = typeintent.getStringExtra("type");
             getType.setText(type);
         }
@@ -63,7 +59,7 @@ public class FavoritesActivity extends AppCompatActivity {
 
 
         edit_custom.setOnClickListener(view -> {
-            Intent edit_intent = new Intent(FavoritesActivity.this, CustomQuestionActivity.class);
+            Intent edit_intent = new Intent(FavoritesActivity.this, MakeQuestionActivity.class);
             edit_intent.putExtra("type", String.valueOf(getType));
             startActivity(edit_intent);
         });

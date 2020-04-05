@@ -3,6 +3,8 @@ package com.mashup.nnaa.util;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonObject;
+import com.mashup.nnaa.CustomQuestionCallback;
 import com.mashup.nnaa.FindPwActivity;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.QuestionItem;
@@ -45,11 +48,17 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     Context cContext;
     private ArrayList<QuestionItem> customQuestionItems;
 
+    // callback interface
+    private CustomQuestionCallback callback;
+
+    public void setCallback(CustomQuestionCallback callbackListener) {
+        this.callback = callbackListener;
+    }
+
     public CustomQuestionAdapter(Context context, ArrayList<QuestionItem> list) {
         this.customQuestionItems = list;
         this.cContext = context;
     }
-
 
     @NonNull
     @Override
@@ -82,16 +91,31 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof FirstCustomHolder) {
-            ((FirstCustomHolder) holder).first_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((FirstCustomHolder) holder).first_edit.setText(customQuestionItems.get(position).getQuestion_content());
+            ((FirstCustomHolder) holder).bind(callback);
+
+            ((FirstCustomHolder) holder).first_edit.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
 
         } else if (holder instanceof SecondCustomHolder) {
-            ((SecondCustomHolder) holder).second_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((SecondCustomHolder) holder).btn_j.setId(customQuestionItems.get(position).getQuestion_img());
             ((SecondCustomHolder) holder).btn_g.setId(customQuestionItems.get(position).getQuestion_img());
             ((SecondCustomHolder) holder).btn_o.setId(customQuestionItems.get(position).getQuestion_img());
         } else if (holder instanceof ThirdCustomHolder) {
-            ((ThirdCustomHolder) holder).third_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((ThirdCustomHolder) holder).edit1.setText(customQuestionItems.get(position).getQuestion_content());
             ((ThirdCustomHolder) holder).edit2.setText(customQuestionItems.get(position).getQuestion_content());
             ((ThirdCustomHolder) holder).edit3.setText(customQuestionItems.get(position).getQuestion_content());
@@ -105,47 +129,9 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ((ThirdCustomHolder) holder).minus_btn3.setId(customQuestionItems.get(position).getQuestion_img());
             ((ThirdCustomHolder) holder).minus_btn4.setId(customQuestionItems.get(position).getQuestion_img());
         } else {
-            ((ForthCustomHolder) holder).forth_txt.setText(customQuestionItems.get(position).getQeustion_num());
             ((ForthCustomHolder) holder).forth_img.setId(customQuestionItems.get(position).getQuestion_img());
         }
-
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("b", "b");
-
-        NewQuestionDto newQuestionDto = new NewQuestionDto();
-        newQuestionDto.setCategory("친구");
-        newQuestionDto.setChoices(jsonObject);
-        if (holder instanceof FirstCustomHolder) {
-            String edit = ((FirstCustomHolder)holder).first_edit.getText().toString();
-            newQuestionDto.setContent(edit);
-        }
-        //newQuestionDto.setContent(edit);
-        newQuestionDto.setType("객관식");
-       /* ((CustomQuestionActivity) cContext).findViewById(R.id.btn_done).setOnClickListener(view -> {
-            RetrofitHelper.getInstance().postQuestion(newQuestionDto,
-                    new Callback<NewQuestionDto>() {
-                        @Override
-                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                            Toast.makeText(((CustomQuestionActivity) cContext).getBaseContext(), "질문 생성 완료!", Toast.LENGTH_SHORT).show();
-                            Log.v("질문 직접 생성", String.valueOf(response.code()));
-                            ((CustomQuestionActivity) cContext).findViewById(R.id.btn_done).setBackgroundColor(Color.BLUE);
-                        }
-                        @Override
-                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                            Log.v("질문 직접 생성 실패", t.getMessage());
-                        }
-                    });
-        });*/
     }
-
-
-//            Intent intent = new Intent(cContext.getApplicationContext(), FindPwActivity.class);
-//            if (holder instanceof FirstCustomHolder) {
-//                intent.putExtra("edit", ((FirstCustomHolder) holder).first_edit.getText().toString());
-//                Log.v("@@@@@@@@@@@@@@@@", "sdf");
-//            }
-//            cContext.startActivity(intent);
-//            Log.v("@@@@@@@@@@@@@@@@", "Ddddddd");
 
     @Override
     public int getItemCount() {
@@ -159,8 +145,9 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return customQuestionItems.get(position).getViewType();
     }
 
-    public class FirstCustomHolder extends RecyclerView.ViewHolder {
+    public class FirstCustomHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private CustomQuestionCallback callbackListener;
         TextView first_txt;
         EditText first_edit;
 
@@ -169,7 +156,17 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             first_txt = itemView.findViewById(R.id.first_txt);
             first_edit = itemView.findViewById(R.id.first_edit_custom);
+            //setListener();
+        }
 
+        public void bind(CustomQuestionCallback callbackListener) {
+            this.callbackListener = callbackListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            callbackListener.callBack(getAdapterPosition());
         }
     }
 
