@@ -32,7 +32,7 @@
                 android:textColor="#2d2e35"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="Q." />
+                android:text="Q." />
 
             <TextView
                 android:id="@+id/info_text"
