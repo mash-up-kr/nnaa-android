@@ -23,38 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="72dp"
-        android:text="오늘도 더 알고 싶은"
+        android:text="@string/main_welcome"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:lineSpacingExtra="6sp"
-        android:textColor="#2d2e35"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_welcome"
-        tools:text="승윤님" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:lineSpacingExtra="6sp"
-        android:text="안녕하세요"
-        android:textColor="#2d2e35"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_welcome"/>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_questionnaires"
