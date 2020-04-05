@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
     private void checkLogin() {
         AccountManager.getInstance().executeAutoSignIn(new AccountManager.ISignInResultListener() {
             @Override
-            public void onSignInSuccess(String id, String token) {
+            public void onSignInSuccess(String id, String name, String token) {
                 launchMainActivity();
             }
 

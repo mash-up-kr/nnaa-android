@@ -69,15 +69,13 @@ public class RegisterActivity extends AppCompatActivity {
                 edit_password.getText().toString(),
                 edit_name.getText().toString(),
                 new AccountManager.ISignInResultListener() {
-
                     @Override
-                    public void onSignInSuccess(String id, String token) {
+                    public void onSignInSuccess(String id, String name, String token) {
                         Log.v("RegisterSuccess", "Success");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
 
                         // activity->fragment 데이터 보내기
-                        String name = edit_name.getText().toString();
                         Intent login_intent = new Intent(getBaseContext(), MainActivity.class);
                         login_intent.putExtra("Register",name);
                         startActivity(login_intent);

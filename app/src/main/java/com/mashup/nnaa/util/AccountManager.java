@@ -38,8 +38,8 @@ public class AccountManager {
         this.userAuthHeaderInfo = info;
     }
 
-    public void setUserAuthHeaderInfo(String userId, String token) {
-        this.userAuthHeaderInfo = new UserAuthHeaderInfo(userId, token);
+    public void setUserAuthHeaderInfo(String userId, String name, String token) {
+        this.userAuthHeaderInfo = new UserAuthHeaderInfo(userId, name, token);
     }
 
     public void executeAutoSignIn(ISignInResultListener resultListener) {
@@ -50,9 +50,8 @@ public class AccountManager {
 
         executeSignIn(lastEmail, lastEncPw, true, true, new ISignInResultListener() {
             @Override
-            public void onSignInSuccess(String id, String token) {
-                setUserAuthHeaderInfo(id, token);
-                resultListener.onSignInSuccess(id, token);
+            public void onSignInSuccess(String id, String name, String token) {
+                resultListener.onSignInSuccess(id, name, token);
             }
 
             @Override
@@ -94,6 +93,7 @@ public class AccountManager {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
+                String name = response.headers().get("name");
                 String token = response.headers().get("token");
                 LoginDto body = response.body();
 
@@ -110,7 +110,8 @@ public class AccountManager {
                                 .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEnc);
                     }
 
-                    resultListener.onSignInSuccess(id, token);
+                    setUserAuthHeaderInfo(id, name, token);
+                    resultListener.onSignInSuccess(id, name, token);
                 }
             }
             @Override
@@ -149,7 +150,7 @@ public class AccountManager {
                     resultListener.onSignInFail();
                 } else {
                     Log.v("Register", "Register in success: " + email);
-                    resultListener.onSignInSuccess(id, token);
+                    resultListener.onSignInSuccess(id, name, token);
                 }
             }
             @Override
@@ -177,7 +178,7 @@ public class AccountManager {
     }
 
     public interface ISignInResultListener {
-        void onSignInSuccess(String id, String token);
+        void onSignInSuccess(String id, String name, String token);
 
         void onSignInFail();
     }

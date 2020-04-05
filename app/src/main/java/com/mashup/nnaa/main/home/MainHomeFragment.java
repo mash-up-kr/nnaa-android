@@ -2,6 +2,7 @@ package com.mashup.nnaa.main.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
+import com.mashup.nnaa.util.AccountManager;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ import retrofit2.Response;
 
 public class MainHomeFragment extends Fragment {
     private RecyclerView rvQuestionnaires;
-    private TextView tvWelcome, tvName;
+    private TextView tvWelcome;
 
     public static MainHomeFragment newInstance() {
         MainHomeFragment fragment = new MainHomeFragment();
@@ -46,23 +48,24 @@ public class MainHomeFragment extends Fragment {
         rvQuestionnaires.setAdapter(new MainQuestionnaireAdapter());
 
         tvWelcome = view.findViewById(R.id.tv_welcome);
-        tvName = view.findViewById(R.id.tv_name);
+
+        String userName = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
 
         Bundle kakao_bundle = this.getArguments();
         if (kakao_bundle != null) {
-            String kakao_name = kakao_bundle.getString("kakao");
-            tvName.setText(kakao_name);
+            userName = kakao_bundle.getString("kakao");
         }
         Bundle facebook_bundle = this.getArguments();
         if (facebook_bundle != null) {
-            String facebook_name = facebook_bundle.getString("facebook");
-            tvName.setText(facebook_name);
+            userName = facebook_bundle.getString("facebook");
         }
         Bundle login_bundle = this.getArguments();
         if (login_bundle != null) {
-            String login_name = login_bundle.getString("Register");
-            tvName.setText(login_name);
+            userName = login_bundle.getString("Register");
         }
+
+        tvWelcome.setText(Html.fromHtml(getString(R.string.main_welcome, userName)));
+
         return view;
     }
 
