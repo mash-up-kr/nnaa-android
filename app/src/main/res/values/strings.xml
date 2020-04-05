@@ -8,7 +8,7 @@
     <string name="splash_permission_error">All permission should be granted.\nPlease rerun app and grand permissions.</string>
 
     <!-- Main page -->
-    <string name="main_welcome">Glad to see you,\nWelcome <b>%s</b>.</string>
+    <string name="main_welcome">Glad to see you,&lt;br /&gt;Welcome &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="main_home_name_sent_this_questions">%s has sent questions.</string>
     <string name="main_home_no_questionnaires">There are no received questions.</string>
 

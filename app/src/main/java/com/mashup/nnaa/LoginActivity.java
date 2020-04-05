@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 false, false,
                 new AccountManager.ISignInResultListener() {
                     @Override
-                    public void onSignInSuccess(String id, String token) {
+                    public void onSignInSuccess(String id, String name, String token) {
                         launchMainActivity();
                         Log.d(TAG, "id: " + id);
                     }

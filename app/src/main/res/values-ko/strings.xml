@@ -8,7 +8,7 @@
     <string name="splash_permission_error">모든 권한이 승인되어야합니다.\n앱을 다시 실행 후 권한을 승인해주세요.</string>
 
     <!-- Main page -->
-    <string name="main_welcome">오늘도 더 알고싣은\n<b>%s님</b> 안녕하세요.</string>
+    <string name="main_welcome">오늘도 더 알고싣은&lt;br /&gt;&lt;b&gt;%s님&lt;/b&gt; 안녕하세요.</string>
     <string name="main_home_name_sent_this_questions">%s님이 이 질문을 보냈어요.</string>
 
     <!-- Setting page -->
