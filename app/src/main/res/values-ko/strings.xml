@@ -39,6 +39,12 @@
     <string name="plz_enter_name">이름을 입력해주세요.</string>
     <string name="mylist_no_items">보여줄게 없습니다.</string>
     <string name="mylist_fail_to_load">불러오지 못했습니다.</string>
+    <string name="common_share">공유</string>
+    <string name="created_q_done_message">질문지가 만들어졌어요!</string>
+    <string name="created_q_send_it_to_friend">친구에게 공유해보세요!</string>
+    <string name="created_q_questionnaire_id_c">"질문지 ID: "</string>
+    <string name="created_q_copy_link">질문지 링크 복사</string>
+    <string name="created_q_later">나중에</string>
 
 
 </resources>

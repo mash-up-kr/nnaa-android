@@ -3,6 +3,7 @@
     <!-- Common -->
     <string name="common_yes">Yes</string>
     <string name="common_no">No</string>
+    <string name="common_share">Share</string>
 
     <!-- Splash -->
     <string name="splash_permission_error">All permission should be granted.\nPlease rerun app and grand permissions.</string>
@@ -57,6 +58,13 @@
     <string name="plz_enter_name">Please enter the name</string>
     <string name="cancle">cancel</string>
     <string name="lets_start">Let\'s Start</string>
+
+    <!-- Share the questionnaire page -->
+    <string name="created_q_done_message">The questionnaire has been created!</string>
+    <string name="created_q_send_it_to_friend">Share it to your friends!</string>
+    <string name="created_q_questionnaire_id_c">Questionnaire ID: </string>
+    <string name="created_q_copy_link">Copy the questionnaire link</string>
+    <string name="created_q_later">Later</string>
 
     <!--페이스북 앱 id-->
     <string name="facebook_app_key" translatable="false">2479070769047146</string>
