@@ -1,11 +1,27 @@
 package com.mashup.nnaa.network.model;
 
+import com.google.gson.JsonObject;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.mashup.nnaa.data.Choices;
+
 public class Question {
-    public String category;
-    public String[] choices;
-    public String content;
-    public String id;
-    public String type;
+
+    @SerializedName("category")
+    @Expose
+    private String category;
+    @SerializedName("choices")
+    @Expose
+    private JsonObject choices;
+    @SerializedName("content")
+    @Expose
+    private String content;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("type")
+    @Expose
+    private String type;
 
     public String getCategory() {
         return category;
@@ -15,11 +31,11 @@ public class Question {
         this.category = category;
     }
 
-    public String[] getChoices() {
+    public JsonObject getChoices() {
         return choices;
     }
 
-    public void setChoices(String[] choices) {
+    public void setChoices(JsonObject choices) {
         this.choices = choices;
     }
 
@@ -44,14 +60,6 @@ public class Question {
     }
 
     public void setType(String type) {
-        this.type = type;
-    }
-
-    public Question(String category, String[] choices, String content, String id, String type) {
-        this.category = category;
-        this.choices = choices;
-        this.content = content;
-        this.id = id;
         this.type = type;
     }
 }

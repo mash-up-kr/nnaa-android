@@ -104,7 +104,7 @@ public class CustomQuestionActivity extends AppCompatActivity {
         btn_done.setOnClickListener(view -> {
             NewQuestionDto newQu = new NewQuestionDto();
             newQu.setContent(String.valueOf(callback));
-            newQu.setCategory("친구");
+          // newQu.setCategory("친구");
             newQu.setChoices(jsonObject);
             newQu.setType("객관식");
                     RetrofitHelper.getInstance().postQuestion(newQu, new Callback<NewQuestionDto>() {

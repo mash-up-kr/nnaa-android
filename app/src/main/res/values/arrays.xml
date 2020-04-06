@@ -11,6 +11,19 @@
         <item>@string/vip</item>
     </string-array>
 
+    <string-array name="category_array">
+        <item>엄마</item>
+        <item>아빠</item>
+        <item>언니/누나</item>
+        <item>오빠/형</item>
+        <item>동생</item>
+        <item>친구</item>
+        <item>연인</item>
+        <item>소중한 사람</item>
+
+
+    </string-array>
+
 
 
 </resources>

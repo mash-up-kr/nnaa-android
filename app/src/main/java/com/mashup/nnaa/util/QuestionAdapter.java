@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.Question;
 
 import java.util.ArrayList;
@@ -20,15 +20,15 @@ import static android.view.LayoutInflater.from;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-    List<QuestionItem> questionList;
+    List<Question> questionList;
     Context Qcontext;
 
-    public QuestionAdapter(Context context, ArrayList<QuestionItem> questionList) {
+    public QuestionAdapter(Context context, List<Question> questionList) {
         this.Qcontext = context;
         this.questionList = questionList;
     }
 
-    public void setQuestionList(ArrayList<QuestionItem> questionList) {
+    public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
         notifyDataSetChanged();
     }
@@ -36,18 +36,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @NonNull
     @Override
     public QuestionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = from(parent.getContext()).inflate(R.layout.question_item, parent, false);
-
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.ViewHolder holder, int position) {
 
-        holder.mName.setText(questionList.get(position).getQuestion_content());
-        holder.mQ.setText(questionList.get(position).getQeustion_num());
+        holder.mName.setText(questionList.get(position).getId());
+        holder.mQ.setText(questionList.get(position).getContent());
     }
 
 
@@ -66,7 +63,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
 
-             mQ = itemView.findViewById(R.id.q_text);
+            mQ = itemView.findViewById(R.id.q_text);
             mName = itemView.findViewById(R.id.info_text);
         }
     }

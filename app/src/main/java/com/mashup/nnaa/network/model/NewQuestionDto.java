@@ -9,8 +9,9 @@ import java.util.List;
 
 public class NewQuestionDto {
 
-    //@SerializedName("id")
-    //private long id;
+    @SerializedName("id")
+    @Expose
+    private String id;
     @SerializedName("category")
     @Expose
     private String category;
