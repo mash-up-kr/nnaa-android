@@ -109,11 +109,9 @@ public class LoginActivity extends AppCompatActivity {
                 new AccountManager.ISignInResultListener() {
                     @Override
                     public void onSignInSuccess(String id, String name, String token) {
-                        //launchMainActivity();
+                        launchMainActivity();
                         Log.d(TAG, "id: " + id + "," + "name: " + name + "," + "token: " + token);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("name", name);
-                        startActivity(intent);
+                        
                     }
 
                     @Override
