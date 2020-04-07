@@ -48,7 +48,7 @@ public class AccountManager {
         String lastEncPw =
                 SharedPrefHelper.getInstance().getString(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW);
 
-        executeSignIn(lastEmail, lastEncPw, true, true, new ISignInResultListener() {
+        executeSignIn(lastEmail, lastEncPw, new ISignInResultListener() {
             @Override
             public void onSignInSuccess(String id, String name, String token) {
                 resultListener.onSignInSuccess(id, name, token);
@@ -62,10 +62,9 @@ public class AccountManager {
             }
         });
     }
+
     // login
     public void executeSignIn(String email, String password,
-                              boolean isGivenPwEncrypted,
-                              boolean saveForAutoSignIn,
                               ISignInResultListener resultListener) {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Log.v("SignIn", "Sign in fail (not enough): " + email);
@@ -79,21 +78,11 @@ public class AccountManager {
             return;
         }
 
-        final String pwEnc;
-        final String pwForSignIn;
-
-        if (isGivenPwEncrypted) {
-            pwEnc = password;
-        } else {
-            pwEnc = EncryptUtil.encrypt(password);
-        }
-        pwForSignIn = EncryptUtil.doubleEncryptForSignIn(pwEnc);
-
-        RetrofitHelper.getInstance().signInOrRegEmail(email, pwForSignIn, new Callback<LoginDto>() {
+        RetrofitHelper.getInstance().signInOrRegEmail(email, password, new Callback<LoginDto>() {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
-                String name = response.headers().get("name");
+                String name = response.body().getName();
                 String token = response.headers().get("token");
                 LoginDto body = response.body();
 
@@ -101,19 +90,13 @@ public class AccountManager {
                     Log.v("SignIn", "Sign in fail (no id or token value received): " + email);
                     resultListener.onSignInFail();
                 } else {
-                    Log.v("SignIn", "Sign in success: " + email);
-
-                    if (saveForAutoSignIn) {
-                        SharedPrefHelper.getInstance()
-                                .put(SHARED_PREF_LAST_ACCOUNT_EMAIL, email);
-                        SharedPrefHelper.getInstance()
-                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEnc);
-                    }
+                    Log.v("SignIn", "Sign in success: " + email + "," + token + "," + name);
 
                     setUserAuthHeaderInfo(id, name, token);
                     resultListener.onSignInSuccess(id, name, token);
                 }
             }
+
             @Override
             public void onFailure(Call<LoginDto> call, Throwable t) {
                 Log.v("SignIn", "Sign in fail: " + email);
@@ -143,16 +126,17 @@ public class AccountManager {
             public void onResponse(Call<SignUpDto> call, Response<SignUpDto> response) {
                 String id = response.headers().get("id");
                 String token = response.headers().get("token");
-               SignUpDto body = response.body();
+                SignUpDto body = response.body();
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(token)) {
                     Log.v("Register", "Reigster fail (no id or token value received): " + email);
                     resultListener.onSignInFail();
                 } else {
-                    Log.v("Register", "Register in success: " + email);
+                    Log.v("Register", "Register in success: " + email + "," + name + "," + password);
                     resultListener.onSignInSuccess(id, name, token);
                 }
             }
+
             @Override
             public void onFailure(Call<SignUpDto> call, Throwable t) {
                 Log.v("Register", "Register in fail: " + t.getMessage());
@@ -160,6 +144,7 @@ public class AccountManager {
             }
         });
     }
+
     // sign out
     public void executeSignOut(ISignOutResultListener listener) {
         SharedPrefHelper.getInstance().put(SHARED_PREF_LAST_ACCOUNT_EMAIL, "");

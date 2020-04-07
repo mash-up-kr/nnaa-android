@@ -2,24 +2,32 @@ package com.mashup.nnaa.question;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.DeleteQuestionItem;
-import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.QuestionControllerService;
+import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.util.DeleteAdapter;
 import com.mashup.nnaa.util.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DeleteQuestionActivity extends AppCompatActivity {
 
@@ -27,7 +35,7 @@ public class DeleteQuestionActivity extends AppCompatActivity {
     private ItemTouchHelper helper;
     private TextView txt_delete_name, txt_delete_type;
     private Button btn_delete, btn_delete_cancel;
-    private ArrayList<QuestionItem> dArrayList;
+    private List<NewQuestionDto> dArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +65,75 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerDelete.setLayoutManager(linearLayoutManager);
 
-        Intent question_intent = getIntent();
-
-        ArrayList<QuestionItem> list = (ArrayList<QuestionItem>) question_intent.getSerializableExtra("list");
-        dArrayList = list;
-        deleteAdapter = new DeleteAdapter(this, list);
+        dArrayList = new ArrayList<>();
+        deleteAdapter = new DeleteAdapter(this, dArrayList);
         recyclerDelete.setAdapter(deleteAdapter);
+
+        //this.getDeleteQuestion();
 
         helper = new ItemTouchHelper(new ItemTouchHelperCallback(deleteAdapter));
         helper.attachToRecyclerView(recyclerDelete);
 
-        deleteAdapter.notifyDataSetChanged();
+        Intent retrofit_category = getIntent();
+        String category = retrofit_category != null ? retrofit_category.getStringExtra("category") : null;
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://thisisyourbackend.kr/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
+
+        service.getQuestion(category, 30).enqueue(new Callback<List<NewQuestionDto>>() {
+            @Override
+            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
+                if (dArrayList != null) {
+                    dArrayList = response.body();
+                    Log.v("질문삭제 api", "Response =  " + dArrayList + ", " + response.code());
+                    deleteAdapter.setDeleteList(dArrayList);
+                } else if(dArrayList.size()==0) {
+                    Toast.makeText(DeleteQuestionActivity.this, "질문을 생성해주세요!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Log.v("질문삭제 api", String.valueOf(response.code()));
+                }
+            }
+            @Override
+            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
+                Log.v("질문삭제 api", "에러:" + t.getMessage());
+            }
+        });
+        btn_delete.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("질문 삭제 완료");
+            builder.setMessage("질문 삭제를 완료하셨나요?");
+            builder.setPositiveButton("네", (dialogInterface, i) -> {
+                Toast.makeText(getApplicationContext(), "질문삭제 완료.", Toast.LENGTH_SHORT).show();
+                // 질문 삭제 후 QuestionActivity에 반영안됨
+                finish();
+            });
+            builder.setNegativeButton("아니요", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문 삭제를 완료해주세요~", Toast.LENGTH_SHORT).show());
+            builder.show();
+        });
     }
 
+    /*private void getDeleteQuestion() {
+        RetrofitHelper.getInstance().getQuestion(new Callback<List<Question>>() {
+            @Override
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                if (dArrayList != null) {
+                    dArrayList = response.body();
+                    Log.v("QuestionRandom", "Response =  " + dArrayList + ", " + response.code());
+                    deleteAdapter.setDeleteList(dArrayList);
+                } else {
+                    Log.v("QuestionRandom", "No Question");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+                Log.v("QuestionRandom", "에러:" + t.getMessage());
+            }
+        });
+    }*/
 }

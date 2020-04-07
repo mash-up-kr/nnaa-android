@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.Question;
 
@@ -20,15 +21,15 @@ import static android.view.LayoutInflater.from;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-    List<Question> questionList;
+    List<NewQuestionDto> questionList;
     Context Qcontext;
 
-    public QuestionAdapter(Context context, List<Question> questionList) {
+    public QuestionAdapter(Context context, List<NewQuestionDto> questionList) {
         this.Qcontext = context;
         this.questionList = questionList;
     }
 
-    public void setQuestionList(List<Question> questionList) {
+    public void setQuestionList(List<NewQuestionDto> questionList) {
         this.questionList = questionList;
         notifyDataSetChanged();
     }
@@ -43,10 +44,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.ViewHolder holder, int position) {
 
-        holder.mName.setText(questionList.get(position).getId());
-        holder.mQ.setText(questionList.get(position).getContent());
+        holder.mName.setText(questionList.get(position).getContent());
+       // holder.mQ.setText(questionList.get(position).getContent());
     }
-
 
     @Override
     public int getItemCount() {
@@ -63,7 +63,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
 
-            mQ = itemView.findViewById(R.id.q_text);
+           // mQ = itemView.findViewById(R.id.q_text);
             mName = itemView.findViewById(R.id.info_text);
         }
     }

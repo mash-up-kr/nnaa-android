@@ -15,21 +15,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Question;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder>{
+public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
-    private ArrayList<QuestionItem> fList;
+    private List<NewQuestionDto> fList;
     private Context fContext;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    public FavoritesAdapter(Context context, ArrayList<QuestionItem> list) {
+    public FavoritesAdapter(Context context, List<NewQuestionDto> list) {
         this.fList = list;
         this.fContext = context;
+    }
+
+    public void setFavoritList(List<NewQuestionDto> fList) {
+        this.fList = fList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -53,7 +66,17 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 editor = preferences.edit();
                 editor.putBoolean("check", vh.check_box_favorites.isChecked());
                 editor.apply();
+                RetrofitHelper.getInstance().favoriteEnroll(new Callback<NewQuestionDto>() {
+                    @Override
+                    public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                        Log.v("즐겨찾기 등록", String.valueOf(response.code()));
+                    }
 
+                    @Override
+                    public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                        Log.v("즐겨찾기 등록", "실패:"+ t.getMessage());
+                    }
+                });
                 Log.v("즐겨찾기", "Click!");
             }
         });
@@ -87,9 +110,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         }
 
-        void onBind(QuestionItem questionItem) {
-            txt_favorites_question.setText(questionItem.getQuestion_content());
-            check_box_favorites.setChecked(Boolean.parseBoolean(questionItem.getQeustion_num()));
+        void onBind(NewQuestionDto questionItem) {
+            txt_favorites_question.setText(questionItem.getContent());
+            //check_box_favorites.setChecked(Boolean.parseBoolean(questionItem.getId()));
 
         }
     }

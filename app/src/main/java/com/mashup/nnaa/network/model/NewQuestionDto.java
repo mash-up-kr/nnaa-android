@@ -12,33 +12,25 @@ public class NewQuestionDto {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("category")
-    @Expose
-    private String category;
-    @SerializedName("choices")
-    @Expose
-    private JsonObject choices;
     @SerializedName("content")
     @Expose
     private String content;
+    @SerializedName("category")
+    @Expose
+    private String category;
     @SerializedName("type")
     @Expose
     private String type;
+    @SerializedName("choices")
+    @Expose
+    private Choices choices;
 
-    public String getCategory() {
-        return category;
+    public String getId() {
+        return id;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public JsonObject getChoices() {
-        return choices;
-    }
-
-    public void setChoices(JsonObject choices) {
-        this.choices = choices;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getContent() {
@@ -49,6 +41,14 @@ public class NewQuestionDto {
         this.content = content;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getType() {
         return type;
     }
@@ -57,11 +57,11 @@ public class NewQuestionDto {
         this.type = type;
     }
 
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
+    public Choices getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Choices choices) {
+        this.choices = choices;
+    }
 }

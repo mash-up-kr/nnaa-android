@@ -15,8 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.question.QuestionActivity;
 
 import retrofit2.Call;
@@ -56,7 +58,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
         ForthEdit = findViewById(R.id.custom_choice_edit4);
 
         NewQuestionDto newQu = new NewQuestionDto();
-
         Custom_J.setOnClickListener(view -> {
             Custom_J.setVisibility(View.INVISIBLE);
             Custom_J_Blue.setVisibility(View.VISIBLE);
@@ -107,14 +108,19 @@ public class MakeQuestionActivity extends AppCompatActivity {
         });
 
         CustomDone.setOnClickListener(view -> {
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("a", FirstEdit.getText().toString());
-                    jsonObject.addProperty("b", SecondEdit.getText().toString());
-                    jsonObject.addProperty("c", ThirdEdit.getText().toString());
-                    jsonObject.addProperty("d", ForthEdit.getText().toString());
+//                    JsonObject jsonObject = new JsonObject();
+//                    jsonObject.addProperty("a", FirstEdit.getText().toString());
+//                    jsonObject.addProperty("b", SecondEdit.getText().toString());
+//                    jsonObject.addProperty("c", ThirdEdit.getText().toString());
+//                    jsonObject.addProperty("d", ForthEdit.getText().toString());
+            Choices choices = new Choices();
+            choices.setA(FirstEdit.getText().toString());
+            choices.setB(SecondEdit.getText().toString());
+            choices.setC(ThirdEdit.getText().toString());
+            choices.setD(ForthEdit.getText().toString());
                     newQu.setContent(Content_Edit.getText().toString());
                     newQu.setCategory(spinnerCategory.getSelectedItem().toString());
-                    newQu.setChoices(jsonObject);
+                    newQu.setChoices(choices);
                     RetrofitHelper.getInstance().postQuestion(newQu, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {

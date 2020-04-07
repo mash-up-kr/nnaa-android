@@ -1,5 +1,6 @@
 package com.mashup.nnaa.network;
 
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -7,6 +8,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mashup.nnaa.BuildConfig;
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
@@ -14,6 +16,7 @@ import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.QuestionDto;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.SignUpDto;
+import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.util.AccountManager;
 
 import org.json.JSONObject;
@@ -34,11 +37,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
+
     private Retrofit retrofit;
     public final String ENTRY_URL = "https://thisisyourbackend.kr/";
 
     // singleton
     private static final RetrofitHelper _instance = new RetrofitHelper();
+
 
     public static RetrofitHelper getInstance() {
         return _instance;
@@ -47,6 +52,7 @@ public class RetrofitHelper {
     private RetrofitHelper() {
         refreshRetrofit();
     }
+
 
     private void refreshRetrofit() {
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -95,7 +101,6 @@ public class RetrofitHelper {
         userInfo.enqueue(callback);
     }
 
-
     // 회원가입
     public void registerEmail(String email, String password, String name, Callback<SignUpDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
@@ -110,28 +115,31 @@ public class RetrofitHelper {
     }
 
     // 문제지 첫 기본세팅
-    public void getQuestion(Callback<List<Question>> callback) {
+/*    public void getQuestion(Callback<List<NewQuestionDto>> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        Call<List<Question>> getQuestionRandom = service.getQuestion();
+        NewQuestionDto newQuestionDto = new NewQuestionDto();
+        Call<List<NewQuestionDto>> getQuestionRandom = service.getQuestion("엄마",30);
         getQuestionRandom.enqueue(callback);
-
-    }
+    }*/
 
     // 직접 질문 입력해서 질문 추가
     public void postQuestion(NewQuestionDto newQuestionDto, Callback<NewQuestionDto> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-
-     /*   Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(
-                new HashMap<String, String>() {{
-                    put("category", category);
-                    put("choices", choices);
-                    put("content", content);
-                    put("type", type);
-                }}
-        );*/
         Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(newQuestionDto);
-
         newQuestionDtoCall.enqueue(callback);
+    }
+    // 즐겨찾기 해둔 질문들 보여주기
+    public void showFavorites(Callback<List<NewQuestionDto>> callback) {
+        UserControllerService service = retrofit.create(UserControllerService.class);
+        Call<List<NewQuestionDto>> showFavorites = service.showFavorites();
+        showFavorites.enqueue(callback);
+    }
+    // 즐겨찾기 등록
+    public void favoriteEnroll(Callback<NewQuestionDto> callback) {
+        NewQuestionDto newQuestionDto = new NewQuestionDto();
+        UserControllerService service = retrofit.create(UserControllerService.class);
+        Call<NewQuestionDto> favoriteEnroll  = service.favoriteEnroll(newQuestionDto.getId());
+        favoriteEnroll.enqueue(callback);
     }
 
 

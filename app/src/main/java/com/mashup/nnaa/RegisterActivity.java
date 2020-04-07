@@ -76,9 +76,9 @@ public class RegisterActivity extends AppCompatActivity {
                         startActivity(intent);
 
                         // activity->fragment 데이터 보내기
-                        Intent login_intent = new Intent(getBaseContext(), MainActivity.class);
+                        /*Intent login_intent = new Intent(getBaseContext(), MainActivity.class);
                         login_intent.putExtra("Register",name);
-                        startActivity(login_intent);
+                        startActivity(login_intent);*/
 
                         Toast.makeText(RegisterActivity.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
 
