@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,15 +15,26 @@ import android.widget.TextView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.MakeQuestionActivity;
-import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.QuestionControllerService;
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.UserControllerService;
+import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FavoritesActivity extends AppCompatActivity {
 
     private FavoritesAdapter favoritesAdapter;
-    private ArrayList<QuestionItem> fList;
+    private List<NewQuestionDto> fList;
     Button btn_favorites;
     ImageButton imgbtn_past, imgbtn_cancel;
     EditText edit_custom;
@@ -70,14 +82,58 @@ public class FavoritesActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         favorites_recycler.setLayoutManager(linearLayoutManager);
 
-
-        Intent intent = getIntent();
-        ArrayList<QuestionItem> list = (ArrayList<QuestionItem>) intent.getSerializableExtra("flist");
-
-        fList = list;
-        favoritesAdapter = new FavoritesAdapter(this, list);
+        fList = new ArrayList<>();
+        favoritesAdapter = new FavoritesAdapter(this, fList);
         favorites_recycler.setAdapter(favoritesAdapter);
-        favoritesAdapter.notifyDataSetChanged();
+
+        Intent retrofit_category = getIntent();
+        String category = retrofit_category != null ? retrofit_category.getStringExtra("category") : null;
+
+        this.showFavorites();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://thisisyourbackend.kr/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
+        service.getQuestion( category, 30).enqueue(new Callback<List<NewQuestionDto>>() {
+            @Override
+            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
+                if (fList != null) {
+                    fList = response.body();
+                    Log.v("QuestionRandom", "Response =  " + fList + ", " + response.code());
+                    favoritesAdapter.setFavoritList(fList);
+                } else {
+                    Log.v("QuestionRandom", "No Question");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
+                Log.v("QuestionRandom", "에러:" + t.getMessage());
+            }
+        });
+
+    }
+
+    private void showFavorites() {
+       /* RetrofitHelper.getInstance().showFavorites(new Callback<List<NewQuestionDto>>() {
+            @Override
+            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
+                if (fList != null) {
+                    fList = response.body();
+                    Log.v("즐겨찾기 api", "Response =  " + fList + ", " + response.code());
+                    favoritesAdapter.setFavoritList(fList);
+                } else {
+                    Log.v("즐겨찾기 api", "No Question");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
+                Log.v("즐겨찾기 api", "에러:" + t.getMessage());
+            }
+        });*/
 
     }
 }

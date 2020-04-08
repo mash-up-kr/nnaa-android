@@ -35,8 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:name=".LoginActivity" />
         <activity android:name=".select.SelectFriendActivity" />
         <activity
             android:name=".main.MainActivity"

@@ -17,17 +17,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.DeleteQuestionItem;
 import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Question;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteViewHolder> implements ItemTouchHelperListener {
 
-    private ArrayList<QuestionItem> deleteList;
+    private List<NewQuestionDto> deleteList;
     private Context dContext;
 
-    public DeleteAdapter(Context context, ArrayList<QuestionItem> list) {
+    public DeleteAdapter(Context context, List<NewQuestionDto> list) {
         this.deleteList = list;
         this.dContext = context;
+    }
+
+    public void setDeleteList(List<NewQuestionDto> deleteList) {
+        this.deleteList = deleteList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,8 +50,8 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
 
     @Override
     public void onBindViewHolder(@NonNull DeleteViewHolder holder, int position) {
-        holder.delete_num.setText(deleteList.get(position).getQeustion_num());
-        holder.delete_content.setText(deleteList.get(position).getQuestion_content());
+       // holder.delete_num.setText(deleteList.get(position).getQeustion_num());
+        holder.delete_content.setText(deleteList.get(position).getContent());
     }
 
     @Override
@@ -56,7 +64,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
 
     @Override
     public boolean onItemMove(int from_position, int to_position) {
-        QuestionItem questionItem = deleteList.get(from_position);
+        NewQuestionDto questionItem = deleteList.get(from_position);
         deleteList.remove(from_position);
         deleteList.add(to_position, questionItem);
 
@@ -68,7 +76,6 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
     public void onItemSwipe(int position) {
         deleteList.remove(position);
         notifyItemRemoved(position);
-
     }
 
     public class DeleteViewHolder extends RecyclerView.ViewHolder {
@@ -77,7 +84,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
 
         public DeleteViewHolder(View itemView) {
             super(itemView);
-            this.delete_num = itemView.findViewById(R.id.delete_num);
+           // this.delete_num = itemView.findViewById(R.id.delete_num);
             this.delete_content = itemView.findViewById(R.id.delete_content);
 
         }

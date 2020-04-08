@@ -23,30 +23,30 @@
             android:background="#ffffff"
             android:orientation="horizontal">
 
-
             <TextView
                 android:id="@+id/q_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
                 android:textColor="#2d2e35"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="Q." />
+                android:text="Q."
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/info_text"
-                android:layout_width="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="126dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="126dp"
                 android:textColor="#2d2e35"
                 android:textSize="13sp"
                 tools:text="엄마가 가장 좋아하는 음식은?" />
 
+
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
-
 </LinearLayout>

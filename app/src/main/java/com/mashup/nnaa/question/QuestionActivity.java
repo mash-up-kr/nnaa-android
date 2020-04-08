@@ -12,15 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.CustomQuestionItem;
-import com.mashup.nnaa.data.QuestionItem;
 import com.mashup.nnaa.network.QuestionControllerService;
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.Question;
+import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.QuestionAdapter;
@@ -31,15 +26,17 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class QuestionActivity extends AppCompatActivity {
 
     private ImageView img_delete, img_add;
-    private TextView txt_name, txt_type;
+    private TextView txt_name, txt_type, retrofit;
     private Button btn_cancel, btn_next;
 
     private QuestionAdapter questionAdapter;
-    private List<Question> questionList;
+    private List<NewQuestionDto> questionList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +50,7 @@ public class QuestionActivity extends AppCompatActivity {
         btn_cancel = findViewById(R.id.btn_cancel);
         img_delete = findViewById(R.id.img_delete);
         img_add = findViewById(R.id.img_add);
+        retrofit = findViewById(R.id.retrofit);
 
         // setTypeActivity에서 타입, 이름 받아오자
         if (intent != null && intent.getExtras() != null) {
@@ -79,7 +77,6 @@ public class QuestionActivity extends AppCompatActivity {
             startActivity(cancel_intent);
         });
 
-        Intent test = getIntent();
 
         RecyclerView recyclerQuestion = findViewById(R.id.recycler_question);
 
@@ -92,31 +89,64 @@ public class QuestionActivity extends AppCompatActivity {
 
         this.getQuestionRandom();
 
-
+        Intent retrofit_category = getIntent();
+        String category = retrofit_category != null ? retrofit_category.getStringExtra("category") : null;
         String name = txt_name.getText().toString();
         String type = txt_type.getText().toString();
+
         img_delete.setOnClickListener(view -> {
             Toast.makeText(QuestionActivity.this, "질문삭제 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent deleteintent = new Intent(getApplicationContext(), DeleteQuestionActivity.class);
             deleteintent.putExtra("name", name);
             deleteintent.putExtra("type", type);
-            // deleteintent.putExtra("list", list);
+            deleteintent.putExtra("category", category);
             startActivity(deleteintent);
         });
 
         img_add.setOnClickListener(view -> {
             Toast.makeText(QuestionActivity.this, "즐겨찾기 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
-            // bookmarkintent.putExtra("flist", list);
             bookmarkintent.putExtra("type", get_type);
+            bookmarkintent.putExtra("category", category);
             startActivity(bookmarkintent);
+        });
+
+        Intent intent1 = getIntent();
+        String id = intent1 != null ? intent1.getStringExtra("id") : null;
+        String token = intent1 != null ? intent1.getStringExtra("token") : null;
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://thisisyourbackend.kr/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
+        service.getQuestion(category, 30).enqueue(new Callback<List<NewQuestionDto>>() {
+            @Override
+            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
+                if (questionList != null) {
+                    questionList = response.body();
+                    Log.v("QuestionRandom", "Response =  " + questionList + ", " + response.code());
+                    questionAdapter.setQuestionList(questionList);
+                } else if (questionList.size() == 0) {
+                    Toast.makeText(QuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Log.v("QuestionRandom", String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
+                Log.v("QuestionRandom", "에러:" + t.getMessage());
+            }
         });
     }
 
     private void getQuestionRandom() {
-        RetrofitHelper.getInstance().getQuestion(new Callback<List<Question>>() {
+      /*  RetrofitHelper.getInstance().getQuestion(new Callback<List<NewQuestionDto>>() {
             @Override
-            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
                 if (questionList != null) {
                     questionList = response.body();
                     Log.v("QuestionRandom", "Response =  " + questionList + ", " + response.code());
@@ -126,9 +156,9 @@ public class QuestionActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
+            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
                 Log.v("QuestionRandom", "에러:" + t.getMessage());
             }
-        });
+        });*/
     }
 }

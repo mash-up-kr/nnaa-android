@@ -28,23 +28,27 @@
                 android:id="@+id/delete_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
                 android:textColor="#2d2e35"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:text="Q."
-                tools:text="Q." />
+                tools:text="Q."
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/delete_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="126dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="126dp"
                 android:textColor="#2d2e35"
                 android:textSize="13sp"
                 android:text="엄마가 가장 좋아하는 음식은"
-                tools:text="엄마가 가장 좋아하는 음식은?" />
+                tools:text="엄마가 가장 좋아하는 음식은?"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 

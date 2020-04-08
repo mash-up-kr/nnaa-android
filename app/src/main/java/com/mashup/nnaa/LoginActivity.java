@@ -106,12 +106,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(view -> AccountManager.getInstance().executeSignIn(
                 edit_email.getText().toString(),
                 edit_password.getText().toString(),
-                false, false,
                 new AccountManager.ISignInResultListener() {
                     @Override
                     public void onSignInSuccess(String id, String name, String token) {
                         launchMainActivity();
-                        Log.d(TAG, "id: " + id);
+                        Log.d(TAG, "id: " + id + "," + "name: " + name + "," + "token: " + token);
+                        
                     }
 
                     @Override
@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent facbook_intent = new Intent(getBaseContext(), MainActivity.class);
                         facbook_intent.putExtra("facebook", name);
                         startActivity(facbook_intent);
-                        Log.v(TAG, "facebook on success:" + object.getString("email") + object.getString("name"));
+                        Log.v(TAG, "facebook on success:" + "이메일: " + object.getString("email") + "," + "이름:" + object.getString("name"));
                         Log.v(TAG, "facebook token" + loginResult.getAccessToken().getToken());
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -241,7 +241,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(MeV2Response result) {
-                Log.e(TAG, "requestMe onSuccess message : " + result.getKakaoAccount().getEmail() + " " + result.getId() + " " + result.getNickname() );
+                Log.e(TAG, "requestMe onSuccess message : " + "이메일:" + result.getKakaoAccount().getEmail() + "," + "id: " + result.getId() + "," + "이름:" + result.getNickname());
                 String name = result.getNickname();
                 Intent kakao_intent = new Intent(getBaseContext(), MainActivity.class);
                 kakao_intent.putExtra("kakao", name);

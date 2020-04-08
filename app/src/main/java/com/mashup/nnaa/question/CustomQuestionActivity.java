@@ -101,11 +101,11 @@ public class CustomQuestionActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("a", "a");
 
-        btn_done.setOnClickListener(view -> {
+       /* btn_done.setOnClickListener(view -> {
             NewQuestionDto newQu = new NewQuestionDto();
             newQu.setContent(String.valueOf(callback));
           // newQu.setCategory("친구");
-            newQu.setChoices(jsonObject);
+            //newQu.setChoices(jsonObject);
             newQu.setType("객관식");
                     RetrofitHelper.getInstance().postQuestion(newQu, new Callback<NewQuestionDto>() {
                         @Override
@@ -121,7 +121,7 @@ public class CustomQuestionActivity extends AppCompatActivity {
                         }
                     });
                 }
-        );
+        );*/
     }
 
     private void initializeData() {
