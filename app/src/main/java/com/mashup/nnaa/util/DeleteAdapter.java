@@ -50,7 +50,6 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
 
     @Override
     public void onBindViewHolder(@NonNull DeleteViewHolder holder, int position) {
-       // holder.delete_num.setText(deleteList.get(position).getQeustion_num());
         holder.delete_content.setText(deleteList.get(position).getContent());
     }
 
@@ -76,15 +75,15 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
     public void onItemSwipe(int position) {
         deleteList.remove(position);
         notifyItemRemoved(position);
+        notifyItemRangeChanged(position, deleteList.size());
     }
 
     public class DeleteViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView delete_num, delete_content;
+        private TextView delete_content;
 
         public DeleteViewHolder(View itemView) {
             super(itemView);
-           // this.delete_num = itemView.findViewById(R.id.delete_num);
             this.delete_content = itemView.findViewById(R.id.delete_content);
 
         }

@@ -51,17 +51,17 @@ public class MainHomeFragment extends Fragment {
 
         String userName = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
 
-        Bundle kakao_bundle = this.getArguments();
+    /*    Bundle kakao_bundle = this.getArguments();
         if (kakao_bundle != null) {
             userName = kakao_bundle.getString("kakao");
         }
         Bundle facebook_bundle = this.getArguments();
         if (facebook_bundle != null) {
             userName = facebook_bundle.getString("facebook");
-        }
+        }*/
         Bundle login_bundle = this.getArguments();
         if (login_bundle != null) {
-            userName = login_bundle.getString("Register");
+            userName = login_bundle.getString("name");
         }
 
         tvWelcome.setText(Html.fromHtml(getString(R.string.main_welcome, userName)));

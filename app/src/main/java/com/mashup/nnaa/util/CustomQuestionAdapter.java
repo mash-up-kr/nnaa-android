@@ -1,15 +1,11 @@
 package com.mashup.nnaa.util;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -19,24 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.JsonObject;
-import com.mashup.nnaa.CustomQuestionCallback;
-import com.mashup.nnaa.FindPwActivity;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.QuestionItem;
-import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.question.CustomQuestionActivity;
-import com.mashup.nnaa.question.QuestionActivity;
-import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -47,13 +29,6 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     Context cContext;
     private ArrayList<QuestionItem> customQuestionItems;
-
-    // callback interface
-    private CustomQuestionCallback callback;
-
-    public void setCallback(CustomQuestionCallback callbackListener) {
-        this.callback = callbackListener;
-    }
 
     public CustomQuestionAdapter(Context context, ArrayList<QuestionItem> list) {
         this.customQuestionItems = list;
@@ -89,10 +64,9 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         if (holder instanceof FirstCustomHolder) {
             ((FirstCustomHolder) holder).first_edit.setText(customQuestionItems.get(position).getQuestion_content());
-            ((FirstCustomHolder) holder).bind(callback);
+
 
             ((FirstCustomHolder) holder).first_edit.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -145,9 +119,8 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return customQuestionItems.get(position).getViewType();
     }
 
-    public class FirstCustomHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class FirstCustomHolder extends RecyclerView.ViewHolder  {
 
-        private CustomQuestionCallback callbackListener;
         TextView first_txt;
         EditText first_edit;
 
@@ -157,16 +130,6 @@ public class CustomQuestionAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             first_txt = itemView.findViewById(R.id.first_txt);
             first_edit = itemView.findViewById(R.id.first_edit_custom);
             //setListener();
-        }
-
-        public void bind(CustomQuestionCallback callbackListener) {
-            this.callbackListener = callbackListener;
-        }
-
-        @Override
-        public void onClick(View view) {
-            int id = view.getId();
-            callbackListener.callBack(getAdapterPosition());
         }
     }
 

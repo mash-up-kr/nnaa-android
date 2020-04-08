@@ -1,6 +1,7 @@
 package com.mashup.nnaa.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +36,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    private String id;
+    private String token;
+    private String questionId;
+
     public FavoritesAdapter(Context context, List<NewQuestionDto> list) {
         this.fList = list;
         this.fContext = context;
@@ -66,7 +71,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 editor = preferences.edit();
                 editor.putBoolean("check", vh.check_box_favorites.isChecked());
                 editor.apply();
-                RetrofitHelper.getInstance().favoriteEnroll(new Callback<NewQuestionDto>() {
+
+                RetrofitHelper.getInstance().favoriteEnroll(id, token, questionId, new Callback<NewQuestionDto>() {
                     @Override
                     public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                         Log.v("즐겨찾기 등록", String.valueOf(response.code()));

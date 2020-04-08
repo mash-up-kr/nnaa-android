@@ -47,13 +47,6 @@
             android:background="@drawable/corner_shape"
             android:contentDescription="@string/StringValue" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_multi_reply"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/reply_question_name"
-            android:layout_marginTop="37dp"
-            android:layout_marginBottom="70dp" />
 
         <TextView
             android:id="@+id/reply_number"
@@ -62,23 +55,21 @@
             android:layout_marginStart="33dp"
             android:layout_marginTop="297dp"
             android:lineSpacingExtra="12sp"
-            android:text="01 / 20"
             android:textColor="#2a4bff"
             android:textSize="15sp"
             tools:text="01 / 20" />
 
-        <TextView
-            android:id="@+id/reply_question_name"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_answer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="27dp"
+            tools:listitem="@layout/reply_item"
             android:layout_marginStart="32dp"
             android:layout_marginTop="328dp"
             android:lineSpacingExtra="11sp"
-            android:text="엄마는 현재 삶에 만족하나요?"
             android:textColor="#2d2e35"
             android:textSize="16sp"
-            tools:ignore="HardcodedText"
-            tools:text="엄마는 현재 삶에 만족하나요?" />
+            tools:ignore="HardcodedText" />
 
         <ImageButton
             android:id="@+id/reply_choice"
@@ -89,6 +80,8 @@
             android:background="@color/colorWhite"
             android:contentDescription="@string/StringValue"
             android:src="@drawable/choice_btn_heart" />
+
+
     </RelativeLayout>
 
     <Button

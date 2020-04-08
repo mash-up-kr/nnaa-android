@@ -22,6 +22,7 @@
         android:layout_below="@id/img_recycler"
         android:layout_marginBottom="60dp"
         android:background="#ffffff"
+        tools:listitem="@layout/favorites_question_item"
         android:scrollbars="vertical" />
 
     <ImageButton

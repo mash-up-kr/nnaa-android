@@ -31,7 +31,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
     ImageButton Custom_OX, Custom_J_Blue, Custom_G_Blue, Custom_OX_Blue, Custom_J, Custom_G;
     TextView txtJ, txtG, txtOX;
     EditText Content_Edit, FirstEdit, SecondEdit, ThirdEdit, ForthEdit;
-    Spinner spinnerCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
         Custom_J_Blue = findViewById(R.id.custom_btn_j_blue);
         Custom_G_Blue = findViewById(R.id.custom_btn_g_blue);
         Custom_OX_Blue = findViewById(R.id.custom_btn_ox_blue);
-        spinnerCategory = findViewById(R.id.spinner_category);
 
         txtJ = findViewById(R.id.txt_j);
         txtG = findViewById(R.id.txt_g);
@@ -56,6 +54,9 @@ public class MakeQuestionActivity extends AppCompatActivity {
         SecondEdit = findViewById(R.id.custom_choice_edit2);
         ThirdEdit = findViewById(R.id.custom_choice_edit3);
         ForthEdit = findViewById(R.id.custom_choice_edit4);
+
+        Intent intent=getIntent();
+        String category = intent.getStringExtra("category");
 
         NewQuestionDto newQu = new NewQuestionDto();
         Custom_J.setOnClickListener(view -> {
@@ -108,30 +109,26 @@ public class MakeQuestionActivity extends AppCompatActivity {
         });
 
         CustomDone.setOnClickListener(view -> {
-//                    JsonObject jsonObject = new JsonObject();
-//                    jsonObject.addProperty("a", FirstEdit.getText().toString());
-//                    jsonObject.addProperty("b", SecondEdit.getText().toString());
-//                    jsonObject.addProperty("c", ThirdEdit.getText().toString());
-//                    jsonObject.addProperty("d", ForthEdit.getText().toString());
-            Choices choices = new Choices();
-            choices.setA(FirstEdit.getText().toString());
-            choices.setB(SecondEdit.getText().toString());
-            choices.setC(ThirdEdit.getText().toString());
-            choices.setD(ForthEdit.getText().toString());
+                    Choices choices = new Choices();
+                    choices.setA(FirstEdit.getText().toString());
+                    choices.setB(SecondEdit.getText().toString());
+                    choices.setC(ThirdEdit.getText().toString());
+                    choices.setD(ForthEdit.getText().toString());
                     newQu.setContent(Content_Edit.getText().toString());
-                    newQu.setCategory(spinnerCategory.getSelectedItem().toString());
+                    newQu.setCategory(category);
                     newQu.setChoices(choices);
                     RetrofitHelper.getInstance().postQuestion(newQu, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                             if (response.isSuccessful()) {
-                                Log.v("질문 직접 생성", String.valueOf(response.code()));
+                                Log.v("질문 직접 생성", "respose :" + response.code() + "," + "questionId:" + response.body().getId() + "," + "type: " + newQu.getType());
                                 CustomDone.setBackgroundColor(Color.BLUE);
                                 launchQuestionActivity();
                             } else if (response.code() == 400) {
                                 Toast.makeText(MakeQuestionActivity.this, "질문 세팅을 완료해주세요!", Toast.LENGTH_SHORT).show();
                             }
                         }
+
                         @Override
                         public void onFailure(Call<NewQuestionDto> call, Throwable t) {
                             Log.v("질문 직접 생성 실패", t.getMessage());

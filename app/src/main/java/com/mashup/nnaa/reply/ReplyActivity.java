@@ -32,12 +32,18 @@ public class ReplyActivity extends AppCompatActivity {
             String replyName = intent.getStringExtra("reply name");
             reply_name.setText(replyName);
         }
+        String id = intent.getStringExtra("id");
+        String token = intent.getStringExtra("token");
+        String category = intent.getStringExtra("category");
 
         btn_not.setOnClickListener(view -> {
             finish();
         });
         btn_start.setOnClickListener(view -> {
             Intent start_intent = new Intent(ReplyActivity.this, MultiReplyActivity.class);
+            start_intent.putExtra("id", id);
+            start_intent.putExtra("token", token);
+            start_intent.putExtra("category", category);
             startActivity(start_intent);
             Toast.makeText(ReplyActivity.this, "답변하러 가실게요!", Toast.LENGTH_SHORT).show();
         });
