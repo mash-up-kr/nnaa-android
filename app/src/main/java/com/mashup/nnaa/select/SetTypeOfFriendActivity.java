@@ -1,9 +1,6 @@
 package com.mashup.nnaa.select;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +9,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.question.CustomQuestionActivity;
 import com.mashup.nnaa.question.QuestionActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SetTypeOfFriendActivity extends AppCompatActivity implements View.OnClickListener {
     TextView friendType;
@@ -58,15 +57,8 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
 
         });
 
-        Resources res = getResources();
-        type.add(res.getString(R.string.mother));
-        type.add(res.getString(R.string.father));
-        type.add(res.getString(R.string.sister));
-        type.add(res.getString(R.string.brother));
-        type.add(res.getString(R.string.younger));
-        type.add(res.getString(R.string.friend));
-        type.add(res.getString(R.string.lover));
-        type.add(res.getString(R.string.vip));
+        String [] type_str = getResources().getStringArray(R.array.questionlist);
+        Collections.addAll(type,type_str);
 
         cancleBtn.setOnClickListener((view) -> {
             finish();
