@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.QuestionControllerService;
+import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.util.DeleteAdapter;
@@ -68,41 +69,13 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         dArrayList = new ArrayList<>();
         deleteAdapter = new DeleteAdapter(this, dArrayList);
         recyclerDelete.setAdapter(deleteAdapter);
+        recyclerDelete.setHasFixedSize(true);
 
-        //this.getDeleteQuestion();
+        this.getDeleteQuestion();
 
         helper = new ItemTouchHelper(new ItemTouchHelperCallback(deleteAdapter));
         helper.attachToRecyclerView(recyclerDelete);
 
-        Intent retrofit_category = getIntent();
-        String category = retrofit_category != null ? retrofit_category.getStringExtra("category") : null;
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://thisisyourbackend.kr/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-
-        service.getQuestion(category, 30).enqueue(new Callback<List<NewQuestionDto>>() {
-            @Override
-            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
-                if (dArrayList != null) {
-                    dArrayList = response.body();
-                    Log.v("질문삭제 api", "Response =  " + dArrayList + ", " + response.code());
-                    deleteAdapter.setDeleteList(dArrayList);
-                } else if(dArrayList.size()==0) {
-                    Toast.makeText(DeleteQuestionActivity.this, "질문을 생성해주세요!",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Log.v("질문삭제 api", String.valueOf(response.code()));
-                }
-            }
-            @Override
-            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
-                Log.v("질문삭제 api", "에러:" + t.getMessage());
-            }
-        });
         btn_delete.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("질문 삭제 완료");
@@ -117,23 +90,29 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         });
     }
 
-    /*private void getDeleteQuestion() {
-        RetrofitHelper.getInstance().getQuestion(new Callback<List<Question>>() {
+    private void getDeleteQuestion() {
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        String token = intent.getStringExtra("token");
+        String category = intent.getStringExtra("category");
+        RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<List<NewQuestionDto>>() {
             @Override
-            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
                 if (dArrayList != null) {
                     dArrayList = response.body();
-                    Log.v("QuestionRandom", "Response =  " + dArrayList + ", " + response.code());
+                    Log.v("질문삭제페이지", "Response =  " + response.code() + "id: " + id + "," + "token: " + token + "," + "category: " + category);
                     deleteAdapter.setDeleteList(dArrayList);
+                } else if (dArrayList.size() == 0) {
+                    Toast.makeText(DeleteQuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.v("QuestionRandom", "No Question");
+                    Log.v("질문삭제페이지", "No Question");
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
-                Log.v("QuestionRandom", "에러:" + t.getMessage());
+            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
+                Log.v("질문삭제페이지", "에러:" + t.getMessage());
             }
         });
-    }*/
+    }
 }

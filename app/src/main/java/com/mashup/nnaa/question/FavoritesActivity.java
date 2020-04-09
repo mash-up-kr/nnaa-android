@@ -1,6 +1,7 @@
 package com.mashup.nnaa.question;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +57,7 @@ public class FavoritesActivity extends AppCompatActivity {
         getType = findViewById(R.id.get_type);
 
         Intent typeintent = getIntent();
+        String category = typeintent.getStringExtra("category");
         if (typeintent != null && typeintent.getExtras() != null) {
             String type = typeintent.getStringExtra("type");
             getType.setText(type);
@@ -73,6 +75,7 @@ public class FavoritesActivity extends AppCompatActivity {
         edit_custom.setOnClickListener(view -> {
             Intent edit_intent = new Intent(FavoritesActivity.this, MakeQuestionActivity.class);
             edit_intent.putExtra("type", String.valueOf(getType));
+            edit_intent.putExtra("category",category);
             startActivity(edit_intent);
         });
 
@@ -85,44 +88,23 @@ public class FavoritesActivity extends AppCompatActivity {
         fList = new ArrayList<>();
         favoritesAdapter = new FavoritesAdapter(this, fList);
         favorites_recycler.setAdapter(favoritesAdapter);
-
-        Intent retrofit_category = getIntent();
-        String category = retrofit_category != null ? retrofit_category.getStringExtra("category") : null;
+        favorites_recycler.setHasFixedSize(true);
 
         this.showFavorites();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://thisisyourbackend.kr/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        service.getQuestion( category, 30).enqueue(new Callback<List<NewQuestionDto>>() {
-            @Override
-            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
-                if (fList != null) {
-                    fList = response.body();
-                    Log.v("QuestionRandom", "Response =  " + fList + ", " + response.code());
-                    favoritesAdapter.setFavoritList(fList);
-                } else {
-                    Log.v("QuestionRandom", "No Question");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
-                Log.v("QuestionRandom", "에러:" + t.getMessage());
-            }
-        });
 
     }
 
     private void showFavorites() {
-       /* RetrofitHelper.getInstance().showFavorites(new Callback<List<NewQuestionDto>>() {
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        String token = intent.getStringExtra("token");
+        String category = intent.getStringExtra("category");
+        RetrofitHelper.getInstance().showFavorites(id, token, category, new Callback<List<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
                 if (fList != null) {
                     fList = response.body();
-                    Log.v("즐겨찾기 api", "Response =  " + fList + ", " + response.code());
+                    Log.v("즐겨찾기 api", "Response =  " + response.code() + "," + "id: " + id + "," + "token: " + token + "," + "category: " + category);
                     favoritesAdapter.setFavoritList(fList);
                 } else {
                     Log.v("즐겨찾기 api", "No Question");
@@ -133,7 +115,6 @@ public class FavoritesActivity extends AppCompatActivity {
             public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
                 Log.v("즐겨찾기 api", "에러:" + t.getMessage());
             }
-        });*/
-
+        });
     }
 }

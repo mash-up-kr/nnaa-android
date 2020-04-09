@@ -1,35 +1,20 @@
 package com.mashup.nnaa.network;
 
-import android.content.Intent;
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.mashup.nnaa.BuildConfig;
-import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.Question;
-import com.mashup.nnaa.network.model.QuestionDto;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.SignUpDto;
-import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.util.AccountManager;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -115,12 +100,11 @@ public class RetrofitHelper {
     }
 
     // 문제지 첫 기본세팅
-/*    public void getQuestion(Callback<List<NewQuestionDto>> callback) {
+    public void getQuestion(String id, String token, String category, Callback<List<NewQuestionDto>> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        NewQuestionDto newQuestionDto = new NewQuestionDto();
-        Call<List<NewQuestionDto>> getQuestionRandom = service.getQuestion("엄마",30);
+        Call<List<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, 30);
         getQuestionRandom.enqueue(callback);
-    }*/
+    }
 
     // 직접 질문 입력해서 질문 추가
     public void postQuestion(NewQuestionDto newQuestionDto, Callback<NewQuestionDto> callback) {
@@ -128,20 +112,27 @@ public class RetrofitHelper {
         Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(newQuestionDto);
         newQuestionDtoCall.enqueue(callback);
     }
+
     // 즐겨찾기 해둔 질문들 보여주기
-    public void showFavorites(Callback<List<NewQuestionDto>> callback) {
+    public void showFavorites(String id, String token, String category, Callback<List<NewQuestionDto>> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<List<NewQuestionDto>> showFavorites = service.showFavorites();
+        Call<List<NewQuestionDto>> showFavorites = service.showFavorites(id, token, category, 30);
         showFavorites.enqueue(callback);
     }
+
     // 즐겨찾기 등록
-    public void favoriteEnroll(Callback<NewQuestionDto> callback) {
-        NewQuestionDto newQuestionDto = new NewQuestionDto();
+    public void favoriteEnroll(String id, String token, String questionId, Callback<NewQuestionDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<NewQuestionDto> favoriteEnroll  = service.favoriteEnroll(newQuestionDto.getId());
+        Call<NewQuestionDto> favoriteEnroll = service.favoriteEnroll(id, token, questionId);
         favoriteEnroll.enqueue(callback);
     }
 
+    // 즐겨찾기 취소
+    public void favoriteDelete(String id, String token, String questionId, Callback<NewQuestionDto> callback) {
+        UserControllerService service = retrofit.create(UserControllerService.class);
+        Call<NewQuestionDto> favoriteEnroll = service.favoriteEnroll(id, token, questionId);
+        favoriteEnroll.enqueue(callback);
+    }
 
     public void getReceivedQuestionnaire(Callback<List<QuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);

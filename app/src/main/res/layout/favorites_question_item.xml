@@ -33,7 +33,7 @@
             android:layout_width="225dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="18dp"
             android:text="로또에 당첨된다면 하고 싶은 일이 있나요?"
             android:textColor="#2d2e35"
             android:textSize="13sp"

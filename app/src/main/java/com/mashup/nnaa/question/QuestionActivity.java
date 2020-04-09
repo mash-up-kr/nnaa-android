@@ -32,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class QuestionActivity extends AppCompatActivity {
 
     private ImageView img_delete, img_add;
-    private TextView txt_name, txt_type, retrofit;
+    private TextView txt_name, txt_type;
     private Button btn_cancel, btn_next;
 
     private QuestionAdapter questionAdapter;
@@ -43,6 +43,9 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
 
         Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        String token = intent.getStringExtra("token");
+        String category = intent.getStringExtra("category");
 
         txt_name = findViewById(R.id.txt_name);
         txt_type = findViewById(R.id.txt_type);
@@ -50,7 +53,6 @@ public class QuestionActivity extends AppCompatActivity {
         btn_cancel = findViewById(R.id.btn_cancel);
         img_delete = findViewById(R.id.img_delete);
         img_add = findViewById(R.id.img_add);
-        retrofit = findViewById(R.id.retrofit);
 
         // setTypeActivity에서 타입, 이름 받아오자
         if (intent != null && intent.getExtras() != null) {
@@ -67,6 +69,9 @@ public class QuestionActivity extends AppCompatActivity {
             String replyname = txt_name.getText().toString();
             Intent reply_intent = new Intent(QuestionActivity.this, ReplyActivity.class);
             reply_intent.putExtra("reply name", replyname);
+            reply_intent.putExtra("id", id);
+            reply_intent.putExtra("token", token);
+            reply_intent.putExtra("category", category);
             startActivity(reply_intent);
 
         });
@@ -82,6 +87,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerQuestion.setLayoutManager(linearLayoutManager);
+        recyclerQuestion.setHasFixedSize(true);
 
         questionList = new ArrayList<>();
         questionAdapter = new QuestionAdapter(this, questionList);
@@ -89,8 +95,6 @@ public class QuestionActivity extends AppCompatActivity {
 
         this.getQuestionRandom();
 
-        Intent retrofit_category = getIntent();
-        String category = retrofit_category != null ? retrofit_category.getStringExtra("category") : null;
         String name = txt_name.getText().toString();
         String type = txt_type.getText().toString();
 
@@ -100,6 +104,10 @@ public class QuestionActivity extends AppCompatActivity {
             deleteintent.putExtra("name", name);
             deleteintent.putExtra("type", type);
             deleteintent.putExtra("category", category);
+
+            deleteintent.putExtra("id", id);
+            deleteintent.putExtra("token", token);
+
             startActivity(deleteintent);
         });
 
@@ -108,57 +116,38 @@ public class QuestionActivity extends AppCompatActivity {
             Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
             bookmarkintent.putExtra("type", get_type);
             bookmarkintent.putExtra("category", category);
+
+            bookmarkintent.putExtra("id", id);
+            bookmarkintent.putExtra("token", token);
+
             startActivity(bookmarkintent);
-        });
-
-        Intent intent1 = getIntent();
-        String id = intent1 != null ? intent1.getStringExtra("id") : null;
-        String token = intent1 != null ? intent1.getStringExtra("token") : null;
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://thisisyourbackend.kr/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        service.getQuestion(category, 30).enqueue(new Callback<List<NewQuestionDto>>() {
-            @Override
-            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
-                if (questionList != null) {
-                    questionList = response.body();
-                    Log.v("QuestionRandom", "Response =  " + questionList + ", " + response.code());
-                    questionAdapter.setQuestionList(questionList);
-                } else if (questionList.size() == 0) {
-                    Toast.makeText(QuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Log.v("QuestionRandom", String.valueOf(response.code()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
-                Log.v("QuestionRandom", "에러:" + t.getMessage());
-            }
         });
     }
 
     private void getQuestionRandom() {
-      /*  RetrofitHelper.getInstance().getQuestion(new Callback<List<NewQuestionDto>>() {
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        String token = intent.getStringExtra("token");
+        String category = intent.getStringExtra("category");
+
+        RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<List<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
                 if (questionList != null) {
                     questionList = response.body();
-                    Log.v("QuestionRandom", "Response =  " + questionList + ", " + response.code());
+                    Log.v("QuestionRandom", "Response =  " + response.code() + "," + "id:" + "," + "token: " + token + "," + "category: " + category);
                     questionAdapter.setQuestionList(questionList);
+                } else if (questionList.size() == 0) {
+                    Toast.makeText(QuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.v("QuestionRandom", "No Question");
                 }
             }
+
             @Override
             public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
                 Log.v("QuestionRandom", "에러:" + t.getMessage());
             }
-        });*/
+        });
     }
 }

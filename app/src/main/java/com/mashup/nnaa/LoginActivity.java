@@ -109,9 +109,13 @@ public class LoginActivity extends AppCompatActivity {
                 new AccountManager.ISignInResultListener() {
                     @Override
                     public void onSignInSuccess(String id, String name, String token) {
-                        launchMainActivity();
+                        //  launchMainActivity();
                         Log.d(TAG, "id: " + id + "," + "name: " + name + "," + "token: " + token);
-                        
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("name", name);
+                        intent.putExtra("id", id);
+                        intent.putExtra("token", token);
+                        startActivity(intent);
                     }
 
                     @Override
@@ -153,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent facbook_intent = new Intent(getBaseContext(), MainActivity.class);
                         facbook_intent.putExtra("facebook", name);
                         startActivity(facbook_intent);
-                        Log.v(TAG, "facebook on success:" + "이메일: " + object.getString("email") + "," + "이름:" + object.getString("name"));
+                        Log.v(TAG, "facebook on success:" + "이메일: " + object.getString("email") + "," + "이름:" + name);
                         Log.v(TAG, "facebook token" + loginResult.getAccessToken().getToken());
                     } catch (Exception e) {
                         e.printStackTrace();

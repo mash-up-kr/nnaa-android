@@ -4,18 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,36 +17,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.mashup.nnaa.CustomQuestionCallback;
 import com.mashup.nnaa.R;
 
-import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.data.QuestionItem;
-import com.mashup.nnaa.network.QuestionControllerService;
-import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.util.CustomQuestionAdapter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.mashup.nnaa.util.CustomQuestionAdapter.FIRST_CONTENT;
 import static com.mashup.nnaa.util.CustomQuestionAdapter.FORTH_CONTENT;
@@ -68,8 +40,6 @@ public class CustomQuestionActivity extends AppCompatActivity {
     private ArrayList<QuestionItem> cArrayList;
     private NewQuestionDto newQu = new NewQuestionDto();
     Context mContext;
-    private CustomQuestionCallback callback =
-            pos -> Toast.makeText(CustomQuestionActivity.this, "클릭", Toast.LENGTH_SHORT).show();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +104,6 @@ public class CustomQuestionActivity extends AppCompatActivity {
         customQuestionAdapter = new CustomQuestionAdapter(this, cArrayList);
         recyclerCustom.setAdapter(customQuestionAdapter);
 
-        customQuestionAdapter.setCallback(callback);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
