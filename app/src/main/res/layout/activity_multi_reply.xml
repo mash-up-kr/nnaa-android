@@ -57,19 +57,40 @@
             android:lineSpacingExtra="12sp"
             android:textColor="#2a4bff"
             android:textSize="15sp"
-            tools:text="01 / 20" />
+            tools:text="01" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="297dp"
+            android:lineSpacingExtra="12sp"
+            android:text="/"
+            android:textColor="#2a4bff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/reply_end_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="297dp"
+            android:lineSpacingExtra="12sp"
+            android:textColor="#2a4bff"
+            android:textSize="15sp"
+            tools:text="20" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_answer"
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            tools:listitem="@layout/reply_item"
+            android:layout_width="200dp"
+            android:layout_height="55dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="328dp"
             android:lineSpacingExtra="11sp"
             android:textColor="#2d2e35"
             android:textSize="16sp"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            tools:listitem="@layout/reply_item" />
 
         <ImageButton
             android:id="@+id/reply_choice"
@@ -79,9 +100,258 @@
             android:layout_marginTop="317dp"
             android:background="@color/colorWhite"
             android:contentDescription="@string/StringValue"
-            android:src="@drawable/choice_btn_heart" />
+            android:src="@drawable/choice_btn_heart_off" />
 
 
+        <EditText
+            android:id="@+id/reply_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recycler_answer"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="105dp"
+            android:backgroundTint="@color/colorBlue"
+            android:hint="답변을 입력해주세요"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:ignore="HardcodedText,TextFields" />
+
+        <ImageButton
+            android:id="@+id/reply_o_btn"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_below="@id/recycler_answer"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="83dp"
+            android:background="#f3f3f3"
+            android:contentDescription="@string/StringValue"
+            android:src="@drawable/group_3"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/reply_ox_bar"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/recycler_answer"
+            android:layout_marginStart="183dp"
+            android:layout_marginTop="106dp"
+            android:contentDescription="@string/StringValue"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ox_choice_bar" />
+
+        <ImageButton
+            android:id="@+id/reply_x_btn"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_below="@id/recycler_answer"
+            android:layout_marginStart="215dp"
+            android:layout_marginTop="83dp"
+            android:background="#f3f3f3"
+            android:contentDescription="@string/StringValue"
+            android:src="@drawable/quiz_btn_x"
+            android:visibility="gone" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@id/recycler_answer"
+            android:layout_marginTop="37dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="70dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/multi_btn_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/multi_reply_oval"
+                    android:contentDescription="@string/StringValue" />
+
+                <TextView
+                    android:id="@+id/txt_A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="15dp"
+                    android:lineSpacingExtra="12sp"
+                    android:text="A"
+                    android:textColor="#a6a6a6"
+                    android:textSize="15sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/mutli_txt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="91dp"
+                    android:layout_marginTop="14dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="매우 그렇다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp"
+                    tools:text="매우 그렇다"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/multi_img1"
+                    android:layout_width="316dp"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="22dp"
+                    android:src="@drawable/multi_reply_corner"
+                    android:contentDescription="@string/StringValue" />
+
+
+                <ImageView
+                    android:id="@+id/multi_img2"
+                    android:layout_width="316dp"
+                    android:layout_height="54dp"
+                    android:layout_below="@id/multi_img1"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/multi_reply_corner"
+                    android:contentDescription="@string/StringValue" />
+
+
+                <TextView
+                    android:id="@+id/mutli_txt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/multi_img1"
+                    android:layout_marginStart="91dp"
+                    android:layout_marginTop="28dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="그렇다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp"
+                    tools:text="그렇다"
+                    tools:ignore="HardcodedText" />
+
+                <ImageButton
+                    android:id="@+id/multi_btn_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/multi_img1"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="19dp"
+                    android:background="@drawable/multi_reply_oval"
+                    android:contentDescription="@string/StringValue" />
+
+                <TextView
+                    android:id="@+id/txt_B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/multi_img1"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="30dp"
+                    android:lineSpacingExtra="12sp"
+                    android:text="B"
+                    android:textColor="#a6a6a6"
+                    android:textSize="15sp"
+                    tools:ignore="HardcodedText" />
+
+
+                <ImageView
+                    android:id="@+id/multi_img3"
+                    android:layout_width="316dp"
+                    android:layout_height="54dp"
+                    android:layout_below="@id/multi_img2"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/multi_reply_corner"
+                    android:contentDescription="@string/StringValue" />
+
+                <TextView
+                    android:id="@+id/mutli_txt3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/multi_img2"
+                    android:layout_marginStart="91dp"
+                    android:layout_marginTop="28dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="아니다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp"
+                    tools:text="아니다"
+                    tools:ignore="HardcodedText" />
+
+                <ImageButton
+                    android:id="@+id/multi_btn_c"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_below="@id/multi_img2"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="19dp"
+                    android:background="@drawable/multi_reply_oval"
+                    android:contentDescription="@string/StringValue" />
+
+                <TextView
+                    android:id="@+id/txt_C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/multi_img2"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="30dp"
+                    android:lineSpacingExtra="12sp"
+                    android:text="C"
+                    android:textColor="#a6a6a6"
+                    android:textSize="15sp"
+                    tools:ignore="HardcodedText" />
+
+
+                <ImageView
+                    android:id="@+id/multi_img4"
+                    android:layout_width="316dp"
+                    android:layout_height="54dp"
+                    android:layout_below="@id/multi_img3"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/multi_reply_corner"
+                    android:contentDescription="@string/StringValue" />
+
+                <ImageButton
+                    android:id="@+id/multi_btn_d"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_below="@id/multi_img3"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="19dp"
+                    android:background="@drawable/multi_reply_oval"
+                    android:contentDescription="@string/StringValue" />
+
+                <TextView
+                    android:id="@+id/txt_D"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/multi_img3"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="30dp"
+                    android:lineSpacingExtra="12sp"
+                    android:text="D"
+                    android:textColor="#a6a6a6"
+                    android:textSize="15sp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/mutli_txt4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/multi_img3"
+                    android:layout_marginStart="91dp"
+                    android:layout_marginTop="28dp"
+                    android:lineSpacingExtra="11sp"
+                    android:text="매우 아니다"
+                    android:textColor="#2d2e35"
+                    android:textSize="16sp"
+                    tools:text="매우 아니다"
+                    tools:ignore="HardcodedText" />
+            </RelativeLayout>
+        </ScrollView>
     </RelativeLayout>
 
     <Button

@@ -48,6 +48,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ReplyAdapter.ViewHolder holder, int position) {
         holder.answerQ.setText(questionDtoList.get(position).getContent());
+
     }
 
     @Override

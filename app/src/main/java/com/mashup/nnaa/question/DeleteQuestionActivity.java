@@ -53,13 +53,14 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        // QuestionActivity 에서 type, name 받아오자
-        if (intent != null && intent.getExtras() != null) {
-            String name = intent.getStringExtra("name");
-            String type = intent.getStringExtra("type");
-            txt_delete_name.setText(name);
-            txt_delete_type.setText(type);
-        }
+        String id = intent.getStringExtra("id");
+        String token = intent.getStringExtra("token");
+        String category = intent.getStringExtra("category");
+        String name = intent.getStringExtra("name");
+        String type = intent.getStringExtra("type");
+
+        txt_delete_type.setText(String.format("%s인 , ", type));
+        txt_delete_name.setText(String.format("%s께", name));
 
         RecyclerView recyclerDelete = findViewById(R.id.recycler_delete);
 
@@ -83,6 +84,13 @@ public class DeleteQuestionActivity extends AppCompatActivity {
             builder.setPositiveButton("네", (dialogInterface, i) -> {
                 Toast.makeText(getApplicationContext(), "질문삭제 완료.", Toast.LENGTH_SHORT).show();
                 // 질문 삭제 후 QuestionActivity에 반영안됨
+                Intent delete_question = new Intent(DeleteQuestionActivity.this, QuestionActivity.class);
+                delete_question.putExtra("id", id);
+                delete_question.putExtra("token", token);
+                delete_question.putExtra("category", category);
+                delete_question.putExtra("name", name);
+                delete_question.putExtra("type", type);
+                startActivity(delete_question);
                 finish();
             });
             builder.setNegativeButton("아니요", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문 삭제를 완료해주세요~", Toast.LENGTH_SHORT).show());

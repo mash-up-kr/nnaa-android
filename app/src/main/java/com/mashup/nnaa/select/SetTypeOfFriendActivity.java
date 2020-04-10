@@ -17,6 +17,7 @@ import com.mashup.nnaa.question.CustomQuestionActivity;
 import com.mashup.nnaa.question.QuestionActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SetTypeOfFriendActivity extends AppCompatActivity implements View.OnClickListener {
     TextView friendType;
@@ -56,7 +57,7 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
 
             Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
             intent.putExtra("name", name + "님");
-            intent.putExtra("typename", typename);
+            intent.putExtra("type", typename);
             intent.putExtra("category", typename);
 
             intent.putExtra("id", id);
@@ -65,15 +66,8 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
 
         });
 
-        Resources res = getResources();
-        type.add(res.getString(R.string.mother));
-        type.add(res.getString(R.string.father));
-        type.add(res.getString(R.string.sister));
-        type.add(res.getString(R.string.brother));
-        type.add(res.getString(R.string.younger));
-        type.add(res.getString(R.string.friend));
-        type.add(res.getString(R.string.lover));
-        type.add(res.getString(R.string.vip));
+        String [] type_str = getResources().getStringArray(R.array.questionlist);
+        Collections.addAll(type,type_str);
 
         cancleBtn.setOnClickListener((view) -> {
             finish();

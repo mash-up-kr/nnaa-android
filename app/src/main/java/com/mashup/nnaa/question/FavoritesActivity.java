@@ -1,7 +1,6 @@
 package com.mashup.nnaa.question;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,12 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.MakeQuestionActivity;
-import com.mashup.nnaa.network.QuestionControllerService;
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.UserControllerService;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
@@ -29,8 +24,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FavoritesActivity extends AppCompatActivity {
 
@@ -40,7 +33,7 @@ public class FavoritesActivity extends AppCompatActivity {
     ImageButton imgbtn_past, imgbtn_cancel;
     EditText edit_custom;
     ImageView img_favorites, img_recycler;
-    TextView txt_favorites, getType;
+    TextView txt_favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +47,14 @@ public class FavoritesActivity extends AppCompatActivity {
         img_favorites = findViewById(R.id.img_favorites);
         txt_favorites = findViewById(R.id.txt_favorites);
         img_recycler = findViewById(R.id.img_recycler);
-        getType = findViewById(R.id.get_type);
 
         Intent typeintent = getIntent();
         String category = typeintent.getStringExtra("category");
-        if (typeintent != null && typeintent.getExtras() != null) {
-            String type = typeintent.getStringExtra("type");
-            getType.setText(type);
-        }
+        String id = typeintent.getStringExtra("id");
+        String token = typeintent.getStringExtra("token");
+        String type = typeintent.getStringExtra("type");
+        String name = typeintent.getStringExtra("name");
+
 
         imgbtn_past.setOnClickListener(view -> {
             finish();
@@ -74,8 +67,12 @@ public class FavoritesActivity extends AppCompatActivity {
 
         edit_custom.setOnClickListener(view -> {
             Intent edit_intent = new Intent(FavoritesActivity.this, MakeQuestionActivity.class);
-            edit_intent.putExtra("type", String.valueOf(getType));
-            edit_intent.putExtra("category",category);
+            edit_intent.putExtra("type", type);
+            edit_intent.putExtra("category", category);
+            edit_intent.putExtra("id", id);
+            edit_intent.putExtra("token", token);
+            edit_intent.putExtra("name", name);
+
             startActivity(edit_intent);
         });
 
@@ -91,6 +88,7 @@ public class FavoritesActivity extends AppCompatActivity {
         favorites_recycler.setHasFixedSize(true);
 
         this.showFavorites();
+
 
     }
 

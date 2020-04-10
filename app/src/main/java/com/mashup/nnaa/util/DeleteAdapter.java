@@ -61,7 +61,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
         } else return 0;
     }
 
-    @Override
+    /*@Override
     public boolean onItemMove(int from_position, int to_position) {
         NewQuestionDto questionItem = deleteList.get(from_position);
         deleteList.remove(from_position);
@@ -69,13 +69,12 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
 
         notifyItemMoved(from_position, to_position);
         return true;
-    }
+    }*/
 
     @Override
     public void onItemSwipe(int position) {
         deleteList.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, deleteList.size());
     }
 
     public class DeleteViewHolder extends RecyclerView.ViewHolder {
@@ -85,7 +84,6 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
         public DeleteViewHolder(View itemView) {
             super(itemView);
             this.delete_content = itemView.findViewById(R.id.delete_content);
-
         }
     }
 }
