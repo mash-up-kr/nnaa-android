@@ -118,8 +118,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         void onBind(NewQuestionDto questionItem) {
             txt_favorites_question.setText(questionItem.getContent());
-            //check_box_favorites.setChecked(Boolean.parseBoolean(questionItem.getId()));
-
         }
     }
 }

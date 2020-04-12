@@ -22,8 +22,8 @@
         android:layout_below="@id/img_recycler"
         android:layout_marginBottom="60dp"
         android:background="#ffffff"
-        tools:listitem="@layout/favorites_question_item"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        tools:listitem="@layout/favorites_question_item" />
 
     <ImageButton
         android:id="@+id/imgbtn_past"
@@ -84,15 +84,6 @@
             android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
-
-        <TextView
-            android:id="@+id/get_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="166dp"
-            android:visibility="invisible"
-            tools:text="type" />
     </LinearLayout>
 
     <Button

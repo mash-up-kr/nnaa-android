@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MakeQuestionActivity"></activity>
+        <activity android:name=".question.MakeQuestionActivity"></activity>
         <activity android:name=".FindPwActivity" />
         <activity android:name=".reply.MultiReplyActivity" />
         <activity android:name=".reply.ReplyActivity" />

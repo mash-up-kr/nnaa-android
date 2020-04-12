@@ -20,8 +20,8 @@
             android:layout_height="337dp"
             android:layout_marginBottom="70dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/rel_img_back"
             android:scaleType="centerCrop"
+            android:src="@drawable/rel_img_back"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="ContentDescription" />
 
@@ -133,6 +133,7 @@
                 android:layout_width="240dp"
                 android:layout_height="70dp"
                 android:layout_gravity="end"
+                android:layout_marginStart="120dp"
                 android:background="@drawable/blue_rect_rad_51"
                 android:text="@string/lets_start"
                 android:textColor="@color/colorWhite"

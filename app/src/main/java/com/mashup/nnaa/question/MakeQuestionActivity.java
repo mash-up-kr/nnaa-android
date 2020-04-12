@@ -1,4 +1,4 @@
-package com.mashup.nnaa;
+package com.mashup.nnaa.question;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,16 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.Question;
-import com.mashup.nnaa.question.QuestionActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,8 +52,13 @@ public class MakeQuestionActivity extends AppCompatActivity {
         ThirdEdit = findViewById(R.id.custom_choice_edit3);
         ForthEdit = findViewById(R.id.custom_choice_edit4);
 
-        Intent intent=getIntent();
+        // QuestionActivity에 줄 값들
+        Intent intent = getIntent();
         String category = intent.getStringExtra("category");
+        String id = intent.getStringExtra("id");
+        String token = intent.getStringExtra("token");
+        String type = intent.getStringExtra("type");
+        String name = intent.getStringExtra("name");
 
         NewQuestionDto newQu = new NewQuestionDto();
         Custom_J.setOnClickListener(view -> {
@@ -65,6 +67,10 @@ public class MakeQuestionActivity extends AppCompatActivity {
             Custom_OX.setEnabled(false);
             Custom_G.setEnabled(false);
             Toast.makeText(view.getContext(), "주관식 선택!", Toast.LENGTH_SHORT).show();
+            FirstEdit.setEnabled(false);
+            SecondEdit.setEnabled(false);
+            ThirdEdit.setEnabled(false);
+            ForthEdit.setEnabled(false);
             newQu.setType("주관식");
         });
         Custom_J_Blue.setOnClickListener(view -> {
@@ -73,6 +79,10 @@ public class MakeQuestionActivity extends AppCompatActivity {
             Custom_OX_Blue.setEnabled(true);
             Custom_G.setEnabled(true);
             Toast.makeText(view.getContext(), "주관식 선택 취소!", Toast.LENGTH_SHORT).show();
+            FirstEdit.setEnabled(true);
+            SecondEdit.setEnabled(true);
+            ThirdEdit.setEnabled(true);
+            ForthEdit.setEnabled(true);
             newQu.setType("");
         });
         Custom_G.setOnClickListener(view -> {
@@ -96,6 +106,10 @@ public class MakeQuestionActivity extends AppCompatActivity {
             Custom_OX_Blue.setVisibility(View.VISIBLE);
             Custom_G.setEnabled(false);
             Custom_J.setEnabled(false);
+            FirstEdit.setEnabled(false);
+            SecondEdit.setEnabled(false);
+            ThirdEdit.setEnabled(false);
+            ForthEdit.setEnabled(false);
             Toast.makeText(view.getContext(), "O X 선택!", Toast.LENGTH_SHORT).show();
             newQu.setType("OX");
         });
@@ -104,6 +118,10 @@ public class MakeQuestionActivity extends AppCompatActivity {
             Custom_OX.setVisibility(View.VISIBLE);
             Custom_J.setEnabled(true);
             Custom_G.setEnabled(true);
+            FirstEdit.setEnabled(true);
+            SecondEdit.setEnabled(true);
+            ThirdEdit.setEnabled(true);
+            ForthEdit.setEnabled(true);
             Toast.makeText(view.getContext(), "O X 선택 취소!", Toast.LENGTH_SHORT).show();
             newQu.setType("");
         });
@@ -123,7 +141,15 @@ public class MakeQuestionActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 Log.v("질문 직접 생성", "respose :" + response.code() + "," + "questionId:" + response.body().getId() + "," + "type: " + newQu.getType());
                                 CustomDone.setBackgroundColor(Color.BLUE);
-                                launchQuestionActivity();
+                                //launchQuestionActivity();
+                                Intent mk_intent = new Intent(MakeQuestionActivity.this, QuestionActivity.class);
+                                mk_intent.putExtra("category", category);
+                                mk_intent.putExtra("id", id);
+                                mk_intent.putExtra("token", token);
+                                mk_intent.putExtra("name", name);
+                                mk_intent.putExtra("type", type);
+                                startActivity(mk_intent);
+                                finish();
                             } else if (response.code() == 400) {
                                 Toast.makeText(MakeQuestionActivity.this, "질문 세팅을 완료해주세요!", Toast.LENGTH_SHORT).show();
                             }

@@ -55,7 +55,7 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
 
             Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
             intent.putExtra("name", name + "님");
-            intent.putExtra("typename", typename);
+            intent.putExtra("type", typename);
             intent.putExtra("category", typename);
 
             intent.putExtra("id", id);
