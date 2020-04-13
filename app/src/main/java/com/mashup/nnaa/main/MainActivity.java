@@ -17,6 +17,7 @@ import com.mashup.nnaa.main.home.MainHomeFragment;
 import com.mashup.nnaa.main.mylist.MainMyListFragment;
 import com.mashup.nnaa.main.notifications.MainNotificationsFragment;
 import com.mashup.nnaa.main.setting.MainSettingFragment;
+import com.mashup.nnaa.util.AccountManager;
 
 import java.util.HashMap;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         // Load HOME fragment page
         onMainTabClicked(Page.HOME);
 
-        /* Intent kakao = getIntent();
+         Intent kakao = getIntent();
         if (kakao != null) {
             String kakao_name = kakao.getStringExtra("kakao");
             MainHomeFragment mainHomeFragment = new MainHomeFragment();
@@ -54,15 +55,6 @@ public class MainActivity extends AppCompatActivity {
             Bundle facebook_bundle = new Bundle();
             facebook_bundle.putString("facebook", text);
             mainHomeFragment.setArguments(facebook_bundle);
-        }*/
-        Intent login = getIntent();
-        if(login!=null) {
-            String text = login.getStringExtra("name");
-            MainHomeFragment mainHomeFragment = new MainHomeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, mainHomeFragment).commit();
-            Bundle login_bundle = new Bundle();
-            login_bundle.putString("name", text);
-            mainHomeFragment.setArguments(login_bundle);
         }
     }
 

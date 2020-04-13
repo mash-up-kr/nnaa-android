@@ -102,7 +102,7 @@ public class RetrofitHelper {
     // 문제지 첫 기본세팅
     public void getQuestion(String id, String token, String category, Callback<List<NewQuestionDto>> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        Call<List<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, 30);
+        Call<List<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, 20);
         getQuestionRandom.enqueue(callback);
     }
 
@@ -114,9 +114,9 @@ public class RetrofitHelper {
     }
 
     // 즐겨찾기 해둔 질문들 보여주기
-    public void showFavorites(String id, String token, String category, Callback<List<NewQuestionDto>> callback) {
+    public void showFavorites(String id, String token, Callback<List<NewQuestionDto>> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<List<NewQuestionDto>> showFavorites = service.showFavorites(id, token, category, 30);
+        Call<List<NewQuestionDto>> showFavorites = service.showFavorites(id, token);
         showFavorites.enqueue(callback);
     }
 
@@ -130,8 +130,8 @@ public class RetrofitHelper {
     // 즐겨찾기 취소
     public void favoriteDelete(String id, String token, String questionId, Callback<NewQuestionDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<NewQuestionDto> favoriteEnroll = service.favoriteEnroll(id, token, questionId);
-        favoriteEnroll.enqueue(callback);
+        Call<NewQuestionDto> favoriteDelete = service.favoriteDelete(id, token, questionId);
+        favoriteDelete.enqueue(callback);
     }
 
     public void getReceivedQuestionnaire(Callback<List<QuestionnaireDto>> callback) {

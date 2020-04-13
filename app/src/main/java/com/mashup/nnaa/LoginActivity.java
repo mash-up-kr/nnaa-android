@@ -56,8 +56,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edit_email, edit_password;
     private TextView txt_register, txt_forget_password;
     private CallbackManager mCallbackManager; // facebook 콜백
-    private SharedPreferences setting;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onDestroy() {
@@ -77,13 +75,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_facebook_login = findViewById(R.id.btn_facebook_login);
         autoLogin = findViewById(R.id.auto_login);
 
-
-        setting = getSharedPreferences("setting", MODE_PRIVATE);
-        editor = setting.edit();
-
-        if (setting.getBoolean("auto_login", false)) {
-            edit_email.setText(setting.getString("ID", ""));
-            edit_password.setText(setting.getString("PW", ""));
+        if (SharedPrefHelper.getInstance().getBoolean("auto_login", false)) {
+            edit_email.setText(SharedPrefHelper.getInstance().getString("ID", ""));
+            edit_password.setText(SharedPrefHelper.getInstance().getString("PW", ""));
             autoLogin.setChecked(true);
         }
         // auto login
@@ -92,13 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "자동 로그인", Toast.LENGTH_SHORT).show();
                 String ID = edit_email.getText().toString();
                 String PW = edit_password.getText().toString();
-                editor.putString("ID", ID);
-                editor.putString("PW", PW);
-                editor.putBoolean("auto_login", true);
-                editor.apply();
-            } else {
-                editor.clear();
-                editor.apply();
+
+                SharedPrefHelper.getInstance().put("ID", ID);
+                SharedPrefHelper.getInstance().put("PW", PW);
+                SharedPrefHelper.getInstance().put("auto_login", true);
             }
         });
 
@@ -109,13 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 new AccountManager.ISignInResultListener() {
                     @Override
                     public void onSignInSuccess(String id, String name, String token) {
-                        //  launchMainActivity();
-                        Log.d(TAG, "id: " + id + "," + "name: " + name + "," + "token: " + token);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("name", name);
-                        intent.putExtra("id", id);
-                        intent.putExtra("token", token);
-                        startActivity(intent);
+                        launchMainActivity();
                     }
 
                     @Override

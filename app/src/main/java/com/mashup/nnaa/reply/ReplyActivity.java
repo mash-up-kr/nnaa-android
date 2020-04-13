@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.question.QuestionActivity;
+import com.mashup.nnaa.util.AccountManager;
 
 public class ReplyActivity extends AppCompatActivity {
 
@@ -21,19 +22,14 @@ public class ReplyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
 
-        Intent intent = getIntent();
-
         reply_name = findViewById(R.id.reply_name);
         btn_not = findViewById(R.id.btn_not);
         btn_start = findViewById(R.id.btn_start);
 
-        // QuestionActivity에서 이름 받아오자
-        if (intent != null && intent.getExtras() != null) {
-            String replyName = intent.getStringExtra("reply name");
-            reply_name.setText(replyName);
-        }
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
+        Intent intent = getIntent();
+
+        reply_name.setText(intent.getStringExtra("reply_name"));
+
         String category = intent.getStringExtra("category");
 
         btn_not.setOnClickListener(view -> {
@@ -41,8 +37,6 @@ public class ReplyActivity extends AppCompatActivity {
         });
         btn_start.setOnClickListener(view -> {
             Intent start_intent = new Intent(ReplyActivity.this, MultiReplyActivity.class);
-            start_intent.putExtra("id", id);
-            start_intent.putExtra("token", token);
             start_intent.putExtra("category", category);
             startActivity(start_intent);
             Toast.makeText(ReplyActivity.this, "답변하러 가실게요!", Toast.LENGTH_SHORT).show();

@@ -25,7 +25,6 @@ public interface QuestionControllerService {
                                            @Query("category") String category,
                                            @Query("size") Integer size);
 
-
     // 직접 질문 입력해서 질문 추가하기
     @POST("question")
     Call<NewQuestionDto> postQuestion(@Body NewQuestionDto body);

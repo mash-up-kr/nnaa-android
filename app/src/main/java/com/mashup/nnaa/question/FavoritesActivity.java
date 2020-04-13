@@ -12,10 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
@@ -50,11 +52,10 @@ public class FavoritesActivity extends AppCompatActivity {
 
         Intent typeintent = getIntent();
         String category = typeintent.getStringExtra("category");
-        String id = typeintent.getStringExtra("id");
-        String token = typeintent.getStringExtra("token");
         String type = typeintent.getStringExtra("type");
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String name = typeintent.getStringExtra("name");
-
 
         imgbtn_past.setOnClickListener(view -> {
             finish();
@@ -69,8 +70,6 @@ public class FavoritesActivity extends AppCompatActivity {
             Intent edit_intent = new Intent(FavoritesActivity.this, MakeQuestionActivity.class);
             edit_intent.putExtra("type", type);
             edit_intent.putExtra("category", category);
-            edit_intent.putExtra("id", id);
-            edit_intent.putExtra("token", token);
             edit_intent.putExtra("name", name);
 
             startActivity(edit_intent);
@@ -94,18 +93,22 @@ public class FavoritesActivity extends AppCompatActivity {
 
     private void showFavorites() {
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String category = intent.getStringExtra("category");
-        RetrofitHelper.getInstance().showFavorites(id, token, category, new Callback<List<NewQuestionDto>>() {
+
+        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<List<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
-                if (fList != null) {
+                if (response.isSuccessful()) {
                     fList = response.body();
                     Log.v("즐겨찾기 api", "Response =  " + response.code() + "," + "id: " + id + "," + "token: " + token + "," + "category: " + category);
                     favoritesAdapter.setFavoritList(fList);
+                } else if (response.code() == 400) {
+                    Toast.makeText(FavoritesActivity.this, "즐겨찾기 한 질문이 없습니다.", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    Log.v("즐겨찾기 api", "No Question");
+                    Log.v("즐겨찾기 api", response.message());
                 }
             }
 

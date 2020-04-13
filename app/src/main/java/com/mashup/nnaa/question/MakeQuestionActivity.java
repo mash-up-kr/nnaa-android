@@ -17,6 +17,7 @@ import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.util.AccountManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,9 +56,9 @@ public class MakeQuestionActivity extends AppCompatActivity {
         // QuestionActivity에 줄 값들
         Intent intent = getIntent();
         String category = intent.getStringExtra("category");
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
         String type = intent.getStringExtra("type");
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String name = intent.getStringExtra("name");
 
         NewQuestionDto newQu = new NewQuestionDto();

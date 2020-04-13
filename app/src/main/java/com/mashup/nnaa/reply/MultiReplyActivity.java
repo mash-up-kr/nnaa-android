@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.ClickCallbackListener;
 import com.mashup.nnaa.util.ReplyAdapter;
 
@@ -120,8 +121,8 @@ public class MultiReplyActivity extends AppCompatActivity {
 
     private void answerQuestion() {
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String category = intent.getStringExtra("category");
         if (category.equals("주관식")) {
 
