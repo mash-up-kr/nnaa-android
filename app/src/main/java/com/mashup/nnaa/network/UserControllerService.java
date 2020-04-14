@@ -36,11 +36,9 @@ public interface UserControllerService {
     Call<ResponseBody> signInOrRegSocial(@Body HashMap<String, String> body);
 
     // 즐겨찾기 해둔 질문들 보여주기
-    @GET("question/random")
+    @GET("user/bookmark")
     Call<List<NewQuestionDto>> showFavorites(@Header("id") String id,
-                                             @Header("token") String token,
-                                             @Query("category") String category,
-                                             @Query("size") Integer size);
+                                             @Header("token") String token);
 
     // 즐겨찾기 등록
     @PATCH("user/bookmark/{questionId}")

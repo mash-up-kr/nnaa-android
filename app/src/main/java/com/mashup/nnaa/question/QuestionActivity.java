@@ -1,9 +1,12 @@
 package com.mashup.nnaa.question;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.reply.ReplyActivity;
+import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.DeleteAdapter;
 import com.mashup.nnaa.util.ItemTouchHelperCallback;
 import com.mashup.nnaa.util.QuestionAdapter;
@@ -37,7 +41,6 @@ public class QuestionActivity extends AppCompatActivity {
     private ImageView img_delete, img_add;
     private TextView txt_name, txt_type;
     private Button btn_cancel, btn_next;
-
     private QuestionAdapter questionAdapter;
     private List<NewQuestionDto> questionList;
 
@@ -46,8 +49,7 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
+
         String category = intent.getStringExtra("category");
         String type = intent.getStringExtra("type");
         String name = intent.getStringExtra("name");
@@ -67,9 +69,7 @@ public class QuestionActivity extends AppCompatActivity {
             // 보낸 질문함으로 넘어감
             String replyname = txt_name.getText().toString();
             Intent reply_intent = new Intent(QuestionActivity.this, ReplyActivity.class);
-            reply_intent.putExtra("reply name", replyname);
-            reply_intent.putExtra("id", id);
-            reply_intent.putExtra("token", token);
+            reply_intent.putExtra("reply_name", replyname);
             reply_intent.putExtra("category", category);
             startActivity(reply_intent);
 
@@ -100,9 +100,6 @@ public class QuestionActivity extends AppCompatActivity {
             deleteintent.putExtra("type", type);
             deleteintent.putExtra("category", category);
 
-            deleteintent.putExtra("id", id);
-            deleteintent.putExtra("token", token);
-
             startActivity(deleteintent);
         });
 
@@ -111,30 +108,32 @@ public class QuestionActivity extends AppCompatActivity {
             Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
             bookmarkintent.putExtra("type", type);
             bookmarkintent.putExtra("category", category);
-
             bookmarkintent.putExtra("name", name);
 
-            bookmarkintent.putExtra("id", id);
-            bookmarkintent.putExtra("token", token);
 
             startActivity(bookmarkintent);
         });
+
     }
+
 
     private void getQuestionRandom() {
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
         String category = intent.getStringExtra("category");
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
+
+        Intent intent1 = new Intent(QuestionActivity.this, QuestionAdapter.class);
+        intent1.putExtra("category", category);
 
         RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<List<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
                 if (questionList != null) {
                     questionList = response.body();
-                    Log.v("QuestionRandom", "Response =  "+ response.code() + "," + "id:" + id + "," + "token: " + token + "," + "category: " + category);
-
+                    Log.v("QuestionRandom", "Response =  " + response.code() + "," + "id:" + id + "," + "token: " + token + "," + "category: " + category);
                     questionAdapter.setQuestionList(questionList);
+
                 } else if (questionList.size() == 0) {
                     Toast.makeText(QuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
                 } else {

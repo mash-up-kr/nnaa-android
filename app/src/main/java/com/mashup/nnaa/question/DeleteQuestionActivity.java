@@ -18,6 +18,7 @@ import com.mashup.nnaa.network.QuestionControllerService;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
+import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.DeleteAdapter;
 import com.mashup.nnaa.util.ItemTouchHelperCallback;
 
@@ -53,11 +54,11 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
         String category = intent.getStringExtra("category");
-        String name = intent.getStringExtra("name");
         String type = intent.getStringExtra("type");
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
+        String name = intent.getStringExtra("name");
 
         txt_delete_type.setText(String.format("%s인 , ", type));
         txt_delete_name.setText(String.format("%s께", name));
@@ -85,8 +86,6 @@ public class DeleteQuestionActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "질문삭제 완료.", Toast.LENGTH_SHORT).show();
                 // 질문 삭제 후 QuestionActivity에 반영안됨
                 Intent delete_question = new Intent(DeleteQuestionActivity.this, QuestionActivity.class);
-                delete_question.putExtra("id", id);
-                delete_question.putExtra("token", token);
                 delete_question.putExtra("category", category);
                 delete_question.putExtra("name", name);
                 delete_question.putExtra("type", type);
@@ -100,9 +99,9 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
     private void getDeleteQuestion() {
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String token = intent.getStringExtra("token");
         String category = intent.getStringExtra("category");
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<List<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
