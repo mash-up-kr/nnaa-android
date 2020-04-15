@@ -29,7 +29,7 @@ public interface UserControllerService {
     Call<LoginDto> signInOrRegEmail(@Body HashMap<String, String> body);
 
     // 회원가입(이메일)
-    @POST("user/email")
+    @POST("user/email/sign_up")
     Call<SignUpDto> registerEmail(@Body HashMap<String, String> body);
 
     @POST("user/social")
