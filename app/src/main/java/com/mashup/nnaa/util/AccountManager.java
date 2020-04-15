@@ -82,7 +82,7 @@ public class AccountManager {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
-                String name = response.body().getName();
+                String name = response.headers().get("name");
                 String token = response.headers().get("token");
                 LoginDto body = response.body();
 
