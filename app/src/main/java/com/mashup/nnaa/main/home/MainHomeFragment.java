@@ -1,6 +1,5 @@
 package com.mashup.nnaa.main.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -16,10 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.data.MainHomeQuestionnairesItem;
 import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.util.AccountManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -79,21 +81,35 @@ public class MainHomeFragment extends Fragment {
 
 
     private void requestReceivedQuestionnaires() {
-        RetrofitHelper.getInstance().getReceivedQuestionnaire(new Callback<List<QuestionnaireDto>>() {
+        RetrofitHelper.getInstance().getReceivedQuestionnaires(new Callback<List<InboxQuestionnaireDto>>() {
             @Override
-            public void onResponse(Call<List<QuestionnaireDto>> call, Response<List<QuestionnaireDto>> response) {
-                List<QuestionnaireDto> questionnaires = response.body();
+            public void onResponse(Call<List<InboxQuestionnaireDto>> call, Response<List<InboxQuestionnaireDto>> response) {
+                List<InboxQuestionnaireDto> questionnaires = response.body();
                 showReceivedQuestionnaires(questionnaires);
             }
 
             @Override
-            public void onFailure(Call<List<QuestionnaireDto>> call, Throwable t) {
+            public void onFailure(Call<List<InboxQuestionnaireDto>> call, Throwable t) {
                 Toast.makeText(getContext(), "Fail to get data!\n" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void showReceivedQuestionnaires(List<QuestionnaireDto> questionnaires) {
+    private void showReceivedQuestionnaires(List<InboxQuestionnaireDto> questionnaires) {
+        MainQuestionnaireAdapter adapter = (MainQuestionnaireAdapter) rvQuestionnaires.getAdapter();
+        if (adapter == null) return;
 
+        ArrayList<MainHomeQuestionnairesItem> items = new ArrayList<>();
+        if (questionnaires == null || questionnaires.isEmpty()) {
+            items.add(new MainHomeQuestionnairesItem());
+        } else {
+            for (InboxQuestionnaireDto dto : questionnaires) {
+                int qId = Integer.parseInt(dto.id);
+                String qSender = dto.senderName;
+                items.add(new MainHomeQuestionnairesItem(qId, qSender));
+            }
+        }
+
+        adapter.setData(items);
     }
 }
