@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.Questionnaire;
+import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
+import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
 
 import java.util.ArrayList;
@@ -66,42 +67,56 @@ public class MainMyListSubFragment extends Fragment {
     }
 
     private void loadInbox() {
-        RetrofitHelper.getInstance().getReceivedQuestionnaire(new Callback<List<QuestionnaireDto>>() {
+        RetrofitHelper.getInstance().getReceivedQuestionnaires(new Callback<List<InboxQuestionnaireDto>>() {
             @Override
-            public void onResponse(Call<List<QuestionnaireDto>> call, Response<List<QuestionnaireDto>> response) {
+            public void onResponse(Call<List<InboxQuestionnaireDto>> call, Response<List<InboxQuestionnaireDto>> response) {
                 onLoadDataSuccess(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<QuestionnaireDto>> call, Throwable t) {
+            public void onFailure(Call<List<InboxQuestionnaireDto>> call, Throwable t) {
                 onLoadDataFailure();
             }
         });
     }
 
     private void loadOutbox() {
-        RetrofitHelper.getInstance().getSendQuestionnaire(new Callback<List<QuestionnaireDto>>() {
+        RetrofitHelper.getInstance().getSendQuestionnaires(new Callback<List<OutboxQuestionnaireDto>>() {
             @Override
-            public void onResponse(Call<List<QuestionnaireDto>> call, Response<List<QuestionnaireDto>> response) {
+            public void onResponse(Call<List<OutboxQuestionnaireDto>> call, Response<List<OutboxQuestionnaireDto>> response) {
                 onLoadDataSuccess(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<QuestionnaireDto>> call, Throwable t) {
+            public void onFailure(Call<List<OutboxQuestionnaireDto>> call, Throwable t) {
                 onLoadDataFailure();
             }
         });
     }
 
-    private void onLoadDataSuccess(List<QuestionnaireDto> data) {
+    private void onLoadDataSuccess(List data) {
         MainMyListDataAdapter adapter = (MainMyListDataAdapter) rvMyList.getAdapter();
         if (adapter == null)
             return;
 
-        if (data == null)
-            data = new ArrayList<>();
+        ArrayList<MainMyListDataAdapter.InOutBoxQuestionnaireItem> items = new ArrayList<>();
 
-        if (data.size() == 0) {
+        if (data != null && !data.isEmpty()) {
+            MainMyListDataAdapter.InOutBoxQuestionnaireItem newItem = null;
+            for (int i = 0; i < data.size(); i++) {
+                if (data.get(i) instanceof InboxQuestionnaireDto) {
+                    newItem = MainMyListDataAdapter.InOutBoxQuestionnaireItem
+                            .createFromInboxDto((InboxQuestionnaireDto) data.get(i));
+                } else if (data.get(i) instanceof OutboxQuestionnaireDto) {
+                    newItem = MainMyListDataAdapter.InOutBoxQuestionnaireItem
+                            .createFromOutboxDto((OutboxQuestionnaireDto) data.get(i));
+                }
+                if (newItem == null) continue;
+                items.add(newItem);
+            }
+        }
+
+        if (items.isEmpty()) {
             rvMyList.setVisibility(View.GONE);
             tvNoItem.setVisibility(View.VISIBLE);
         } else {
@@ -109,7 +124,7 @@ public class MainMyListSubFragment extends Fragment {
             tvNoItem.setVisibility(View.GONE);
         }
 
-        adapter.setData((ArrayList<QuestionnaireDto>) data);
+        adapter.setData(items);
     }
 
     private void onLoadDataFailure() {
