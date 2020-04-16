@@ -1,5 +1,7 @@
 package com.mashup.nnaa.network;
 
+import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
+import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
 import com.mashup.nnaa.network.model.QuestionnaireDto;
@@ -30,10 +32,10 @@ public interface QuestionnaireControllerService {
                                             QuestionnaireAnswerDto questionnaireAnswerDto);
     // 받은 질문지 리스트 보기
     @GET("questionnaire/inbox")
-    Call<List<QuestionnaireDto>> getReceiveQuestionnaires();
+    Call<List<InboxQuestionnaireDto>> getReceiveQuestionnaires();
 
     // 보낸 질문지 리스트 보기
     @GET("questionnaire/outbox")
-    Call<List<QuestionnaireDto>> getSendQuestionnaires();
+    Call<List<OutboxQuestionnaireDto>> getSendQuestionnaires();
 
 }
