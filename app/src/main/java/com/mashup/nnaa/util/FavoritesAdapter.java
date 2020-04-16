@@ -19,6 +19,7 @@ import com.mashup.nnaa.data.QuestionItem;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
+import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
-    private List<NewQuestionDto> fList;
+    private List<bookmarkQuestionDto> fList;
     private Context fContext;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -40,12 +41,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     private String token;
     private String questionId;
 
-    public FavoritesAdapter(Context context, List<NewQuestionDto> list) {
+    public FavoritesAdapter(Context context, List<bookmarkQuestionDto> list) {
         this.fList = list;
         this.fContext = context;
     }
 
-    public void setFavoritList(List<NewQuestionDto> fList) {
+    public void setFavoritList(List<bookmarkQuestionDto> fList) {
         this.fList = fList;
         notifyDataSetChanged();
     }
@@ -72,7 +73,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 editor.putBoolean("check", vh.check_box_favorites.isChecked());
                 editor.apply();
 
-                RetrofitHelper.getInstance().favoriteEnroll(id, token, questionId, new Callback<NewQuestionDto>() {
+               /* RetrofitHelper.getInstance().favoriteEnroll(id, token, questionId, new Callback<NewQuestionDto>() {
                     @Override
                     public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                         Log.v("즐겨찾기 등록", String.valueOf(response.code()));
@@ -82,7 +83,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                     public void onFailure(Call<NewQuestionDto> call, Throwable t) {
                         Log.v("즐겨찾기 등록", "실패:"+ t.getMessage());
                     }
-                });
+                });*/
                 Log.v("즐겨찾기", "Click!");
             }
         });
@@ -116,8 +117,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         }
 
-        void onBind(NewQuestionDto questionItem) {
-            txt_favorites_question.setText(questionItem.getContent());
+        void onBind(bookmarkQuestionDto Item) {
+            txt_favorites_question.setText(Item.getContent());
         }
     }
 }

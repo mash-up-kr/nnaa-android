@@ -110,12 +110,9 @@ public class QuestionActivity extends AppCompatActivity {
             bookmarkintent.putExtra("category", category);
             bookmarkintent.putExtra("name", name);
 
-
             startActivity(bookmarkintent);
         });
-
     }
-
 
     private void getQuestionRandom() {
         Intent intent = getIntent();
@@ -131,7 +128,10 @@ public class QuestionActivity extends AppCompatActivity {
             public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
                 if (questionList != null) {
                     questionList = response.body();
-                    Log.v("QuestionRandom", "Response =  " + response.code() + "," + "id:" + id + "," + "token: " + token + "," + "category: " + category);
+                    Log.v("QuestionRandom", "Response =  " + response.code() + "," + "id:" + id + "," + "token: " + token + "," + "category: " + category +
+                            response.body().get(0).getType()  + questionList.size());
+                            intent1.putExtra("zero",response.body().get(0).getContent());
+
                     questionAdapter.setQuestionList(questionList);
 
                 } else if (questionList.size() == 0) {

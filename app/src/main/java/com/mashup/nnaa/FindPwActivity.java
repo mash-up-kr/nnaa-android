@@ -13,6 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.LoginDto;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class FindPwActivity extends AppCompatActivity {
 
     @Override
@@ -36,33 +43,26 @@ public class FindPwActivity extends AppCompatActivity {
             if (editFind.getText().toString().isEmpty()) {
                 Toast.makeText(FindPwActivity.this, "가입하신 이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
             } else {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("plain/text");
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "NNAA 비밀번호 찾기메일입니다.");
-                intent.putExtra(Intent.EXTRA_TEXT, "비밀번호");
-                startActivity(intent);
-                Log.v("@@@@@@@@@@@", "mail");
-                btnFind.setBackgroundColor(Color.BLUE);
+                RetrofitHelper.getInstance().sendNewPw(email, new Callback<LoginDto>() {
+                    @Override
+                    public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
+                        progressDialog.setMessage("메일을 보내는중입니다..");
+                        progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Horizontal);
+                        progressDialog.show();
+                        if (response.isSuccessful()) {
+                            btnFind.setBackgroundColor(Color.BLUE);
+                            Toast.makeText(FindPwActivity.this, "이메일을 보냈습니다!", Toast.LENGTH_SHORT).show();
+                            Log.v("재설정 이메일", email);
+                        }
+                    }
 
-                progressDialog.setMessage("메일을 보내는중입니다..");
-                progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Horizontal);
-                progressDialog.show();
-
-                Toast.makeText(FindPwActivity.this, "이메일로 비밀번호를 보냈습니다!", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Call<LoginDto> call, Throwable t) {
+                        Log.v("재설정 이메일", t.getMessage());
+                    }
+                });
             }
-
-            // progressDialog.dismiss();
+            progressDialog.dismiss();
         });
-
-        TextView textView = findViewById(R.id.text_pw);
-        Intent intent = getIntent();
-        if (intent != null && intent.getExtras() != null) {
-            String test = intent.getStringExtra("edit");
-            String t = intent.getStringExtra("btn");
-
-            textView.setText(test);
-            textView.append(t);
-        }
     }
 }

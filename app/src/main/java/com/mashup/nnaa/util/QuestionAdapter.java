@@ -18,10 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.Question;
+import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,20 +63,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public void onBindViewHolder(@NonNull QuestionAdapter.ViewHolder holder, int position) {
 
         holder.mName.setText(questionList.get(position).getContent());
-
-       /* holder.qChoice.setOnCheckedChangeListener(null);
-        holder.qChoice.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (holder.qChoice.isChecked()) {
-                Toast.makeText(buttonView.getContext(), "즐겨찾기 추가", Toast.LENGTH_LONG).show();
-                preferences = buttonView.getContext().getSharedPreferences("check", Context.MODE_PRIVATE);
-                editor = preferences.edit();
-                editor.putBoolean("check", holder.qChoice.isChecked());
-                editor.apply();
-                holder.qChoice.setChecked(true);
-            }else {
-                Toast.makeText(buttonView.getContext(),"즐겨찾기 해제",Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 
 
@@ -97,21 +85,28 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             mName = itemView.findViewById(R.id.info_text);
             qChoice = itemView.findViewById(R.id.question_choice);
 
-          /*  Bundle bundle = ((Activity) Qcontext).getIntent().getExtras();
+            Bundle bundle = ((Activity) Qcontext).getIntent().getExtras();
 
-            final String id = bundle.getString("id");
-            final String token = bundle.getString("token");*/
+//            final String id = bundle.getString("id");
+//            final String token = bundle.getString("token");
+            final String category = bundle.getString("category");
             final String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
             final String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
             final String questionId = "5e8c13f10509a8373b106865";
+            final String zero = bundle.getString("zero");
+            NewQuestionDto newQuestionDto = new NewQuestionDto();
+            newQuestionDto.setCategory(category);
+            newQuestionDto.setContent(zero);
+
             qChoice.setOnCheckedChangeListener(null);
             qChoice.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (qChoice.isChecked()) {
-                    RetrofitHelper.getInstance().favoriteEnroll(id, token, questionId, new Callback<NewQuestionDto>() {
+                    RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                             qChoice.setChecked(true);
-                            Log.v("@@@@@@@", "id : " + id + "token: " + token + "questionId: " + response.body().getId());
+                            Log.v("@@@@@@@", "id : " + id + "token: " + token + category+ zero+ response.code());
+
                             Toast.makeText(buttonView.getContext(), "즐겨찾기 추가", Toast.LENGTH_LONG).show();
                         }
 
@@ -121,22 +116,21 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                         }
                     });
                 } else {
-                    RetrofitHelper.getInstance().favoriteDelete(id, token, questionId, new Callback<NewQuestionDto>() {
+                    RetrofitHelper.getInstance().favoriteDelete(id, token, questionId, new Callback<bookmarkQuestionDto>() {
                         @Override
-                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                        public void onResponse(Call<bookmarkQuestionDto> call, Response<bookmarkQuestionDto> response) {
                             Toast.makeText(buttonView.getContext(), "즐겨찾기 해제", Toast.LENGTH_SHORT).show();
-                            Log.v("#######", "id : " + id + "token: " + token + "questionId: " + response.body().getId());
-                            response.body().getId();
+                            Log.v("#######", "id : " + id + "token: " + token);
+
                             qChoice.setChecked(false);
                         }
 
                         @Override
-                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                        public void onFailure(Call<bookmarkQuestionDto> call, Throwable t) {
 
                         }
                     });
                 }
-
             });
         }
     }

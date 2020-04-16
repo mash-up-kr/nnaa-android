@@ -21,11 +21,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
 
     List<NewQuestionDto> questionDtoList;
     Context mContext;
-    private ClickCallbackListener callbackListener;
 
-    public void setCallbackListener(ClickCallbackListener callbackListener) {
-        this.callbackListener = callbackListener;
-    }
 
     public ReplyAdapter(Context context, List<NewQuestionDto> questionDtos) {
         this.questionDtoList = questionDtos;
@@ -59,7 +55,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
         return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView answerQ;
 
@@ -67,16 +63,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
             super(itemView);
             answerQ = itemView.findViewById(R.id.answer_question);
 
-            setListener();
-        }
 
-        private void setListener() {
-            answerQ.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            callbackListener.callBack(getAdapterPosition());
         }
     }
 }
