@@ -18,6 +18,7 @@
         <activity android:name=".question.LocalQuestionActivity"></activity>
         <activity
             android:name=".ResetPwActivity"
+            android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -32,10 +33,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".question.MakeQuestionActivity" />
-        <activity android:name=".FindPwActivity" />
+        <activity
+            android:name=".FindPwActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".reply.MultiReplyActivity" />
         <activity android:name=".reply.ReplyActivity" />
-        <activity android:name=".RegisterActivity" /> <!-- 페이스북 메타데이터 -->
+        <activity
+            android:name=".RegisterActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->
@@ -50,7 +56,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+                  android:windowSoftInputMode="adjustResize" />
         <activity android:name=".select.SelectFriendActivity" />
         <activity
             android:name=".main.MainActivity"

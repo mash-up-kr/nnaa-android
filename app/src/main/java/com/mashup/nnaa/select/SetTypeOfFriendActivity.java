@@ -1,9 +1,6 @@
 package com.mashup.nnaa.select;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +9,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.question.CustomQuestionActivity;
 import com.mashup.nnaa.question.QuestionActivity;
 import com.mashup.nnaa.util.AccountManager;
 

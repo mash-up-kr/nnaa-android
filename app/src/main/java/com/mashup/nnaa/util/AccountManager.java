@@ -82,9 +82,11 @@ public class AccountManager {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
-                String name = response.body().getName();
                 String token = response.headers().get("token");
+                String name = "Somebody";
                 LoginDto body = response.body();
+                if (body != null)
+                    name = body.getName();
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(token)) {
                     Log.v("SignIn", "Sign in fail (no id or token value received): " + email);
