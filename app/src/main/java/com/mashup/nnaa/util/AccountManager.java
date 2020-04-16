@@ -48,7 +48,7 @@ public class AccountManager {
         String lastEncPw =
                 SharedPrefHelper.getInstance().getString(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW);
 
-        executeSignIn(lastEmail, lastEncPw, new ISignInResultListener() {
+        executeSignIn(lastEmail, lastEncPw, true, true, new ISignInResultListener() {
             @Override
             public void onSignInSuccess(String id, String name, String token) {
                 resultListener.onSignInSuccess(id, name, token);
@@ -65,6 +65,8 @@ public class AccountManager {
 
     // login
     public void executeSignIn(String email, String password,
+                              boolean isGivenPwEncrypted,
+                              boolean saveForAutoSignIn,
                               ISignInResultListener resultListener) {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Log.v("SignIn", "Sign in fail (not enough): " + email);
@@ -78,7 +80,17 @@ public class AccountManager {
             return;
         }
 
-        RetrofitHelper.getInstance().signInOrRegEmail(email, password, new Callback<LoginDto>() {
+        final String pwEnc;
+        final String pwForSignIn;
+
+        if (isGivenPwEncrypted) {
+            pwEnc = password;
+        } else {
+            pwEnc = EncryptUtil.encrypt(password);
+        }
+        pwForSignIn = EncryptUtil.doubleEncryptForSignIn(pwEnc);
+
+        RetrofitHelper.getInstance().signInOrRegEmail(email, pwForSignIn, new Callback<LoginDto>() {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
@@ -93,6 +105,13 @@ public class AccountManager {
                     resultListener.onSignInFail();
                 } else {
                     Log.v("SignIn", "Sign in success: " + email + "," + token + "," + name);
+
+                    if (saveForAutoSignIn) {
+                        SharedPrefHelper.getInstance()
+                                .put(SHARED_PREF_LAST_ACCOUNT_EMAIL, email);
+                        SharedPrefHelper.getInstance()
+                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEnc);
+                    }
 
                     setUserAuthHeaderInfo(id, name, token);
                     resultListener.onSignInSuccess(id, name, token);

@@ -97,6 +97,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(view -> AccountManager.getInstance().executeSignIn(
                 edit_email.getText().toString(),
                 edit_password.getText().toString(),
+                false,
+                autoLogin.isChecked(),
                 new AccountManager.ISignInResultListener() {
                     @Override
                     public void onSignInSuccess(String id, String name, String token) {
