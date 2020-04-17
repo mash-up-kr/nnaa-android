@@ -136,6 +136,14 @@ public class MakeQuestionActivity extends AppCompatActivity {
                     newQu.setContent(Content_Edit.getText().toString());
                     newQu.setCategory(category);
                     newQu.setChoices(choices);
+                    Intent mk_intent = new Intent(MakeQuestionActivity.this, QuestionActivity.class);
+                    mk_intent.putExtra("category", category);
+                    mk_intent.putExtra("name", name);
+                    mk_intent.putExtra("type", type);
+                    startActivity(mk_intent);
+                    finish();
+
+                    CustomDone.setBackgroundColor(Color.BLUE);
                     RetrofitHelper.getInstance().postQuestion(newQu, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {

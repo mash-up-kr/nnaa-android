@@ -80,17 +80,19 @@
             android:textSize="15sp"
             tools:text="20" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_answer"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
+        <TextView
+            android:id="@+id/text_question"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="328dp"
+            android:layout_marginEnd="100dp"
             android:lineSpacingExtra="11sp"
             android:textColor="#2d2e35"
             android:textSize="16sp"
             tools:ignore="HardcodedText"
-            tools:listitem="@layout/reply_item" />
+            tools:text="질문" />
+
 
         <ImageButton
             android:id="@+id/reply_choice"
@@ -107,10 +109,12 @@
             android:id="@+id/reply_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recycler_answer"
+            android:layout_below="@id/text_question"
             android:layout_marginStart="33dp"
             android:layout_marginTop="105dp"
             android:backgroundTint="@color/colorBlue"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="답변을 입력해주세요"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -122,9 +126,9 @@
             android:id="@+id/reply_o_btn"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:layout_below="@id/recycler_answer"
+            android:layout_below="@id/text_question"
             android:layout_marginStart="61dp"
-            android:layout_marginTop="83dp"
+            android:layout_marginTop="73dp"
             android:background="#f3f3f3"
             android:contentDescription="@string/StringValue"
             android:src="@drawable/group_3"
@@ -134,31 +138,36 @@
             android:id="@+id/reply_ox_bar"
             android:layout_width="1dp"
             android:layout_height="40dp"
-            android:layout_below="@id/recycler_answer"
+            android:layout_below="@id/text_question"
             android:layout_marginStart="183dp"
-            android:layout_marginTop="106dp"
+            android:layout_marginTop="96dp"
             android:contentDescription="@string/StringValue"
             android:visibility="gone"
+
             app:srcCompat="@drawable/ox_choice_bar" />
 
         <ImageButton
             android:id="@+id/reply_x_btn"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:layout_below="@id/recycler_answer"
+            android:layout_below="@id/text_question"
             android:layout_marginStart="215dp"
-            android:layout_marginTop="83dp"
+            android:layout_marginTop="73dp"
             android:background="#f3f3f3"
             android:contentDescription="@string/StringValue"
             android:src="@drawable/quiz_btn_x"
             android:visibility="gone" />
 
         <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_below="@id/recycler_answer"
-            android:layout_marginTop="37dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="70dp">
+            android:scrollbarStyle="insideInset"
+            android:clipToPadding="false"
+            android:layout_below="@id/text_question"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="70dp"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -171,7 +180,8 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="6dp"
                     android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue" />
+                    android:contentDescription="@string/StringValue"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/txt_A"
@@ -183,6 +193,7 @@
                     android:text="A"
                     android:textColor="#a6a6a6"
                     android:textSize="15sp"
+                    android:visibility="invisible"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -195,16 +206,18 @@
                     android:text="매우 그렇다"
                     android:textColor="#2d2e35"
                     android:textSize="16sp"
-                    tools:text="매우 그렇다"
-                    tools:ignore="HardcodedText" />
+                    android:visibility="invisible"
+                    tools:ignore="HardcodedText"
+                    tools:text="매우 그렇다" />
 
                 <ImageView
                     android:id="@+id/multi_img1"
                     android:layout_width="316dp"
                     android:layout_height="54dp"
                     android:layout_marginStart="22dp"
+                    android:contentDescription="@string/StringValue"
                     android:src="@drawable/multi_reply_corner"
-                    android:contentDescription="@string/StringValue" />
+                    android:visibility="invisible" />
 
 
                 <ImageView
@@ -214,8 +227,9 @@
                     android:layout_below="@id/multi_img1"
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="14dp"
+                    android:contentDescription="@string/StringValue"
                     android:src="@drawable/multi_reply_corner"
-                    android:contentDescription="@string/StringValue" />
+                    android:visibility="invisible" />
 
 
                 <TextView
@@ -229,8 +243,9 @@
                     android:text="그렇다"
                     android:textColor="#2d2e35"
                     android:textSize="16sp"
-                    tools:text="그렇다"
-                    tools:ignore="HardcodedText" />
+                    android:visibility="invisible"
+                    tools:ignore="HardcodedText"
+                    tools:text="그렇다" />
 
                 <ImageButton
                     android:id="@+id/multi_btn_b"
@@ -240,7 +255,8 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="19dp"
                     android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue" />
+                    android:contentDescription="@string/StringValue"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/txt_B"
@@ -253,6 +269,7 @@
                     android:text="B"
                     android:textColor="#a6a6a6"
                     android:textSize="15sp"
+                    android:visibility="invisible"
                     tools:ignore="HardcodedText" />
 
 
@@ -263,8 +280,9 @@
                     android:layout_below="@id/multi_img2"
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="14dp"
+                    android:contentDescription="@string/StringValue"
                     android:src="@drawable/multi_reply_corner"
-                    android:contentDescription="@string/StringValue" />
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/mutli_txt3"
@@ -277,8 +295,9 @@
                     android:text="아니다"
                     android:textColor="#2d2e35"
                     android:textSize="16sp"
-                    tools:text="아니다"
-                    tools:ignore="HardcodedText" />
+                    android:visibility="invisible"
+                    tools:ignore="HardcodedText"
+                    tools:text="아니다" />
 
                 <ImageButton
                     android:id="@+id/multi_btn_c"
@@ -288,7 +307,8 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="19dp"
                     android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue" />
+                    android:contentDescription="@string/StringValue"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/txt_C"
@@ -301,6 +321,7 @@
                     android:text="C"
                     android:textColor="#a6a6a6"
                     android:textSize="15sp"
+                    android:visibility="invisible"
                     tools:ignore="HardcodedText" />
 
 
@@ -311,8 +332,9 @@
                     android:layout_below="@id/multi_img3"
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="14dp"
+                    android:contentDescription="@string/StringValue"
                     android:src="@drawable/multi_reply_corner"
-                    android:contentDescription="@string/StringValue" />
+                    android:visibility="invisible" />
 
                 <ImageButton
                     android:id="@+id/multi_btn_d"
@@ -322,7 +344,8 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="19dp"
                     android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue" />
+                    android:contentDescription="@string/StringValue"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/txt_D"
@@ -335,6 +358,7 @@
                     android:text="D"
                     android:textColor="#a6a6a6"
                     android:textSize="15sp"
+                    android:visibility="invisible"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -348,8 +372,9 @@
                     android:text="매우 아니다"
                     android:textColor="#2d2e35"
                     android:textSize="16sp"
-                    tools:text="매우 아니다"
-                    tools:ignore="HardcodedText" />
+                    android:visibility="invisible"
+                    tools:ignore="HardcodedText"
+                    tools:text="매우 아니다" />
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>

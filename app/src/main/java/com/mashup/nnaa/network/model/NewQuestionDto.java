@@ -25,6 +25,21 @@ public class NewQuestionDto {
     @Expose
     private Choices choices;
 
+
+    Boolean flag;
+
+    public NewQuestionDto(String id, String content, String category, String type, Choices choices) {
+        this.id = id;
+        this.content = content;
+        this.category = category;
+        this.type = type;
+        this.choices = choices;
+    }
+
+    public NewQuestionDto() {
+
+    }
+
     public String getId() {
         return id;
     }

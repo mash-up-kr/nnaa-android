@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.FavoritesAdapter;
 
@@ -30,7 +31,7 @@ import retrofit2.Response;
 public class FavoritesActivity extends AppCompatActivity {
 
     private FavoritesAdapter favoritesAdapter;
-    private List<NewQuestionDto> fList;
+    private List<bookmarkQuestionDto> fList;
     Button btn_favorites;
     ImageButton imgbtn_past, imgbtn_cancel;
     EditText edit_custom;
@@ -97,9 +98,9 @@ public class FavoritesActivity extends AppCompatActivity {
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String category = intent.getStringExtra("category");
 
-        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<List<NewQuestionDto>>() {
+        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<List<bookmarkQuestionDto>>() {
             @Override
-            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
+            public void onResponse(Call<List<bookmarkQuestionDto>> call, Response<List<bookmarkQuestionDto>> response) {
                 if (response.isSuccessful()) {
                     fList = response.body();
                     Log.v("즐겨찾기 api", "Response =  " + response.code() + "," + "id: " + id + "," + "token: " + token + "," + "category: " + category);
@@ -113,7 +114,7 @@ public class FavoritesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
+            public void onFailure(Call<List<bookmarkQuestionDto>> call, Throwable t) {
                 Log.v("즐겨찾기 api", "에러:" + t.getMessage());
             }
         });

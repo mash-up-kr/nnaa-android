@@ -15,9 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".question.LocalQuestionActivity"></activity>
         <activity
             android:name=".ResetPwActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.nnaa.com"
+                    android:pathPattern="/nnaa"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
         <activity android:name=".question.MakeQuestionActivity" />
         <activity
             android:name=".FindPwActivity"
@@ -30,8 +44,7 @@
         <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_key" />
-        <!-- 카카오톡 메타데이터 -->
+            android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
