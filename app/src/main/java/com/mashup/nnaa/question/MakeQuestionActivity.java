@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import retrofit2.Response;
 
 public class MakeQuestionActivity extends AppCompatActivity {
 
+    public static final int RESULT_UPDATE_OK = 10000;
     Button CustomDone;
     ImageButton Custom_OX, Custom_J_Blue, Custom_G_Blue, Custom_OX_Blue, Custom_J, Custom_G;
     TextView txtJ, txtG, txtOX;
@@ -34,6 +36,8 @@ public class MakeQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_question);
+
+        Intent mk_intent = new Intent();
 
         CustomDone = findViewById(R.id.custom_done);
         Custom_J = findViewById(R.id.custom_btn_j);
@@ -72,7 +76,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             SecondEdit.setEnabled(false);
             ThirdEdit.setEnabled(false);
             ForthEdit.setEnabled(false);
-            newQu.setType("주관식");
+            mk_intent.putExtra("type", "주관식");
         });
         Custom_J_Blue.setOnClickListener(view -> {
             Custom_J_Blue.setVisibility(View.INVISIBLE);
@@ -84,7 +88,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             SecondEdit.setEnabled(true);
             ThirdEdit.setEnabled(true);
             ForthEdit.setEnabled(true);
-            newQu.setType("");
+            mk_intent.putExtra("type", "");
         });
         Custom_G.setOnClickListener(view -> {
             Custom_G.setVisibility(View.INVISIBLE);
@@ -92,7 +96,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             Custom_J.setEnabled(false);
             Custom_OX.setEnabled(false);
             Toast.makeText(view.getContext(), "객관식 선택!", Toast.LENGTH_SHORT).show();
-            newQu.setType("객관식");
+            mk_intent.putExtra("type", "객관식");
         });
         Custom_G_Blue.setOnClickListener(view -> {
             Custom_G_Blue.setVisibility(View.INVISIBLE);
@@ -100,7 +104,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             Custom_J.setEnabled(true);
             Custom_OX.setEnabled(true);
             Toast.makeText(view.getContext(), "객관식 선택 취소!", Toast.LENGTH_SHORT).show();
-            newQu.setType("");
+            mk_intent.putExtra("type", "");
         });
         Custom_OX.setOnClickListener(view -> {
             Custom_OX.setVisibility(View.INVISIBLE);
@@ -112,7 +116,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             ThirdEdit.setEnabled(false);
             ForthEdit.setEnabled(false);
             Toast.makeText(view.getContext(), "O X 선택!", Toast.LENGTH_SHORT).show();
-            newQu.setType("OX");
+            mk_intent.putExtra("type", "OX");
         });
         Custom_OX_Blue.setOnClickListener(view -> {
             Custom_OX_Blue.setVisibility(View.INVISIBLE);
@@ -124,59 +128,23 @@ public class MakeQuestionActivity extends AppCompatActivity {
             ThirdEdit.setEnabled(true);
             ForthEdit.setEnabled(true);
             Toast.makeText(view.getContext(), "O X 선택 취소!", Toast.LENGTH_SHORT).show();
-            newQu.setType("");
+            mk_intent.putExtra("type", "");
         });
 
         CustomDone.setOnClickListener(view -> {
-                    Choices choices = new Choices();
-                    choices.setA(FirstEdit.getText().toString());
-                    choices.setB(SecondEdit.getText().toString());
-                    choices.setC(ThirdEdit.getText().toString());
-                    choices.setD(ForthEdit.getText().toString());
-                    newQu.setContent(Content_Edit.getText().toString());
-                    newQu.setCategory(category);
-                    newQu.setChoices(choices);
-                    Intent mk_intent = new Intent(MakeQuestionActivity.this, QuestionActivity.class);
-                    mk_intent.putExtra("category", category);
-                    mk_intent.putExtra("name", name);
-                    mk_intent.putExtra("type", type);
-                    startActivity(mk_intent);
-                    finish();
 
-                    CustomDone.setBackgroundColor(Color.BLUE);
-                    RetrofitHelper.getInstance().postQuestion(newQu, new Callback<NewQuestionDto>() {
-                        @Override
-                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                            if (response.isSuccessful()) {
-                                Log.v("질문 직접 생성", "respose :" + response.code() + "," + "questionId:" + response.body().getId() + "," + "type: " + newQu.getType());
-                                CustomDone.setBackgroundColor(Color.BLUE);
-                                //launchQuestionActivity();
-                                Intent mk_intent = new Intent(MakeQuestionActivity.this, QuestionActivity.class);
-                                mk_intent.putExtra("category", category);
-                                mk_intent.putExtra("id", id);
-                                mk_intent.putExtra("token", token);
-                                mk_intent.putExtra("name", name);
-                                mk_intent.putExtra("type", type);
-                                startActivity(mk_intent);
-                                finish();
-                            } else if (response.code() == 400) {
-                                Toast.makeText(MakeQuestionActivity.this, "질문 세팅을 완료해주세요!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
+            mk_intent.putExtra("content", Content_Edit.getText().toString());
+            mk_intent.putExtra("setA", FirstEdit.getText().toString());
+            mk_intent.putExtra("setB", SecondEdit.getText().toString());
+            mk_intent.putExtra("setC", ThirdEdit.getText().toString());
+            mk_intent.putExtra("setD", ForthEdit.getText().toString());
+            mk_intent.putExtra("category", category);
 
-                        @Override
-                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                            Log.v("질문 직접 생성 실패", t.getMessage());
-                        }
-                    });
-                }
-        );
-    }
+            setResult(RESULT_UPDATE_OK, mk_intent);
+            finish();
 
-    private void launchQuestionActivity() {
-        Toast.makeText(MakeQuestionActivity.this, "질문 작성 완료!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MakeQuestionActivity.this, QuestionActivity.class);
-        startActivity(intent);
-        finish();
+            CustomDone.setBackgroundColor(Color.BLUE);
+            Toast.makeText(MakeQuestionActivity.this, "질문 작성 완료!", Toast.LENGTH_SHORT).show();
+        });
     }
 }

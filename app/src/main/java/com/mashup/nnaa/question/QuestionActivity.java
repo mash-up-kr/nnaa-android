@@ -104,8 +104,8 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         img_add.setOnClickListener(view -> {
-            Toast.makeText(QuestionActivity.this, "즐겨찾기 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
-            Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
+            Toast.makeText(QuestionActivity.this, "질문생성 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
+            Intent bookmarkintent = new Intent(QuestionActivity.this, LocalQuestionActivity.class);
             bookmarkintent.putExtra("type", type);
             bookmarkintent.putExtra("category", category);
             bookmarkintent.putExtra("name", name);

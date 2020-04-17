@@ -141,8 +141,12 @@ public class AccountManager {
             resultListener.onSignInFail();
             return;
         }
+        final String pwEnc;
+        final String pwForSignUp;
+        pwEnc = EncryptUtil.encrypt(password);
+        pwForSignUp = EncryptUtil.doubleEncryptForSignIn(pwEnc);
 
-        RetrofitHelper.getInstance().registerEmail(email, password, name, new Callback<SignUpDto>() {
+        RetrofitHelper.getInstance().registerEmail(email, pwForSignUp, name, new Callback<SignUpDto>() {
             @Override
             public void onResponse(Call<SignUpDto> call, Response<SignUpDto> response) {
                 String id = response.headers().get("id");
@@ -153,7 +157,7 @@ public class AccountManager {
                     Log.v("Register", "Reigster fail (no id or token value received): " + email);
                     resultListener.onSignInFail();
                 } else {
-                    Log.v("Register", "Register in success: " + email + "," + name + "," + password);
+                    Log.v("Register", "Register in success: " + "email:" + email + "," + "name:" + name + "," + "password:" + password);
                     resultListener.onSignInSuccess(id, name, token);
                 }
             }
