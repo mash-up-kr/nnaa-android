@@ -64,7 +64,7 @@ public class AccountManager {
 
     // login
     public void executeSignIn(String email, String password,
-                              boolean isGivenPwEncrypted,
+                              boolean isGivenPwEncryptedLocally,
                               boolean saveForAutoSignIn,
                               ISignInResultListener resultListener) {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
@@ -79,17 +79,18 @@ public class AccountManager {
             return;
         }
 
-        final String pwEnc;
-        final String pwForSignIn;
+        final String pwEncLocal;
+        final String pwEncSignIn;
 
-        if (isGivenPwEncrypted) {
-            pwEnc = password;
+        if (isGivenPwEncryptedLocally) {
+            pwEncLocal = password;
+            pwEncSignIn = EncryptUtil.encryptPasswordFromLocalToSignIn(pwEncLocal);
         } else {
-            pwEnc = EncryptUtil.encrypt(password);
+            pwEncLocal = EncryptUtil.encryptPasswordFromPlaintextToLocal(password);
+            pwEncSignIn = EncryptUtil.encryptPasswordFromLocalToSignIn(pwEncLocal);
         }
-        pwForSignIn = EncryptUtil.doubleEncryptForSignIn(pwEnc);
 
-        RetrofitHelper.getInstance().signIn(email, pwForSignIn, new Callback<LoginDto>() {
+        RetrofitHelper.getInstance().signIn(email, pwEncSignIn, new Callback<LoginDto>() {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
@@ -109,7 +110,7 @@ public class AccountManager {
                         SharedPrefHelper.getInstance()
                                 .put(SHARED_PREF_LAST_ACCOUNT_EMAIL, email);
                         SharedPrefHelper.getInstance()
-                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEnc);
+                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEncLocal);
                     }
 
                     setUserAuthHeaderInfo(id, name, token);
@@ -141,7 +142,9 @@ public class AccountManager {
             return;
         }
 
-        RetrofitHelper.getInstance().registerEmail(email, password, name, new Callback<SignUpDto>() {
+        String encPasswd = EncryptUtil.encryptPasswordFromPlaintextToSignIn(password);
+
+        RetrofitHelper.getInstance().registerEmail(email, encPasswd, name, new Callback<SignUpDto>() {
             @Override
             public void onResponse(Call<SignUpDto> call, Response<SignUpDto> response) {
                 String id = response.headers().get("id");

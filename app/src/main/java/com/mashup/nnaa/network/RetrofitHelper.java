@@ -90,12 +90,19 @@ public class RetrofitHelper {
     }
 
     // 회원가입
-    public void registerEmail(String email, String password, String name, Callback<SignUpDto> callback) {
+    /**
+     * Register new member with given information
+     * @param email Email address
+     * @param encPw Encrypted(Sign-In) password string
+     * @param name
+     * @param callback
+     */
+    public void registerEmail(String email, String encPw, String name, Callback<SignUpDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
         Call<SignUpDto> signUpDtoCall = service.registerEmail(
                 new HashMap<String, String>() {{
                     put("email", email);
-                    put("password", password);
+                    put("password", encPw);
                     put("name", name);
                 }}
         );

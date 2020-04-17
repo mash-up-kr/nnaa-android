@@ -5,7 +5,24 @@ import java.security.NoSuchAlgorithmException;
 
 public class EncryptUtil {
 
-    public static String encrypt(String src) {
+    public static String encryptPasswordFromPlaintextToLocal(String plaintext) {
+        return encryptPhase1(plaintext);
+    }
+
+    public static String encryptPasswordFromPlaintextToSignIn(String plaintext) {
+        return encryptPhase2(encryptPhase1(plaintext));
+    }
+
+    public static String encryptPasswordFromLocalToSignIn(String autoLoginEncryptPassword) {
+        return encryptPhase2(autoLoginEncryptPassword);
+    }
+
+    /**
+     * Encrypt given string. Phase1 = MD5 + SHA256
+     * @param src
+     * @return Encrypted MD5+Sha256 string
+     */
+    public static String encryptPhase1(String src) {
         // md5 + sha256
         String md5 = null;
         String md5sha = src;
@@ -20,12 +37,17 @@ public class EncryptUtil {
         return md5sha;
     }
 
-    public static String doubleEncryptForSignIn(String encryptedStr) {
+    /**
+     * Encrypt given string. Phase2 = SHA + 256
+     * @param src
+     * @return Encrypted Sha256+MD5 string
+     */
+    public static String encryptPhase2(String src) {
         // sha256 + md5
         String sha = null;
-        String shamd5 = encryptedStr;
+        String shamd5 = src;
         try {
-            sha = getSha256Str(encryptedStr);
+            sha = getSha256Str(src);
             shamd5 = getMd5Str(sha);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
