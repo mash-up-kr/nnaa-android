@@ -42,10 +42,8 @@ public class EncryptUtil {
         byte[] byteData = md5.digest();
         StringBuilder sb = new StringBuilder();
 
-
         for (byte byteDatum : byteData) {
-            String tmpEncTxt = Integer.toHexString((int) byteDatum & 0x00ff);
-            sb.append(tmpEncTxt);
+            sb.append(Integer.toString((byteDatum & 0xff) + 0x100, 16).substring(1));
         }
 
         return sb.toString();
