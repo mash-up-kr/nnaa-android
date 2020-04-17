@@ -9,7 +9,6 @@ import com.mashup.nnaa.network.UserAuthHeaderInfo;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,7 +89,7 @@ public class AccountManager {
         }
         pwForSignIn = EncryptUtil.doubleEncryptForSignIn(pwEnc);
 
-        RetrofitHelper.getInstance().signInOrRegEmail(email, pwForSignIn, new Callback<LoginDto>() {
+        RetrofitHelper.getInstance().signIn(email, pwForSignIn, new Callback<LoginDto>() {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
