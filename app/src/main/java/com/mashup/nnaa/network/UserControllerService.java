@@ -28,7 +28,7 @@ public interface UserControllerService {
 
     // 로그인(이메일)
     @POST("user/email/sign_in")
-    Call<LoginDto> signInOrRegEmail(@Body HashMap<String, String> body);
+    Call<LoginDto> signIn(@Body HashMap<String, String> body);
 
     // 회원가입(이메일)
     @POST("user/email/sign_up")
