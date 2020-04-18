@@ -38,8 +38,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     List<NewQuestionDto> questionList;
     Context Qcontext;
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     public QuestionAdapter(Context context, List<NewQuestionDto> questionList) {
         this.Qcontext = context;
@@ -98,6 +96,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             newQuestionDto.setCategory(category);
             newQuestionDto.setContent(zero);
 
+            Choices choices = new Choices();
+
             qChoice.setOnCheckedChangeListener(null);
             qChoice.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (qChoice.isChecked()) {
@@ -105,7 +105,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                             qChoice.setChecked(true);
-                            Log.v("@@@@@@@", "id : " + id + "token: " + token + category+ zero+ response.code());
+
+
+                            Log.v("@@@@@@@", "id : " + id + "token: " + token + "content:" + response.body().getContent() + response.code());
 
                             Toast.makeText(buttonView.getContext(), "즐겨찾기 추가", Toast.LENGTH_LONG).show();
                         }
