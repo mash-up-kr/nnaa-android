@@ -9,7 +9,6 @@ import com.mashup.nnaa.network.UserAuthHeaderInfo;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,7 +64,7 @@ public class AccountManager {
 
     // login
     public void executeSignIn(String email, String password,
-                              boolean isGivenPwEncrypted,
+                              boolean isGivenPwEncryptedLocally,
                               boolean saveForAutoSignIn,
                               ISignInResultListener resultListener) {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
@@ -80,17 +79,18 @@ public class AccountManager {
             return;
         }
 
-        final String pwEnc;
-        final String pwForSignIn;
+        final String pwEncLocal;
+        final String pwEncSignIn;
 
-        if (isGivenPwEncrypted) {
-            pwEnc = password;
+        if (isGivenPwEncryptedLocally) {
+            pwEncLocal = password;
+            pwEncSignIn = EncryptUtil.encryptPasswordFromLocalToSignIn(pwEncLocal);
         } else {
-            pwEnc = EncryptUtil.encrypt(password);
+            pwEncLocal = EncryptUtil.encryptPasswordFromPlaintextToLocal(password);
+            pwEncSignIn = EncryptUtil.encryptPasswordFromLocalToSignIn(pwEncLocal);
         }
-        pwForSignIn = EncryptUtil.doubleEncryptForSignIn(pwEnc);
 
-        RetrofitHelper.getInstance().signInOrRegEmail(email, pwForSignIn, new Callback<LoginDto>() {
+        RetrofitHelper.getInstance().signIn(email, pwEncSignIn, new Callback<LoginDto>() {
             @Override
             public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
                 String id = response.headers().get("id");
@@ -110,7 +110,7 @@ public class AccountManager {
                         SharedPrefHelper.getInstance()
                                 .put(SHARED_PREF_LAST_ACCOUNT_EMAIL, email);
                         SharedPrefHelper.getInstance()
-                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEnc);
+                                .put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, pwEncLocal);
                     }
 
                     setUserAuthHeaderInfo(id, name, token);
@@ -141,12 +141,10 @@ public class AccountManager {
             resultListener.onSignInFail();
             return;
         }
-        final String pwEnc;
-        final String pwForSignUp;
-        pwEnc = EncryptUtil.encrypt(password);
-        pwForSignUp = EncryptUtil.doubleEncryptForSignIn(pwEnc);
 
-        RetrofitHelper.getInstance().registerEmail(email, pwForSignUp, name, new Callback<SignUpDto>() {
+        String encPasswd = EncryptUtil.encryptPasswordFromPlaintextToSignIn(password);
+
+        RetrofitHelper.getInstance().registerEmail(email, encPasswd, name, new Callback<SignUpDto>() {
             @Override
             public void onResponse(Call<SignUpDto> call, Response<SignUpDto> response) {
                 String id = response.headers().get("id");
@@ -157,7 +155,7 @@ public class AccountManager {
                     Log.v("Register", "Reigster fail (no id or token value received): " + email);
                     resultListener.onSignInFail();
                 } else {
-                    Log.v("Register", "Register in success: " + "email:" + email + "," + "name:" + name + "," + "password:" + password);
+                    Log.v("Register", "Register in success: " + email + "," + name + "," + password);
                     resultListener.onSignInSuccess(id, name, token);
                 }
             }

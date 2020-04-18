@@ -2,13 +2,11 @@ package com.mashup.nnaa.network;
 
 import android.text.TextUtils;
 
-import com.kakao.usermgmt.response.model.User;
 import com.mashup.nnaa.BuildConfig;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
-import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
@@ -80,9 +78,9 @@ public class RetrofitHelper {
     }
 
     // 로그인
-    public void signInOrRegEmail(String email, String encPw, Callback<LoginDto> callback) {
+    public void signIn(String email, String encPw, Callback<LoginDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<LoginDto> userInfo = service.signInOrRegEmail(
+        Call<LoginDto> userInfo = service.signIn(
                 new HashMap<String, String>() {{
                     put("email", email);
                     put("password", encPw);
@@ -92,12 +90,19 @@ public class RetrofitHelper {
     }
 
     // 회원가입
-    public void registerEmail(String email, String password, String name, Callback<SignUpDto> callback) {
+    /**
+     * Register new member with given information
+     * @param email Email address
+     * @param encPw Encrypted(Sign-In) password string
+     * @param name
+     * @param callback
+     */
+    public void registerEmail(String email, String encPw, String name, Callback<SignUpDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
         Call<SignUpDto> signUpDtoCall = service.registerEmail(
                 new HashMap<String, String>() {{
                     put("email", email);
-                    put("password", password);
+                    put("password", encPw);
                     put("name", name);
                 }}
         );
