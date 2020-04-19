@@ -14,9 +14,11 @@ import java.util.ArrayList;
 
 public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataViewHolder> {
     private ArrayList<InOutBoxQuestionnaireItem> items;
+    private MainMyListPagerAdapter.MyListType type;
 
-    public MainMyListDataAdapter() {
+    public MainMyListDataAdapter(MainMyListPagerAdapter.MyListType type) {
         items = new ArrayList<>();
+        this.type = type;
     }
 
     public void setData(ArrayList<InOutBoxQuestionnaireItem> data) {
@@ -30,7 +32,8 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataVi
         return new MainMyListDataViewHolder(
                 LayoutInflater
                         .from(parent.getContext())
-                        .inflate(R.layout.item_main_mylist_sublist_item, parent, false));
+                        .inflate(R.layout.item_main_mylist_sublist_item, parent, false),
+                type);
     }
 
     @Override

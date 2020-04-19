@@ -45,7 +45,7 @@ public class MainMyListSubFragment extends Fragment {
         tvNoItem = view.findViewById(R.id.tv_no_item_myList);
         rvMyList = view.findViewById(R.id.rv_myList);
         rvMyList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvMyList.setAdapter(new MainMyListDataAdapter());
+        rvMyList.setAdapter(new MainMyListDataAdapter(type));
 
         switch (type)
         {
