@@ -50,10 +50,10 @@ public class MainMyListSubFragment extends Fragment {
         switch (type)
         {
             case SENT:
-                loadInbox();
+                loadOutbox();
                 break;
             case RECEIVED:
-                loadOutbox();
+                loadInbox();
                 break;
         }
 
