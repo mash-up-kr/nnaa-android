@@ -17,7 +17,6 @@ import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
-import com.mashup.nnaa.network.model.QuestionnaireDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +119,7 @@ public class MainMyListSubFragment extends Fragment {
             rvMyList.setVisibility(View.GONE);
             tvNoItem.setVisibility(View.VISIBLE);
         } else {
+            adapter.setData(items);
             rvMyList.setVisibility(View.VISIBLE);
             tvNoItem.setVisibility(View.GONE);
         }
