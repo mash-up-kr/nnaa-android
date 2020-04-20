@@ -8,7 +8,7 @@ import com.mashup.nnaa.data.Choices;
 import java.io.Serializable;
 import java.util.List;
 
-public class NewQuestionDto  implements Serializable {
+public class NewQuestionDto implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -26,8 +26,6 @@ public class NewQuestionDto  implements Serializable {
     @Expose
     private Choices choices;
 
-
-    Boolean flag;
 
     public NewQuestionDto(String id, String content, String category, String type, Choices choices) {
         this.id = id;

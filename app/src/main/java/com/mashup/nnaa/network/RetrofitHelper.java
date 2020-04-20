@@ -11,6 +11,7 @@ import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -156,9 +157,9 @@ public class RetrofitHelper {
     }
 
     // 즐겨찾기 해둔 질문들 보여주기
-    public void showFavorites(String id, String token, Callback<List<bookmarkQuestionDto>> callback) {
+    public void showFavorites(String id, String token, Callback<ArrayList<bookmarkQuestionDto>> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<List<bookmarkQuestionDto>> showFavorites = service.showFavorites(id, token);
+        Call<ArrayList<bookmarkQuestionDto>> showFavorites = service.showFavorites(id, token);
         showFavorites.enqueue(callback);
     }
 
@@ -170,9 +171,9 @@ public class RetrofitHelper {
     }
 
     // 즐겨찾기 취소
-    public void favoriteDelete(String id, String token, String bookmarkQuestionId, Callback<bookmarkQuestionDto> callback) {
+    public void favoriteDelete(String id, String token, String bookmarkQuestionId, Callback<NewQuestionDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<bookmarkQuestionDto> favoriteDelete = service.favoriteDelete(id, token, bookmarkQuestionId);
+        Call<NewQuestionDto> favoriteDelete = service.favoriteDelete(id, token, bookmarkQuestionId);
         favoriteDelete.enqueue(callback);
     }
 

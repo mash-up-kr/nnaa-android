@@ -41,7 +41,8 @@ public class DeleteQuestionActivity extends AppCompatActivity {
     private TextView txt_delete_name, txt_delete_type;
     private Button btn_delete;
     private ImageView btn_delete_cancel;
-    private List<NewQuestionDto> dArrayList;
+    private ArrayList<NewQuestionDto> dArrayList;
+    public static final int RESULT_DELETE_OK = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,9 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         recyclerDelete.setLayoutManager(linearLayoutManager);
 
         dArrayList = new ArrayList<>();
-        deleteAdapter = new DeleteAdapter(this, dArrayList);
+
+        ArrayList<NewQuestionDto> list = (ArrayList<NewQuestionDto>) intent.getSerializableExtra("list");
+        deleteAdapter = new DeleteAdapter(this, list);
 
         recyclerDelete.setAdapter(deleteAdapter);
         recyclerDelete.setHasFixedSize(true);
@@ -88,20 +91,21 @@ public class DeleteQuestionActivity extends AppCompatActivity {
             builder.setMessage("질문 삭제를 완료하셨나요?");
             builder.setPositiveButton("네", (dialogInterface, i) -> {
                 Toast.makeText(getApplicationContext(), "질문삭제 완료.", Toast.LENGTH_SHORT).show();
-                // 질문 삭제 후 QuestionActivity에 반영안됨
+
                 Intent delete_question = new Intent(DeleteQuestionActivity.this, LocalQuestionActivity.class);
                 delete_question.putExtra("category", category);
                 delete_question.putExtra("name", name);
                 delete_question.putExtra("type", type);
-                startActivity(delete_question);
+
+                delete_question.putExtra("delete", list);
+                setResult(RESULT_DELETE_OK, delete_question);
+                //startActivity(delete_question);
                 finish();
             });
             builder.setNegativeButton("아니요", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문 삭제를 완료해주세요~", Toast.LENGTH_SHORT).show());
             builder.show();
         });
-
     }
-
 }
 
 

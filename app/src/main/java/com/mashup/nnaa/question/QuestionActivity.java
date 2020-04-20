@@ -117,7 +117,7 @@ public class QuestionActivity extends AppCompatActivity {
             public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
                 if (questionList != null) {
                     questionList = response.body();
-                    Log.v("QuestionRandom", "Response =  " + response.code() + "," + "id:" + id + "," + "token: " + token + "," + "category: " + category +
+                    Log.v("QuestionRandom", "Response =  " + response.code() + "," + "content:" + response.body().get(0).getContent()+ "," + "category: " + category +
                             response.body().get(0).getType()  + questionList.size());
                             intent1.putExtra("zero",response.body().get(0).getContent());
 
