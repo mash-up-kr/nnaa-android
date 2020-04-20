@@ -1,35 +1,44 @@
 package com.mashup.nnaa.main.mylist;
 
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 
 import java.util.ArrayList;
 
-public class MainMyListDataAdapter extends RecyclerView.Adapter {
+public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataViewHolder> {
     private ArrayList<InOutBoxQuestionnaireItem> items;
+    private MainMyListPagerAdapter.MyListType type;
 
-    public MainMyListDataAdapter() {
+    public MainMyListDataAdapter(MainMyListPagerAdapter.MyListType type) {
         items = new ArrayList<>();
+        this.type = type;
     }
 
     public void setData(ArrayList<InOutBoxQuestionnaireItem> data) {
         this.items = data;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public MainMyListDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MainMyListDataViewHolder(
+                LayoutInflater
+                        .from(parent.getContext())
+                        .inflate(R.layout.item_main_mylist_sublist_item, parent, false),
+                type);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull MainMyListDataViewHolder holder, int position) {
+        holder.bind(items.get(position));
     }
 
     @Override

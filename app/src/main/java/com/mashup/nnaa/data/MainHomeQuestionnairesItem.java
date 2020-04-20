@@ -1,7 +1,7 @@
 package com.mashup.nnaa.data;
 
 public class MainHomeQuestionnairesItem {
-    public int questionnairesId;
+    public String questionnairesId;
     public String sender;
 
     /**
@@ -9,7 +9,7 @@ public class MainHomeQuestionnairesItem {
      * @param questionnairesId
      * @param sender
      */
-    public MainHomeQuestionnairesItem(int questionnairesId,
+    public MainHomeQuestionnairesItem(String questionnairesId,
                                       String sender) {
         this.questionnairesId = questionnairesId;
         this.sender = sender;
@@ -19,7 +19,7 @@ public class MainHomeQuestionnairesItem {
      * Create "No Items" item
      */
     public MainHomeQuestionnairesItem() {
-        this.questionnairesId = -1;
+        this.questionnairesId = "";
         this.sender = "No items";
     }
 }

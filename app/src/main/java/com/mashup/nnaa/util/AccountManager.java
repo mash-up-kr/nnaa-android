@@ -102,6 +102,7 @@ public class AccountManager {
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(token)) {
                     Log.v("SignIn", "Sign in fail (no id or token value received): " + email);
+                    RetrofitHelper.getInstance().refreshRetrofit();
                     resultListener.onSignInFail();
                 } else {
                     Log.v("SignIn", "Sign in success: " + email + "," + token + "," + name);
@@ -114,6 +115,7 @@ public class AccountManager {
                     }
 
                     setUserAuthHeaderInfo(id, name, token);
+                    RetrofitHelper.getInstance().refreshRetrofit();
                     resultListener.onSignInSuccess(id, name, token);
                 }
             }
@@ -121,6 +123,7 @@ public class AccountManager {
             @Override
             public void onFailure(Call<LoginDto> call, Throwable t) {
                 Log.v("SignIn", "Sign in fail: " + email);
+                RetrofitHelper.getInstance().refreshRetrofit();
                 resultListener.onSignInFail();
             }
         });
@@ -174,6 +177,7 @@ public class AccountManager {
         SharedPrefHelper.getInstance().put(SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW, "");
         userAuthHeaderInfo = null;
         Log.v("SignOut", "Signed out");
+        RetrofitHelper.getInstance().refreshRetrofit();
         listener.onSignOut();
         LoginManager.getInstance().logOut();
     }

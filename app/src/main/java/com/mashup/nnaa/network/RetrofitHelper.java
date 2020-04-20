@@ -42,7 +42,7 @@ public class RetrofitHelper {
     }
 
 
-    private void refreshRetrofit() {
+    public void refreshRetrofit() {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(ENTRY_URL)
                 .addConverterFactory(GsonConverterFactory.create());

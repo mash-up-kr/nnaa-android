@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.util.AccountManager;
 
 public class MainSettingFragment extends Fragment {
     public static MainSettingFragment newInstance() {
@@ -29,7 +30,7 @@ public class MainSettingFragment extends Fragment {
         TextView tvTitle = view.findViewById(R.id.tv_setting_title);
         tvTitle.setText(String.format(
                 getString(R.string.setting_title),
-                "You"
+                AccountManager.getInstance().getUserAuthHeaderInfo().getName()
         ));
 
         initList(view.findViewById(R.id.rv_settings));

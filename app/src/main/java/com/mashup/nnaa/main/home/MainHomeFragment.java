@@ -104,7 +104,7 @@ public class MainHomeFragment extends Fragment {
             items.add(new MainHomeQuestionnairesItem());
         } else {
             for (InboxQuestionnaireDto dto : questionnaires) {
-                int qId = Integer.parseInt(dto.id);
+                String qId = dto.id;
                 String qSender = dto.senderName;
                 items.add(new MainHomeQuestionnairesItem(qId, qSender));
             }
