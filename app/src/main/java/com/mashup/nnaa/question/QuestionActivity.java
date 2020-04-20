@@ -38,9 +38,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class QuestionActivity extends AppCompatActivity {
 
-    private ImageView img_delete, img_add;
+    private ImageView  img_add;
     private TextView txt_name, txt_type;
-    private Button btn_cancel, btn_next;
+    private Button  btn_next;
+    private ImageView btn_cancel;
     private QuestionAdapter questionAdapter;
     private List<NewQuestionDto> questionList;
 
@@ -58,7 +59,6 @@ public class QuestionActivity extends AppCompatActivity {
         txt_type = findViewById(R.id.txt_type);
         btn_next = findViewById(R.id.btn_next);
         btn_cancel = findViewById(R.id.btn_cancel);
-        img_delete = findViewById(R.id.img_delete);
         img_add = findViewById(R.id.img_add);
 
 
@@ -91,17 +91,6 @@ public class QuestionActivity extends AppCompatActivity {
         questionAdapter = new QuestionAdapter(this, questionList);
         recyclerQuestion.setAdapter(questionAdapter);
         this.getQuestionRandom();
-
-
-        img_delete.setOnClickListener(view -> {
-            Toast.makeText(QuestionActivity.this, "질문삭제 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
-            Intent deleteintent = new Intent(getApplicationContext(), DeleteQuestionActivity.class);
-            deleteintent.putExtra("name", name);
-            deleteintent.putExtra("type", type);
-            deleteintent.putExtra("category", category);
-
-            startActivity(deleteintent);
-        });
 
         img_add.setOnClickListener(view -> {
             Toast.makeText(QuestionActivity.this, "질문생성 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();

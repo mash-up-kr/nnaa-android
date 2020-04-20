@@ -3,7 +3,9 @@ package com.mashup.nnaa.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Choices {
+import java.io.Serializable;
+
+public class Choices implements Serializable {
 
     @SerializedName("a")
     @Expose

@@ -5,9 +5,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.mashup.nnaa.data.Choices;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class NewQuestionDto {
+public class NewQuestionDto  implements Serializable {
 
     @SerializedName("id")
     @Expose

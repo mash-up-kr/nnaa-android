@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/replace_fragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2d2e35"
     android:orientation="vertical">
@@ -37,14 +37,14 @@
         android:src="@drawable/arrow_left_335"
         tools:ignore="ContentDescription" />
 
-    <ImageButton
-        android:id="@+id/imgbtn_cancel"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+    <ImageView
+        android:id="@+id/img_delete"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginStart="312dp"
         android:layout_marginTop="57dp"
-        android:background="#ffffff"
-        android:src="@drawable/cancel_img" />
+        android:src="@drawable/delete_1487"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/local_mk_edit"

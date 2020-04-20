@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
+            <ImageView
                 android:id="@+id/cancle_btn_in_type_of_friend"
                 android:layout_width="163dp"
                 android:layout_height="70dp"
@@ -127,6 +127,15 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="14sp"
                 tools:ignore="ButtonStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="21dp"
+                android:text="@string/cancle"
+                android:textColor="#730d0d0d"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/next_btn_in_type_of_friend"

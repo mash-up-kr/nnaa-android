@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.QuestionControllerService;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
@@ -36,7 +39,8 @@ public class DeleteQuestionActivity extends AppCompatActivity {
     private DeleteAdapter deleteAdapter;
     private ItemTouchHelper helper;
     private TextView txt_delete_name, txt_delete_type;
-    private Button btn_delete, btn_delete_cancel;
+    private Button btn_delete;
+    private ImageView btn_delete_cancel;
     private List<NewQuestionDto> dArrayList;
 
     @Override
@@ -55,13 +59,13 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String category = intent.getStringExtra("category");
-        String type = intent.getStringExtra("type");
+        String type = intent.getStringExtra("name_type");
         String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String name = intent.getStringExtra("name");
 
         txt_delete_type.setText(String.format("%s인 , ", type));
-        txt_delete_name.setText(String.format("%s께", name));
+        txt_delete_name.setText(String.format("%s님께", name));
 
         RecyclerView recyclerDelete = findViewById(R.id.recycler_delete);
 
@@ -70,10 +74,10 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
         dArrayList = new ArrayList<>();
         deleteAdapter = new DeleteAdapter(this, dArrayList);
+
         recyclerDelete.setAdapter(deleteAdapter);
         recyclerDelete.setHasFixedSize(true);
-
-        this.getDeleteQuestion();
+        deleteAdapter.notifyDataSetChanged();
 
         helper = new ItemTouchHelper(new ItemTouchHelperCallback(deleteAdapter));
         helper.attachToRecyclerView(recyclerDelete);
@@ -85,7 +89,7 @@ public class DeleteQuestionActivity extends AppCompatActivity {
             builder.setPositiveButton("네", (dialogInterface, i) -> {
                 Toast.makeText(getApplicationContext(), "질문삭제 완료.", Toast.LENGTH_SHORT).show();
                 // 질문 삭제 후 QuestionActivity에 반영안됨
-                Intent delete_question = new Intent(DeleteQuestionActivity.this, QuestionActivity.class);
+                Intent delete_question = new Intent(DeleteQuestionActivity.this, LocalQuestionActivity.class);
                 delete_question.putExtra("category", category);
                 delete_question.putExtra("name", name);
                 delete_question.putExtra("type", type);
@@ -95,31 +99,9 @@ public class DeleteQuestionActivity extends AppCompatActivity {
             builder.setNegativeButton("아니요", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문 삭제를 완료해주세요~", Toast.LENGTH_SHORT).show());
             builder.show();
         });
+
     }
 
-    private void getDeleteQuestion() {
-        Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
-        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
-        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
-        RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<List<NewQuestionDto>>() {
-            @Override
-            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
-                if (dArrayList != null) {
-                    dArrayList = response.body();
-                    Log.v("질문삭제페이지", "Response =  " + response.code() + "id: " + id + "," + "token: " + token + "," + "category: " + category);
-                    deleteAdapter.setDeleteList(dArrayList);
-                } else if (dArrayList.size() == 0) {
-                    Toast.makeText(DeleteQuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.v("질문삭제페이지", "No Question");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
-                Log.v("질문삭제페이지", "에러:" + t.getMessage());
-            }
-        });
-    }
 }
+
+
