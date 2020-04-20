@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.util.AccountManager;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -18,9 +20,10 @@ import retrofit2.Response;
 
 public class ResetPwActivity extends AppCompatActivity {
 
-    ImageView resetClose;
-    EditText edit_reset_pw, edit_reset_pw_confirm;
-    Button btn_reset;
+    private ImageView resetClose;
+    private EditText edit_reset_pw, edit_reset_pw_confirm;
+    private Button btn_reset;
+    private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,6 @@ public class ResetPwActivity extends AppCompatActivity {
         String newPw = edit_reset_pw.getText().toString();
         String newPwConfirm = edit_reset_pw_confirm.getText().toString();
 
-        // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
@@ -43,7 +45,11 @@ public class ResetPwActivity extends AppCompatActivity {
         RetrofitHelper.getInstance().resetPw(newPw, newPwConfirm, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                if (response.isSuccessful()) {
+                    Intent success = new Intent(ResetPwActivity.this, LoginActivity.class);
+                    startActivity(success);
+                    Toast.makeText(getApplicationContext(), "비밀번호 재설정 완료!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
