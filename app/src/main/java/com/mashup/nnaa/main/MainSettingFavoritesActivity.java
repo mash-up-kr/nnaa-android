@@ -16,7 +16,7 @@ import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
-import com.mashup.nnaa.util.FavoritesAdapter;
+import com.mashup.nnaa.util.BookmarkAdapter;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,8 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
     private RecyclerView recyclerQuestion;
     //private QuestionAdapter questionAdapter;
     //private List<NewQuestionDto> questionList;
-    private FavoritesAdapter favoritesAdapter;
-    private ArrayList<bookmarkQuestionDto> favoritesList;
+    private BookmarkAdapter bookmarkAdapter;
+    private ArrayList<bookmarkQuestionDto> bookmarkList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +80,9 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerQuestion.setLayoutManager(linearLayoutManager);
 
-        favoritesList = new ArrayList<bookmarkQuestionDto>();
-        favoritesAdapter = new FavoritesAdapter(this, favoritesList);
-        recyclerQuestion.setAdapter(favoritesAdapter);
+        bookmarkList = new ArrayList<bookmarkQuestionDto>();
+        bookmarkAdapter = new BookmarkAdapter(this, bookmarkList);
+        recyclerQuestion.setAdapter(bookmarkAdapter);
         recyclerQuestion.setHasFixedSize(true);
 
         this.showFavorites();
@@ -98,12 +98,11 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<bookmarkQuestionDto>> call, Response<ArrayList<bookmarkQuestionDto>> response) {
                 if (response.isSuccessful()) {
-                    favoritesList = response.body();
+                    bookmarkList = response.body();
                     Log.v("즐겨찾기 api", "Response = " + response.code());
-                    favoritesAdapter.setFavoritList(favoritesList);
+                    bookmarkAdapter.setFavoriteList(bookmarkList);
                 } else if (response.code() == 400) {
                     Toast.makeText(MainSettingFavoritesActivity.this, "즐겨찾기 한 질문이 없습니다.", Toast.LENGTH_SHORT).show();
-
                 } else {
                     Log.v("즐겨찾기 api", response.message());
                 }
