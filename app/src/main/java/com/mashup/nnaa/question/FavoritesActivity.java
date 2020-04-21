@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.FavoritesAdapter;
@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class FavoritesActivity extends AppCompatActivity {
 
     private FavoritesAdapter favoritesAdapter;
-    private ArrayList<bookmarkQuestionDto> fList;
+    private ArrayList<NewQuestionDto> fList;
     Button btn_favorites;
     ImageButton imgbtn_past, imgbtn_cancel;
     ImageView img_favorites, img_recycler;
@@ -77,13 +77,13 @@ public class FavoritesActivity extends AppCompatActivity {
     }
 
     private void showFavorites() {
-        Intent intent = getIntent();
+
         String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
-        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<ArrayList<bookmarkQuestionDto>>() {
+        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<ArrayList<NewQuestionDto>>() {
             @Override
-            public void onResponse(Call<ArrayList<bookmarkQuestionDto>> call, Response<ArrayList<bookmarkQuestionDto>> response) {
+            public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (response.isSuccessful()) {
                     fList = response.body();
                     Log.v("즐겨찾기 api", "Response = " + response.code());
@@ -97,7 +97,7 @@ public class FavoritesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<bookmarkQuestionDto>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<NewQuestionDto>> call, Throwable t) {
                 Log.v("즐겨찾기 api", "에러:" + t.getMessage());
             }
         });

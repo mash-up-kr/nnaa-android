@@ -76,6 +76,7 @@
         android:hint="비밀번호를 입력해주세요"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:maxLength="15"
         android:textAlignment="center"
         tools:ignore="HardcodedText" />
 

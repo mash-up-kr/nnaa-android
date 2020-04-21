@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,17 +34,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
-    private ArrayList<bookmarkQuestionDto> fList;
+    private ArrayList<NewQuestionDto> fList;
     private Context fContext;
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
-    public FavoritesAdapter(Context context, ArrayList<bookmarkQuestionDto> list) {
+    public FavoritesAdapter(Context context, ArrayList<NewQuestionDto> list) {
         this.fList = list;
         this.fContext = context;
     }
 
-    public void setFavoritList(ArrayList<bookmarkQuestionDto> fList) {
+    public void setFavoritList(ArrayList<NewQuestionDto> fList) {
         this.fList = fList;
         notifyDataSetChanged();
     }
@@ -58,8 +60,31 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.ViewHolder holder, int position) {
+
         holder.txt_favorites_question.setText(fList.get(position).getContent());
+
+        holder.check_box_favorites.setOnClickListener(view -> {
+
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                NewQuestionDto item = fList.get(pos);
+
+                RetrofitHelper.getInstance().favoriteDelete(id, token, item.getId(), new Callback<NewQuestionDto>() {
+                    @Override
+                    public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                        deleteFavorites(pos);
+                        Log.v("delete bookmark", "position" + pos);
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -71,7 +96,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txt_favorites_question;
-        private CheckBox check_box_favorites;
+        private ImageView check_box_favorites;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -80,5 +105,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             check_box_favorites = itemView.findViewById(R.id.check_box_favorites);
 
         }
+
+    }
+
+    private void deleteFavorites(int position) {
+        fList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, fList.size());
     }
 }

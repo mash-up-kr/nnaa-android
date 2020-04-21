@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/img_recycler"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="150dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/corner_shape"
         android:contentDescription="@string/StringValue" />
@@ -56,7 +56,7 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_marginStart="37dp"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="150dp"
             android:contentDescription="@string/StringValue"
             android:src="@drawable/star_favorite_1498" />
 
@@ -65,7 +65,7 @@
             android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="166dp"
+            android:layout_marginTop="146dp"
             android:text="즐겨 찾기에 추가된 질문"
             android:textColor="#2d2e35"
             android:textSize="13sp"

@@ -2,6 +2,7 @@ package com.mashup.nnaa.network;
 
 import com.mashup.nnaa.network.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -21,9 +22,9 @@ public interface QuestionControllerService {
     // 문제지 첫 기본세팅
     @GET("question/random")
     Call<List<NewQuestionDto>> getQuestion(@Header("id") String id,
-                                           @Header("token") String token,
-                                           @Query("category") String category,
-                                           @Query("size") Integer size);
+                                                @Header("token") String token,
+                                                @Query("category") String category,
+                                                @Query("size") Integer size);
 
     // 직접 질문 입력해서 질문 추가하기
     @POST("question")

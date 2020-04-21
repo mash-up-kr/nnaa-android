@@ -105,7 +105,7 @@ public class AccountManager {
                     RetrofitHelper.getInstance().refreshRetrofit();
                     resultListener.onSignInFail();
                 } else {
-                    Log.v("SignIn", "Sign in success: " + email + "," + token + "," + name);
+                    Log.v("SignIn", "Sign in success: " + email + "," + token + "," + name + "," + id);
 
                     if (saveForAutoSignIn) {
                         SharedPrefHelper.getInstance()

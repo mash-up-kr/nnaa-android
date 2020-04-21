@@ -2,23 +2,29 @@ package com.mashup.nnaa.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,8 +35,8 @@ import static android.view.LayoutInflater.from;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-    List<NewQuestionDto> questionList;
-    Context Qcontext;
+    private List<NewQuestionDto> questionList;
+    private Context Qcontext;
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
@@ -55,6 +61,55 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.ViewHolder holder, int position) {
         holder.mName.setText(questionList.get(position).getContent());
+        holder.qChoice.setChecked(questionList.get(position).isFlag());
+
+
+        Bundle bundle = ((Activity) Qcontext).getIntent().getExtras();
+
+        final String category = bundle.getString("category");
+
+        holder.qChoice.setOnCheckedChangeListener(null);
+        final NewQuestionDto questionDto = questionList.get(position);
+
+        holder.qChoice.setOnCheckedChangeListener((buttonView, isChekced) -> {
+
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                NewQuestionDto item = questionList.get(pos);
+
+                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getId(), item.getContent(), category, item.getType(), item.getChoices());
+
+                if (holder.qChoice.isChecked()) {
+                    RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
+                        @Override
+                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                            newQuestionDto.setFlag(isChekced);
+                            questionDto.setFlag(isChekced);
+                            holder.qChoice.setChecked(newQuestionDto.isFlag());
+                        }
+
+                        @Override
+                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                            Log.v("즐찾 등록", t.getMessage());
+                        }
+                    });
+                } else {
+                    // 즐겨찾기 해제
+                    RetrofitHelper.getInstance().favoriteDelete(id, token, item.getId(), new Callback<NewQuestionDto>() {
+                        @Override
+                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                            holder.qChoice.setChecked(false);
+                            questionDto.setFlag(false);
+                            newQuestionDto.setFlag(false);
+                        }
+                        @Override
+                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                            Log.v("즐찾 해제", t.getMessage());
+                        }
+                    });
+                }
+            }
+        });
     }
 
 
@@ -77,52 +132,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             mName = itemView.findViewById(R.id.info_text);
             qChoice = itemView.findViewById(R.id.question_choice);
 
-            // 즐겨찾기 등록
-            qChoice.setOnCheckedChangeListener(null);
-
-            qChoice.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-                Bundle bundle = ((Activity)Qcontext).getIntent().getExtras();
-
-                final String category = bundle.getString("category");
-                int pos = getAdapterPosition();
-                if (pos != RecyclerView.NO_POSITION) {
-                    NewQuestionDto item = questionList.get(pos);
-
-                    NewQuestionDto newQuestionDto = new NewQuestionDto(item.getId(), item.getContent(), category, item.getType(), item.getChoices());
-
-                    if (qChoice.isChecked()) {
-                        RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
-                            @Override
-                            public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                                qChoice.setChecked(true);
-                                Log.v("favorite", "code:" + response.code() + "content:" + item.getContent() + item.getId() + category + item.getType() + item.getChoices());
-                            }
-
-                            @Override
-                            public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                                Log.v("favorite delete", t.getMessage());
-                            }
-                        });
-                    } else {
-                        // 즐겨찾기 해제
-                        RetrofitHelper.getInstance().favoriteDelete(id, token, item.getId(), new Callback<NewQuestionDto>() {
-                            @Override
-                            public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                                Toast.makeText(buttonView.getContext(), "즐겨찾기 해제", Toast.LENGTH_SHORT).show();
-                                Log.v("favorite delete", "id : " + id + "token: " + token);
-
-                                qChoice.setChecked(false);
-                            }
-
-                            @Override
-                            public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                                Log.v("favorite delete", t.getMessage());
-                            }
-                        });
-                    }
-                }
-            });
         }
     }
 }

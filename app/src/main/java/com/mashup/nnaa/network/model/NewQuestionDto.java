@@ -25,7 +25,12 @@ public class NewQuestionDto implements Serializable {
     @SerializedName("choices")
     @Expose
     private Choices choices;
-
+    @SerializedName("bookmarkQuestionId")
+    @Expose
+    private String bookmarkQuestionId;
+    @SerializedName("isBookmarked")
+    @Expose
+    private boolean flag;
 
     public NewQuestionDto(String id, String content, String category, String type, Choices choices) {
         this.id = id;
@@ -77,5 +82,20 @@ public class NewQuestionDto implements Serializable {
 
     public void setChoices(Choices choices) {
         this.choices = choices;
+    }
+
+    public String getBookmarkQuestionId() {
+        return bookmarkQuestionId;
+    }
+
+    public void setBookmarkQuestionId(String bookmarkQuestionId) {
+        this.bookmarkQuestionId = bookmarkQuestionId;
+    }
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 }

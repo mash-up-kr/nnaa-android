@@ -67,6 +67,7 @@
             android:background="@drawable/login_shape"
             android:hint="이름을 알려주세요!"
             android:inputType="textPersonName"
+            android:maxLength="10"
             android:textAlignment="center"
             tools:ignore="Autofill,HardcodedText" />
 
@@ -119,6 +120,7 @@
             android:hint="영어,숫자,특수문자를 활용하여주세요!"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:maxLength="15"
             android:textAlignment="center"
             tools:ignore="HardcodedText" />
 
@@ -145,6 +147,7 @@
             android:hint="***"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:maxLength="15"
             android:textAlignment="center"
             tools:ignore="HardcodedText" />
 
