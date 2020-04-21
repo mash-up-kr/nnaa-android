@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.question.FavoritesActivity;
 import com.mashup.nnaa.question.QuestionActivity;
 import com.mashup.nnaa.util.AccountManager;
 
@@ -22,7 +24,8 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
     TextView friendType;
     ImageButton selectBtnLeft, selectBtnRight;
     ArrayList<String> type = new ArrayList<>();
-    Button cancleBtn, nextBtn;
+    Button nextBtn;
+    ImageView cancleBtn;
 
     EditText etName;
 
@@ -59,8 +62,8 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
 
         });
 
-        String [] type_str = getResources().getStringArray(R.array.questionlist);
-        Collections.addAll(type,type_str);
+        String[] type_str = getResources().getStringArray(R.array.questionlist);
+        Collections.addAll(type, type_str);
 
         cancleBtn.setOnClickListener((view) -> {
             finish();

@@ -25,15 +25,15 @@ import java.util.List;
 
 public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteViewHolder> implements ItemTouchHelperListener {
 
-    private List<NewQuestionDto> deleteList;
+    private ArrayList<NewQuestionDto> deleteList;
     private Context dContext;
 
-    public DeleteAdapter(Context context, List<NewQuestionDto> list) {
+    public DeleteAdapter(Context context, ArrayList<NewQuestionDto> list) {
         this.deleteList = list;
         this.dContext = context;
     }
 
-    public void setDeleteList(List<NewQuestionDto> deleteList) {
+    public void setDeleteList(ArrayList<NewQuestionDto> deleteList) {
         this.deleteList = deleteList;
         notifyDataSetChanged();
     }

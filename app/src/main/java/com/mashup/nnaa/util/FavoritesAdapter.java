@@ -32,21 +32,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
-    private List<bookmarkQuestionDto> fList;
+    private ArrayList<bookmarkQuestionDto> fList;
     private Context fContext;
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
+    private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+    private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
-    private String id;
-    private String token;
-    private String questionId;
-
-    public FavoritesAdapter(Context context, List<bookmarkQuestionDto> list) {
+    public FavoritesAdapter(Context context, ArrayList<bookmarkQuestionDto> list) {
         this.fList = list;
         this.fContext = context;
     }
 
-    public void setFavoritList(List<bookmarkQuestionDto> fList) {
+    public void setFavoritList(ArrayList<bookmarkQuestionDto> fList) {
         this.fList = fList;
         notifyDataSetChanged();
     }
@@ -57,44 +53,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favorites_question_item, parent, false);
 
-        ViewHolder vh = new ViewHolder(view);
-
-
-        // check box 리스너
-        preferences = vh.check_box_favorites.getContext().getSharedPreferences("check", Context.MODE_PRIVATE);
-        vh.check_box_favorites.setOnCheckedChangeListener(null);
-        vh.check_box_favorites.setChecked(vh.check_box_favorites.isSelected());
-
-        vh.check_box_favorites.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                Toast.makeText(view.getContext(), "즐겨찾기", Toast.LENGTH_LONG).show();
-                preferences = buttonView.getContext().getSharedPreferences("check", MODE_PRIVATE);
-                editor = preferences.edit();
-                editor.putBoolean("check", vh.check_box_favorites.isChecked());
-                editor.apply();
-
-               /* RetrofitHelper.getInstance().favoriteEnroll(id, token, questionId, new Callback<NewQuestionDto>() {
-                    @Override
-                    public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                        Log.v("즐겨찾기 등록", String.valueOf(response.code()));
-                    }
-
-                    @Override
-                    public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                        Log.v("즐겨찾기 등록", "실패:"+ t.getMessage());
-                    }
-                });*/
-                Log.v("즐겨찾기", "Click!");
-            }
-        });
-
-        return vh;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.ViewHolder holder, int position) {
-        holder.onBind(fList.get(position));
-
+        holder.txt_favorites_question.setText(fList.get(position).getContent());
     }
 
     @Override
@@ -115,10 +79,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             txt_favorites_question = itemView.findViewById(R.id.txt_favorites_question);
             check_box_favorites = itemView.findViewById(R.id.check_box_favorites);
 
-        }
-
-        void onBind(bookmarkQuestionDto Item) {
-            txt_favorites_question.setText(Item.getContent());
         }
     }
 }

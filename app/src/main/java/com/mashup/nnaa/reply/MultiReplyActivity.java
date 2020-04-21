@@ -33,8 +33,8 @@ public class MultiReplyActivity extends AppCompatActivity {
 
     TextView reply_number, reply_end_nubmer, txtA, txtB, txtC, txtD, veryYes, Yes, No, veryNo, txtQuestion;
     ImageButton reply_cancel, reply_choice, reply_O, reply_X, btnA, btnB, btnC, btnD;
-    ImageView ox_bar, multi_img1, multi_img2, multi_img3, multi_img4;
-    Button btn_next_question, btn_past;
+    ImageView ox_bar, multi_img1, multi_img2, multi_img3, multi_img4, btn_past;
+    Button btn_next_question;
     EditText replyEdit;
     ScrollView scrollView;
     private ReplyAdapter replyAdapter;
@@ -94,19 +94,11 @@ public class MultiReplyActivity extends AppCompatActivity {
             Toast.makeText(view.getContext(), "즐겨찾기 추가", Toast.LENGTH_SHORT).show();
         });
 
-       /* RecyclerView recyclerAnswer = findViewById(R.id.recycler_answer);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerAnswer.setLayoutManager(layoutManager);
-        recyclerAnswer.setHasFixedSize(true);*/
 
         // ui 키보드에 밀리는거 방지
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         questionDtoList = new ArrayList<>();
-        /*replyAdapter = new ReplyAdapter(this, questionDtoList);
-        recyclerAnswer.setAdapter(replyAdapter);
-*/
-
         this.answerQuestion();
     }
 

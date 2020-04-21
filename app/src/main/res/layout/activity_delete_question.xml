@@ -74,19 +74,29 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/btn_delete_cancel"
             android:layout_width="163dp"
             android:layout_height="70dp"
             android:layout_gravity="bottom"
             android:background="#fefefe"
-            android:text="cancel"
-            android:textColor="#0d0d0d"
-            android:textSize="14sp"
             tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="21dp"
+            android:text="@string/cancle"
+            android:textColor="#730d0d0d"
+            android:textSize="14sp" />
+
 
         <Button
             android:id="@+id/btn_delete"

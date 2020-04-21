@@ -2,15 +2,11 @@ package com.mashup.nnaa.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +17,8 @@ import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.Question;
-import com.mashup.nnaa.network.model.Question;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,6 +31,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     List<NewQuestionDto> questionList;
     Context Qcontext;
+    private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+    private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
     public QuestionAdapter(Context context, List<NewQuestionDto> questionList) {
         this.Qcontext = context;
@@ -59,7 +54,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.ViewHolder holder, int position) {
-
         holder.mName.setText(questionList.get(position).getContent());
     }
 
@@ -83,55 +77,50 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             mName = itemView.findViewById(R.id.info_text);
             qChoice = itemView.findViewById(R.id.question_choice);
 
-            Bundle bundle = ((Activity) Qcontext).getIntent().getExtras();
-
-//            final String id = bundle.getString("id");
-//            final String token = bundle.getString("token");
-            final String category = bundle.getString("category");
-            final String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
-            final String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
-            final String questionId = "5e8c13f10509a8373b106865";
-            final String zero = bundle.getString("zero");
-            NewQuestionDto newQuestionDto = new NewQuestionDto();
-            newQuestionDto.setCategory(category);
-            newQuestionDto.setContent(zero);
-
-            Choices choices = new Choices();
-
+            // 즐겨찾기 등록
             qChoice.setOnCheckedChangeListener(null);
+
             qChoice.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (qChoice.isChecked()) {
-                    RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
-                        @Override
-                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                            qChoice.setChecked(true);
 
+                Bundle bundle = ((Activity)Qcontext).getIntent().getExtras();
 
-                            Log.v("@@@@@@@", "id : " + id + "token: " + token + "content:" + response.body().getContent() + response.code());
+                final String category = bundle.getString("category");
+                int pos = getAdapterPosition();
+                if (pos != RecyclerView.NO_POSITION) {
+                    NewQuestionDto item = questionList.get(pos);
 
-                            Toast.makeText(buttonView.getContext(), "즐겨찾기 추가", Toast.LENGTH_LONG).show();
-                        }
+                    NewQuestionDto newQuestionDto = new NewQuestionDto(item.getId(), item.getContent(), category, item.getType(), item.getChoices());
 
-                        @Override
-                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                    if (qChoice.isChecked()) {
+                        RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
+                            @Override
+                            public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                                qChoice.setChecked(true);
+                                Log.v("favorite", "code:" + response.code() + "content:" + item.getContent() + item.getId() + category + item.getType() + item.getChoices());
+                            }
 
-                        }
-                    });
-                } else {
-                    RetrofitHelper.getInstance().favoriteDelete(id, token, questionId, new Callback<bookmarkQuestionDto>() {
-                        @Override
-                        public void onResponse(Call<bookmarkQuestionDto> call, Response<bookmarkQuestionDto> response) {
-                            Toast.makeText(buttonView.getContext(), "즐겨찾기 해제", Toast.LENGTH_SHORT).show();
-                            Log.v("#######", "id : " + id + "token: " + token);
+                            @Override
+                            public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                                Log.v("favorite delete", t.getMessage());
+                            }
+                        });
+                    } else {
+                        // 즐겨찾기 해제
+                        RetrofitHelper.getInstance().favoriteDelete(id, token, item.getId(), new Callback<NewQuestionDto>() {
+                            @Override
+                            public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                                Toast.makeText(buttonView.getContext(), "즐겨찾기 해제", Toast.LENGTH_SHORT).show();
+                                Log.v("favorite delete", "id : " + id + "token: " + token);
 
-                            qChoice.setChecked(false);
-                        }
+                                qChoice.setChecked(false);
+                            }
 
-                        @Override
-                        public void onFailure(Call<bookmarkQuestionDto> call, Throwable t) {
-
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                                Log.v("favorite delete", t.getMessage());
+                            }
+                        });
+                    }
                 }
             });
         }

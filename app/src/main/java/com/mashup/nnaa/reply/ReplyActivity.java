@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,8 @@ import com.mashup.nnaa.util.AccountManager;
 public class ReplyActivity extends AppCompatActivity {
 
     TextView reply_name;
-    Button btn_not, btn_start;
+    Button  btn_start;
+    ImageView btn_not;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

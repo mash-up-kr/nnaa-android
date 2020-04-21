@@ -1,43 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".reply.MultiReplyActivity">
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="이미지가 열리지 않습니다"
-        android:scaleType="fitXY"
-        android:src="@drawable/img_back_with"
-        tools:ignore="HardcodedText" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="33dp"
-        android:lineSpacingExtra="10sp"
-        android:text="답변 중단하기"
-        android:textColor="#686868"
-        android:textSize="14sp"
-        tools:ignore="HardcodedText" />
-
-    <ImageButton
-        android:id="@+id/reply_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="36dp"
-        android:background="#4Dffffff"
-        android:src="@drawable/cancel_img"
-        tools:ignore="ContentDescription" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_back_with"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="이미지가 열리지 않습니다"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_back_with"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/img_corner"
@@ -45,362 +27,414 @@
             android:layout_height="68dp"
             android:layout_marginTop="263dp"
             android:background="@drawable/corner_shape"
-            android:contentDescription="@string/StringValue" />
-
-
-        <TextView
-            android:id="@+id/reply_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="297dp"
-            android:lineSpacingExtra="12sp"
-            android:textColor="#2a4bff"
-            android:textSize="15sp"
-            tools:text="01" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="297dp"
-            android:lineSpacingExtra="12sp"
-            android:text="/"
-            android:textColor="#2a4bff"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/reply_end_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="63dp"
-            android:layout_marginTop="297dp"
-            android:lineSpacingExtra="12sp"
-            android:textColor="#2a4bff"
-            android:textSize="15sp"
-            tools:text="20" />
-
-        <TextView
-            android:id="@+id/text_question"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="328dp"
-            android:layout_marginEnd="100dp"
-            android:lineSpacingExtra="11sp"
-            android:textColor="#2d2e35"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText"
-            tools:text="질문" />
-
-
-        <ImageButton
-            android:id="@+id/reply_choice"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="290dp"
-            android:layout_marginTop="317dp"
-            android:background="@color/colorWhite"
             android:contentDescription="@string/StringValue"
-            android:src="@drawable/choice_btn_heart_off" />
+            app:layout_constraintTop_toBottomOf="@id/img_back_with" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/text_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="48dp"
+        android:lineSpacingExtra="10sp"
+        android:text="답변 중단하기"
+        android:textColor="#686868"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/reply_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:background="#4Dffffff"
+        android:src="@drawable/cancel_img"
+        app:layout_constraintStart_toEndOf="@id/text_cancel"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
 
-        <EditText
-            android:id="@+id/reply_edit"
+    <TextView
+        android:id="@+id/reply_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="297dp"
+        android:lineSpacingExtra="12sp"
+        android:textColor="#2a4bff"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="01" />
+
+    <TextView
+        android:id="@+id/between"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="297dp"
+        android:lineSpacingExtra="12sp"
+        android:text="/"
+        android:textColor="#2a4bff"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/reply_number"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reply_end_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="297dp"
+        android:lineSpacingExtra="12sp"
+        android:textColor="#2a4bff"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/between"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/text_question"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="100dp"
+        android:lineSpacingExtra="11sp"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reply_number"
+        tools:ignore="HardcodedText"
+        tools:text="엄마는 현재 삶에 만족하나요?" />
+
+
+    <ImageButton
+        android:id="@+id/reply_choice"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="301dp"
+        android:layout_marginEnd="22dp"
+        android:background="@color/colorWhite"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/choice_btn_heart_off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/reply_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_question"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="488dp"
+        android:backgroundTint="@color/colorBlue"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="답변을 입력해주세요"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,TextFields" />
+
+    <ImageButton
+        android:id="@+id/reply_o_btn"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_below="@id/text_question"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="466dp"
+        android:background="#f3f3f3"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/group_3"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/reply_ox_bar"
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/text_question"
+        android:layout_marginStart="183dp"
+        android:layout_marginTop="489dp"
+        android:contentDescription="@string/StringValue"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ox_choice_bar" />
+
+    <ImageButton
+        android:id="@+id/reply_x_btn"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_below="@id/text_question"
+        android:layout_marginStart="215dp"
+        android:layout_marginTop="466dp"
+        android:background="#f3f3f3"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/quiz_btn_x"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="392dp"
+        android:layout_marginBottom="70dp"
+        android:clipToPadding="false"
+        android:scrollbarStyle="insideInset"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_question"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="105dp"
-            android:backgroundTint="@color/colorBlue"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:hint="답변을 입력해주세요"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textSize="14sp"
-            android:visibility="gone"
-            tools:ignore="HardcodedText,TextFields" />
+            android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/reply_o_btn"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_below="@id/text_question"
-            android:layout_marginStart="61dp"
-            android:layout_marginTop="73dp"
-            android:background="#f3f3f3"
-            android:contentDescription="@string/StringValue"
-            android:src="@drawable/group_3"
-            android:visibility="gone" />
+            <ImageButton
+                android:id="@+id/multi_btn_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/multi_reply_oval"
+                android:contentDescription="@string/StringValue"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:lineSpacingExtra="12sp"
+                android:text="A"
+                android:textColor="#a6a6a6"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/mutli_txt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="91dp"
+                android:layout_marginTop="14dp"
+                android:lineSpacingExtra="11sp"
+                android:text="매우 그렇다"
+                android:textColor="#2d2e35"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText"
+                tools:text="매우 그렇다" />
+
+            <ImageView
+                android:id="@+id/multi_img1"
+                android:layout_width="316dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="22dp"
+                android:contentDescription="@string/StringValue"
+                android:src="@drawable/multi_reply_corner"
+                android:visibility="gone" />
+
+
+            <ImageView
+                android:id="@+id/multi_img2"
+                android:layout_width="316dp"
+                android:layout_height="54dp"
+                android:layout_below="@id/multi_img1"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/StringValue"
+                android:src="@drawable/multi_reply_corner"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/mutli_txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/multi_img1"
+                android:layout_marginStart="91dp"
+                android:layout_marginTop="28dp"
+                android:lineSpacingExtra="11sp"
+                android:text="그렇다"
+                android:textColor="#2d2e35"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText"
+                tools:text="그렇다" />
+
+            <ImageButton
+                android:id="@+id/multi_btn_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/multi_img1"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="19dp"
+                android:background="@drawable/multi_reply_oval"
+                android:contentDescription="@string/StringValue"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_B"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/multi_img1"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="30dp"
+                android:lineSpacingExtra="12sp"
+                android:text="B"
+                android:textColor="#a6a6a6"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+
+            <ImageView
+                android:id="@+id/multi_img3"
+                android:layout_width="316dp"
+                android:layout_height="54dp"
+                android:layout_below="@id/multi_img2"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/StringValue"
+                android:src="@drawable/multi_reply_corner"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/mutli_txt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/multi_img2"
+                android:layout_marginStart="91dp"
+                android:layout_marginTop="28dp"
+                android:lineSpacingExtra="11sp"
+                android:text="아니다"
+                android:textColor="#2d2e35"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText"
+                tools:text="아니다" />
+
+            <ImageButton
+                android:id="@+id/multi_btn_c"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_below="@id/multi_img2"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="19dp"
+                android:background="@drawable/multi_reply_oval"
+                android:contentDescription="@string/StringValue"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/multi_img2"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="30dp"
+                android:lineSpacingExtra="12sp"
+                android:text="C"
+                android:textColor="#a6a6a6"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+
+            <ImageView
+                android:id="@+id/multi_img4"
+                android:layout_width="316dp"
+                android:layout_height="54dp"
+                android:layout_below="@id/multi_img3"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="14dp"
+                android:contentDescription="@string/StringValue"
+                android:src="@drawable/multi_reply_corner"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/multi_btn_d"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_below="@id/multi_img3"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="19dp"
+                android:background="@drawable/multi_reply_oval"
+                android:contentDescription="@string/StringValue"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/multi_img3"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="30dp"
+                android:lineSpacingExtra="12sp"
+                android:text="D"
+                android:textColor="#a6a6a6"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/mutli_txt4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/multi_img3"
+                android:layout_marginStart="91dp"
+                android:layout_marginTop="28dp"
+                android:lineSpacingExtra="11sp"
+                android:text="매우 아니다"
+                android:textColor="#2d2e35"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText"
+                tools:text="매우 아니다" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-            android:id="@+id/reply_ox_bar"
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/text_question"
-            android:layout_marginStart="183dp"
-            android:layout_marginTop="96dp"
+            android:id="@+id/btn_past"
+            android:layout_width="163dp"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
             android:contentDescription="@string/StringValue"
-            android:visibility="gone"
+            android:scaleType="fitStart"
+            android:src="@drawable/choice_btn_arr_l"
+            tools:ignore="HardcodedText" />
 
-            app:srcCompat="@drawable/ox_choice_bar" />
+        <Button
+            android:id="@+id/btn_next_question"
+            android:layout_width="240dp"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_shape"
+            android:drawableEnd="@drawable/choice_btn_arr_r"
+            android:text="  Next Question"
+            android:textColor="#fefefe"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText" />
+    </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/reply_x_btn"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_below="@id/text_question"
-            android:layout_marginStart="215dp"
-            android:layout_marginTop="73dp"
-            android:background="#f3f3f3"
-            android:contentDescription="@string/StringValue"
-            android:src="@drawable/quiz_btn_x"
-            android:visibility="gone" />
-
-        <ScrollView
-            android:id="@+id/scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbarStyle="insideInset"
-            android:clipToPadding="false"
-            android:layout_below="@id/text_question"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="70dp"
-            android:visibility="gone">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:id="@+id/multi_btn_a"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="6dp"
-                    android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/txt_A"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginTop="15dp"
-                    android:lineSpacingExtra="12sp"
-                    android:text="A"
-                    android:textColor="#a6a6a6"
-                    android:textSize="15sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/mutli_txt1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="91dp"
-                    android:layout_marginTop="14dp"
-                    android:lineSpacingExtra="11sp"
-                    android:text="매우 그렇다"
-                    android:textColor="#2d2e35"
-                    android:textSize="16sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText"
-                    tools:text="매우 그렇다" />
-
-                <ImageView
-                    android:id="@+id/multi_img1"
-                    android:layout_width="316dp"
-                    android:layout_height="54dp"
-                    android:layout_marginStart="22dp"
-                    android:contentDescription="@string/StringValue"
-                    android:src="@drawable/multi_reply_corner"
-                    android:visibility="invisible" />
-
-
-                <ImageView
-                    android:id="@+id/multi_img2"
-                    android:layout_width="316dp"
-                    android:layout_height="54dp"
-                    android:layout_below="@id/multi_img1"
-                    android:layout_marginStart="22dp"
-                    android:layout_marginTop="14dp"
-                    android:contentDescription="@string/StringValue"
-                    android:src="@drawable/multi_reply_corner"
-                    android:visibility="invisible" />
-
-
-                <TextView
-                    android:id="@+id/mutli_txt2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/multi_img1"
-                    android:layout_marginStart="91dp"
-                    android:layout_marginTop="28dp"
-                    android:lineSpacingExtra="11sp"
-                    android:text="그렇다"
-                    android:textColor="#2d2e35"
-                    android:textSize="16sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText"
-                    tools:text="그렇다" />
-
-                <ImageButton
-                    android:id="@+id/multi_btn_b"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/multi_img1"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="19dp"
-                    android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/txt_B"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/multi_img1"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginTop="30dp"
-                    android:lineSpacingExtra="12sp"
-                    android:text="B"
-                    android:textColor="#a6a6a6"
-                    android:textSize="15sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText" />
-
-
-                <ImageView
-                    android:id="@+id/multi_img3"
-                    android:layout_width="316dp"
-                    android:layout_height="54dp"
-                    android:layout_below="@id/multi_img2"
-                    android:layout_marginStart="22dp"
-                    android:layout_marginTop="14dp"
-                    android:contentDescription="@string/StringValue"
-                    android:src="@drawable/multi_reply_corner"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/mutli_txt3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/multi_img2"
-                    android:layout_marginStart="91dp"
-                    android:layout_marginTop="28dp"
-                    android:lineSpacingExtra="11sp"
-                    android:text="아니다"
-                    android:textColor="#2d2e35"
-                    android:textSize="16sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText"
-                    tools:text="아니다" />
-
-                <ImageButton
-                    android:id="@+id/multi_btn_c"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:layout_below="@id/multi_img2"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="19dp"
-                    android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/txt_C"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/multi_img2"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginTop="30dp"
-                    android:lineSpacingExtra="12sp"
-                    android:text="C"
-                    android:textColor="#a6a6a6"
-                    android:textSize="15sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText" />
-
-
-                <ImageView
-                    android:id="@+id/multi_img4"
-                    android:layout_width="316dp"
-                    android:layout_height="54dp"
-                    android:layout_below="@id/multi_img3"
-                    android:layout_marginStart="22dp"
-                    android:layout_marginTop="14dp"
-                    android:contentDescription="@string/StringValue"
-                    android:src="@drawable/multi_reply_corner"
-                    android:visibility="invisible" />
-
-                <ImageButton
-                    android:id="@+id/multi_btn_d"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:layout_below="@id/multi_img3"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="19dp"
-                    android:background="@drawable/multi_reply_oval"
-                    android:contentDescription="@string/StringValue"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/txt_D"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/multi_img3"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginTop="30dp"
-                    android:lineSpacingExtra="12sp"
-                    android:text="D"
-                    android:textColor="#a6a6a6"
-                    android:textSize="15sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/mutli_txt4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/multi_img3"
-                    android:layout_marginStart="91dp"
-                    android:layout_marginTop="28dp"
-                    android:lineSpacingExtra="11sp"
-                    android:text="매우 아니다"
-                    android:textColor="#2d2e35"
-                    android:textSize="16sp"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText"
-                    tools:text="매우 아니다" />
-            </RelativeLayout>
-        </ScrollView>
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/btn_past"
-        android:layout_width="163dp"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom"
-        android:background="#ffffff"
-        android:drawableStart="@drawable/choice_btn_arr_l"
-        android:elevation="3dp"
-        android:textSize="14sp"
-        tools:ignore="HardcodedText" />
-
-    <Button
-        android:id="@+id/btn_next_question"
-        android:layout_width="240dp"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/button_shape"
-        android:drawableEnd="@drawable/choice_btn_arr_r"
-        android:text="  Next Question"
-        android:textColor="#fefefe"
-        android:textSize="14sp"
-        tools:ignore="HardcodedText" />
-
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,20 +45,6 @@
         android:background="#ffffff"
         android:src="@drawable/cancel_img" />
 
-    <EditText
-        android:id="@+id/edit_custom"
-        android:layout_width="309dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="23dp"
-        android:background="@drawable/question_corner"
-        android:drawableStart="@drawable/edit_1482"
-        android:hint=" 질문을 직접 입력해보세요"
-        android:inputType="textAutoComplete"
-        android:textSize="13sp"
-        android:textStyle="bold" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

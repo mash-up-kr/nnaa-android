@@ -46,29 +46,15 @@
         app:layout_constraintTop_toBottomOf="@id/txt_type"
         tools:ignore="HardcodedText" />
 
-
-    <ImageView
-        android:id="@+id/img_delete"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="34dp"
-        android:src="@drawable/delete_1487"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-
     <ImageView
         android:id="@+id/img_add"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="34dp"
         android:layout_marginEnd="21dp"
         android:contentDescription="@string/StringValue"
         android:src="@drawable/plus_white"
-        app:layout_constraintLeft_toRightOf="@id/img_delete"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -92,16 +78,22 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/btn_cancel"
             android:layout_width="163dp"
             android:layout_height="70dp"
             android:layout_gravity="bottom"
             android:background="#fefefe"
-            android:text="cancel"
-            android:textColor="#0d0d0d"
-            android:textSize="14sp"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="21dp"
+            android:text="@string/cancle"
+            android:textColor="#730d0d0d"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btn_next"

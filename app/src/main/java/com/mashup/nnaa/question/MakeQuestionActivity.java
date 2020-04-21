@@ -3,9 +3,11 @@ package com.mashup.nnaa.question;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -59,7 +61,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
 
         // QuestionActivity에 줄 값들
         Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
         String type = intent.getStringExtra("type");
         String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
@@ -133,16 +134,20 @@ public class MakeQuestionActivity extends AppCompatActivity {
 
         CustomDone.setOnClickListener(view -> {
 
+            if (Content_Edit.getText().toString().isEmpty() && Content_Edit.getText().toString().length() == 0) {
+                Toast.makeText(MakeQuestionActivity.this, "질문 내용을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                CustomDone.setEnabled(false);
+            } else
+                CustomDone.setEnabled(true);
+
             mk_intent.putExtra("content", Content_Edit.getText().toString());
             mk_intent.putExtra("setA", FirstEdit.getText().toString());
             mk_intent.putExtra("setB", SecondEdit.getText().toString());
             mk_intent.putExtra("setC", ThirdEdit.getText().toString());
             mk_intent.putExtra("setD", ForthEdit.getText().toString());
-            mk_intent.putExtra("category", category);
 
             setResult(RESULT_UPDATE_OK, mk_intent);
             finish();
-
             CustomDone.setBackgroundColor(Color.BLUE);
             Toast.makeText(MakeQuestionActivity.this, "질문 작성 완료!", Toast.LENGTH_SHORT).show();
         });
