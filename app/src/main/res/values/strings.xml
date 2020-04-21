@@ -29,6 +29,7 @@
     <string name="setting_sign_out">Sign out</string>
     <string name="setting_del_account">Delete account</string>
     <string name="setting_blocked_users">Blocked users</string>
+    <string name="setting_manage_favorites">Favorite question management</string>
 
     <string name="setting_want_to_sign_out">Do you really want to sign out?</string>
 
