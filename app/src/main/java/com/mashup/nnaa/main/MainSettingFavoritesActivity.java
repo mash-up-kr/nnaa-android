@@ -9,17 +9,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
-import com.mashup.nnaa.util.QuestionAdapter;
+import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,8 +29,10 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
     private TextView txt_manage_favorites;
     private Button btn_cancel_msf, btn_next_msf;
     private RecyclerView recyclerQuestion;
-    private QuestionAdapter questionAdapter;
-    private List<NewQuestionDto> questionList;
+    //private QuestionAdapter questionAdapter;
+    //private List<NewQuestionDto> questionList;
+    private FavoritesAdapter favoritesAdapter;
+    private ArrayList<bookmarkQuestionDto> favoritesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,36 +70,49 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
             //적용 완료하고 세팅페이지로 넘어가야함
         });
 
-        recyclerQuestion = findViewById(R.id.recycler_main_setting_favorites);
+        /*recyclerQuestion = findViewById(R.id.recycler_main_setting_favorites);
         questionList = new ArrayList<>();
         questionAdapter = new QuestionAdapter(this, questionList);
         recyclerQuestion.setAdapter(questionAdapter);
-        this.getQuestionRandom();
+        this.getQuestionRandom();*/
+
+        recyclerQuestion = findViewById(R.id.recycler_main_setting_favorites);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerQuestion.setLayoutManager(linearLayoutManager);
+
+        favoritesList = new ArrayList<bookmarkQuestionDto>();
+        favoritesAdapter = new FavoritesAdapter(this, favoritesList);
+        recyclerQuestion.setAdapter(favoritesAdapter);
+        recyclerQuestion.setHasFixedSize(true);
+
+        this.showFavorites();
 
     }
 
-    private void getQuestionRandom() {
+    private void showFavorites() {
         Intent intent = getIntent();
         String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
-        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<List<bookmarkQuestionDto>>() {
+        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<ArrayList<bookmarkQuestionDto>>() {
             @Override
-            public void onResponse(Call<List<bookmarkQuestionDto>> call, Response<List<bookmarkQuestionDto>> response) {
-                if (questionList != null) {
+            public void onResponse(Call<ArrayList<bookmarkQuestionDto>> call, Response<ArrayList<bookmarkQuestionDto>> response) {
+                if (response.isSuccessful()) {
+                    favoritesList = response.body();
+                    Log.v("즐겨찾기 api", "Response = " + response.code());
+                    favoritesAdapter.setFavoritList(favoritesList);
+                } else if (response.code() == 400) {
+                    Toast.makeText(MainSettingFavoritesActivity.this, "즐겨찾기 한 질문이 없습니다.", Toast.LENGTH_SHORT).show();
 
-                } else if (questionList.size() == 0) {
-                    Toast.makeText(MainSettingFavoritesActivity.this, "즐겨찾기된 질문이 없습니다", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.v("QuestionRandom", "No Question");
+                    Log.v("즐겨찾기 api", response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<bookmarkQuestionDto>> call, Throwable t) {
-                Log.v("QuestionRandom", "에러:" + t.getMessage());
+            public void onFailure(Call<ArrayList<bookmarkQuestionDto>> call, Throwable t) {
+                Log.v("즐겨찾기 api", "에러:" + t.getMessage());
             }
-
         });
     }
 }

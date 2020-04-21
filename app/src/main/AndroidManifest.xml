@@ -73,6 +73,7 @@
         <activity
             android:name=".question.CustomQuestionActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".main.MainSettingFavoritesActivity"/>
     </application>
 
 </manifest>
