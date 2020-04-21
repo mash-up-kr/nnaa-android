@@ -82,9 +82,9 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
         String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
-        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<List<bookmarkQuestionDto>>() {
+        RetrofitHelper.getInstance().showFavorites(id, token, new Callback<ArrayList<NewQuestionDto>>() {
             @Override
-            public void onResponse(Call<List<bookmarkQuestionDto>> call, Response<List<bookmarkQuestionDto>> response) {
+            public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionList != null) {
 
                 } else if (questionList.size() == 0) {
@@ -95,7 +95,7 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<bookmarkQuestionDto>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<NewQuestionDto>> call, Throwable t) {
                 Log.v("QuestionRandom", "에러:" + t.getMessage());
             }
 
