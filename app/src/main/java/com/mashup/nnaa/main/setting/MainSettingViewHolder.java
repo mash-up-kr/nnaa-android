@@ -1,6 +1,5 @@
 package com.mashup.nnaa.main.setting;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -10,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.login.LoginManager;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mashup.nnaa.LoginActivity;
 import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.main.MainSettingFavoritesActivity;
 import com.mashup.nnaa.util.AccountManager;
 
 public class MainSettingViewHolder extends RecyclerView.ViewHolder {
@@ -45,7 +44,11 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
             case SIGN_OUT:
                 callSignOut();
                 break;
+            case MANAGE_FAVORITES:
+                callFavoritesManagement();
+                break;
         }
+
     }
 
     private void callSignOut() {
@@ -81,5 +84,11 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
                 )
                 .setNegativeButton(R.string.common_no, null)
                 .show();
+    }
+
+    private void callFavoritesManagement() {
+        Intent intent = new Intent(NnaaApplication.getAppContext(), MainSettingFavoritesActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        NnaaApplication.getAppContext().startActivity(intent);
     }
 }

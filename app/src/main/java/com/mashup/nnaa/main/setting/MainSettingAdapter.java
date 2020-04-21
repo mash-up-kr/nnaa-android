@@ -15,9 +15,10 @@ import java.util.Arrays;
 
 public class MainSettingAdapter extends RecyclerView.Adapter<MainSettingViewHolder> {
     public enum SettingList {
-        SIGN_OUT(R.string.setting_sign_out);//,
+        SIGN_OUT(R.string.setting_sign_out),//,
         //DELETE_ACCOUNT(R.string.setting_del_account),
         //BLOCKED_USERS(R.string.setting_blocked_users);
+        MANAGE_FAVORITES(R.string.setting_manage_favorites);
         // Todo : 서버 api 없는 기능들 주석처리함. 서버에서 추가되면 기능 지원
 
         private int textResId;
