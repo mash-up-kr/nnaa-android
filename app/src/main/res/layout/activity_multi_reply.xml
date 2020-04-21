@@ -139,6 +139,7 @@
         android:hint="답변을 입력해주세요"
         android:importantForAutofill="no"
         android:inputType="text"
+        android:maxLength="30"
         android:textSize="14sp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"

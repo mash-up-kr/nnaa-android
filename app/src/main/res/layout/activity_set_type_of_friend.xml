@@ -46,6 +46,7 @@
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:autofillHints="Name"
+                android:ems="10"
                 android:inputType="text"
                 android:textAlignment="center"
                 tools:ignore="LabelFor" />
