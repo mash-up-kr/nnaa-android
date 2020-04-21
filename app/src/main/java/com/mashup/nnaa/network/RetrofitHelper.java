@@ -157,9 +157,9 @@ public class RetrofitHelper {
     }
 
     // 즐겨찾기 해둔 질문들 보여주기
-    public void showFavorites(String id, String token, Callback<ArrayList<bookmarkQuestionDto>> callback) {
+    public void showFavorites(String id, String token, Callback<ArrayList<NewQuestionDto>> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<ArrayList<bookmarkQuestionDto>> showFavorites = service.showFavorites(id, token);
+        Call<ArrayList<NewQuestionDto>> showFavorites = service.showFavorites(id, token);
         showFavorites.enqueue(callback);
     }
 

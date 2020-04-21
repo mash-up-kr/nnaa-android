@@ -53,8 +53,8 @@ public interface UserControllerService {
 
     // 즐겨찾기 해둔 질문들 보여주기
     @GET("user/bookmark")
-    Call<ArrayList<bookmarkQuestionDto>> showFavorites(@Header("id") String id,
-                                                       @Header("token") String token);
+    Call<ArrayList<NewQuestionDto>> showFavorites(@Header("id") String id,
+                                                  @Header("token") String token);
 
     // 즐겨찾기 등록
     @POST("user/bookmark")
@@ -65,8 +65,8 @@ public interface UserControllerService {
     // 즐겨찾기 취소
     @DELETE("user/bookmark/{bookmarkQuestionId}")
     Call<NewQuestionDto> favoriteDelete(@Header("id") String id,
-                                             @Header("token") String token,
-                                             @Path("bookmarkQuestionId") String bookmarkQuestionId);
+                                        @Header("token") String token,
+                                        @Path("bookmarkQuestionId") String bookmarkQuestionId);
 
     // 이름으로 유저찾기
     @GET("user")

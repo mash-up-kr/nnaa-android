@@ -75,9 +75,8 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
         dArrayList = new ArrayList<>();
 
-        ArrayList<NewQuestionDto> list = (ArrayList<NewQuestionDto>) intent.getSerializableExtra("list");
-        deleteAdapter = new DeleteAdapter(this, list);
-
+        dArrayList = (ArrayList<NewQuestionDto>) intent.getSerializableExtra("list");
+        deleteAdapter = new DeleteAdapter(this, dArrayList);
         recyclerDelete.setAdapter(deleteAdapter);
         recyclerDelete.setHasFixedSize(true);
         deleteAdapter.notifyDataSetChanged();
@@ -93,13 +92,10 @@ public class DeleteQuestionActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "질문삭제 완료.", Toast.LENGTH_SHORT).show();
 
                 Intent delete_question = new Intent(DeleteQuestionActivity.this, LocalQuestionActivity.class);
-                delete_question.putExtra("category", category);
-                delete_question.putExtra("name", name);
-                delete_question.putExtra("type", type);
 
-                delete_question.putExtra("delete", list);
+                delete_question.putExtra("delete", dArrayList);
+
                 setResult(RESULT_DELETE_OK, delete_question);
-                //startActivity(delete_question);
                 finish();
             });
             builder.setNegativeButton("아니요", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문 삭제를 완료해주세요~", Toast.LENGTH_SHORT).show());

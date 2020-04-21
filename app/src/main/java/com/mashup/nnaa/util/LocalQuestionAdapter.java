@@ -1,6 +1,7 @@
 package com.mashup.nnaa.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,67 @@ public class LocalQuestionAdapter extends RecyclerView.Adapter<LocalQuestionAdap
     @Override
     public void onBindViewHolder(@NonNull LocalQuestionAdapter.ViewHolder holder, int position) {
         holder.local_content.setText(list.get(position).getContent());
+        holder.bookmark.setChecked(list.get(position).isFlag());
+
+        SharedPreferences pref = mContext.getSharedPreferences("check",0);
+        if (pref.contains("checked") && pref.getBoolean("checked", true)) {
+            holder.bookmark.setChecked(true);
+        } else {
+            holder.bookmark.setChecked(false);
+        }
+
+        holder.bookmark.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+
+                NewQuestionDto item = list.get(pos);
+
+                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getId(), item.getContent(), item.getCategory(), item.getType(), item.getChoices());
+
+                if (holder.bookmark.isChecked()) {
+                    RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
+                        @Override
+                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+                            // local에서 하트 여부처리
+                            newQuestionDto.setFlag(true);
+                            holder.bookmark.setChecked(newQuestionDto.isFlag());
+                            Log.v("bookmark", "response:" + response.code() + item.getContent() + item.getId());
+                            SharedPreferences pref = mContext.getSharedPreferences("check",0);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putBoolean("checked", true);
+                            editor.apply();
+                        }
+
+                        @Override
+                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                            Log.v("Local bookmark", t.getMessage());
+                        }
+                    });
+                } else {
+                    // 즐찾 해제
+
+                    // local question id 없어서 안됨
+                    RetrofitHelper.getInstance().favoriteDelete(id, token, item.getId(), new Callback<NewQuestionDto>() {
+                        @Override
+                        public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
+
+                            Log.v("bookmark delete", "response:" + response.code() + item.getContent() + item.getId());
+                            holder.bookmark.setChecked(false);
+                            newQuestionDto.setFlag(false);
+                            SharedPreferences pref = mContext.getSharedPreferences("check",0);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putBoolean("checked", false);
+                            editor.apply();
+                        }
+
+                        @Override
+                        public void onFailure(Call<NewQuestionDto> call, Throwable t) {
+                            Log.v("bookmark delete", t.getMessage());
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
@@ -76,48 +138,6 @@ public class LocalQuestionAdapter extends RecyclerView.Adapter<LocalQuestionAdap
             local_content = itemView.findViewById(R.id.local_question);
             bookmark = itemView.findViewById(R.id.local_choice);
 
-            bookmark.setOnCheckedChangeListener(null);
-            bookmark.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-                int pos = getAdapterPosition();
-                if (pos != RecyclerView.NO_POSITION) {
-                    NewQuestionDto item = list.get(pos);
-
-                    NewQuestionDto newQuestionDto = new NewQuestionDto(item.getId(), item.getContent(), item.getCategory(), item.getType(), item.getChoices());
-
-                    if (bookmark.isChecked()) {
-                        // 북마크 등록
-                        RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
-                            @Override
-                            public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                                bookmark.setChecked(true);
-                                Log.v("bookmark", "response:" + response.code() + item.getContent() + item.getId());
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                                Log.v("Local bookmark", t.getMessage());
-                            }
-                        });
-                    } else {
-                        // 북마크 해제
-                        RetrofitHelper.getInstance().favoriteDelete(id, token, item.getId(), new Callback<NewQuestionDto>() {
-                            @Override
-                            public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-
-                                Log.v("bookmark delete", "response:" + response.code() + item.getContent() + item.getId());
-                                bookmark.setChecked(false);
-                            }
-
-                            @Override
-                            public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                                Log.v("bookmark delete", t.getMessage());
-                            }
-                        });
-                    }
-                }
-            });
         }
     }
 }

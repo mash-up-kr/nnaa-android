@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class LocalQuestionActivity extends AppCompatActivity {
 
     private EditText makeQuestion;
     private ImageView question_delete;
+    private ImageButton img_past;
     private Button btn_favor;
     private LocalQuestionAdapter localQuestionAdapter;
     private ArrayList<NewQuestionDto> localList;
@@ -58,9 +60,14 @@ public class LocalQuestionActivity extends AppCompatActivity {
         String name_type = intent.getStringExtra("type");
         String name = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
 
+        img_past = findViewById(R.id.imgbtn_past);
         makeQuestion = findViewById(R.id.local_mk_edit);
         question_delete = findViewById(R.id.img_delete);
         btn_favor = findViewById(R.id.btn_favorites);
+
+        img_past.setOnClickListener(view -> {
+            finish();
+        });
 
         RecyclerView local_recycler = findViewById(R.id.local_recyclerview);
 
@@ -91,7 +98,7 @@ public class LocalQuestionActivity extends AppCompatActivity {
             deleteintent.putExtra("name_type", name_type);
             deleteintent.putExtra("list", localList);
 
-            startActivityForResult(deleteintent, 0);
+            startActivityForResult(deleteintent, 1000);
         });
         btn_favor.setOnClickListener(view ->
         {
@@ -132,21 +139,19 @@ public class LocalQuestionActivity extends AppCompatActivity {
                             "type: " + type + "," + "choices: " + "[a]:" + a + "," + "[b]:" + b + "," + "[c]:" + c + "," + "[d]:" + d);
 
                     localQuestionAdapter.notifyDataSetChanged();
-
                 }
                 break;
 
             case DeleteQuestionActivity.RESULT_DELETE_OK:
 
-                Intent intent = getIntent();
+                localList = (ArrayList<NewQuestionDto>) data.getSerializableExtra("delete");
+                setQuestion(localList);
+                localQuestionAdapter.setLocalQuestionList(localList);
 
-                ArrayList<NewQuestionDto> list = (ArrayList<NewQuestionDto>) intent.getSerializableExtra("delete");
-                localQuestionAdapter = new LocalQuestionAdapter(this, list);
-                localQuestionAdapter.notifyDataSetChanged();
-
-
+                break;
         }
     }
+
 
     private void setQuestion(ArrayList<NewQuestionDto> localList) {
         SharedPreferences prefs = getSharedPreferences("list", 0);

@@ -132,13 +132,12 @@ public class MakeQuestionActivity extends AppCompatActivity {
             mk_intent.putExtra("type", "");
         });
 
+        if (Content_Edit.getText().toString().isEmpty() && Content_Edit.getText().toString().length() == 0) {
+            Toast.makeText(MakeQuestionActivity.this, "질문 내용을 입력해주세요!", Toast.LENGTH_SHORT).show();
+            Content_Edit.requestFocus();
+            CustomDone.setEnabled(false);
+        }
         CustomDone.setOnClickListener(view -> {
-
-            if (Content_Edit.getText().toString().isEmpty() && Content_Edit.getText().toString().length() == 0) {
-                Toast.makeText(MakeQuestionActivity.this, "질문 내용을 입력해주세요!", Toast.LENGTH_SHORT).show();
-                CustomDone.setEnabled(false);
-            } else
-                CustomDone.setEnabled(true);
 
             mk_intent.putExtra("content", Content_Edit.getText().toString());
             mk_intent.putExtra("setA", FirstEdit.getText().toString());
@@ -146,6 +145,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             mk_intent.putExtra("setC", ThirdEdit.getText().toString());
             mk_intent.putExtra("setD", ForthEdit.getText().toString());
 
+            CustomDone.setEnabled(true);
             setResult(RESULT_UPDATE_OK, mk_intent);
             finish();
             CustomDone.setBackgroundColor(Color.BLUE);
