@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reply.ReplyActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/StringValue"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_back_read" />
+
+    <TextView
+        android:id="@+id/reply_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="134dp"
+        android:lineSpacingExtra="7sp"
+        android:textColor="#313fc4"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="승윤님의" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="6dp"
+        android:lineSpacingExtra="6sp"
+        android:text="질문이 도착했어요"
+        android:textColor="#313fc4"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reply_name"
+        tools:ignore="HardcodedText" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_not"
+            android:layout_width="163dp"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorWhite"
+            android:contentDescription="@string/StringValue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="21dp"
+            android:text="not now"
+            android:textColor="#730d0d0d"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="240dp"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_shape"
+            android:text="Let's start"
+            android:textColor="#fefefe"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText" />
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

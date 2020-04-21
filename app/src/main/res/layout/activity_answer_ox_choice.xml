@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnswerOxChoiceActivity"
-    >
+    tools:context=".answer.AnswerOxChoiceActivity">
 
     <ImageView
         android:id="@+id/answer_ox_background"
@@ -46,7 +45,6 @@
         android:background="@drawable/white_rect_rad_34">
 
         <TextView
-            android:id="@+id/questionnaire_number_in_ox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -80,7 +78,7 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/choice_btn_heart_in_ox"
+                android:id="@+id/choice_btn_heart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

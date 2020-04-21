@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/multi_btn_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue"
+        />
+
+    <TextView
+        android:id="@+id/txt_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="16dp"
+        android:lineSpacingExtra="12sp"
+        android:text="A"
+        android:textColor="#a6a6a6"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/mutli_txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="14dp"
+        android:lineSpacingExtra="11sp"
+        android:text="매우 그렇다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="매우 그렇다" />
+
+    <ImageView
+        android:id="@+id/multi_img1"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/multi_reply_corner" />
+
+
+    <ImageView
+        android:id="@+id/multi_img2"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/multi_reply_corner" />
+
+
+    <TextView
+        android:id="@+id/mutli_txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="82dp"
+        android:lineSpacingExtra="11sp"
+        android:text="그렇다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="그렇다" />
+
+    <ImageButton
+        android:id="@+id/multi_btn_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue"
+        />
+    <TextView
+        android:id="@+id/txt_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="84dp"
+        android:lineSpacingExtra="12sp"
+        android:text="B"
+        android:textColor="#a6a6a6"
+        android:textSize="15sp" />
+
+
+    <ImageView
+        android:id="@+id/multi_img3"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="136dp"
+        android:src="@drawable/multi_reply_corner" />
+
+    <TextView
+        android:id="@+id/mutli_txt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="150dp"
+        android:lineSpacingExtra="11sp"
+        android:text="아니다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="아니다" />
+
+    <ImageButton
+        android:id="@+id/multi_btn_c"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="141dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue"
+        />
+
+    <TextView
+        android:id="@+id/txt_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="153dp"
+        android:lineSpacingExtra="12sp"
+        android:text="C"
+        android:textColor="#a6a6a6"
+        android:textSize="15sp" />
+
+
+    <ImageView
+        android:id="@+id/multi_img4"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="204dp"
+        android:src="@drawable/multi_reply_corner" />
+
+    <ImageButton
+        android:id="@+id/multi_btn_d"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="210dp"
+        android:background="@drawable/multi_reply_oval"
+        android:contentDescription="@string/StringValue" />
+
+    <TextView
+        android:id="@+id/txt_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="222dp"
+        android:lineSpacingExtra="12sp"
+        android:text="D"
+        android:textColor="#a6a6a6"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/mutli_txt4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="221dp"
+        android:lineSpacingExtra="11sp"
+        android:text="매우 아니다"
+        android:textColor="#2d2e35"
+        android:textSize="16sp"
+        tools:text="매우 아니다" />
+
+</FrameLayout>

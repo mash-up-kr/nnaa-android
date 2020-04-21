@@ -45,12 +45,13 @@ public class SplashActivity extends AppCompatActivity {
     private void checkLogin() {
         AccountManager.getInstance().executeAutoSignIn(new AccountManager.ISignInResultListener() {
             @Override
-            public void onSignInSuccess(String id, String token) {
+            public void onSignInSuccess(String id, String name, String token) {
                 launchMainActivity();
             }
 
             @Override
             public void onSignInFail() {
+                Toast.makeText(getBaseContext(), "Fail to auto sign in, please try again", Toast.LENGTH_SHORT).show();
                 launchSignInActivity();
             }
         });

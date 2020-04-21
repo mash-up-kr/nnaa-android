@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/second_txt"
+        android:text="두번째, 문제 형식을 설정해주세요"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
@@ -20,12 +22,28 @@
         android:layout_marginTop="57dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/custom_question_img"
-        android:textColor="#ffffff"
-        android:src="@drawable/text_style_1210"
+        android:contentDescription="@string/StringValue"
         android:scaleType="center"
+        android:src="@drawable/text_style_1210"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btn_j_blue"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/custom_question_blue"
+        android:contentDescription="@string/StringValue"
+        android:scaleType="center"
+        android:src="@drawable/btn_txt_sel"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:contentDescription="@string/StringValue" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/txt_j"
@@ -45,21 +63,37 @@
         android:layout_marginTop="57dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/custom_question_img"
+        android:contentDescription="@string/StringValue"
+        android:scaleType="center"
+        android:src="@drawable/list_1497"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        android:src="@drawable/list_1497"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btn_g_blue"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/custom_question_blue"
+        android:contentDescription="@string/StringValue"
         android:scaleType="center"
+        android:src="@drawable/btn_list_sel"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:contentDescription="@string/StringValue" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/txt_g"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="163dp"
-        android:text="@string/txt_g"
         android:layout_marginTop="160dp"
         android:layout_marginBottom="27dp"
+        android:text="@string/txt_g"
         android:textSize="13sp" />
 
     <ImageButton
@@ -69,13 +103,29 @@
         android:layout_marginStart="242dp"
         android:layout_marginTop="57dp"
         android:layout_marginBottom="28dp"
-        android:background="@drawable/custom_question_blue"
+        android:background="@drawable/custom_question_img"
+        android:contentDescription="@string/StringValue"
+        android:scaleType="center"
+        android:src="@drawable/btn_ox_un"
         android:textColor="#ffffff"
         android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btn_o_blue"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="242dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/custom_question_blue"
+        android:contentDescription="@string/StringValue"
         android:scaleType="center"
-        android:src="@drawable/plus_circle_1425"
+        android:src="@drawable/btn_ox_sel"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:contentDescription="@string/StringValue" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/txt_o"
@@ -83,8 +133,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="276dp"
         android:layout_marginTop="160dp"
-        android:text="@string/txt_o"
         android:layout_marginBottom="27dp"
+        android:text="@string/txt_o"
         android:textSize="13sp" />
 
 

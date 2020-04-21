@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,21 +12,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:textColor="#2d2e35"
-        android:textSize="15sp" />
+        android:text="첫번째, 원하는 질문을 입력해주세요"
+        android:textSize="15sp"
+        tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/edit_custom"
+        android:id="@+id/first_edit_custom"
         android:layout_width="324dp"
         android:layout_height="54dp"
         android:layout_below="@id/first_txt"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="18dp"
         android:layout_marginRight="18dp"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:background="@drawable/question_corner"
         android:drawableStart="@drawable/edit_1482"
         android:focusableInTouchMode="true"
         android:textSize="14sp"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
 </RelativeLayout>

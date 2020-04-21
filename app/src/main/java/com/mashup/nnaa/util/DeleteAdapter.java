@@ -1,11 +1,14 @@
 package com.mashup.nnaa.util;
 
-
+import android.content.Context;
+import android.graphics.Color;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,13 +16,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.DeleteQuestionItem;
+import com.mashup.nnaa.data.QuestionItem;
+import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Question;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteViewHolder> {
+public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteViewHolder> implements ItemTouchHelperListener {
 
+    private ArrayList<NewQuestionDto> deleteList;
+    private Context dContext;
 
-    private ArrayList<DeleteQuestionItem> deleteData = new ArrayList<>();
+    public DeleteAdapter(Context context, ArrayList<NewQuestionDto> list) {
+        this.deleteList = list;
+        this.dContext = context;
+    }
+
+    public void setDeleteList(ArrayList<NewQuestionDto> deleteList) {
+        this.deleteList = deleteList;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -33,41 +50,40 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteView
 
     @Override
     public void onBindViewHolder(@NonNull DeleteViewHolder holder, int position) {
-
-        holder.onBind(deleteData.get(position));
+        holder.delete_content.setText(deleteList.get(position).getContent());
     }
 
     @Override
     public int getItemCount() {
 
-        return deleteData.size();
+        if (deleteList != null) {
+            return deleteList.size();
+        } else return 0;
     }
 
-    public void addItem(DeleteQuestionItem deleteitem) {
-        deleteData.add(deleteitem);
+    /*@Override
+    public boolean onItemMove(int from_position, int to_position) {
+        NewQuestionDto questionItem = deleteList.get(from_position);
+        deleteList.remove(from_position);
+        deleteList.add(to_position, questionItem);
+
+        notifyItemMoved(from_position, to_position);
+        return true;
+    }*/
+
+    @Override
+    public void onItemSwipe(int position) {
+        deleteList.remove(position);
+        notifyItemRemoved(position);
     }
 
-    class DeleteViewHolder extends RecyclerView.ViewHolder {
+    public class DeleteViewHolder extends RecyclerView.ViewHolder {
 
-        private CheckBox check_box;
-        private TextView txt_check;
+        private TextView delete_content;
 
-        DeleteViewHolder(View itemView) {
+        public DeleteViewHolder(View itemView) {
             super(itemView);
-
-            check_box = itemView.findViewById(R.id.check_box);
-
-            check_box.setButtonDrawable(R.drawable.check_box);
-
-            txt_check = itemView.findViewById(R.id.txt_check);
-
-
-
-        }
-
-        void onBind(DeleteQuestionItem deleteitem) {
-            check_box.setText(deleteitem.getCheckBox());
-            txt_check.setText(deleteitem.getQuestion_Txt());
+            this.delete_content = itemView.findViewById(R.id.delete_content);
         }
     }
 }

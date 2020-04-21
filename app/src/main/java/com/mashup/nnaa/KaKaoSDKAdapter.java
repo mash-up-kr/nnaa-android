@@ -49,12 +49,7 @@ public class KaKaoSDKAdapter extends KakaoAdapter {
 
     @Override
     public IApplicationConfig getApplicationConfig() {
-        return new IApplicationConfig() {
-            @Override
-            public Context getApplicationContext() {
-                return NnaaApplication.getAppContext().getApplicationContext();
-            }
-        };
+        return () -> NnaaApplication.getAppContext().getApplicationContext();
     }
 }
 

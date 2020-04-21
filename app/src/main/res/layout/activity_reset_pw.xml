@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResetPwActivity">
+
+    <TextView
+        android:id="@+id/reset_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="72dp"
+        android:lineSpacingExtra="7sp"
+        android:text="비밀번호 재설정 페이지"
+        android:textColor="#2d2e35"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/reset_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:lineSpacingExtra="13sp"
+        android:text="비밀번호를 재설정해주세요!"
+        android:textColor="#2d2e35"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reset_title"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/img_reset_close"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="18dp"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/quiz_btn_close"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reset_pw_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="50dp"
+        android:lineSpacingExtra="12sp"
+        android:text="새 비밀번호"
+        android:textColor="#2d2e35"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reset_content"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/edit_reset_pw"
+        android:layout_width="324dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="7dp"
+        android:autofillHints="true"
+        android:background="@drawable/login_shape"
+        android:hint="새로운 비밀번호를 입력해주세요"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reset_pw_txt"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/reset_confirm_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="23dp"
+        android:lineSpacingExtra="12sp"
+        android:text="비밀번호 확인"
+        android:textColor="#2d2e35"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_reset_pw"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/edit_reset_pw_confirm"
+        android:layout_width="324dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/password_confirm_change"
+        android:hint="***"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reset_confirm_txt"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="#2d2e35"
+        android:lineSpacingExtra="13sp"
+        android:text="비밀번호 재설정"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="HardcodedText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

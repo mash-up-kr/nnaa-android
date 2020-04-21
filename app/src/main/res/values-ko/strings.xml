@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
+    <string name="common_yes">네</string>
+    <string name="common_no">아니오</string>
 
     <!-- Splash -->
     <string name="splash_permission_error">모든 권한이 승인되어야합니다.\n앱을 다시 실행 후 권한을 승인해주세요.</string>
 
     <!-- Main page -->
-    <string name="main_welcome">오늘도 더 알고싣은\n<b>%s님</b> 안녕하세요.</string>
+    <string name="main_welcome">오늘도 더 알고싶은&lt;br /&gt;&lt;b&gt;%s님&lt;/b&gt; 안녕하세요.</string>
     <string name="main_home_name_sent_this_questions">%s님이 이 질문을 보냈어요.</string>
 
     <!-- Setting page -->
     <string name="setting_title">%s님의\n설정 페이지</string>
-    <string-array name="settings">
-        <item>로그아웃</item>
-        <item>탈퇴하기</item>
-        <item>차단하기</item>
-    </string-array>
+    <string name="setting_sign_out">로그아웃</string>
+    <string name="setting_del_account">탈퇴하기</string>
+    <string name="setting_blocked_users">차단하기</string>
+    <string name="setting_want_to_sign_out">정말 로그아웃 하시겠습니까?</string>
+    <string name="setting_manage_favorites">즐겨찾기 질문 관리하기</string>
+
+    <!-- Notifications page -->
+    <string name="noti_no_notifications">받은 알림이 없어요.</string>
+    <string name="mylist_friend_has_sent_a_new_q_to_you">%s님이 이 질문을 보냈어요.</string>
+    <string name="mylist_you_have_sent_a_q_to_s"></string>
 
     <string name="app_name">NNAA</string>
     <string name="mother">엄마</string>
@@ -29,12 +37,19 @@
     <string name="cancle">cancel</string>
     <string name="lets_start">Let\'s Start</string>
     <string name="main_home_no_questionnaires">도착한 질문이 없어요.</string>
-    <string name="noti_no_notifications">받은 알림이 없어요.</string>
     <string name="mylist_tab_received">받은 질문</string>
     <string name="mylist_tab_sent">보낸 질문</string>
     <string name="to_me">나에게</string>
     <string name="is_my">은(는) 나의</string>
     <string name="plz_enter_name">이름을 입력해주세요.</string>
+    <string name="mylist_no_items">보여줄게 없습니다.</string>
+    <string name="mylist_fail_to_load">불러오지 못했습니다.</string>
+    <string name="common_share">공유</string>
+    <string name="created_q_done_message">질문지가 만들어졌어요!</string>
+    <string name="created_q_send_it_to_friend">친구에게 공유해보세요!</string>
+    <string name="created_q_questionnaire_id_c">"질문지 ID: "</string>
+    <string name="created_q_copy_link">질문지 링크 복사</string>
+    <string name="created_q_later">나중에</string>
 
 
 </resources>

@@ -1,37 +1,48 @@
 <resources>
     <string name="app_name">NNAA</string>
+    <!-- Common -->
+    <string name="common_yes">Yes</string>
+    <string name="common_no">No</string>
+    <string name="common_share">Share</string>
 
     <!-- Splash -->
     <string name="splash_permission_error">All permission should be granted.\nPlease rerun app and grand permissions.</string>
 
     <!-- Main page -->
-    <string name="main_welcome">Glad to see you,\nWelcome <b>%s</b>.</string>
+    <string name="main_welcome">Glad to see you,&lt;br /&gt;Welcome &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="main_home_name_sent_this_questions">%s has sent questions.</string>
     <string name="main_home_no_questionnaires">There are no received questions.</string>
 
     <!-- Notifications page -->
     <string name="noti_no_notifications">There are no received notifications.</string>
+    <string name="mylist_friend_has_sent_a_new_q_to_you">%s has send a new questionnaire to you!</string>
+    <string name="mylist_you_have_sent_a_q_to_s"></string>
 
     <!-- MyList page -->
     <string name="mylist_tab_received">Received</string>
     <string name="mylist_tab_sent">Sent</string>
+    <string name="mylist_no_items">No items</string>
+    <string name="mylist_fail_to_load">Fail to load the list</string>
 
     <!-- Setting page -->
     <string name="setting_title">Setting page\nfor %s</string>
-    <string-array name="settings">
-        <item>Sign out</item>
-        <item>Delete account</item>
-        <item>Blocked users</item>
-    </string-array>
+    <string name="setting_sign_out">Sign out</string>
+    <string name="setting_del_account">Delete account</string>
+    <string name="setting_blocked_users">Blocked users</string>
+    <string name="setting_manage_favorites">Favorite question management</string>
 
-    <string name="StringValue">이미지가 열리지 않습니다.</string>
+    <string name="setting_want_to_sign_out">Do you really want to sign out?</string>
+
+    <string name="StringValue" translatable="false">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">
         <item>(선택없음)</item>
+        <item>엄마</item>
         <item>아빠</item>
         <item>동생</item>
         <item>누나/언니</item>
         <item>형/오빠</item>
-        <item>소중한 사람</item>
+        <item>친구</item>
+        <item>소중한사람</item>
         <item>연인</item>
     </string-array>
 
@@ -48,8 +59,15 @@
     <string name="to_me">To me,</string>
     <string name="is_my">is my</string>
     <string name="plz_enter_name">Please enter the name</string>
-    <string name="cancle">cancle</string>
+    <string name="cancle">cancel</string>
     <string name="lets_start">Let\'s Start</string>
+
+    <!-- Share the questionnaire page -->
+    <string name="created_q_done_message">The questionnaire has been created!</string>
+    <string name="created_q_send_it_to_friend">Share it to your friends!</string>
+    <string name="created_q_questionnaire_id_c">Questionnaire ID: </string>
+    <string name="created_q_copy_link">Copy the questionnaire link</string>
+    <string name="created_q_later">Later</string>
 
     <!--페이스북 앱 id-->
     <string name="facebook_app_key" translatable="false">2479070769047146</string>

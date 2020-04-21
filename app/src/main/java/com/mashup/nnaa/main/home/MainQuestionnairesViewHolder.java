@@ -24,8 +24,8 @@ public class MainQuestionnairesViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(int position, int totalCount, MainHomeQuestionnairesItem item) {
-        if (item.questionnairesId == -1) {
-            // Indicate that there is no item when question Id is -1 (empty)
+        if (item.questionnairesId.isEmpty()) {
+            // Indicate that there is no item when question Id is "" (empty)
             tvIndex.setVisibility(View.GONE);
             tvSender.setText(R.string.main_home_no_questionnaires);
 
