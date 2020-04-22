@@ -5,11 +5,6 @@
     android:layout_height="40dp"
     android:padding="10dp">
     <TextView
-        android:id="@+id/tv_mylist_friend_name"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"/>
-    <TextView
         android:id="@+id/tv_mylist_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

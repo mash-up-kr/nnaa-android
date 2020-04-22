@@ -11,7 +11,6 @@ import com.mashup.nnaa.R;
 
 public class MainMyListDataViewHolder extends RecyclerView.ViewHolder {
     private MainMyListPagerAdapter.MyListType type;
-    private TextView tvFriend;
     private TextView tvTitle;
     private TextView tvCategory;
     private TextView tvDate;
@@ -19,7 +18,6 @@ public class MainMyListDataViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.type = type;
 
-        tvFriend = itemView.findViewById(R.id.tv_mylist_friend_name);
         tvTitle = itemView.findViewById(R.id.tv_mylist_title);
         tvCategory = itemView.findViewById(R.id.tv_mylist_category);
         tvDate = itemView.findViewById(R.id.tv_mylist_datetime);
@@ -42,8 +40,10 @@ public class MainMyListDataViewHolder extends RecyclerView.ViewHolder {
                 friendName = TextUtils.isEmpty(item.senderName) ? item.receiverName : item.senderName;
         }
 
-        tvFriend.setText(friendName);
-        tvTitle.setText(item.id + "/" + item.questionsCount);
+        String contentText = itemView.getContext().getString(
+                type == MainMyListPagerAdapter.MyListType.SENT ? R.string.mylist_sent_to_s : R.string.mylist_received_from_s);
+
+        tvTitle.setText(String.format(contentText, friendName));
         tvCategory.setText(item.category);
         tvDate.setText(item.createdAt);
     }
