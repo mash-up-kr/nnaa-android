@@ -91,10 +91,12 @@ public class RetrofitHelper {
     }
 
     // 회원가입
+
     /**
      * Register new member with given information
-     * @param email Email address
-     * @param encPw Encrypted(Sign-In) password string
+     *
+     * @param email    Email address
+     * @param encPw    Encrypted(Sign-In) password string
      * @param name
      * @param callback
      */
@@ -111,16 +113,16 @@ public class RetrofitHelper {
     }
 
     // 비밀번호 재설정 이메일 보내기
-    public void sendNewPw(String email, Callback<LoginDto> callback) {
+    public void sendNewPw(String email, Callback<ResponseBody> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<LoginDto> loginDtoCall = service.sendNewPw(email);
+        Call<ResponseBody> loginDtoCall = service.sendNewPw(email);
         loginDtoCall.enqueue(callback);
     }
 
     // 로그인 상태 비번 재설정
-    public void currentRePw(String currentPassword, String newPassword, String newPasswordAgain, Callback<ResponseBody> callback) {
+    public void changePw(String id, String token, String currentPassword, String newPassword, String newPasswordAgain, Callback<ResponseBody> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<ResponseBody> currentPw = service.currentRePw(
+        Call<ResponseBody> currentPw = service.changePw(id, token,
                 new HashMap<String, String>() {{
                     put("currentPassword", currentPassword);
                     put("newPassword", newPassword);

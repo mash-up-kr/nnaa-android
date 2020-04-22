@@ -10,12 +10,11 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.LoginDto;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,30 +36,32 @@ public class FindPwActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
         btnFind.setOnClickListener(view -> {
             if (editFind.getText().toString().isEmpty()) {
                 Toast.makeText(FindPwActivity.this, "가입하신 이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
             } else {
-                RetrofitHelper.getInstance().sendNewPw(editFind.getText().toString(), new Callback<LoginDto>() {
+                progressDialog.setMessage("메일을 보내는중입니다..");
+                progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Horizontal);
+                progressDialog.show();
+
+                RetrofitHelper.getInstance().sendNewPw(editFind.getText().toString(), new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<LoginDto> call, Response<LoginDto> response) {
-                        progressDialog.setMessage("메일을 보내는중입니다..");
-                        progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Horizontal);
-                        progressDialog.show();
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 200) {
                             btnFind.setBackgroundColor(Color.BLUE);
                             Toast.makeText(FindPwActivity.this, "이메일을 보냈습니다!", Toast.LENGTH_SHORT).show();
                             Log.v("재설정 이메일", "response:" + response.code() + editFind.getText().toString());
                         }
+                        progressDialog.dismiss();
                     }
 
                     @Override
-                    public void onFailure(Call<LoginDto> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Log.v("재설정 이메일", t.getMessage());
                     }
                 });
             }
-            progressDialog.dismiss();
         });
     }
 }
