@@ -14,6 +14,7 @@
     <!-- Setting page -->
     <string name="setting_title">%s님의\n설정 페이지</string>
     <string name="setting_sign_out">로그아웃</string>
+    <string name="setting_change_pw">비밀번호 변경</string>
     <string name="setting_del_account">탈퇴하기</string>
     <string name="setting_blocked_users">차단하기</string>
     <string name="setting_want_to_sign_out">정말 로그아웃 하시겠습니까?</string>
