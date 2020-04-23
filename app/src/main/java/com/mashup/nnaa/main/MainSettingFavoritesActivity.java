@@ -1,5 +1,6 @@
 package com.mashup.nnaa.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
@@ -48,15 +50,12 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
 
         img_add_msf.setOnClickListener(view -> {
             //즐겨찾기 질문 추가
+            Intent addintent = new Intent(NnaaApplication.getAppContext(), MainSettingMakeFavoritesActivity.class);
+            startActivity(addintent);
         });
 
         img_delete_msf.setOnClickListener(view -> {
-            /*즐겨찾기 질문 삭제
-            1. 삭제버튼 누르면 질문 스와이프 가능
-            -> 삭제할 질문들 스와이프 후 적용 버튼 누르면 삭제된 질문 적용됨?
-            2. 체크박스 클릭해서 삭제?
-            3. 삭제버튼 안눌러도 원래 화면에서 스와이프 가능한가..?
-             */
+
         });
 
         btn_cancel_msf.setOnClickListener(view -> {
@@ -84,6 +83,18 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
 
         this.showFavorites();
 
+
+        /* Swipe to delete
+        ItemTouchHelperListener listener = new ItemTouchHelperListener() {
+            @Override
+            public void onItemSwipe(int position) {
+
+            }
+        };
+        //ItemTouchHelperCallback itemTouchHelperCallback = new ItemTouchHelperCallback(listener);
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper();
+        itemTouchhelper.attachToRecyclerView(favorites_recycler);*/
 
 
     }
