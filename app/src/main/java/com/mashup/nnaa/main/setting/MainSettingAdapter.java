@@ -18,13 +18,16 @@ public class MainSettingAdapter extends RecyclerView.Adapter<MainSettingViewHold
         SIGN_OUT(R.string.setting_sign_out),//,
         //DELETE_ACCOUNT(R.string.setting_del_account),
         //BLOCKED_USERS(R.string.setting_blocked_users);
-        MANAGE_FAVORITES(R.string.setting_manage_favorites);
+        MANAGE_FAVORITES(R.string.setting_manage_favorites),
+        CHANGE_PW(R.string.setting_change_pw);
         // Todo : 서버 api 없는 기능들 주석처리함. 서버에서 추가되면 기능 지원
 
         private int textResId;
+
         public String getText() {
             return NnaaApplication.getAppContext().getString(textResId);
         }
+
         SettingList(int textResId) {
             this.textResId = textResId;
         }

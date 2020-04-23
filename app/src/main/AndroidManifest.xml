@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".question.LocalQuestionActivity"></activity>
+        <activity android:name=".main.setting.ChangePwActivity" />
+        <activity android:name=".question.LocalQuestionActivity" />
 
         <activity
             android:name=".ResetPwActivity"
@@ -70,7 +71,7 @@
         <activity android:name=".question.DeleteQuestionActivity" />
         <activity android:name=".question.QuestionActivity" />
         <activity android:name=".select.SetTypeOfFriendActivity" />
-        <activity android:name=".main.MainSettingFavoritesActivity"/>
+        <activity android:name=".main.MainSettingFavoritesActivity" />
         <activity
             android:name=".question.CustomQuestionActivity"
             android:windowSoftInputMode="adjustResize" />

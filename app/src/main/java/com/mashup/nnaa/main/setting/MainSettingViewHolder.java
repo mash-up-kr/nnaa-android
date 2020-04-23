@@ -47,6 +47,9 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
             case MANAGE_FAVORITES:
                 callFavoritesManagement();
                 break;
+            case CHANGE_PW:
+                callChagnePw();
+                break;
         }
 
     }
@@ -88,6 +91,12 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
 
     private void callFavoritesManagement() {
         Intent intent = new Intent(NnaaApplication.getAppContext(), MainSettingFavoritesActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        NnaaApplication.getAppContext().startActivity(intent);
+    }
+
+    private void callChagnePw() {
+        Intent intent = new Intent(NnaaApplication.getAppContext(), ChangePwActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         NnaaApplication.getAppContext().startActivity(intent);
     }

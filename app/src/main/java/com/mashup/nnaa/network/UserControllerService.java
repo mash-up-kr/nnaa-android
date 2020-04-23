@@ -37,15 +37,20 @@ public interface UserControllerService {
 
     // 로그인한 사용자의 비밀번호 재설정
     @PUT("user/password")
-    Call<ResponseBody> currentRePw(@Body HashMap<String, String> body);
+    Call<ResponseBody> changePw(@Header("id") String id,
+                                @Header("token") String token,
+                                @Query("currentPassword") String currentPassword,
+                                @Query("newPassword") String newPassword,
+                                @Query("newPasswordAgain") String newPasswordAgain);
 
     // 재설정 이메일을 거쳐온 후 비번 재설정
     @PUT("user/password/email")
-    Call<ResponseBody> resetPw(@Body HashMap<String, String> body);
+    Call<ResponseBody> resetPw(@Query("newPassword") String newPassword,
+                               @Query("newPasswordAgain") String newPasswordAgain);
 
     // 비밀번호 재설정 이메일 보내기
-    @GET("user/password/email")
-    Call<LoginDto> sendNewPw(@Query("email") String email);
+    @GET("user/password/email/tmp")
+    Call<ResponseBody> sendNewPw(@Query("email") String email);
 
     // sns
     @POST("user/social")
