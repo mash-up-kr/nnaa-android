@@ -122,25 +122,14 @@ public class RetrofitHelper {
     // 로그인 상태 비번 재설정
     public void changePw(String id, String token, String currentPassword, String newPassword, String newPasswordAgain, Callback<ResponseBody> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<ResponseBody> currentPw = service.changePw(id, token,
-                new HashMap<String, String>() {{
-                    put("currentPassword", currentPassword);
-                    put("newPassword", newPassword);
-                    put("newPasswordAgain", newPasswordAgain);
-                }}
-        );
+        Call<ResponseBody> currentPw = service.changePw(id, token, currentPassword, newPassword, newPasswordAgain);
         currentPw.enqueue(callback);
     }
 
     // 랜딩 후 비번 재설정
     public void resetPw(String newPw, String newPwConfrim, Callback<ResponseBody> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<ResponseBody> reset = service.resetPw(
-                new HashMap<String, String>() {{
-                    put("newPassword", newPw);
-                    put("newPasswordAgain", newPwConfrim);
-                }}
-        );
+        Call<ResponseBody> reset = service.resetPw(newPw, newPwConfrim);
         reset.enqueue(callback);
     }
 
