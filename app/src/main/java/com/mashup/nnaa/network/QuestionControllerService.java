@@ -21,7 +21,7 @@ public interface QuestionControllerService {
 
     // 문제지 첫 기본세팅
     @GET("question/random")
-    Call<List<NewQuestionDto>> getQuestion(@Header("id") String id,
+    Call<ArrayList<NewQuestionDto>> getQuestion(@Header("id") String id,
                                                 @Header("token") String token,
                                                 @Query("category") String category,
                                                 @Query("size") Integer size);
