@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".main.MainSettingMakeFavoritesActivity"></activity>
+        <activity android:name=".main.MainSettingMakeFavoritesActivity" />
+        <activity android:name=".main.setting.ChangePwActivity" />
         <activity android:name=".question.LocalQuestionActivity" />
         <activity
             android:name=".ResetPwActivity"
@@ -72,6 +73,7 @@
         <activity
             android:name=".question.CustomQuestionActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".answer.AnswerOxChoiceActivity" />
     </application>
 
 </manifest>

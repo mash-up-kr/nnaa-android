@@ -12,8 +12,6 @@
     <string name="main_welcome">Glad to see you,&lt;br /&gt;Welcome &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="main_home_name_sent_this_questions">%s has sent questions.</string>
     <string name="main_home_no_questionnaires">There are no received questions.</string>
-    <string name="mylist_sent_to_s">Sent questionnaire to %s.</string>
-    <string name="mylist_received_from_s">Received questionnaire from %s.</string>
 
     <!-- Notifications page -->
     <string name="noti_no_notifications">There are no received notifications.</string>
@@ -25,10 +23,13 @@
     <string name="mylist_tab_sent">Sent</string>
     <string name="mylist_no_items">No items</string>
     <string name="mylist_fail_to_load">Fail to load the list</string>
+    <string name="mylist_sent_to_s">To %s.</string>
+    <string name="mylist_received_from_s">From %s.</string>
 
     <!-- Setting page -->
     <string name="setting_title">Setting page\nfor %s</string>
     <string name="setting_sign_out">Sign out</string>
+    <string name="setting_change_pw">Change Pw</string>
     <string name="setting_del_account">Delete account</string>
     <string name="setting_blocked_users">Blocked users</string>
     <string name="setting_manage_favorites">Favorite question management</string>
