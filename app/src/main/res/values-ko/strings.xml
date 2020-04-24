@@ -23,7 +23,7 @@
     <!-- Notifications page -->
     <string name="noti_no_notifications">받은 알림이 없어요.</string>
     <string name="mylist_friend_has_sent_a_new_q_to_you">%s님이 이 질문을 보냈어요.</string>
-    <string name="mylist_you_have_sent_a_q_to_s"></string>
+    <string name="mylist_you_have_sent_a_q_to_s">%s에게 새 질문지를 보냈습니다!</string>
 
     <string name="app_name">NNAA</string>
     <string name="mother">엄마</string>
@@ -51,6 +51,7 @@
     <string name="created_q_questionnaire_id_c">"질문지 ID: "</string>
     <string name="created_q_copy_link">질문지 링크 복사</string>
     <string name="created_q_later">나중에</string>
-
+    <string name="mylist_sent_to_s">%s에게</string>
+    <string name="mylist_received_from_s">%s로부터</string>
 
 </resources>

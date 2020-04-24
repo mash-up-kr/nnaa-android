@@ -75,6 +75,7 @@
         <activity
             android:name=".question.CustomQuestionActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".answer.AnswerOxChoiceActivity" />
     </application>
 
 </manifest>

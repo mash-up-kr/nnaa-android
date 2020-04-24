@@ -45,6 +45,7 @@
         android:background="@drawable/white_rect_rad_34">
 
         <TextView
+            android:id="@+id/questionnaire_number_in_ox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -68,6 +69,7 @@
             android:layout_marginEnd="22dp">
 
             <TextView
+                android:id="@+id/question_ox_choice"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -78,7 +80,7 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/choice_btn_heart"
+                android:id="@+id/choice_btn_heart_in_ox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -117,7 +119,7 @@
                     android:gravity="center"
                     android:text="o"
                     android:textSize="40sp"
-                    app:srcCompat="@drawable/group_3"
+                    app:srcCompat="@drawable/ox_choice_btn_o"
 
                     />
 
@@ -133,7 +135,7 @@
                     android:layout_height="85dp"
                     android:layout_marginStart="45dp"
                     android:background="@drawable/ox_choice_button"
-                    app:srcCompat="@drawable/quiz_btn_o" />
+                    app:srcCompat="@drawable/ox_choice_btn_x" />
             </LinearLayout>
         </LinearLayout>
 
@@ -156,7 +158,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_weight="1"
@@ -169,7 +171,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/blue_rect_rad_51"
-                android:gravity="right">
+                android:gravity="end">
 
                 <TextView
                     android:id="@+id/next_btn_text_in_multiple_chioce"
