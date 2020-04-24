@@ -134,9 +134,9 @@ public class RetrofitHelper {
     }
 
     // 문제지 첫 기본세팅
-    public void getQuestion(String id, String token, String category, Callback<List<NewQuestionDto>> callback) {
+    public void getQuestion(String id, String token, String category, Callback<ArrayList<NewQuestionDto>> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        Call<List<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, 100);
+        Call<ArrayList<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, 100);
         getQuestionRandom.enqueue(callback);
     }
 
