@@ -30,14 +30,15 @@ public class NewQuestionDto implements Serializable {
     private String bookmarkQuestionId;
     @SerializedName("isBookmarked")
     @Expose
-    private boolean flag;
+    private boolean isBookmarked;
 
-    public NewQuestionDto(String id, String content, String category, String type, Choices choices) {
+    public NewQuestionDto(String id, String content, String category, String type, Choices choices, boolean isBookmarked) {
         this.id = id;
         this.content = content;
         this.category = category;
         this.type = type;
         this.choices = choices;
+        this.isBookmarked = isBookmarked;
     }
 
     public NewQuestionDto() {
@@ -91,11 +92,11 @@ public class NewQuestionDto implements Serializable {
     public void setBookmarkQuestionId(String bookmarkQuestionId) {
         this.bookmarkQuestionId = bookmarkQuestionId;
     }
-    public boolean isFlag() {
-        return flag;
+    public boolean isBookmarked() {
+        return isBookmarked;
     }
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public void setBookmarked(boolean bookmarked) {
+        isBookmarked = bookmarked;
     }
 }

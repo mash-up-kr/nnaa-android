@@ -59,14 +59,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
         ThirdEdit = findViewById(R.id.custom_choice_edit3);
         ForthEdit = findViewById(R.id.custom_choice_edit4);
 
-        // QuestionActivity에 줄 값들
-        Intent intent = getIntent();
-        String type = intent.getStringExtra("type");
-        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
-        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
-        String name = intent.getStringExtra("name");
-
-        NewQuestionDto newQu = new NewQuestionDto();
         Custom_J.setOnClickListener(view -> {
             Custom_J.setVisibility(View.INVISIBLE);
             Custom_J_Blue.setVisibility(View.VISIBLE);
@@ -136,7 +128,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             Toast.makeText(MakeQuestionActivity.this, "질문 내용을 입력해주세요!", Toast.LENGTH_SHORT).show();
             Content_Edit.requestFocus();
             CustomDone.setEnabled(false);
-        }
+        } else  CustomDone.setEnabled(true);
         CustomDone.setOnClickListener(view -> {
 
             mk_intent.putExtra("content", Content_Edit.getText().toString());
@@ -145,11 +137,11 @@ public class MakeQuestionActivity extends AppCompatActivity {
             mk_intent.putExtra("setC", ThirdEdit.getText().toString());
             mk_intent.putExtra("setD", ForthEdit.getText().toString());
 
-            CustomDone.setEnabled(true);
             setResult(RESULT_UPDATE_OK, mk_intent);
             finish();
             CustomDone.setBackgroundColor(Color.BLUE);
             Toast.makeText(MakeQuestionActivity.this, "질문 작성 완료!", Toast.LENGTH_SHORT).show();
+
         });
     }
 }

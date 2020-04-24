@@ -20,16 +20,16 @@ import static android.view.LayoutInflater.from;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> {
 
-    List<NewQuestionDto> questionDtoList;
+    ArrayList<NewQuestionDto> questionDtoList;
     Context mContext;
 
 
-    public ReplyAdapter(Context context, List<NewQuestionDto> questionDtos) {
+    public ReplyAdapter(Context context, ArrayList<NewQuestionDto> questionDtos) {
         this.questionDtoList = questionDtos;
         this.mContext = context;
     }
 
-    public void setQuestionDtoList(List<NewQuestionDto> questionDtoList) {
+    public void setQuestionDtoList(ArrayList<NewQuestionDto> questionDtoList) {
         this.questionDtoList = questionDtoList;
         notifyDataSetChanged();
     }
