@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,17 +37,17 @@ import static android.view.LayoutInflater.from;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-    private List<NewQuestionDto> questionList;
+    private ArrayList<NewQuestionDto> questionList;
     private Context Qcontext;
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
-    public QuestionAdapter(Context context, List<NewQuestionDto> questionList) {
+    public QuestionAdapter(Context context, ArrayList<NewQuestionDto> questionList) {
         this.Qcontext = context;
         this.questionList = questionList;
     }
 
-    public void setQuestionList(List<NewQuestionDto> questionList) {
+    public void setQuestionList(ArrayList<NewQuestionDto> questionList) {
         this.questionList = questionList;
         notifyDataSetChanged();
     }
@@ -61,15 +63,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.ViewHolder holder, int position) {
         holder.mName.setText(questionList.get(position).getContent());
-        holder.qChoice.setChecked(questionList.get(position).isFlag());
-
+        holder.qChoice.setChecked(questionList.get(position).isBookmarked());
 
         Bundle bundle = ((Activity) Qcontext).getIntent().getExtras();
 
         final String category = bundle.getString("category");
 
         holder.qChoice.setOnCheckedChangeListener(null);
-        final NewQuestionDto questionDto = questionList.get(position);
 
         holder.qChoice.setOnCheckedChangeListener((buttonView, isChekced) -> {
 
@@ -77,15 +77,17 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             if (pos != RecyclerView.NO_POSITION) {
                 NewQuestionDto item = questionList.get(pos);
 
-                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getId(), item.getContent(), category, item.getType(), item.getChoices());
-
+                NewQuestionDto newQuestionDto = new NewQuestionDto("", item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
                 if (holder.qChoice.isChecked()) {
                     RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
-                            newQuestionDto.setFlag(isChekced);
-                            questionDto.setFlag(isChekced);
-                            holder.qChoice.setChecked(newQuestionDto.isFlag());
+                            newQuestionDto.setBookmarked(true);
+
+                            holder.qChoice.setChecked(newQuestionDto.isBookmarked());
+                            holder.qChoice.setChecked(isChekced);
+                            SharedPrefHelper.getInstance().put("check",holder.qChoice.isChecked());
+
                         }
 
                         @Override
@@ -99,9 +101,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                             holder.qChoice.setChecked(false);
-                            questionDto.setFlag(false);
-                            newQuestionDto.setFlag(false);
+
+                            item.setBookmarked(false);
+                            newQuestionDto.setBookmarked(false);
+                            holder.qChoice.setChecked(false);
                         }
+
                         @Override
                         public void onFailure(Call<NewQuestionDto> call, Throwable t) {
                             Log.v("즐찾 해제", t.getMessage());
@@ -132,6 +137,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             mName = itemView.findViewById(R.id.info_text);
             qChoice = itemView.findViewById(R.id.question_choice);
 
+            SharedPrefHelper.getInstance().getBoolean("check",false);
         }
     }
 }
+

@@ -1,9 +1,11 @@
 package com.mashup.nnaa.util;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.login.LoginManager;
+import com.mashup.nnaa.main.setting.ChangePwActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.UserAuthHeaderInfo;
 import com.mashup.nnaa.network.model.LoginDto;
@@ -106,6 +108,7 @@ public class AccountManager {
                     resultListener.onSignInFail();
                 } else {
                     Log.v("SignIn", "Sign in success: " + email + "," + token + "," + name + "," + id);
+                    Log.v("Sign In", "pwenc:" + pwEncSignIn + "," + "pwlocal:" + pwEncLocal + "," + "pw:" + password);
 
                     if (saveForAutoSignIn) {
                         SharedPrefHelper.getInstance()

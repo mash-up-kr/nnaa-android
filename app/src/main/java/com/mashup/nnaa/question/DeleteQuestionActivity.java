@@ -60,13 +60,13 @@ public class DeleteQuestionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String category = intent.getStringExtra("category");
-        String type = intent.getStringExtra("name_type");
+        String type = intent.getStringExtra("type");
         String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String name = intent.getStringExtra("name");
 
         txt_delete_type.setText(String.format("%s인 , ", type));
-        txt_delete_name.setText(String.format("%s님께", name));
+        txt_delete_name.setText(String.format("%s께", name));
 
         RecyclerView recyclerDelete = findViewById(R.id.recycler_delete);
 

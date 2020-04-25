@@ -35,16 +35,10 @@ public class ResetPwActivity extends AppCompatActivity {
         resetClose = findViewById(R.id.img_reset_close);
         btn_reset = findViewById(R.id.btn_reset);
 
-        /*Intent appLinkIntent = getIntent();
-        String appLinkAction = appLinkIntent.getAction();
-        Uri appLinkData = appLinkIntent.getData();
+        resetClose.setOnClickListener(view -> {
+            finish();
+        });
 
-        if (appLinkData != null) {
-            if ("http".equals(appLinkData.getScheme()) && "www.nnaa.com".equals(appLinkData.getHost())) {
-                appLinkAction = appLinkData.getQueryParameter("userId");
-                Log.v("DEEPLINK", "userid:"+ appLinkAction);
-            }
-        }*/
         // parameter 확인
         Intent deeplink = getIntent();
         if (Intent.ACTION_VIEW.equals(deeplink.getAction())) {
@@ -60,9 +54,9 @@ public class ResetPwActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         launchLoginActivity();
                         Log.v("딥링크 비번 재설정", response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
-
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     Log.v("딥링크 비번 재설정", t.getMessage());
@@ -70,6 +64,7 @@ public class ResetPwActivity extends AppCompatActivity {
             });
         });
     }
+
     private void launchLoginActivity() {
         Intent success = new Intent(ResetPwActivity.this, LoginActivity.class);
         startActivity(success);

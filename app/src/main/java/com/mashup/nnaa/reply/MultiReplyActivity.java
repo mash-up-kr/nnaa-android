@@ -38,7 +38,7 @@ public class MultiReplyActivity extends AppCompatActivity {
     EditText replyEdit;
     ScrollView scrollView;
     private ReplyAdapter replyAdapter;
-    private List<NewQuestionDto> questionDtoList;
+    private ArrayList<NewQuestionDto> questionDtoList;
     private int count = 1;
 
     @Override
@@ -89,10 +89,10 @@ public class MultiReplyActivity extends AppCompatActivity {
         });
 
         // 질문 즐겨찾기
-        reply_choice.setOnClickListener(view -> {
+     /*   reply_choice.setOnClickListener(view -> {
             reply_choice.setImageResource(R.drawable.choice_btn_heart_on);
             Toast.makeText(view.getContext(), "즐겨찾기 추가", Toast.LENGTH_SHORT).show();
-        });
+        });*/
 
 
         // ui 키보드에 밀리는거 방지
@@ -108,9 +108,9 @@ public class MultiReplyActivity extends AppCompatActivity {
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String category = intent.getStringExtra("category");
 
-        RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<List<NewQuestionDto>>() {
+        RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<ArrayList<NewQuestionDto>>() {
             @Override
-            public void onResponse(Call<List<NewQuestionDto>> call, Response<List<NewQuestionDto>> response) {
+            public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionDtoList != null) {
                     questionDtoList = response.body();
 
@@ -122,7 +122,9 @@ public class MultiReplyActivity extends AppCompatActivity {
                         btn_next_question.setEnabled(true);
                         btn_past.setEnabled(true);
                         txtQuestion.setText(response.body().get(count - 1).getContent());
-                        if (response.body().get(count - 1).getType() != null) {
+                        if (response.body().get(count - 1).getType() != null && response.body().get(count-1).isBookmarked() ==true) {
+                            reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
+
                             if (response.body().get(count - 1).getType().equals("주관식")) {
                                 subjectQuestion();
                             } else if (response.body().get(count - 1).getType().equals("OX")) {
@@ -148,7 +150,9 @@ public class MultiReplyActivity extends AppCompatActivity {
                             btn_past.setEnabled(true);
                             btn_next_question.setEnabled(true);
                             txtQuestion.setText(response.body().get(count - 1).getContent());
-                            if (response.body().get(count - 1).getType() != null) {
+                            if (response.body().get(count - 1).getType() != null && response.body().get(count-1).isBookmarked() ==true) {
+                                reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
+
                                 if (response.body().get(count - 1).getType().equals("주관식")) {
                                     subjectQuestion();
                                 } else if (response.body().get(count - 1).getType().equals("OX")) {
@@ -170,7 +174,7 @@ public class MultiReplyActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<NewQuestionDto>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<NewQuestionDto>> call, Throwable t) {
                 Log.v("답변 리스트", "에러:" + t.getMessage());
             }
         });

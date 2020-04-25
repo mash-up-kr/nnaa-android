@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,10 +31,10 @@ public class FavoritesActivity extends AppCompatActivity {
 
     private FavoritesAdapter favoritesAdapter;
     private ArrayList<NewQuestionDto> fList;
-    Button btn_favorites;
-    ImageButton imgbtn_past, imgbtn_cancel;
-    ImageView img_favorites, img_recycler;
-    TextView txt_favorites;
+    private Button btn_favorites;
+    private ImageButton imgbtn_past, imgbtn_cancel;
+    private ImageView img_favorites, img_recycler;
+    private TextView txt_favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,6 @@ public class FavoritesActivity extends AppCompatActivity {
         imgbtn_cancel.setOnClickListener(view -> {
             finish();
         });
-
 
         RecyclerView favorites_recycler = findViewById(R.id.favorites_recycler);
 
