@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".main.MainSettingMakeFavoritesActivity" />
         <activity android:name=".main.setting.ChangePwActivity" />
         <activity android:name=".question.LocalQuestionActivity" />
-
         <activity
             android:name=".ResetPwActivity"
             android:launchMode="singleTask"
@@ -32,7 +32,6 @@
                     android:host="www.nnaa.com"
                     android:pathPrefix="/reset"
                     android:scheme="http" />
-
             </intent-filter>
         </activity>
         <activity android:name=".question.MakeQuestionActivity" />
@@ -43,8 +42,7 @@
         <activity android:name=".reply.ReplyActivity" />
         <activity
             android:name=".RegisterActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <!-- 페이스북 메타데이터 -->
+            android:windowSoftInputMode="adjustResize" /> <!-- 페이스북 메타데이터 -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->

@@ -9,17 +9,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
-import com.mashup.nnaa.util.QuestionAdapter;
+import com.mashup.nnaa.util.BookmarkAdapter;
+import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,9 +30,10 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
     private ImageView img_add_msf, img_delete_msf;
     private TextView txt_manage_favorites;
     private Button btn_cancel_msf, btn_next_msf;
-    private RecyclerView recyclerQuestion;
-    private QuestionAdapter questionAdapter;
-    private List<NewQuestionDto> questionList;
+    private RecyclerView favorites_recycler;
+    private FavoritesAdapter favoritesAdapter;
+    private ArrayList<NewQuestionDto> fList;
+    private BookmarkAdapter bookmarkAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +50,12 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
 
         img_add_msf.setOnClickListener(view -> {
             //즐겨찾기 질문 추가
+            Intent addintent = new Intent(NnaaApplication.getAppContext(), MainSettingMakeFavoritesActivity.class);
+            startActivity(addintent);
         });
 
         img_delete_msf.setOnClickListener(view -> {
-            /*즐겨찾기 질문 삭제
-            1. 삭제버튼 누르면 질문 스와이프 가능
-            -> 삭제할 질문들 스와이프 후 적용 버튼 누르면 삭제된 질문 적용됨?
-            2. 체크박스 클릭해서 삭제?
-            3. 삭제버튼 안눌러도 원래 화면에서 스와이프 가능한가..?
-             */
+
         });
 
         btn_cancel_msf.setOnClickListener(view -> {
@@ -69,36 +68,62 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
             //적용 완료하고 세팅페이지로 넘어가야함
         });
 
-        recyclerQuestion = findViewById(R.id.recycler_main_setting_favorites);
-        questionList = new ArrayList<>();
-        questionAdapter = new QuestionAdapter(this, questionList);
-        recyclerQuestion.setAdapter(questionAdapter);
-        this.getQuestionRandom();
+        favorites_recycler = findViewById(R.id.recycler_main_setting_favorites);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        favorites_recycler.setLayoutManager(linearLayoutManager);
+
+        fList = new ArrayList<>();
+        //favoritesAdapter = new FavoritesAdapter(this, fList);
+        //favorites_recycler.setAdapter(favoritesAdapter);
+
+        bookmarkAdapter = new BookmarkAdapter(this,fList);
+        favorites_recycler.setAdapter(bookmarkAdapter);
+        favorites_recycler.setHasFixedSize(true);
+
+        this.showFavorites();
+
+
+        /* Swipe to delete
+        ItemTouchHelperListener listener = new ItemTouchHelperListener() {
+            @Override
+            public void onItemSwipe(int position) {
+
+            }
+        };
+        //ItemTouchHelperCallback itemTouchHelperCallback = new ItemTouchHelperCallback(listener);
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper();
+        itemTouchhelper.attachToRecyclerView(favorites_recycler);*/
+
 
     }
 
-    private void getQuestionRandom() {
-        Intent intent = getIntent();
+    private void showFavorites() {
+
         String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
         RetrofitHelper.getInstance().showFavorites(id, token, new Callback<ArrayList<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
-                if (questionList != null) {
+                if (response.isSuccessful()) {
+                    fList = response.body();
+                    Log.v("즐겨찾기 api", "Response = " + response.code());
+                    bookmarkAdapter.setFavoriteList(fList);
+                } else if (response.code() == 400) {
+                    Toast.makeText(MainSettingFavoritesActivity.this, "즐겨찾기 한 질문이 없습니다.", Toast.LENGTH_SHORT).show();
 
-                } else if (questionList.size() == 0) {
-                    Toast.makeText(MainSettingFavoritesActivity.this, "즐겨찾기된 질문이 없습니다", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.v("QuestionRandom", "No Question");
+                    Log.v("즐겨찾기 api", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<NewQuestionDto>> call, Throwable t) {
-                Log.v("QuestionRandom", "에러:" + t.getMessage());
+                Log.v("즐겨찾기 api", "에러:" + t.getMessage());
             }
-
         });
     }
+
 }

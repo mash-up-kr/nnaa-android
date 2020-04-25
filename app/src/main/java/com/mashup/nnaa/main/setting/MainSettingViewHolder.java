@@ -91,7 +91,7 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
 
     private void callFavoritesManagement() {
         Intent intent = new Intent(NnaaApplication.getAppContext(), MainSettingFavoritesActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         NnaaApplication.getAppContext().startActivity(intent);
     }
 
