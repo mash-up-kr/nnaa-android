@@ -44,12 +44,14 @@ public interface UserControllerService {
                                 @Query("newPasswordAgain") String newPasswordAgain);
 
     // 재설정 이메일을 거쳐온 후 비번 재설정
-    @PUT("user/password/email")
-    Call<ResponseBody> resetPw(@Query("newPassword") String newPassword,
+    @PUT("user/email/password")
+    Call<ResponseBody> resetPw(@Header("id") String id,
+                               @Header("token") String token,
+                               @Query("newPassword") String newPassword,
                                @Query("newPasswordAgain") String newPasswordAgain);
 
     // 비밀번호 재설정 이메일 보내기
-    @GET("user/password/email/tmp")
+    @GET("user/password/email")
     Call<ResponseBody> sendNewPw(@Query("email") String email);
 
     // sns

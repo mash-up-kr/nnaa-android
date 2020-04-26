@@ -44,25 +44,25 @@ public class ResetPwActivity extends AppCompatActivity {
         if (Intent.ACTION_VIEW.equals(deeplink.getAction())) {
             Uri uri = deeplink.getData();
             String user_id = uri.getQueryParameter("id");
-            Log.v("DEEPLINK", "id:" + user_id);
-        }
+            String token = uri.getQueryParameter("token");
+            Log.v("DEEPLINK", "id:" + user_id + "," + "token:" + token);
 
-        btn_reset.setOnClickListener(view -> {
-            RetrofitHelper.getInstance().resetPw(edit_reset_pw.getText().toString(), edit_reset_pw_confirm.getText().toString(), new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful()) {
-                        launchLoginActivity();
-                        Log.v("딥링크 비번 재설정", response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
+            btn_reset.setOnClickListener(view -> {
+                RetrofitHelper.getInstance().resetPw(user_id, token, edit_reset_pw.getText().toString(), edit_reset_pw_confirm.getText().toString(), new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            launchLoginActivity();
+                            Log.v("딥링크 비번 재설정", response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
+                        }
                     }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.v("딥링크 비번 재설정", t.getMessage());
-                }
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.v("딥링크 비번 재설정", t.getMessage());
+                    }
+                });
             });
-        });
+        }
     }
 
     private void launchLoginActivity() {
