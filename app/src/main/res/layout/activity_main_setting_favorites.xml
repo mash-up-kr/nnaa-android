@@ -45,13 +45,23 @@
         app:layout_constraintLeft_toRightOf="@id/img_delete_msf"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/corner_shape"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571"
+        tools:layout_editor_absoluteX="0dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_main_setting_favorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="137dp"
+        android:layout_marginTop="160dp"
         android:layout_marginBottom="70dp"
-        android:background="@drawable/corner_shape"
         android:clipToPadding="false"
         android:keepScreenOn="true"
         android:scrollbarThumbVertical="@drawable/scrollbar"
@@ -60,6 +70,7 @@
         tools:listitem="@layout/item_main_setting_favorite" />
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
