@@ -38,16 +38,16 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
                     filteredList = unFilterdList;
                 } else {
                     ArrayList<SharingDto> filteringList = new ArrayList<>();
-                    /*for(SharingDto name: unFilterdList) {
-                        if(name.toLowerCase().contains(charString.toLowerCase())) {
+                    for(SharingDto name: unFilterdList) {
+                        if(name.getName().toLowerCase().contains(charString.toLowerCase())) {
                             filteringList.add(name);
                         }
                     }
                     for(SharingDto email: unFilterdList) {
-                        if(email.toLowerCase().contains(charString.toLowerCase())) {
+                        if(email.getEmail().toLowerCase().contains(charString.toLowerCase())) {
                             filteringList.add(email);
                         }
-                    }*/
+                    }
                     filteredList = filteringList;
                 }
                 FilterResults filterResults = new FilterResults();
