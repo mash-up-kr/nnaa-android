@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".question.SharingActivity" />
         <activity android:name=".main.MainSettingMakeFavoritesActivity" />
         <activity android:name=".main.setting.ChangePwActivity" />
         <activity android:name=".question.LocalQuestionActivity" />
@@ -29,9 +30,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="www.nnaa.com"
-                    android:pathPrefix="/reset"
-                    android:scheme="http" />
+                    android:host="reset_password"
+                    android:scheme="nnaa" />
             </intent-filter>
         </activity>
         <activity android:name=".question.MakeQuestionActivity" />

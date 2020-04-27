@@ -7,6 +7,7 @@ import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
+import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
@@ -127,9 +128,9 @@ public class RetrofitHelper {
     }
 
     // 랜딩 후 비번 재설정
-    public void resetPw(String newPw, String newPwConfrim, Callback<ResponseBody> callback) {
+    public void resetPw(String id, String token, String newPw, String newPwConfrim, Callback<ResponseBody> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<ResponseBody> reset = service.resetPw(newPw, newPwConfrim);
+        Call<ResponseBody> reset = service.resetPw(id, token, newPw, newPwConfrim);
         reset.enqueue(callback);
     }
 
@@ -140,12 +141,6 @@ public class RetrofitHelper {
         getQuestionRandom.enqueue(callback);
     }
 
-    // 직접 질문 입력해서 질문 추가
-    public void postQuestion(NewQuestionDto newQuestionDto, Callback<NewQuestionDto> callback) {
-        QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        Call<NewQuestionDto> newQuestionDtoCall = service.postQuestion(newQuestionDto);
-        newQuestionDtoCall.enqueue(callback);
-    }
 
     // 즐겨찾기 해둔 질문들 보여주기
     public void showFavorites(String id, String token, Callback<ArrayList<NewQuestionDto>> callback) {
@@ -166,6 +161,13 @@ public class RetrofitHelper {
         UserControllerService service = retrofit.create(UserControllerService.class);
         Call<NewQuestionDto> favoriteDelete = service.favoriteDelete(id, token, bookmarkQuestionId);
         favoriteDelete.enqueue(callback);
+    }
+
+    // 질문지 보내기
+    public void postQuestionnaire(String id, String token, Questionnaire questionnaire, Callback<Questionnaire> callback) {
+        QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
+        Call<Questionnaire> postQuestionnaire = service.postQuestionnaire(id, token, questionnaire);
+        postQuestionnaire.enqueue(callback);
     }
 
     public void getReceivedQuestionnaires(Callback<List<InboxQuestionnaireDto>> callback) {
