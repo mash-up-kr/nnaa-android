@@ -2,7 +2,9 @@ package com.mashup.nnaa.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
@@ -35,6 +38,7 @@ public class LocalQuestionAdapter extends RecyclerView.Adapter<LocalQuestionAdap
     private Context mContext;
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
+    private SparseBooleanArray Selected = new SparseBooleanArray(0);
 
     public LocalQuestionAdapter(Context context, ArrayList<NewQuestionDto> list) {
         this.mContext = context;
@@ -56,32 +60,42 @@ public class LocalQuestionAdapter extends RecyclerView.Adapter<LocalQuestionAdap
     @Override
     public void onBindViewHolder(@NonNull LocalQuestionAdapter.ViewHolder holder, int position) {
         holder.local_content.setText(list.get(position).getContent());
-        holder.bookmark.setChecked(list.get(position).isFlag());
+        holder.bookmark.setChecked(list.get(position).isBookmarked());
 
-        SharedPreferences pref = mContext.getSharedPreferences("check",0);
+        if(Selected.get(position, false)) {
+            holder.itemView.setBackgroundColor(Color.BLUE);
+        } else {
+            holder.itemView.setBackgroundColor(Color.WHITE);
+        }
+
+        SharedPreferences pref = mContext.getSharedPreferences("check", 0);
         if (pref.contains("checked") && pref.getBoolean("checked", true)) {
             holder.bookmark.setChecked(true);
         } else {
             holder.bookmark.setChecked(false);
         }
 
+        holder.bookmark.setOnCheckedChangeListener(null);
         holder.bookmark.setOnCheckedChangeListener((buttonView, isChecked) -> {
             int pos = holder.getAdapterPosition();
             if (pos != RecyclerView.NO_POSITION) {
 
                 NewQuestionDto item = list.get(pos);
 
-                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getId(), item.getContent(), item.getCategory(), item.getType(), item.getChoices());
+                NewQuestionDto newQuestionDto = new NewQuestionDto( item.getContent(), item.getCategory(), item.getType(), item.getChoices(), item.isBookmarked());
+
 
                 if (holder.bookmark.isChecked()) {
                     RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                             // local에서 하트 여부처리
-                            newQuestionDto.setFlag(true);
-                            holder.bookmark.setChecked(newQuestionDto.isFlag());
+                            newQuestionDto.setBookmarked(true);
+                            holder.bookmark.setChecked(newQuestionDto.isBookmarked());
+                            holder.bookmark.setChecked(isChecked);
+
                             Log.v("bookmark", "response:" + response.code() + item.getContent() + item.getId());
-                            SharedPreferences pref = mContext.getSharedPreferences("check",0);
+                            SharedPreferences pref = mContext.getSharedPreferences("check", 0);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putBoolean("checked", true);
                             editor.apply();
@@ -102,8 +116,8 @@ public class LocalQuestionAdapter extends RecyclerView.Adapter<LocalQuestionAdap
 
                             Log.v("bookmark delete", "response:" + response.code() + item.getContent() + item.getId());
                             holder.bookmark.setChecked(false);
-                            newQuestionDto.setFlag(false);
-                            SharedPreferences pref = mContext.getSharedPreferences("check",0);
+                            newQuestionDto.setBookmarked(false);
+                            SharedPreferences pref = mContext.getSharedPreferences("check", 0);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putBoolean("checked", false);
                             editor.apply();
@@ -138,6 +152,17 @@ public class LocalQuestionAdapter extends RecyclerView.Adapter<LocalQuestionAdap
             local_content = itemView.findViewById(R.id.local_question);
             bookmark = itemView.findViewById(R.id.local_choice);
 
+            itemView.setOnClickListener(view -> {
+               int pos = getAdapterPosition();
+
+               if(Selected.get(pos,false)) {
+                   Selected.put(pos, false);
+                    view.setBackgroundColor(Color.WHITE);
+               }else {
+                   Selected.put(pos, true);
+                   view.setBackgroundColor(Color.BLUE);
+               }
+            });
         }
     }
 }

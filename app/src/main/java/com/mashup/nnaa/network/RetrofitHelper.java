@@ -2,12 +2,14 @@ package com.mashup.nnaa.network;
 
 import android.text.TextUtils;
 
+import com.kakao.usermgmt.response.model.User;
 import com.mashup.nnaa.BuildConfig;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.Questionnaire;
+import com.mashup.nnaa.network.model.SharingDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
@@ -170,7 +172,14 @@ public class RetrofitHelper {
         postQuestionnaire.enqueue(callback);
     }
 
-    public void getReceivedQuestionnaires(Callback<List<InboxQuestionnaireDto>> callback) {
+    // 이름으로 유저찾기
+    public void userName(String name, Callback<ArrayList<Questionnaire>> callback) {
+        UserControllerService service = retrofit.create(UserControllerService.class);
+        Call<ArrayList<Questionnaire>> userName = service.userName(name);
+        userName.enqueue(callback);
+    }
+
+   public void getReceivedQuestionnaires(Callback<List<InboxQuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
         Call<List<InboxQuestionnaireDto>> receivedQuestionnaire = service.getReceiveQuestionnaires();
         receivedQuestionnaire.enqueue(callback);

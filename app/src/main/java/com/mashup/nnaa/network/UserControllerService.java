@@ -3,6 +3,8 @@ package com.mashup.nnaa.network;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Question;
+import com.mashup.nnaa.network.model.Questionnaire;
+import com.mashup.nnaa.network.model.SharingDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 
@@ -77,5 +79,5 @@ public interface UserControllerService {
 
     // 이름으로 유저찾기
     @GET("user")
-    Call<ResponseBody> userName(@Query("name") String name);
+    Call<ArrayList<Questionnaire>> userName(@Query("name") String name);
 }

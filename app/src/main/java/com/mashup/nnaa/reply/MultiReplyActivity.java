@@ -88,13 +88,6 @@ public class MultiReplyActivity extends AppCompatActivity {
             builder.show();
         });
 
-        // 질문 즐겨찾기
-     /*   reply_choice.setOnClickListener(view -> {
-            reply_choice.setImageResource(R.drawable.choice_btn_heart_on);
-            Toast.makeText(view.getContext(), "즐겨찾기 추가", Toast.LENGTH_SHORT).show();
-        });*/
-
-
         // ui 키보드에 밀리는거 방지
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 

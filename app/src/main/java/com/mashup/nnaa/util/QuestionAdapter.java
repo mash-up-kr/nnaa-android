@@ -77,7 +77,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             if (pos != RecyclerView.NO_POSITION) {
                 NewQuestionDto item = questionList.get(pos);
 
-                NewQuestionDto newQuestionDto = new NewQuestionDto("", item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
+                NewQuestionDto newQuestionDto = new NewQuestionDto( item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
                 if (holder.qChoice.isChecked()) {
                     RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override

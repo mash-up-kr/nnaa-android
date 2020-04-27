@@ -23,6 +23,7 @@ import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.QuestionAdapter;
@@ -54,6 +55,9 @@ public class QuestionActivity extends AppCompatActivity {
         String type = intent.getStringExtra("type");
         String name = intent.getStringExtra("name");
 
+        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
+
         txt_name = findViewById(R.id.txt_name);
         txt_type = findViewById(R.id.txt_type);
         btn_next = findViewById(R.id.btn_next);
@@ -72,18 +76,18 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         btn_next.setOnClickListener(view -> {
-            // 보낸 질문함으로 넘어감
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("질문지 보내기");
-            builder.setMessage("질문지를 전송할까요?");
+            builder.setMessage("질문지를 보낼까요?");
             builder.setPositiveButton("확인", (dialogInterface, i) -> {
-                Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
-                String replyname = txt_name.getText().toString();
-                Intent reply_intent = new Intent(QuestionActivity.this, ReplyActivity.class);
-                reply_intent.putExtra("reply_name", replyname);
-                reply_intent.putExtra("category", category);
-                startActivity(reply_intent);
-            });
+                        Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
+                        Intent reply_intent = new Intent(QuestionActivity.this, SharingActivity.class);
+                        reply_intent.putExtra("category", category);
+                        reply_intent.putExtra("list", questionList);
+                        startActivity(reply_intent);
+                        Log.v("@@@@@@@","list:" + questionList.get(0).getChoices() + questionList.get(0).getContent());
+                    }
+            );
             builder.setNegativeButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문지 보내기 취소", Toast.LENGTH_SHORT).show());
             builder.show();
         });
@@ -180,7 +184,7 @@ public class QuestionActivity extends AppCompatActivity {
                 choices.setD(d);
 
                 if (contents != null && !contents.isEmpty()) {
-                    NewQuestionDto newQuestionDto = new NewQuestionDto("", contents, category, type, choices, false);
+                    NewQuestionDto newQuestionDto = new NewQuestionDto( contents, category, type, choices, false);
 
                     questionList.add(newQuestionDto);
                     setQuestion(questionList);

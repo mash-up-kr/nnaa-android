@@ -35,6 +35,7 @@ import com.kakao.util.exception.KakaoException;
 import com.mashup.nnaa.main.MainActivity;
 import com.mashup.nnaa.main.home.MainHomeFragment;
 import com.mashup.nnaa.util.AccountManager;
+import com.mashup.nnaa.util.EncryptUtil;
 import com.mashup.nnaa.util.SharedPrefHelper;
 
 import org.json.JSONObject;
