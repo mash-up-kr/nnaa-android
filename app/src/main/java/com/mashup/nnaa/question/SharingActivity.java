@@ -43,13 +43,11 @@ public class SharingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String cateogry = intent.getStringExtra("category");
 
-        ArrayList<NewQuestionDto> test;
-        test = (ArrayList<NewQuestionDto>) intent.getSerializableExtra("list");
-        Log.v("테스트","list:"+test.get(0).getContent() + test.get(0).getCategory());
+        String json = intent.getStringExtra("list");
 
         Intent intent1 = new Intent(SharingActivity.this, SharingAdapter.class);
-        intent1.putExtra("category",cateogry);
-        intent1.putExtra("list",list);
+        intent1.putExtra("category", cateogry);
+        intent1.putExtra("list", json);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 

@@ -137,9 +137,9 @@ public class RetrofitHelper {
     }
 
     // 문제지 첫 기본세팅
-    public void getQuestion(String id, String token, String category, Callback<ArrayList<NewQuestionDto>> callback) {
+    public void getQuestion(String id, String token, String category, int size, Callback<ArrayList<NewQuestionDto>> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        Call<ArrayList<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, 100);
+        Call<ArrayList<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, size);
         getQuestionRandom.enqueue(callback);
     }
 
@@ -172,6 +172,13 @@ public class RetrofitHelper {
         postQuestionnaire.enqueue(callback);
     }
 
+    // 질문지 답변
+    public void answerQuestionnaire(String id, String token, String questionnaireId, Questionnaire questionnaire, Callback<Questionnaire> callback) {
+        QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
+        Call<Questionnaire> answerQuestionnaire = service.answerQuestionnaire(id, token, questionnaireId, questionnaire);
+        answerQuestionnaire.enqueue(callback);
+    }
+
     // 이름으로 유저찾기
     public void userName(String name, Callback<ArrayList<Questionnaire>> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
@@ -179,7 +186,7 @@ public class RetrofitHelper {
         userName.enqueue(callback);
     }
 
-   public void getReceivedQuestionnaires(Callback<List<InboxQuestionnaireDto>> callback) {
+    public void getReceivedQuestionnaires(Callback<List<InboxQuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
         Call<List<InboxQuestionnaireDto>> receivedQuestionnaire = service.getReceiveQuestionnaires();
         receivedQuestionnaire.enqueue(callback);

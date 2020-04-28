@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
@@ -27,6 +28,10 @@ import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.QuestionAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -80,12 +85,36 @@ public class QuestionActivity extends AppCompatActivity {
             builder.setTitle("질문지 보내기");
             builder.setMessage("질문지를 보낼까요?");
             builder.setPositiveButton("확인", (dialogInterface, i) -> {
-                        Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
-                        Intent reply_intent = new Intent(QuestionActivity.this, SharingActivity.class);
-                        reply_intent.putExtra("category", category);
-                        reply_intent.putExtra("list", questionList);
-                        startActivity(reply_intent);
-                        Log.v("@@@@@@@","list:" + questionList.get(0).getChoices() + questionList.get(0).getContent());
+                        try {
+                            JSONArray jsonArray = new JSONArray();
+                            for (int j = 0; j < questionList.size(); j++) {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("id", questionList.get(j).getId());
+                                jsonObject.put("type", questionList.get(j).getType());
+                                jsonObject.put("content", questionList.get(j).getContent());
+                                if (questionList.get(j).getChoices() != null) {
+                                    JSONObject object = new JSONObject();
+                                    object.put("a", questionList.get(j).getChoices().getA());
+                                    object.put("b", questionList.get(j).getChoices().getB());
+                                    object.put("c", questionList.get(j).getChoices().getC());
+                                    object.put("d", questionList.get(j).getChoices().getD());
+                                    jsonObject.put("chocies", object);
+                                } else jsonObject.put("choices", "null");
+
+                                jsonObject.put("isBookmarked", questionList.get(j).isBookmarked());
+                                jsonArray.put(jsonObject);
+                            }
+
+                            Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
+                            Intent reply_intent = new Intent(QuestionActivity.this, SharingActivity.class);
+                            reply_intent.putExtra("category", category);
+                            reply_intent.putExtra("list", jsonArray.toString());
+                            startActivity(reply_intent);
+
+                            Log.d("@@@@@@", jsonArray.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
             );
             builder.setNegativeButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문지 보내기 취소", Toast.LENGTH_SHORT).show());
@@ -136,12 +165,13 @@ public class QuestionActivity extends AppCompatActivity {
         Intent intent1 = new Intent(QuestionActivity.this, QuestionAdapter.class);
         intent1.putExtra("category", category);
 
-        RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<ArrayList<NewQuestionDto>>() {
+        RetrofitHelper.getInstance().getQuestion(id, token, category, 15, new Callback<ArrayList<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionList != null) {
                     questionList = response.body();
                     questionAdapter.setQuestionList(questionList);
+                    Log.v("SIZE", "size:" + questionList.size());
 
                     for (NewQuestionDto newQuestionDto : getQuestion()) {
                         questionList.add(newQuestionDto);
@@ -184,7 +214,7 @@ public class QuestionActivity extends AppCompatActivity {
                 choices.setD(d);
 
                 if (contents != null && !contents.isEmpty()) {
-                    NewQuestionDto newQuestionDto = new NewQuestionDto( contents, category, type, choices, false);
+                    NewQuestionDto newQuestionDto = new NewQuestionDto(contents, category, type, choices, false);
 
                     questionList.add(newQuestionDto);
                     setQuestion(questionList);

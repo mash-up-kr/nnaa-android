@@ -23,11 +23,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.main.MainActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.AdditionalProp;
+import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.Questions;
 import com.mashup.nnaa.network.model.SharingDto;
@@ -36,6 +39,7 @@ import com.mashup.nnaa.question.SharingActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -45,6 +49,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +68,10 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
     private Date date = new Date(now);
     private SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.KOREA);
     private String time = simple.format(date);
+    private JSONArray jsonArray;
+    Choices choices = new Choices();
+    AdditionalProp additionalProp = new AdditionalProp();
+    Questions questions = new Questions();
 
     public SharingAdapter(Context context, ArrayList<Questionnaire> list) {
         this.unFilterdList = list;
@@ -123,31 +132,40 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
         holder.txt_name.setText(filteredList.get(position).getName());
         holder.txt_email.setText(filteredList.get(position).getEmail());
 
-        holder.userSelect.setOnClickListener(view -> {
+        int pos = holder.getAdapterPosition();
+        if (pos != RecyclerView.NO_POSITION) {
+            Questionnaire item = filteredList.get(pos);
 
-            Bundle bundle = ((Activity) sContext).getIntent().getExtras();
-            final String category = bundle.getString("category");
+            holder.userSelect.setOnClickListener(view -> {
 
-            int pos = holder.getAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION) {
-                Questionnaire item = filteredList.get(pos);
-
-                Choices choices = new Choices();
-                choices.setA("nnaa");
-                choices.setB("nnaa");
-                choices.setC("테스트");
-                choices.setD("하이");
-
-                AdditionalProp additionalProp = new AdditionalProp();
-                additionalProp.setChoices(choices);
-                additionalProp.setType("주관식");
-                additionalProp.setContent("안녕하세요");
-
-                Questions questions = new Questions();
-                questions.setAdditionalProp(additionalProp);
+                Bundle bundle = ((Activity) sContext).getIntent().getExtras();
+                final String category = bundle.getString("category");
+                final String list = bundle.getString("list");
+                Log.v("@@@@@@@@@@","테스트:"+list);
+                try {
+                    jsonArray = new JSONArray(list);
+                    Log.v("@@@@", jsonArray.toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        if (choices != null & additionalProp != null & questions != null) {
+                            choices.setA(jsonObject.getString(choices.getA()));
+                            choices.setB(jsonObject.getString(choices.getB()));
+                            choices.setC(jsonObject.getString(choices.getC()));
+                            choices.setD(jsonObject.getString(choices.getD()));
+                            additionalProp.setChoices(choices);
+                            additionalProp.setType(jsonObject.getString(additionalProp.getType()));
+                            additionalProp.setContent(jsonObject.getString(additionalProp.getContent()));
+                            questions.setAdditionalProp(additionalProp);
+                            additionalProp.setChoices(choices);
+                            questions.setAdditionalProp(additionalProp);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 Questionnaire questionnaire = new Questionnaire(category, time, questions, item.getId());
-                Log.v("@@", "cateogry:" + category + "," + "time:" + time + "," + "questions:" + questions.getAdditionalProp().getContent() + "," + "id:" + item.getId());
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(sContext);
                 builder.setTitle("해당 친구에게 보내기");
                 builder.setMessage("질문지를 보낼까요?");
@@ -167,9 +185,8 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
                 }));
                 builder.setNegativeButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소하였습니다.", Toast.LENGTH_SHORT).show());
                 builder.show();
-
-            }
-        });
+            });
+        }
     }
 
 

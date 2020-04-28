@@ -32,9 +32,12 @@ public interface QuestionnaireControllerService {
     Call<QuestionnaireDto> getQuestionnaire(@Path("questionnaireId") String questionnaireId);
 
     // 질문지에 답변하기
+    @Headers({"Content-Type: application/json"})
     @PUT("questionnaire/{questionnaireId")
-    Call<Questionnaire> answerQuestionnaire(@Path("questionnaireId") String questionnaireId,
-                                            QuestionnaireAnswerDto questionnaireAnswerDto);
+    Call<Questionnaire> answerQuestionnaire(@Header("id") String id,
+                                            @Header("token") String token,
+                                            @Path("questionnaireId") String questionnaireId,
+                                            @Body Questionnaire questionnaireAnswerDto);
 
     // 받은 질문지 리스트 보기
     @GET("questionnaire/inbox")

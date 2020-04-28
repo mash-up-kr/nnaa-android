@@ -24,6 +24,6 @@ public interface QuestionControllerService {
     Call<ArrayList<NewQuestionDto>> getQuestion(@Header("id") String id,
                                                 @Header("token") String token,
                                                 @Query("category") String category,
-                                                @Query("size") Integer size);
+                                                @Query("size") int size);
 
 }

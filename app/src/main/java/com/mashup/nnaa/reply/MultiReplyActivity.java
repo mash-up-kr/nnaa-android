@@ -101,7 +101,7 @@ public class MultiReplyActivity extends AppCompatActivity {
         String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
         String category = intent.getStringExtra("category");
 
-        RetrofitHelper.getInstance().getQuestion(id, token, category, new Callback<ArrayList<NewQuestionDto>>() {
+        RetrofitHelper.getInstance().getQuestion(id, token, category, 15,new Callback<ArrayList<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionDtoList != null) {

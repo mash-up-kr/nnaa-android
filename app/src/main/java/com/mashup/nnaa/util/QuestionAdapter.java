@@ -77,7 +77,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             if (pos != RecyclerView.NO_POSITION) {
                 NewQuestionDto item = questionList.get(pos);
 
-                NewQuestionDto newQuestionDto = new NewQuestionDto( item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
+                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
                 if (holder.qChoice.isChecked()) {
                     RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override
@@ -86,7 +86,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
                             holder.qChoice.setChecked(newQuestionDto.isBookmarked());
                             holder.qChoice.setChecked(isChekced);
-                            SharedPrefHelper.getInstance().put("check",holder.qChoice.isChecked());
+                            SharedPrefHelper.getInstance().put("check", holder.qChoice.isChecked());
 
                         }
 
@@ -137,7 +137,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             mName = itemView.findViewById(R.id.info_text);
             qChoice = itemView.findViewById(R.id.question_choice);
 
-            SharedPrefHelper.getInstance().getBoolean("check",false);
+            SharedPrefHelper.getInstance().getBoolean("check", false);
         }
     }
 }
