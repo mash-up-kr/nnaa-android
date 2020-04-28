@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.util.AccountManager;
+import com.mashup.nnaa.util.EncryptUtil;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -48,14 +49,21 @@ public class ResetPwActivity extends AppCompatActivity {
             Log.v("DEEPLINK", "id:" + user_id + "," + "token:" + token);
 
             btn_reset.setOnClickListener(view -> {
-                RetrofitHelper.getInstance().resetPw(user_id, token, edit_reset_pw.getText().toString(), edit_reset_pw_confirm.getText().toString(), new Callback<ResponseBody>() {
+                String plainNewPw = edit_reset_pw.getText().toString();
+                String plainNewPwConfirm = edit_reset_pw_confirm.getText().toString();
+
+                String encryptNewPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPw);
+                String encryptNewPwConfirm = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPwConfirm);
+
+                RetrofitHelper.getInstance().resetPw(user_id, token, encryptNewPw, encryptNewPwConfirm, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             Intent success = new Intent(NnaaApplication.getAppContext(), LoginActivity.class);
-                            success.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            success.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             NnaaApplication.getAppContext().startActivity(success);
                             Log.v("딥링크 비번 재설정", response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
+                            finish();
                         }
                     }
                     @Override
