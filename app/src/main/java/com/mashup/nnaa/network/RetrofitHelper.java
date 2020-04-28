@@ -2,12 +2,14 @@ package com.mashup.nnaa.network;
 
 import android.text.TextUtils;
 
+import com.kakao.usermgmt.response.model.User;
 import com.mashup.nnaa.BuildConfig;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.Questionnaire;
+import com.mashup.nnaa.network.model.SharingDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
@@ -135,9 +137,9 @@ public class RetrofitHelper {
     }
 
     // 문제지 첫 기본세팅
-    public void getQuestion(String id, String token, String category, Callback<ArrayList<NewQuestionDto>> callback) {
+    public void getQuestion(String id, String token, String category, int size, Callback<ArrayList<NewQuestionDto>> callback) {
         QuestionControllerService service = retrofit.create(QuestionControllerService.class);
-        Call<ArrayList<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, 100);
+        Call<ArrayList<NewQuestionDto>> getQuestionRandom = service.getQuestion(id, token, category, size);
         getQuestionRandom.enqueue(callback);
     }
 
@@ -168,6 +170,20 @@ public class RetrofitHelper {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
         Call<Questionnaire> postQuestionnaire = service.postQuestionnaire(id, token, questionnaire);
         postQuestionnaire.enqueue(callback);
+    }
+
+    // 질문지 답변
+    public void answerQuestionnaire(String id, String token, String questionnaireId, Questionnaire questionnaire, Callback<Questionnaire> callback) {
+        QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
+        Call<Questionnaire> answerQuestionnaire = service.answerQuestionnaire(id, token, questionnaireId, questionnaire);
+        answerQuestionnaire.enqueue(callback);
+    }
+
+    // 이름으로 유저찾기
+    public void userName(String name, Callback<ArrayList<Questionnaire>> callback) {
+        UserControllerService service = retrofit.create(UserControllerService.class);
+        Call<ArrayList<Questionnaire>> userName = service.userName(name);
+        userName.enqueue(callback);
     }
 
     public void getReceivedQuestionnaires(Callback<List<InboxQuestionnaireDto>> callback) {

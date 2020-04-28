@@ -4,32 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.util.Log;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.network.model.SharingDto;
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.util.SharingAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SharingActivity extends AppCompatActivity {
 
     private EditText editSearch;
-    private ImageView imgCancel, btnNot;
-    private Button btnSend;
+    private ImageView imgCancel;
     private SharingAdapter adapter;
-    private ArrayList<SharingDto> list = new ArrayList<>();
+    private ArrayList<Questionnaire> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +39,31 @@ public class SharingActivity extends AppCompatActivity {
 
         editSearch = findViewById(R.id.search_view);
         imgCancel = findViewById(R.id.img_sharing_close);
-        btnNot = findViewById(R.id.btn_not);
-        btnSend = findViewById(R.id.btn_send);
+
+        Intent intent = getIntent();
+        String cateogry = intent.getStringExtra("category");
+
+        String json = intent.getStringExtra("list");
+
+        Intent intent1 = new Intent(SharingActivity.this, SharingAdapter.class);
+        intent1.putExtra("category", cateogry);
+        intent1.putExtra("list", json);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        imgCancel.setOnClickListener(view -> {
+            finish();
+        });
 
         RecyclerView sharing_recyclerview = findViewById(R.id.recyclerview_sharing);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         sharing_recyclerview.setLayoutManager(linearLayoutManager);
 
+        list = new ArrayList<>();
+
         adapter = new SharingAdapter(this, list);
         sharing_recyclerview.setAdapter(adapter);
 
-        getData();
 
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -58,7 +73,18 @@ public class SharingActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
-                adapter.getFilter().filter(charSequence);
+                RetrofitHelper.getInstance().userName(charSequence.toString(), new Callback<ArrayList<Questionnaire>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Questionnaire>> call, Response<ArrayList<Questionnaire>> response) {
+                        list = response.body();
+                        adapter.setSharinglist(list);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Questionnaire>> call, Throwable t) {
+                        Log.v("@@", t.getMessage());
+                    }
+                });
             }
 
             @Override
@@ -66,20 +92,5 @@ public class SharingActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void getData() {
-
-        List<String> namelist = Arrays.asList("고승윤", "아무개", "김김김", "토니", "디디", "김김김", "토니", "디디");
-        List<String> emaillist = Arrays.asList("aaa@aaa.com", "bbb@bbb.com", "ccc@ccc.com", "ddd@ddd.com", "eee@eee.com","ccc@ccc.com", "ddd@ddd.com", "eee@eee.com");
-
-        for (int i = 0; i < namelist.size(); i++) {
-            SharingDto sharingDto = new SharingDto();
-            sharingDto.setName(namelist.get(i));
-            sharingDto.setEmail(emaillist.get(i));
-
-            adapter.addItem(sharingDto);
-        }
-        adapter.notifyDataSetChanged();
     }
 }

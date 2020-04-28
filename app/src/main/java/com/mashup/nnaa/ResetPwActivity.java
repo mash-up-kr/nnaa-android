@@ -52,7 +52,9 @@ public class ResetPwActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
-                            launchLoginActivity();
+                            Intent success = new Intent(NnaaApplication.getAppContext(), LoginActivity.class);
+                            success.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            NnaaApplication.getAppContext().startActivity(success);
                             Log.v("딥링크 비번 재설정", response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
                         }
                     }
@@ -63,11 +65,5 @@ public class ResetPwActivity extends AppCompatActivity {
                 });
             });
         }
-    }
-
-    private void launchLoginActivity() {
-        Intent success = new Intent(ResetPwActivity.this, LoginActivity.class);
-        startActivity(success);
-        Toast.makeText(getApplicationContext(), "비밀번호 재설정 완료!", Toast.LENGTH_SHORT).show();
     }
 }

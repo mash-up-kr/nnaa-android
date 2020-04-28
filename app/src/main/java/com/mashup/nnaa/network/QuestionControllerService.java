@@ -24,10 +24,6 @@ public interface QuestionControllerService {
     Call<ArrayList<NewQuestionDto>> getQuestion(@Header("id") String id,
                                                 @Header("token") String token,
                                                 @Query("category") String category,
-                                                @Query("size") Integer size);
-
-    // 직접 질문 입력해서 질문 추가하기
-    @POST("question")
-    Call<NewQuestionDto> postQuestion(@Body NewQuestionDto body);
+                                                @Query("size") int size);
 
 }

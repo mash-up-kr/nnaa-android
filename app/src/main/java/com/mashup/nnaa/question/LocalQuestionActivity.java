@@ -107,7 +107,7 @@ public class LocalQuestionActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+   /* @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
@@ -130,7 +130,7 @@ public class LocalQuestionActivity extends AppCompatActivity {
                 choices.setD(d);
 
                 if (contents != null && !contents.isEmpty()) {
-                    NewQuestionDto newQuestionDto = new NewQuestionDto("", contents, category, type, choices);
+                    NewQuestionDto newQuestionDto = new NewQuestionDto("", contents, category, type, choices, false);
 
                     localList.add(newQuestionDto);
                     setQuestion(localList);
@@ -150,7 +150,7 @@ public class LocalQuestionActivity extends AppCompatActivity {
 
                 break;
         }
-    }
+    }*/
 
 
     private void setQuestion(ArrayList<NewQuestionDto> localList) {
