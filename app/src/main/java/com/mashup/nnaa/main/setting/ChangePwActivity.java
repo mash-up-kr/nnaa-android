@@ -55,6 +55,7 @@ public class ChangePwActivity extends AppCompatActivity {
             String encryptOldPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainOldPw);
             String encryptNewPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPw);
             String encryptNewPwConfirm = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPwConfirm);
+
             RetrofitHelper.getInstance().changePw(id, token, encryptOldPw, encryptNewPw, encryptNewPwConfirm, new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -62,9 +63,11 @@ public class ChangePwActivity extends AppCompatActivity {
                         btn_change.setBackgroundColor(Color.BLUE);
                         Toast.makeText(view.getContext(), "비밀번호 변경완료! 다시 로그인 해주세요.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
 
                         Log.v("비번변경", "response:" + response.code() + changePw.getText().toString());
+                        finish();
                     }
                 }
 

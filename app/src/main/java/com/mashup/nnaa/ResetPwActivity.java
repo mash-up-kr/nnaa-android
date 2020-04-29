@@ -60,9 +60,10 @@ public class ResetPwActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             Intent success = new Intent(NnaaApplication.getAppContext(), LoginActivity.class);
-                            success.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            success.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             NnaaApplication.getAppContext().startActivity(success);
                             Log.v("딥링크 비번 재설정", response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
+                            finish();
                         }
                     }
 
