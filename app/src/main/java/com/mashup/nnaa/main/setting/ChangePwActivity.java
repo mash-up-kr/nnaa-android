@@ -46,14 +46,16 @@ public class ChangePwActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), MainActivity.class);
             startActivity(intent);
         });
-        String pw = currentPw.getText().toString();
-        String pwLocal;
-        String pwSign;
-        pwLocal = EncryptUtil.encryptPasswordFromPlaintextToLocal(pw);
-        pwSign = EncryptUtil.encryptPasswordFromLocalToSignIn(pwLocal);
 
         btn_change.setOnClickListener(view -> {
-            RetrofitHelper.getInstance().changePw(id, token, pwSign, changePw.getText().toString(), confirmPw.getText().toString(), new Callback<ResponseBody>() {
+            String plainOldPw = currentPw.getText().toString();
+            String plainNewPw = changePw.getText().toString();
+            String plainNewPwConfirm = confirmPw.getText().toString();
+
+            String encryptOldPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainOldPw);
+            String encryptNewPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPw);
+            String encryptNewPwConfirm = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPwConfirm);
+            RetrofitHelper.getInstance().changePw(id, token, encryptOldPw, encryptNewPw, encryptNewPwConfirm, new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
