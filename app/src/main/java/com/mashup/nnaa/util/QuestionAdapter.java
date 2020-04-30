@@ -117,6 +117,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         });
     }
 
+    public void addItem(NewQuestionDto newQuestionDto) {
+        questionList.add(newQuestionDto);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {

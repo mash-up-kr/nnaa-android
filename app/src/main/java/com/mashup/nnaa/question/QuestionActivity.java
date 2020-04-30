@@ -60,9 +60,6 @@ public class QuestionActivity extends AppCompatActivity {
         String type = intent.getStringExtra("type");
         String name = intent.getStringExtra("name");
 
-        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
-        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
-
         txt_name = findViewById(R.id.txt_name);
         txt_type = findViewById(R.id.txt_type);
         btn_next = findViewById(R.id.btn_next);
@@ -111,7 +108,7 @@ public class QuestionActivity extends AppCompatActivity {
                             reply_intent.putExtra("list", jsonArray.toString());
                             startActivity(reply_intent);
 
-                            Log.d("@@@@@@", jsonArray.toString());
+                            Log.v("@@@@@@", jsonArray.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -135,7 +132,6 @@ public class QuestionActivity extends AppCompatActivity {
         questionList = new ArrayList<>();
         questionAdapter = new QuestionAdapter(this, questionList);
         recyclerQuestion.setAdapter(questionAdapter);
-
 
         this.getQuestionRandom();
 
@@ -165,7 +161,7 @@ public class QuestionActivity extends AppCompatActivity {
         Intent intent1 = new Intent(QuestionActivity.this, QuestionAdapter.class);
         intent1.putExtra("category", category);
 
-        RetrofitHelper.getInstance().getQuestion(id, token, category, 15, new Callback<ArrayList<NewQuestionDto>>() {
+        RetrofitHelper.getInstance().getQuestion(id, token, category, "10", new Callback<ArrayList<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionList != null) {
@@ -173,9 +169,11 @@ public class QuestionActivity extends AppCompatActivity {
                     questionAdapter.setQuestionList(questionList);
                     Log.v("SIZE", "size:" + questionList.size());
 
+                    // 기존 리스트도 함께추가된다 막아야함
                     for (NewQuestionDto newQuestionDto : getQuestion()) {
                         questionList.add(newQuestionDto);
                         questionAdapter.notifyDataSetChanged();
+                        Log.v("@@@@",newQuestionDto.getContent());
                     }
                 } else if (questionList.size() == 0) {
                     Toast.makeText(QuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
@@ -215,10 +213,9 @@ public class QuestionActivity extends AppCompatActivity {
 
                 if (contents != null && !contents.isEmpty()) {
                     NewQuestionDto newQuestionDto = new NewQuestionDto(contents, category, type, choices, false);
-
+                    // local 퀘션 추가
                     questionList.add(newQuestionDto);
                     setQuestion(questionList);
-
 
                     Log.v("Question Add", "질문생성: " + "content: " + contents + "," + "category: " + category + "," +
                             "type: " + type + "," + "choices: " + "[a]:" + a + "," + "[b]:" + b + "," + "[c]:" + c + "," + "[d]:" + d);
@@ -234,7 +231,6 @@ public class QuestionActivity extends AppCompatActivity {
                 questionAdapter.setQuestionList(questionList);
 
                 break;
-
         }
     }
 

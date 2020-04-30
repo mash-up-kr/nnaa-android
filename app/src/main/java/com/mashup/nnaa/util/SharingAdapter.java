@@ -23,7 +23,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
@@ -40,6 +42,7 @@ import com.mashup.nnaa.question.SharingActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -48,6 +51,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -59,6 +63,8 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHolder> implements Filterable {
 
+    private static final String TAG = "SharingAdapter";
+
     private Context sContext;
     private ArrayList<Questionnaire> unFilterdList;
     private ArrayList<Questionnaire> filteredList;
@@ -68,7 +74,7 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
     private Date date = new Date(now);
     private SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.KOREA);
     private String time = simple.format(date);
-    private JSONArray jsonArray;
+
     Choices choices = new Choices();
     AdditionalProp additionalProp = new AdditionalProp();
     Questions questions = new Questions();
@@ -132,40 +138,60 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
         holder.txt_name.setText(filteredList.get(position).getName());
         holder.txt_email.setText(filteredList.get(position).getEmail());
 
+
         int pos = holder.getAdapterPosition();
         if (pos != RecyclerView.NO_POSITION) {
             Questionnaire item = filteredList.get(pos);
 
             holder.userSelect.setOnClickListener(view -> {
 
+
                 Bundle bundle = ((Activity) sContext).getIntent().getExtras();
                 final String category = bundle.getString("category");
+
                 final String list = bundle.getString("list");
-                Log.v("@@@@@@@@@@","테스트:"+list);
+                Log.v("제이슨", "리스트 결과:" + list);
                 try {
-                    jsonArray = new JSONArray(list);
-                    Log.v("@@@@", jsonArray.toString());
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        if (choices != null & additionalProp != null & questions != null) {
-                            choices.setA(jsonObject.getString(choices.getA()));
-                            choices.setB(jsonObject.getString(choices.getB()));
-                            choices.setC(jsonObject.getString(choices.getC()));
-                            choices.setD(jsonObject.getString(choices.getD()));
-                            additionalProp.setChoices(choices);
-                            additionalProp.setType(jsonObject.getString(additionalProp.getType()));
-                            additionalProp.setContent(jsonObject.getString(additionalProp.getContent()));
-                            questions.setAdditionalProp(additionalProp);
-                            additionalProp.setChoices(choices);
-                            questions.setAdditionalProp(additionalProp);
+                    JSONArray array = new JSONArray(list);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        Log.d(TAG, "onBindViewHolder: object = " + object + ",");
+                        String content = object.getString("content");
+                        additionalProp.setContent(content);
+                        Log.d(TAG, "onBindViewHolder: object = " + content);
+                        String type = object.getString("type");
+                        additionalProp.setType(type);
+                        Log.d(TAG, "onBindViewHolder: object = " + type);
+
+                        if (!(array.getJSONObject(i).isNull("choices"))) {
+                            String choice = object.getString("choices");
+                            additionalProp.setChoices(null);
+                            Log.d(TAG, "onBindViewHolder: choices = " + choice);
                         }
+                        else {
+                            String choice = object.getString("chocies");
+                            JSONObject jsonObject = object.getJSONObject(choice);
+                            String a = jsonObject.getString("a");
+                            String b = jsonObject.getString("b");
+                            String c = jsonObject.getString("c");
+                            String d = jsonObject.getString("d");
+                            choices.setA(a);
+                            choices.setB(b);
+                            choices.setC(c);
+                            choices.setD(d);
+
+                            additionalProp.setChoices(choices);
+                            questions.setAdditionalProp(additionalProp);
+
+                            Log.d(TAG, "onBindViewHolder: choices = " + choices + "choices:" + a + b + c + d);
+                        }
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 Questionnaire questionnaire = new Questionnaire(category, time, questions, item.getId());
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(sContext);
                 builder.setTitle("해당 친구에게 보내기");
                 builder.setMessage("질문지를 보낼까요?");

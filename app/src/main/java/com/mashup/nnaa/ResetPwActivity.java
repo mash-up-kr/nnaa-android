@@ -66,6 +66,7 @@ public class ResetPwActivity extends AppCompatActivity {
                             finish();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Log.v("딥링크 비번 재설정", t.getMessage());
