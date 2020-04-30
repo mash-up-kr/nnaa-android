@@ -74,7 +74,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
         Custom_J_Blue.setOnClickListener(view -> {
             Custom_J_Blue.setVisibility(View.INVISIBLE);
             Custom_J.setVisibility(View.VISIBLE);
-            Custom_OX_Blue.setEnabled(true);
+            Custom_OX.setEnabled(true);
             Custom_G.setEnabled(true);
             Toast.makeText(view.getContext(), "주관식 선택 취소!", Toast.LENGTH_SHORT).show();
             FirstEdit.setEnabled(true);
@@ -124,11 +124,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
             mk_intent.putExtra("type", "");
         });
 
-        if (Content_Edit.getText().toString().isEmpty() && Content_Edit.getText().toString().length() == 0) {
-            Toast.makeText(MakeQuestionActivity.this, "질문 내용을 입력해주세요!", Toast.LENGTH_SHORT).show();
-            Content_Edit.requestFocus();
-            CustomDone.setEnabled(false);
-        } else  CustomDone.setEnabled(true);
         CustomDone.setOnClickListener(view -> {
 
             mk_intent.putExtra("content", Content_Edit.getText().toString());
