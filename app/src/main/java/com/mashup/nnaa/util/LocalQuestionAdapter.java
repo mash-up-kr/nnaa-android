@@ -152,17 +152,6 @@ public class LocalQuestionAdapter extends RecyclerView.Adapter<LocalQuestionAdap
             local_content = itemView.findViewById(R.id.local_question);
             bookmark = itemView.findViewById(R.id.local_choice);
 
-            itemView.setOnClickListener(view -> {
-               int pos = getAdapterPosition();
-
-               if(Selected.get(pos,false)) {
-                   Selected.put(pos, false);
-                    view.setBackgroundColor(Color.WHITE);
-               }else {
-                   Selected.put(pos, true);
-                   view.setBackgroundColor(Color.BLUE);
-               }
-            });
         }
     }
 }
