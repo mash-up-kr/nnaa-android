@@ -18,12 +18,17 @@ import android.widget.Toast;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.Answers;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.ReplyAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +45,12 @@ public class MultiReplyActivity extends AppCompatActivity {
     private ReplyAdapter replyAdapter;
     private ArrayList<NewQuestionDto> questionDtoList;
     private int count = 1;
+    private long now = System.currentTimeMillis();
+    private Date date = new Date(now);
+    private SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.KOREA);
+    private String time = simple.format(date);
+    String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
+    String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +107,27 @@ public class MultiReplyActivity extends AppCompatActivity {
     }
 
     private void answerQuestion() {
-        Intent intent = getIntent();
-        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
-        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
-        String category = intent.getStringExtra("category");
 
-        RetrofitHelper.getInstance().getQuestion(id, token, category, 15,new Callback<ArrayList<NewQuestionDto>>() {
+        String questionnaireId = "5ea79f53eca1302c37bbf00f";
+
+        Answers answers = new Answers();
+
+        QuestionnaireAnswerDto answerDto = new QuestionnaireAnswerDto(answers, time);
+        RetrofitHelper.getInstance().answerQuestionnaire(id, token, questionnaireId, answerDto, new Callback<QuestionnaireAnswerDto>() {
+            @Override
+            public void onResponse(Call<QuestionnaireAnswerDto> call, Response<QuestionnaireAnswerDto> response) {
+
+                Log.v("response","respose:"+response.code());
+
+            }
+
+            @Override
+            public void onFailure(Call<QuestionnaireAnswerDto> call, Throwable t) {
+
+            }
+        });
+
+        /*RetrofitHelper.getInstance().getQuestion(id, token, category, "10", new Callback<ArrayList<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionDtoList != null) {
@@ -115,7 +141,7 @@ public class MultiReplyActivity extends AppCompatActivity {
                         btn_next_question.setEnabled(true);
                         btn_past.setEnabled(true);
                         txtQuestion.setText(response.body().get(count - 1).getContent());
-                        if (response.body().get(count - 1).getType() != null && response.body().get(count-1).isBookmarked() ==true) {
+                        if (response.body().get(count - 1).getType() != null && response.body().get(count - 1).isBookmarked() == true) {
                             reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
 
                             if (response.body().get(count - 1).getType().equals("주관식")) {
@@ -143,7 +169,7 @@ public class MultiReplyActivity extends AppCompatActivity {
                             btn_past.setEnabled(true);
                             btn_next_question.setEnabled(true);
                             txtQuestion.setText(response.body().get(count - 1).getContent());
-                            if (response.body().get(count - 1).getType() != null && response.body().get(count-1).isBookmarked() ==true) {
+                            if (response.body().get(count - 1).getType() != null && response.body().get(count - 1).isBookmarked() == true) {
                                 reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
 
                                 if (response.body().get(count - 1).getType().equals("주관식")) {
@@ -158,7 +184,7 @@ public class MultiReplyActivity extends AppCompatActivity {
                     });
                     reply_end_nubmer.setText(String.valueOf(questionDtoList.size()));
                     Log.v("답변 리스트", "Response =  " + response.code() + "," + "id:" + "," + "token: " + token);
-                    /*   replyAdapter.setQuestionDtoList(questionDtoList);*/
+                    *//*   replyAdapter.setQuestionDtoList(questionDtoList);*//*
                 } else if (questionDtoList.size() == 0) {
                     Toast.makeText(MultiReplyActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -170,7 +196,7 @@ public class MultiReplyActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<NewQuestionDto>> call, Throwable t) {
                 Log.v("답변 리스트", "에러:" + t.getMessage());
             }
-        });
+        });*/
     }
 
     private void subjectQuestion() {
