@@ -12,6 +12,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <ImageView
             android:id="@+id/img_back_with"
             android:layout_width="match_parent"
@@ -29,6 +30,7 @@
             android:background="@drawable/corner_shape"
             android:contentDescription="@string/StringValue"
             app:layout_constraintTop_toBottomOf="@id/img_back_with" />
+
     </FrameLayout>
 
     <TextView
@@ -124,6 +126,18 @@
         android:src="@drawable/choice_btn_heart_off"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        app:layout_constraintTop_toBottomOf="@id/reply_choice"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/lottie_complete"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="140dp"
+        app:lottie_autoPlay="true"
+        android:visibility="gone"
+        app:lottie_fileName="18725-checkmark-blue-english4school.json"
+        app:lottie_loop="true" />
 
 
     <EditText
