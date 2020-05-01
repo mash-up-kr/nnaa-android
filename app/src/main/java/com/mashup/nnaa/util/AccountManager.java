@@ -32,6 +32,11 @@ public class AccountManager {
     private UserAuthHeaderInfo userAuthHeaderInfo;
 
     public UserAuthHeaderInfo getUserAuthHeaderInfo() {
+        if (userAuthHeaderInfo == null) {
+            // Abnormal case. To avoid Fatal Crash error, return empty object instead of null if userAuthHeaderInfo is null.
+            Log.w("AccountManager", "::getUserAuthHeaderInfo userAuthHeaderInfo is null. return empty object.");
+            userAuthHeaderInfo = new UserAuthHeaderInfo("", "", "");
+        }
         return userAuthHeaderInfo;
     }
 
