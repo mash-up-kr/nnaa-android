@@ -18,6 +18,7 @@ public class ReplyActivity extends AppCompatActivity {
     TextView reply_name;
     Button  btn_start;
     ImageView btn_not;
+    String name = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class ReplyActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        reply_name.setText(intent.getStringExtra("reply_name"));
+        reply_name.setText(String.format("%s님의", name));
 
         String category = intent.getStringExtra("category");
 
