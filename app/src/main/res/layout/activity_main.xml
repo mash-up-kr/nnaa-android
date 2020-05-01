@@ -54,7 +54,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.19"
                 android:scaleType="fitCenter"
-                android:src="@drawable/main_tab_alarm"/>
+                android:src="@drawable/main_tab_alarm"
+                android:visibility="invisible"/> <!-- Hide this due to the alarm feature is not planned. -->
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
