@@ -25,6 +25,7 @@ import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Questionnaire;
+import com.mashup.nnaa.reply.MultiReplyActivity;
 import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.QuestionAdapter;
@@ -95,7 +96,7 @@ public class QuestionActivity extends AppCompatActivity {
                                     object.put("b", questionList.get(j).getChoices().getB());
                                     object.put("c", questionList.get(j).getChoices().getC());
                                     object.put("d", questionList.get(j).getChoices().getD());
-                                    jsonObject.put("chocies", object);
+                                    jsonObject.put("choices", object);
                                 } else jsonObject.put("choices", "null");
 
                                 jsonObject.put("isBookmarked", questionList.get(j).isBookmarked());
