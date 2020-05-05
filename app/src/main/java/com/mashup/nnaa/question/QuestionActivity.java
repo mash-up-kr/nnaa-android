@@ -51,6 +51,7 @@ public class QuestionActivity extends AppCompatActivity {
     private QuestionAdapter questionAdapter;
     private ArrayList<NewQuestionDto> questionList;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
@@ -90,6 +91,7 @@ public class QuestionActivity extends AppCompatActivity {
                                 jsonObject.put("id", questionList.get(j).getId());
                                 jsonObject.put("type", questionList.get(j).getType());
                                 jsonObject.put("content", questionList.get(j).getContent());
+
                                 if (questionList.get(j).getChoices() != null) {
                                     JSONObject object = new JSONObject();
                                     object.put("a", questionList.get(j).getChoices().getA());
@@ -134,6 +136,7 @@ public class QuestionActivity extends AppCompatActivity {
         questionAdapter = new QuestionAdapter(this, questionList);
         recyclerQuestion.setAdapter(questionAdapter);
 
+
         this.getQuestionRandom();
 
         img_add.setOnClickListener(view -> {
@@ -167,16 +170,15 @@ public class QuestionActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionList != null && response.body() != null) {
                     questionList = response.body();
+                    Log.v("로그확인", "dd" + response.body());
                     questionAdapter.setQuestionList(questionList);
 
-                    for (NewQuestionDto newQuestionDto : getQuestion()) {
-                        questionList.add(newQuestionDto);
-                        questionAdapter.notifyDataSetChanged();
+                    if (getQuestion() != null) {
+                        for (NewQuestionDto newQuestionDto : getQuestion()) {
+                            questionList.add(newQuestionDto);
+                            questionAdapter.notifyDataSetChanged();
+                        }
                     }
-                } else if (questionList.size() == 0) {
-                    Toast.makeText(QuestionActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.v("QuestionRandom", "No Question");
                 }
             }
 
