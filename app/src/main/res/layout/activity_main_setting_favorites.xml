@@ -22,28 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/setting_manage_favorites" />
 
-    <ImageView
-        android:id="@+id/img_delete_msf"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/delete_1487"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
-        android:id="@+id/img_add_msf"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/StringValue"
-        android:src="@drawable/plus_white"
-        app:layout_constraintLeft_toRightOf="@id/img_delete_msf"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -77,27 +55,34 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/btn_cancel_msf"
+        <ImageView
+            android:id="@+id/btn_cancel"
             android:layout_width="163dp"
             android:layout_height="70dp"
             android:layout_gravity="bottom"
             android:background="#fefefe"
-            android:text="취소하기"
-            android:textColor="#0d0d0d"
-            android:textSize="14sp"
             tools:ignore="HardcodedText" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="21dp"
+            android:text="@string/cancle"
+            android:textColor="#730d0d0d"
+            android:textSize="14sp" />
+
         <Button
-            android:id="@+id/btn_next_msf"
+            android:id="@+id/btn_next"
             android:layout_width="240dp"
             android:layout_height="70dp"
             android:layout_gravity="bottom|end"
             android:background="@drawable/button_shape"
-            android:text="적용하기"
+            android:text="next"
             android:textColor="#ffffff"
             android:textSize="14sp"
             tools:ignore="HardcodedText" />
     </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
