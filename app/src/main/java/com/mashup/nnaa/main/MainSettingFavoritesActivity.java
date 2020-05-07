@@ -16,6 +16,7 @@ import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
+import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.BookmarkAdapter;
 import com.mashup.nnaa.util.FavoritesAdapter;
@@ -27,45 +28,32 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainSettingFavoritesActivity extends AppCompatActivity {
-    private ImageView img_add_msf, img_delete_msf;
+
+    private ImageView cancel;
     private TextView txt_manage_favorites;
-    private Button btn_cancel_msf, btn_next_msf;
+    private Button btn_next;
     private RecyclerView favorites_recycler;
-    private FavoritesAdapter favoritesAdapter;
+    private MainSettingFavoritesAdapter adapter;
     private ArrayList<NewQuestionDto> fList;
-    private BookmarkAdapter bookmarkAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_setting_favorites);
 
-        img_add_msf = findViewById(R.id.img_add_msf);
-        img_delete_msf = findViewById(R.id.img_delete_msf);
         txt_manage_favorites = findViewById(R.id.txt_manage_favorites);
-        btn_cancel_msf = findViewById(R.id.btn_cancel_msf);
-        btn_next_msf = findViewById(R.id.btn_next_msf);
+        cancel = findViewById(R.id.btn_cancel);
+        btn_next = findViewById(R.id.btn_next);
 
         txt_manage_favorites.setText(R.string.setting_manage_favorites);
 
-        img_add_msf.setOnClickListener(view -> {
-            //즐겨찾기 질문 추가
-            Intent addintent = new Intent(NnaaApplication.getAppContext(), MainSettingMakeFavoritesActivity.class);
-            startActivity(addintent);
-        });
-
-        img_delete_msf.setOnClickListener(view -> {
-
-        });
-
-        btn_cancel_msf.setOnClickListener(view -> {
-            Toast.makeText(MainSettingFavoritesActivity.this, "처음으로 돌아갑니다.", Toast.LENGTH_SHORT).show();
+        cancel.setOnClickListener(view -> {
             finish();
         });
 
-        btn_next_msf.setOnClickListener(view -> {
-            Toast.makeText(MainSettingFavoritesActivity.this, "적용 완료!", Toast.LENGTH_SHORT).show();
-            //적용 완료하고 세팅페이지로 넘어가야함
+        btn_next.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), SetTypeOfFriendActivity.class);
+            startActivity(intent);
         });
 
         favorites_recycler = findViewById(R.id.recycler_main_setting_favorites);
@@ -74,28 +62,12 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
         favorites_recycler.setLayoutManager(linearLayoutManager);
 
         fList = new ArrayList<>();
-        //favoritesAdapter = new FavoritesAdapter(this, fList);
-        //favorites_recycler.setAdapter(favoritesAdapter);
 
-        bookmarkAdapter = new BookmarkAdapter(this,fList);
-        favorites_recycler.setAdapter(bookmarkAdapter);
+        adapter = new MainSettingFavoritesAdapter(this, fList);
+        favorites_recycler.setAdapter(adapter);
         favorites_recycler.setHasFixedSize(true);
 
         this.showFavorites();
-
-
-        /* Swipe to delete
-        ItemTouchHelperListener listener = new ItemTouchHelperListener() {
-            @Override
-            public void onItemSwipe(int position) {
-
-            }
-        };
-        //ItemTouchHelperCallback itemTouchHelperCallback = new ItemTouchHelperCallback(listener);
-
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper();
-        itemTouchhelper.attachToRecyclerView(favorites_recycler);*/
-
 
     }
 
@@ -110,7 +82,7 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     fList = response.body();
                     Log.v("즐겨찾기 api", "Response = " + response.code());
-                    bookmarkAdapter.setFavoriteList(fList);
+                    adapter.setFavoritList(fList);
                 } else if (response.code() == 400) {
                     Toast.makeText(MainSettingFavoritesActivity.this, "즐겨찾기 한 질문이 없습니다.", Toast.LENGTH_SHORT).show();
 
