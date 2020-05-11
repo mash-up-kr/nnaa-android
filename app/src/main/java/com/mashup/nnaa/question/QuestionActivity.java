@@ -86,6 +86,7 @@ public class QuestionActivity extends AppCompatActivity {
             builder.setPositiveButton("확인", (dialogInterface, i) -> {
                         try {
                             JSONArray jsonArray = new JSONArray();
+
                             for (int j = 0; j < questionList.size(); j++) {
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("id", questionList.get(j).getId());
@@ -110,8 +111,10 @@ public class QuestionActivity extends AppCompatActivity {
                             reply_intent.putExtra("category", category);
                             reply_intent.putExtra("list", jsonArray.toString());
                             startActivity(reply_intent);
+                            Log.d("@@@@@@",jsonArray.toString());
 
-                            Log.v("@@@@@@", jsonArray.toString());
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -170,8 +173,15 @@ public class QuestionActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionList != null && response.body() != null) {
                     questionList = response.body();
-                    Log.v("로그확인", "dd" + response.body());
+
                     questionAdapter.setQuestionList(questionList);
+
+//                    SharedPreferences pref = getPreferences(0);
+//                    Gson gson = new Gson();
+//                    String dto = pref.getString("local","");
+//                    NewQuestionDto questionDto = gson.fromJson(dto, NewQuestionDto.class);
+//                    questionList.add(questionDto);
+
 
                     if (getQuestion() != null) {
                         for (NewQuestionDto newQuestionDto : getQuestion()) {
@@ -213,9 +223,19 @@ public class QuestionActivity extends AppCompatActivity {
 
                 if (contents != null && !contents.isEmpty()) {
                     NewQuestionDto newQuestionDto = new NewQuestionDto(contents, category, type, choices, false);
+
                     // local 퀘션 추가
-                    questionList.add(newQuestionDto);
                     setQuestion(questionList);
+                    questionList.add(newQuestionDto);
+
+//                    SharedPreferences pref = getPreferences(0);
+//                    SharedPreferences.Editor editor = pref.edit();
+//                    Gson gson = new Gson();
+//                    String dto = gson.toJson(newQuestionDto);
+//                    String json = gson.toJson(questionList);
+//                    editor.putString("local", dto);
+//                    editor.putString("list",json);
+//                    editor.apply();
 
                     questionAdapter.notifyDataSetChanged();
                 }
@@ -239,6 +259,7 @@ public class QuestionActivity extends AppCompatActivity {
         editor.putString("local_question", json);
         editor.apply();
     }
+
 
     private ArrayList<NewQuestionDto> getQuestion() {
         SharedPreferences prefs = getSharedPreferences("question_list", 0);

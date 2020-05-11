@@ -44,6 +44,9 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
             case SIGN_OUT:
                 callSignOut();
                 break;
+            case HOW_USE:
+                callHowtoUse();
+                break;
             case MANAGE_FAVORITES:
                 callFavoritesManagement();
                 break;
@@ -87,6 +90,11 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
                 )
                 .setNegativeButton(R.string.common_no, null)
                 .show();
+    }
+    private void callHowtoUse() {
+        Intent intent = new Intent(NnaaApplication.getAppContext(), HowUseActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        NnaaApplication.getAppContext().startActivity(intent);
     }
 
     private void callFavoritesManagement() {

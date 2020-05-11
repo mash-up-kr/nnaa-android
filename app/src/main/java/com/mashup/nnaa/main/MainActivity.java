@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         // Load HOME fragment page
         onMainTabClicked(Page.HOME);
 
-         Intent kakao = getIntent();
+       /* Intent kakao = getIntent();
         if (kakao != null) {
             String kakao_name = kakao.getStringExtra("kakao");
             MainHomeFragment mainHomeFragment = new MainHomeFragment();
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle facebook_bundle = new Bundle();
             facebook_bundle.putString("facebook", text);
             mainHomeFragment.setArguments(facebook_bundle);
-        }
+        }*/
     }
 
     private void setOnMainTabBtnsClicked() {

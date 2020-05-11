@@ -94,12 +94,12 @@
         android:layout_marginBottom="70dp"
         android:background="@drawable/corner_shape"
         android:keepScreenOn="true"
-        android:scrollbarSize="23dp"
         android:scrollbars="vertical"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/question_item" />
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"

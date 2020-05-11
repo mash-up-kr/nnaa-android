@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".reply.MultiReplyActivity">
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_start"
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lf30_VFRLuW.json"
+        app:lottie_loop="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_click"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="11873-click.json"
+        app:lottie_loop="true" />
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,11 +116,11 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="297dp"
         android:lineSpacingExtra="12sp"
+        android:text="lastnumber"
         android:textColor="#2a4bff"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@id/between"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="20" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_question"
@@ -128,14 +151,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
-        app:layout_constraintTop_toBottomOf="@id/reply_choice"
-        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/lottie_complete"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="140dp"
-        app:lottie_autoPlay="true"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
         app:lottie_fileName="18725-checkmark-blue-english4school.json"
         app:lottie_loop="true" />
 

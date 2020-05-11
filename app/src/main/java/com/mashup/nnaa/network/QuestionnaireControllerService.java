@@ -1,5 +1,6 @@
 package com.mashup.nnaa.network;
 
+import com.mashup.nnaa.main.mylist.MainMyListDataAdapter;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.Questionnaire;
@@ -29,7 +30,9 @@ public interface QuestionnaireControllerService {
 
     // 질문지 보기
     @GET("questionnaire/{questionnaireId}")
-    Call<QuestionnaireDto> getQuestionnaire(@Path("questionnaireId") String questionnaireId);
+    Call<MainMyListDataAdapter.InOutBoxQuestionnaireItem> showQuestionnaire(@Header("id") String id,
+                                                                            @Header("token") String token,
+                                                                            @Path("questionnaireId") String questionnaireId);
 
     // 질문지에 답변하기
     @Headers({"Content-Type: application/json"})

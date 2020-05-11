@@ -16,7 +16,7 @@ import com.mashup.nnaa.util.AccountManager;
 public class ReplyActivity extends AppCompatActivity {
 
     TextView reply_name;
-    Button  btn_start;
+    Button btn_start;
     ImageView btn_not;
     String name = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
 
@@ -35,12 +35,16 @@ public class ReplyActivity extends AppCompatActivity {
 
         String category = intent.getStringExtra("category");
 
-        btn_not.setOnClickListener(view -> {
-            finish();
-        });
+        String list = intent.getStringExtra("questions");
+        String id = intent.getStringExtra("id");
+
+        btn_not.setOnClickListener(view -> finish());
+
         btn_start.setOnClickListener(view -> {
             Intent start_intent = new Intent(ReplyActivity.this, MultiReplyActivity.class);
             start_intent.putExtra("category", category);
+            start_intent.putExtra("list", list);
+            start_intent.putExtra("id", id);
             startActivity(start_intent);
             Toast.makeText(ReplyActivity.this, "답변하러 가실게요!", Toast.LENGTH_SHORT).show();
         });

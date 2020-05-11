@@ -3,24 +3,26 @@ package com.mashup.nnaa.network.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.HashMap;
+
 public class QuestionnaireAnswerDto {
     @SerializedName("answers")
     @Expose
-    private Answers answers;
+    private HashMap<String, String> answers;
     @SerializedName("updatedAt")
     @Expose
     private String updatedAt;
 
-    public QuestionnaireAnswerDto(Answers answers, String updatedAt) {
+    public QuestionnaireAnswerDto(HashMap<String, String> answers, String updatedAt) {
         this.answers = answers;
         this.updatedAt = updatedAt;
     }
 
-    public Answers getAnswers() {
+    public HashMap<String, String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Answers answers) {
+    public void setAnswers(HashMap<String, String> answers) {
         this.answers = answers;
     }
 

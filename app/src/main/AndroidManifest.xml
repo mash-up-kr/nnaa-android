@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".NnaaApplication"
@@ -15,6 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".main.mylist.MainShowQuestionnaire"></activity>
+        <activity android:name=".main.setting.HowUseActivity" />
         <activity android:name=".question.SharingActivity" />
         <activity android:name=".main.MainSettingMakeFavoritesActivity" />
         <activity android:name=".main.setting.ChangePwActivity" />
@@ -42,10 +45,11 @@
         <activity android:name=".reply.ReplyActivity" />
         <activity
             android:name=".RegisterActivity"
-            android:windowSoftInputMode="adjustResize" /> <!-- 페이스북 메타데이터 -->
+            android:windowSoftInputMode="adjustResize" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_key" /> <!-- 카카오톡 메타데이터 -->
+            android:value="@string/facebook_app_key" />
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

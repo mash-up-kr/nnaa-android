@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2d2e35"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/txt_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="30dp"
+        android:text="질문지 확인 페이지 "
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/show_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="21dp"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/show_questionnarie_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="95dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/corner_shape"
+        app:layout_constraintBottom_toTopOf="@id/frameLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/custom_first_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="30dp"
+                android:text="첫번째, 질문지 내용 확인"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/custom_first_edit"
+                android:layout_width="324dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_first_txt"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/custom_second_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="28dp"
+                android:text="두번째, 질문지 유형 확인"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_first_edit"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/show_type_txt"
+                android:layout_width="324dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_second_txt"
+                tools:ignore="LabelFor" />
+
+
+            <TextView
+                android:id="@+id/custom_third_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="18dp"
+                android:text="세번째, 질문지 보기 확인"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/show_type_txt"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="22dp"
+                android:text="유형이 객관식인 경우"
+                android:textColor="#2a4bff"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/custom_third_txt"
+                app:layout_constraintTop_toBottomOf="@id/show_type_txt" />
+
+            <TextView
+                android:id="@+id/custom_choice_edit1"
+                android:layout_width="324dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_third_txt"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/answer_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="27dp"
+                android:text="네번째, 질문지 답변 확인"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_choice_edit1"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/show_answer_text"
+                android:layout_width="324dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/question_corner"
+                android:drawableStart="@drawable/edit_1482"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/answer_text"
+                tools:ignore="LabelFor" />
+
+
+            <TextView
+                android:id="@+id/custom_forth_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:gravity="center"
+                android:text="질문지 확인 완료"
+                android:textColor="#2d2e35"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/show_answer_text"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/custom_img"
+                android:layout_width="244dp"
+                android:layout_height="137dp"
+                android:layout_below="@id/custom_forth_txt"
+                android:layout_marginTop="29dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/StringValue"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_forth_txt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btn_complete"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/colorBlue"
+            android:text="확인 완료"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

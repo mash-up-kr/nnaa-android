@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +18,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.main.MainActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.Answers;
 import com.mashup.nnaa.network.model.NewQuestionDto;
@@ -24,11 +29,16 @@ import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.ReplyAdapter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +46,8 @@ import retrofit2.Response;
 
 public class MultiReplyActivity extends AppCompatActivity {
 
-    TextView reply_number, reply_end_nubmer, txtA, txtB, txtC, txtD, veryYes, Yes, No, veryNo, txtQuestion;
+    private static final String TAG = "MultiReplyActivity";
+    TextView reply_number, reply_end_nubmer, txtA, txtB, txtC, txtD, a_txt, b_txt, c_txt, d_txt, txtQuestion;
     ImageButton reply_cancel, reply_choice, reply_O, reply_X, btnA, btnB, btnC, btnD;
     ImageView ox_bar, multi_img1, multi_img2, multi_img3, multi_img4, btn_past;
     Button btn_next_question;
@@ -51,6 +62,12 @@ public class MultiReplyActivity extends AppCompatActivity {
     private String time = simple.format(date);
     String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
+    LottieAnimationView lottieAnimationView, lottieStart, lottieClick;
+    HashMap<String, String> answers = new HashMap<>();
+    String a = "";
+    String b = "";
+    String c = "";
+    String d = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +80,10 @@ public class MultiReplyActivity extends AppCompatActivity {
         txtB = findViewById(R.id.txt_B);
         txtC = findViewById(R.id.txt_C);
         txtD = findViewById(R.id.txt_D);
-        veryYes = findViewById(R.id.mutli_txt1);
-        Yes = findViewById(R.id.mutli_txt2);
-        No = findViewById(R.id.mutli_txt3);
-        veryNo = findViewById(R.id.mutli_txt4);
+        a_txt = findViewById(R.id.mutli_txt1);
+        b_txt = findViewById(R.id.mutli_txt2);
+        c_txt = findViewById(R.id.mutli_txt3);
+        d_txt = findViewById(R.id.mutli_txt4);
         btnA = findViewById(R.id.multi_btn_a);
         btnB = findViewById(R.id.multi_btn_b);
         btnC = findViewById(R.id.multi_btn_c);
@@ -84,8 +101,24 @@ public class MultiReplyActivity extends AppCompatActivity {
         reply_choice = findViewById(R.id.reply_choice);
         btn_next_question = findViewById(R.id.btn_next_question);
         replyEdit = findViewById(R.id.reply_edit);
-
+        lottieAnimationView = findViewById(R.id.lottie_complete);
+        lottieStart = findViewById(R.id.lottie_start);
+        lottieStart.bringToFront();
+        lottieClick = findViewById(R.id.lottie_click);
+        lottieClick.bringToFront();
         scrollView = findViewById(R.id.scroll_view);
+
+        lottieAnimationView.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("답변 완료");
+            builder.setMessage("답변을 완료하셨나요?");
+            builder.setPositiveButton("확인", (dialogInterface, i) -> {
+                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                startActivity(intent);
+            });
+            builder.setNegativeButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "답변을 완료해주세요.", Toast.LENGTH_SHORT).show());
+            builder.show();
+        });
 
         reply_cancel.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -108,26 +141,114 @@ public class MultiReplyActivity extends AppCompatActivity {
 
     private void answerQuestion() {
 
-        String questionnaireId = "5ea79f53eca1302c37bbf00f";
+        Intent intent = getIntent();
+        String question = intent.getStringExtra("list");
+        String q_id = intent.getStringExtra("id");
 
-        Answers answers = new Answers();
+        reply_number.setText(String.valueOf(count));
 
-        QuestionnaireAnswerDto answerDto = new QuestionnaireAnswerDto(answers, time);
-        RetrofitHelper.getInstance().answerQuestionnaire(id, token, questionnaireId, answerDto, new Callback<QuestionnaireAnswerDto>() {
-            @Override
-            public void onResponse(Call<QuestionnaireAnswerDto> call, Response<QuestionnaireAnswerDto> response) {
+        lottieClick.setOnClickListener(view -> {
 
-                Log.v("response","respose:"+response.code());
+            lottieStart.setVisibility(View.GONE);
+            lottieClick.setVisibility(View.GONE);
+            try {
+                JSONObject object = new JSONObject(Objects.requireNonNull(question));
 
-            }
+                for (int i = 0; i < object.length(); i++) {
 
-            @Override
-            public void onFailure(Call<QuestionnaireAnswerDto> call, Throwable t) {
+                    reply_end_nubmer.setText(String.valueOf(object.length()));
 
+                    JSONObject jsonObject = object.getJSONObject("additionalProp1");
+                    String content = jsonObject.getString("content");
+                    String type = jsonObject.getString("type");
+                    boolean bookmark = jsonObject.getBoolean("isBookmarked");
+                    txtQuestion.setText(content);
+
+                    if (bookmark == true) {
+                        reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
+                    } else {
+                        reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_off);
+                    }
+
+                    if (jsonObject.getJSONObject("choices").isNull("choices")) {
+                        String choice = jsonObject.getString("choices");
+                        JSONObject c_object = new JSONObject(choice);
+                        a = c_object.getString("a");
+                        b = c_object.getString("b");
+                        c = c_object.getString("c");
+                        d = c_object.getString("d");
+                        a_txt.setText(a);
+                        b_txt.setText(b);
+                        c_txt.setText(c);
+                        d_txt.setText(d);
+                    }
+                    if (type.equals("객관식")) {
+                        chooesQuestion();
+                    } else if (type.equals("주관식")) {
+                        subjectQuestion();
+                    } else if (type.equals("OX")) {
+                        oxQuestion();
+                    }
+                }
+                btn_next_question.setOnClickListener(view1 -> {
+
+                    QuestionnaireAnswerDto answerDto = new QuestionnaireAnswerDto(answers, time);
+                    RetrofitHelper.getInstance().answerQuestionnaire(id, token, q_id, answerDto, new Callback<QuestionnaireAnswerDto>() {
+                        @Override
+                        public void onResponse(Call<QuestionnaireAnswerDto> call, Response<QuestionnaireAnswerDto> response) {
+                            if (response.isSuccessful()) {
+                                count++;
+                                reply_number.setText(String.valueOf(count));
+
+                                replyEdit.setText("");
+                                reply_X.setImageResource(R.drawable.quiz_btn_x);
+                                reply_O.setImageResource(R.drawable.group_3);
+                                btnA.setBackgroundResource(R.drawable.multi_reply_oval);
+                                txtA.setTextColor(getResources().getColor(R.color.darkergrey));
+                                btnB.setBackgroundResource(R.drawable.multi_reply_oval);
+                                txtB.setTextColor(getResources().getColor(R.color.darkergrey));
+                                btnC.setBackgroundResource(R.drawable.multi_reply_oval);
+                                txtC.setTextColor(getResources().getColor(R.color.darkergrey));
+                                btnD.setBackgroundResource(R.drawable.multi_reply_oval);
+                                txtD.setTextColor(getResources().getColor(R.color.darkergrey));
+
+                                btn_next_question.setEnabled(true);
+                                btn_past.setEnabled(true);
+
+                                if (count == object.length()) {
+                                    Toast.makeText(MultiReplyActivity.this, "마지막 질문입니다!", Toast.LENGTH_SHORT).show();
+                                    btn_next_question.setEnabled(false);
+                                    btn_past.setEnabled(true);
+                                    lottieAnimationView.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<QuestionnaireAnswerDto> call, Throwable t) {
+                            Log.v("@@@@@", Objects.requireNonNull(t.getMessage()));
+                        }
+                    });
+                });
+
+                btn_past.setOnClickListener(view2 -> {
+                    if (count == 1) {
+                        btn_past.setEnabled(false);
+                        btn_next_question.setEnabled(true);
+                        Toast.makeText(MultiReplyActivity.this, "첫번째 질문입니다!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        count--;
+                        reply_number.setText(String.valueOf(count));
+                        btn_past.setEnabled(true);
+                        btn_next_question.setEnabled(true);
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         });
 
-        /*RetrofitHelper.getInstance().getQuestion(id, token, category, "10", new Callback<ArrayList<NewQuestionDto>>() {
+       /* RetrofitHelper.getInstance().getQuestion(id, token, "엄마", "10", new Callback<ArrayList<NewQuestionDto>>() {
             @Override
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionDtoList != null) {
@@ -137,25 +258,47 @@ public class MultiReplyActivity extends AppCompatActivity {
                     txtQuestion.setText(response.body().get(count - 1).getContent());
                     btn_next_question.setOnClickListener(view -> {
                         count++;
+                        replyEdit.setText("");
+                        reply_X.setImageResource(R.drawable.quiz_btn_x);
+                        reply_O.setImageResource(R.drawable.group_3);
+                        btnA.setBackgroundResource(R.drawable.multi_reply_oval);
+                        txtA.setTextColor(getResources().getColor(R.color.darkergrey));
+                        btnB.setBackgroundResource(R.drawable.multi_reply_oval);
+                        txtB.setTextColor(getResources().getColor(R.color.darkergrey));
+                        btnC.setBackgroundResource(R.drawable.multi_reply_oval);
+                        txtC.setTextColor(getResources().getColor(R.color.darkergrey));
+                        btnD.setBackgroundResource(R.drawable.multi_reply_oval);
+                        txtD.setTextColor(getResources().getColor(R.color.darkergrey));
+
                         reply_number.setText(String.valueOf(count));
                         btn_next_question.setEnabled(true);
                         btn_past.setEnabled(true);
                         txtQuestion.setText(response.body().get(count - 1).getContent());
-                        if (response.body().get(count - 1).getType() != null && response.body().get(count - 1).isBookmarked() == true) {
-                            reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
+                        if (response.body().get(count - 1).getType() != null) {
 
-                            if (response.body().get(count - 1).getType().equals("주관식")) {
-                                subjectQuestion();
-                            } else if (response.body().get(count - 1).getType().equals("OX")) {
-                                oxQuestion();
-                            } else if (response.body().get(count - 1).getType().equals("객관식")) {
-                                chooesQuestion();
+                            switch (response.body().get(count - 1).getType()) {
+                                case "주관식":
+                                    subjectQuestion();
+                                    break;
+                                case "OX":
+                                    oxQuestion();
+                                    break;
+                                case "객관식":
+                                    chooesQuestion();
+
+                                    break;
                             }
+                        }
+                        if (response.body().get(count - 1).isBookmarked()) {
+                            reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
+                        } else {
+                            reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_off);
                         }
                         if (count == questionDtoList.size()) {
                             Toast.makeText(MultiReplyActivity.this, "마지막 질문입니다!", Toast.LENGTH_SHORT).show();
                             btn_next_question.setEnabled(false);
                             btn_past.setEnabled(true);
+                            lottieAnimationView.setVisibility(View.VISIBLE);
                         }
                     });
                     btn_past.setOnClickListener(view -> {
@@ -169,22 +312,29 @@ public class MultiReplyActivity extends AppCompatActivity {
                             btn_past.setEnabled(true);
                             btn_next_question.setEnabled(true);
                             txtQuestion.setText(response.body().get(count - 1).getContent());
-                            if (response.body().get(count - 1).getType() != null && response.body().get(count - 1).isBookmarked() == true) {
-                                reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
-
-                                if (response.body().get(count - 1).getType().equals("주관식")) {
-                                    subjectQuestion();
-                                } else if (response.body().get(count - 1).getType().equals("OX")) {
-                                    oxQuestion();
-                                } else if (response.body().get(count - 1).getType().equals("객관식")) {
-                                    chooesQuestion();
+                            if (response.body().get(count - 1).getType() != null) {
+                                switch (response.body().get(count - 1).getType()) {
+                                    case "주관식":
+                                        subjectQuestion();
+                                        break;
+                                    case "OX":
+                                        oxQuestion();
+                                        break;
+                                    case "객관식":
+                                        chooesQuestion();
+                                        break;
                                 }
                             }
+                        }
+                        if (response.body().get(count - 1).isBookmarked()) {
+                            reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_on);
+                        } else {
+                            reply_choice.setBackgroundResource(R.drawable.choice_btn_heart_off);
                         }
                     });
                     reply_end_nubmer.setText(String.valueOf(questionDtoList.size()));
                     Log.v("답변 리스트", "Response =  " + response.code() + "," + "id:" + "," + "token: " + token);
-                    *//*   replyAdapter.setQuestionDtoList(questionDtoList);*//*
+                    //replyAdapter.setQuestionDtoList(questionDtoList);
                 } else if (questionDtoList.size() == 0) {
                     Toast.makeText(MultiReplyActivity.this, "질문을 생성해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -201,6 +351,7 @@ public class MultiReplyActivity extends AppCompatActivity {
 
     private void subjectQuestion() {
         replyEdit.setVisibility(View.VISIBLE);
+        answers.put("additionalProp1", replyEdit.getText().toString());
         reply_X.setVisibility(View.INVISIBLE);
         reply_O.setVisibility(View.INVISIBLE);
         ox_bar.setVisibility(View.INVISIBLE);
@@ -208,10 +359,10 @@ public class MultiReplyActivity extends AppCompatActivity {
         txtB.setVisibility(View.INVISIBLE);
         txtC.setVisibility(View.INVISIBLE);
         txtD.setVisibility(View.INVISIBLE);
-        veryYes.setVisibility(View.INVISIBLE);
-        Yes.setVisibility(View.INVISIBLE);
-        No.setVisibility(View.INVISIBLE);
-        veryNo.setVisibility(View.INVISIBLE);
+        a_txt.setVisibility(View.INVISIBLE);
+        b_txt.setVisibility(View.INVISIBLE);
+        c_txt.setVisibility(View.INVISIBLE);
+        d_txt.setVisibility(View.INVISIBLE);
         btnA.setVisibility(View.INVISIBLE);
         btnB.setVisibility(View.INVISIBLE);
         scrollView.setVisibility(View.INVISIBLE);
@@ -229,14 +380,35 @@ public class MultiReplyActivity extends AppCompatActivity {
         txtB.setVisibility(View.VISIBLE);
         txtC.setVisibility(View.VISIBLE);
         txtD.setVisibility(View.VISIBLE);
-        veryYes.setVisibility(View.VISIBLE);
-        Yes.setVisibility(View.VISIBLE);
-        No.setVisibility(View.VISIBLE);
-        veryNo.setVisibility(View.VISIBLE);
+        a_txt.setVisibility(View.VISIBLE);
+        b_txt.setVisibility(View.VISIBLE);
+        c_txt.setVisibility(View.VISIBLE);
+        d_txt.setVisibility(View.VISIBLE);
         btnA.setVisibility(View.VISIBLE);
+
+        btnA.setOnClickListener(view -> {
+            btnA.setBackgroundResource(R.drawable.multi_reply_oval_blue);
+            txtA.setTextColor(Color.WHITE);
+            answers.put("additionalProp1", a);
+        });
         btnB.setVisibility(View.VISIBLE);
+        btnB.setOnClickListener(view -> {
+            btnB.setBackgroundResource(R.drawable.multi_reply_oval_blue);
+            txtB.setTextColor(Color.WHITE);
+            answers.put("additionalProp1", b);
+        });
         btnC.setVisibility(View.VISIBLE);
+        btnC.setOnClickListener(view -> {
+            btnC.setBackgroundResource(R.drawable.multi_reply_oval_blue);
+            txtC.setTextColor(Color.WHITE);
+            answers.put("additionalProp1", c);
+        });
         btnD.setVisibility(View.VISIBLE);
+        btnD.setOnClickListener(view -> {
+            btnD.setBackgroundResource(R.drawable.multi_reply_oval_blue);
+            txtD.setTextColor(Color.WHITE);
+            answers.put("additionalProp1", d);
+        });
         multi_img1.setVisibility(View.VISIBLE);
         multi_img2.setVisibility(View.VISIBLE);
         multi_img3.setVisibility(View.VISIBLE);
@@ -250,6 +422,14 @@ public class MultiReplyActivity extends AppCompatActivity {
     private void oxQuestion() {
         reply_X.setVisibility(View.VISIBLE);
         reply_O.setVisibility(View.VISIBLE);
+        reply_X.setOnClickListener(view -> {
+            reply_X.setImageResource(R.drawable.btn_x_sel);
+            answers.put("additionalProp1", "X");
+        });
+        reply_O.setOnClickListener(view -> {
+            reply_O.setImageResource(R.drawable.group_3_blue);
+            answers.put("additionalProp1", "O");
+        });
         scrollView.setVisibility(View.INVISIBLE);
         ox_bar.setVisibility(View.VISIBLE);
         replyEdit.setVisibility(View.INVISIBLE);
@@ -257,10 +437,10 @@ public class MultiReplyActivity extends AppCompatActivity {
         txtB.setVisibility(View.INVISIBLE);
         txtC.setVisibility(View.INVISIBLE);
         txtD.setVisibility(View.INVISIBLE);
-        veryYes.setVisibility(View.INVISIBLE);
-        Yes.setVisibility(View.INVISIBLE);
-        No.setVisibility(View.INVISIBLE);
-        veryNo.setVisibility(View.INVISIBLE);
+        a_txt.setVisibility(View.INVISIBLE);
+        b_txt.setVisibility(View.INVISIBLE);
+        c_txt.setVisibility(View.INVISIBLE);
+        d_txt.setVisibility(View.INVISIBLE);
         btnA.setVisibility(View.INVISIBLE);
         btnB.setVisibility(View.INVISIBLE);
         btnC.setVisibility(View.INVISIBLE);

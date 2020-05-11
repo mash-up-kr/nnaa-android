@@ -29,6 +29,7 @@
     <!-- Setting page -->
     <string name="setting_title">Setting page\nfor %s</string>
     <string name="setting_sign_out">Sign out</string>
+    <string name="setting_how_use">How Use</string>
     <string name="setting_change_pw">Change Pw</string>
     <string name="setting_del_account">Delete account</string>
     <string name="setting_blocked_users">Blocked users</string>
@@ -38,7 +39,6 @@
 
     <string name="StringValue" translatable="false">이미지가 열리지 않습니다.</string>
     <string-array name="questionlist">
-        <item>(선택없음)</item>
         <item>엄마</item>
         <item>아빠</item>
         <item>동생</item>
