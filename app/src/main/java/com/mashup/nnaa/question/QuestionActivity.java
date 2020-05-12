@@ -36,6 +36,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -104,6 +105,8 @@ public class QuestionActivity extends AppCompatActivity {
 
                                 jsonObject.put("isBookmarked", questionList.get(j).isBookmarked());
                                 jsonArray.put(jsonObject);
+
+                                Log.v("@@@@@",jsonObject.toString());
                             }
 
                             Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
@@ -111,6 +114,7 @@ public class QuestionActivity extends AppCompatActivity {
                             reply_intent.putExtra("category", category);
                             reply_intent.putExtra("list", jsonArray.toString());
                             startActivity(reply_intent);
+
                             Log.d("@@@@@@",jsonArray.toString());
 
 
@@ -243,7 +247,7 @@ public class QuestionActivity extends AppCompatActivity {
 
             case DeleteQuestionActivity.RESULT_DELETE_OK:
 
-                questionList = (ArrayList<NewQuestionDto>) data.getSerializableExtra("delete");
+                questionList = (ArrayList<NewQuestionDto>) Objects.requireNonNull(data).getSerializableExtra("delete");
                 setQuestion(questionList);
                 questionAdapter.setQuestionList(questionList);
 
@@ -252,19 +256,19 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void setQuestion(ArrayList<NewQuestionDto> localList) {
-        SharedPreferences prefs = getSharedPreferences("question_list", 0);
+        SharedPreferences prefs = getSharedPreferences("list", 0);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(localList);
-        editor.putString("local_question", json);
+        editor.putString("local_list", json);
         editor.apply();
     }
 
 
     private ArrayList<NewQuestionDto> getQuestion() {
-        SharedPreferences prefs = getSharedPreferences("question_list", 0);
+        SharedPreferences prefs = getSharedPreferences("list", 0);
         Gson gson = new Gson();
-        String json = prefs.getString("local_question", "");
+        String json = prefs.getString("local_list", "");
         Type type = new TypeToken<ArrayList<NewQuestionDto>>() {
         }.getType();
         ArrayList<NewQuestionDto> list = gson.fromJson(json, type);

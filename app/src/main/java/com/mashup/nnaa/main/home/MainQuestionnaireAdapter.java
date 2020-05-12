@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.main.mylist.MainMyListDataAdapter;
 import com.mashup.nnaa.network.RetrofitHelper;
@@ -20,7 +24,11 @@ import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.AccountManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,14 +104,19 @@ public class MainQuestionnaireAdapter extends RecyclerView.Adapter<MainQuestionn
                             intent.putExtra("questions", response.body().questions.toString());
                             intent.putExtra("id", response.body().id);
                         }
+//                        String answer = response.body().answers.toString();
+//                        JsonParser parser = new JsonParser();
+//                        JsonElement element = parser.parse(answer);
+//                        if(element.getAsJsonObject().get("answers").isJsonNull()){
+//                            Toast.makeText(view.getContext(),"dd",Toast.LENGTH_SHORT).show();
+//                        }
 
                         mContext.startActivity(intent);
-
                     }
 
                     @Override
                     public void onFailure(Call<MainMyListDataAdapter.InOutBoxQuestionnaireItem> call, Throwable t) {
-
+                            Log.v("@@@@@@@@", t.getMessage());
                     }
                 });
 

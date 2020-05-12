@@ -6,7 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONObject;
 
-public class Questionnaire {
+import java.io.Serializable;
+
+public class Questionnaire implements Serializable {
     @SerializedName("category")
     @Expose
     private String category;
@@ -15,13 +17,13 @@ public class Questionnaire {
     private String createdAt;
     @SerializedName("questions")
     @Expose
-    private Questions questions;
+    private String questions;
 
-    public Questions getQuestions() {
+    public String getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Questions questions) {
+    public void setQuestions(String questions) {
         this.questions = questions;
     }
 
@@ -38,7 +40,7 @@ public class Questionnaire {
     @Expose
     private String name;
 
-    public Questionnaire(String category, String createdAt, Questions questions, String receiverId) {
+    public Questionnaire(String category, String createdAt, String questions, String receiverId) {
         this.category = category;
         this.createdAt = createdAt;
         this.questions = questions;

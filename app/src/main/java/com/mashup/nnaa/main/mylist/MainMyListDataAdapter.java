@@ -2,22 +2,29 @@ package com.mashup.nnaa.main.mylist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.util.AccountManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -57,7 +64,6 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
     public void onBindViewHolder(@NonNull MainMyListDataViewHolder holder, int position) {
         holder.bind(items.get(position));
 
-
         int pos = holder.getAdapterPosition();
         InOutBoxQuestionnaireItem item = items.get(pos);
         String questionid = item.id;
@@ -70,6 +76,22 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
                     intent.putExtra("createAt", response.body().createdAt);
                     intent.putExtra("questions", response.body().questions.toString());
                     intent.putExtra("answer", response.body().answers.toString());
+
+                    String te = response.body().answers.toString();
+                    try {
+                        JSONObject object1 = new JSONObject();
+                        object1.put("answers",te);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        JSONObject object = new JSONObject();
+                        object.put("questions", response.body().questions.toString());
+                        intent.putExtra("test",object.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     mContext.startActivity(intent);
                 }
             }

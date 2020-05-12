@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.main.MainActivity;
@@ -29,10 +31,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -129,36 +139,40 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
         JSONObject questionObject = new JSONObject();
         JSONObject test = new JSONObject();
 
-        Questions questions= new Questions();
+        Questions questions = new Questions();
         AdditionalProp additionalProp = new AdditionalProp();
         Choices choices = new Choices();
-
-
+        ArrayList<String> key = new ArrayList<>();
+        ArrayList<String> val = new ArrayList<>();
+        HashMap<String, String> hashMap = new HashMap<>();
 
         holder.userSelect.setOnClickListener(view -> {
 
             try {
                 JSONArray array = new JSONArray(list);
+
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
+
                     test.put("additionalProp" + (i + 1), object);
+                    Log.v("테스트",test.toString());
 
                     String choice = object.getString("choices");
+                    Log.v("초이스",choice);
                     if (array.getJSONObject(i).isNull("choices")) {
                         choice = null;
                     }
-
-                    if(choice.equals("null")) {
-                        choice = object.optString("null");
+                    if (Objects.equals(choice, "null")) {
+                    //    choice = object.optString("null");
+                        Log.v("null초이스",choice);
                     }
 
                     String a = object.optString("a");
                     String b = object.optString("b");
-                    String c= object.optString("c");
-                    String d= object.optString("d");
+                    String c = object.optString("c");
+                    String d = object.optString("d");
                     String content = object.getString("content");
                     String type = object.getString("type");
-
 
                     choices.setA(a);
                     choices.setB(b);
@@ -166,28 +180,37 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
                     choices.setD(d);
 
                     choiceObject.put("choices", choice);
-                    additionalObject.put("additionalProp"+(i+1), choiceObject);
+                    additionalObject.put("additionalProp" + (i + 1), choiceObject);
                     additionalObject.put("content", content);
                     additionalObject.put("type", type);
 
-                    test.put("additionalProp"+(i+1),object);
+                    test.put("additionalProp" + (i + 1), object);
 
-                    additionalProp.setChoices(choices);
-                    additionalProp.setType(type);
-                    additionalProp.setContent(content);
-                    //questions.setAdditionalProp(additionalProp);
-                    //questions.setAdditionalProp(test);
                 }
+
                 String json = test.toString();
                 Log.d(TAG, "제이슨 확인: json = " + json);
+                JSONObject object = new JSONObject();
+                object.put("questions",json);
+                String t = object.toString();
+                JSONObject object1 = new JSONObject(t);
+                String value = object1.getString("questions");
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+                    String test2= mapper.writeValueAsString(value);
+                    Log.v("deserial",test2);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                Questionnaire questionnaire = new Questionnaire(category, time, questions, item.getId());
+                Questionnaire questionnaire = new Questionnaire(category, time, test.toString(), item.getId());
 
                 RetrofitHelper.getInstance().postQuestionnaire(id, token, questionnaire, new Callback<Questionnaire>() {
                     @Override
                     public void onResponse(Call<Questionnaire> call, Response<Questionnaire> response) {
 
-                        if(response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(view.getContext(), MainActivity.class);
                             sContext.startActivity(intent);
@@ -199,39 +222,10 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
                         Log.d(TAG, t.getMessage());
                     }
                 });
-
-
-//                    if (choice.equals("'null'")) {
-//                        JSONObject nullobject = new JSONObject(choice);
-//                        String nullvalue = nullobject.getString("null");
-//                        choices.setNullValue(nullvalue);
-//                        additionalProp.setContent(content);
-//                        additionalProp.setType(type);
-//                        additionalProp.setChoices(choices);
-//                        questions.setAdditionalProp(additionalProp);
-//                    }
-//                    if (!choice.equals("null") && !type.equals("null") && !content.equals("null")) {
-//                        JSONObject choiceobject = new JSONObject(choice);
-//                        String a = choiceobject.getString("a");
-//                        String b = choiceobject.getString("b");
-//                        String c = choiceobject.getString("c");
-//                        String d = choiceobject.getString("d");
-//                        Log.d(TAG, "제이슨 확인: abcd = " + a + b + c + d);
-//                        choices.setA(a);
-//                        choices.setB(b);
-//                        choices.setC(c);
-//                        choices.setD(d);
-//                        additionalProp.setContent(content);
-//                        additionalProp.setType(type);
-//                        additionalProp.setChoices(choices);
-//                        questions.setAdditionalProp(additionalProp);
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         });
-
     }
 
 
