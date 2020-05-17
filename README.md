@@ -1,2 +1,2 @@
 # nnaa-android
-sharingAdapter 수정
+질문지 보내는거만 수정완료하자
