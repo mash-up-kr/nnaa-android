@@ -17,10 +17,10 @@
         <!-- image -->
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="337dp"
+            android:layout_height="260dp"
             android:layout_marginBottom="70dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/rel_img_back"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="ContentDescription" />
@@ -83,7 +83,7 @@
                     android:layout_marginRight="5dp"
                     android:text="@string/mother"
                     android:textAlignment="center"
-                    android:textColor="#2d2e35"
+                    android:textColor="@color/colorBlack"
                     android:textSize="30sp" />
 
                 <ImageButton
@@ -95,11 +95,6 @@
 
             </LinearLayout>
         </LinearLayout>
-        <!--
-        <Spinner
-            android:id="@+id/spinner_type_of_friend"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -44,6 +44,9 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
             case SIGN_OUT:
                 callSignOut();
                 break;
+            case HOW_USE:
+                callHowtoUse();
+                break;
             case MANAGE_FAVORITES:
                 callFavoritesManagement();
                 break;
@@ -63,30 +66,15 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
                             Intent intent = new Intent(NnaaApplication.getAppContext(), LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             NnaaApplication.getAppContext().startActivity(intent);
-
-                            UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
-                                @Override
-                                public void onSessionClosed(ErrorResult errorResult) {
-                                    Log.e("카카오 로그아웃", "카카오 로그아웃 onSessionClosed");
-
-                                }
-
-                                @Override
-                                public void onNotSignedUp() {
-                                    Log.e("카카오 로그아웃", "카카오 로그아웃 onNotSignedUp");
-                                }
-
-                                @Override
-                                public void onSuccess(Long result) {
-                                    Log.e("카카오 로그아웃", "카카오 로그아웃 onSuccess");
-                                    Intent intent = new Intent(NnaaApplication.getAppContext(), LoginActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                }
-                            });
                         })
                 )
                 .setNegativeButton(R.string.common_no, null)
                 .show();
+    }
+    private void callHowtoUse() {
+        Intent intent = new Intent(NnaaApplication.getAppContext(), HowUseActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        NnaaApplication.getAppContext().startActivity(intent);
     }
 
     private void callFavoritesManagement() {

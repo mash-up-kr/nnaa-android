@@ -2,6 +2,7 @@ package com.mashup.nnaa.main.home;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,19 +54,6 @@ public class MainHomeFragment extends Fragment {
 
         String userName = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
 
-        Bundle kakao_bundle = this.getArguments();
-        if (kakao_bundle != null) {
-            //userName = kakao_bundle.getString("kakao");
-            String kakao_name = kakao_bundle.getString("kakao");
-            tvWelcome.setText(kakao_name);
-        }
-        Bundle facebook_bundle = this.getArguments();
-        if (facebook_bundle != null) {
-            String facebook_name = facebook_bundle.getString("facebook");
-            tvWelcome.setText(facebook_name);
-            //userName = facebook_bundle.getString("facebook");
-        }
-
         tvWelcome.setText(Html.fromHtml(getString(R.string.main_welcome, userName)));
 
         return view;
@@ -86,6 +74,7 @@ public class MainHomeFragment extends Fragment {
             public void onResponse(Call<List<InboxQuestionnaireDto>> call, Response<List<InboxQuestionnaireDto>> response) {
                 List<InboxQuestionnaireDto> questionnaires = response.body();
                 showReceivedQuestionnaires(questionnaires);
+
             }
 
             @Override
@@ -99,17 +88,17 @@ public class MainHomeFragment extends Fragment {
         MainQuestionnaireAdapter adapter = (MainQuestionnaireAdapter) rvQuestionnaires.getAdapter();
         if (adapter == null) return;
 
-        ArrayList<MainHomeQuestionnairesItem> items = new ArrayList<>();
+        ArrayList<InboxQuestionnaireDto> items = new ArrayList<>();
         if (questionnaires == null || questionnaires.isEmpty()) {
-            items.add(new MainHomeQuestionnairesItem());
+            items.add(new InboxQuestionnaireDto());
         } else {
             for (InboxQuestionnaireDto dto : questionnaires) {
                 String qId = dto.id;
                 String qSender = dto.senderName;
-                items.add(new MainHomeQuestionnairesItem(qId, qSender));
+                items.add(new InboxQuestionnaireDto(qId, qSender));
             }
         }
 
-        adapter.setData(items);
+        adapter.setData(items, this);
     }
 }

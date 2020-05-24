@@ -32,7 +32,7 @@ public class FavoritesActivity extends AppCompatActivity {
     private FavoritesAdapter favoritesAdapter;
     private ArrayList<NewQuestionDto> fList;
     private Button btn_favorites;
-    private ImageButton imgbtn_past, imgbtn_cancel;
+    private ImageButton imgbtn_past;
     private ImageView img_favorites, img_recycler;
     private TextView txt_favorites;
 
@@ -43,25 +43,14 @@ public class FavoritesActivity extends AppCompatActivity {
 
         btn_favorites = findViewById(R.id.btn_favorites);
         imgbtn_past = findViewById(R.id.imgbtn_past);
-        imgbtn_cancel = findViewById(R.id.imgbtn_cancel);
         img_favorites = findViewById(R.id.img_favorites);
         txt_favorites = findViewById(R.id.txt_favorites);
         img_recycler = findViewById(R.id.img_recycler);
 
-        Intent typeintent = getIntent();
-        String category = typeintent.getStringExtra("category");
-        String type = typeintent.getStringExtra("type");
-        String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
-        String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
-        String name = typeintent.getStringExtra("name");
 
-        imgbtn_past.setOnClickListener(view -> {
-            finish();
-        });
+        imgbtn_past.setOnClickListener(view -> finish());
 
-        imgbtn_cancel.setOnClickListener(view -> {
-            finish();
-        });
+        btn_favorites.setOnClickListener(view -> finish());
 
         RecyclerView favorites_recycler = findViewById(R.id.favorites_recycler);
 

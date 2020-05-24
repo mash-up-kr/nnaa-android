@@ -36,6 +36,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,6 +87,7 @@ public class QuestionActivity extends AppCompatActivity {
             builder.setPositiveButton("확인", (dialogInterface, i) -> {
                         try {
                             JSONArray jsonArray = new JSONArray();
+
                             for (int j = 0; j < questionList.size(); j++) {
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("id", questionList.get(j).getId());
@@ -103,6 +105,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                                 jsonObject.put("isBookmarked", questionList.get(j).isBookmarked());
                                 jsonArray.put(jsonObject);
+
                             }
 
                             Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
@@ -111,7 +114,7 @@ public class QuestionActivity extends AppCompatActivity {
                             reply_intent.putExtra("list", jsonArray.toString());
                             startActivity(reply_intent);
 
-                            Log.v("@@@@@@", jsonArray.toString());
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -170,7 +173,7 @@ public class QuestionActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionList != null && response.body() != null) {
                     questionList = response.body();
-                    Log.v("로그확인", "dd" + response.body());
+
                     questionAdapter.setQuestionList(questionList);
 
                     if (getQuestion() != null) {
@@ -213,9 +216,10 @@ public class QuestionActivity extends AppCompatActivity {
 
                 if (contents != null && !contents.isEmpty()) {
                     NewQuestionDto newQuestionDto = new NewQuestionDto(contents, category, type, choices, false);
+
                     // local 퀘션 추가
-                    questionList.add(newQuestionDto);
                     setQuestion(questionList);
+                    questionList.add(newQuestionDto);
 
                     questionAdapter.notifyDataSetChanged();
                 }
@@ -223,7 +227,7 @@ public class QuestionActivity extends AppCompatActivity {
 
             case DeleteQuestionActivity.RESULT_DELETE_OK:
 
-                questionList = (ArrayList<NewQuestionDto>) data.getSerializableExtra("delete");
+                questionList = (ArrayList<NewQuestionDto>) Objects.requireNonNull(data).getSerializableExtra("delete");
                 setQuestion(questionList);
                 questionAdapter.setQuestionList(questionList);
 
@@ -232,18 +236,19 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void setQuestion(ArrayList<NewQuestionDto> localList) {
-        SharedPreferences prefs = getSharedPreferences("question_list", 0);
+        SharedPreferences prefs = getSharedPreferences("pref", 0);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(localList);
-        editor.putString("local_question", json);
+        editor.putString("qlist", json);
         editor.apply();
     }
 
+
     private ArrayList<NewQuestionDto> getQuestion() {
-        SharedPreferences prefs = getSharedPreferences("question_list", 0);
+        SharedPreferences prefs = getSharedPreferences("pref", 0);
         Gson gson = new Gson();
-        String json = prefs.getString("local_question", "");
+        String json = prefs.getString("qlist", "");
         Type type = new TypeToken<ArrayList<NewQuestionDto>>() {
         }.getType();
         ArrayList<NewQuestionDto> list = gson.fromJson(json, type);

@@ -1,6 +1,7 @@
 package com.mashup.nnaa.main.mylist;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,12 +120,12 @@ public class MainMyListSubFragment extends Fragment {
             rvMyList.setVisibility(View.GONE);
             tvNoItem.setVisibility(View.VISIBLE);
         } else {
-            adapter.setData(items);
+            adapter.setData(items, this);
             rvMyList.setVisibility(View.VISIBLE);
             tvNoItem.setVisibility(View.GONE);
         }
 
-        adapter.setData(items);
+        adapter.setData(items, this);
     }
 
     private void onLoadDataFailure() {

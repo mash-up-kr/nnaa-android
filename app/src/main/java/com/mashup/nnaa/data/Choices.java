@@ -19,15 +19,6 @@ public class Choices implements Serializable {
     @SerializedName("d")
     @Expose
     private String d;
-    private String nullValue;
-
-    public String getNullValue() {
-        return nullValue;
-    }
-
-    public void setNullValue(String nullValue) {
-        this.nullValue = nullValue;
-    }
 
     public String getA() {
         return a;

@@ -27,22 +27,14 @@
 
     <ImageButton
         android:id="@+id/imgbtn_past"
-        android:layout_width="13dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="59dp"
         android:background="#ffffff"
         android:src="@drawable/arrow_left_335"
         tools:ignore="ContentDescription" />
 
-    <ImageButton
-        android:id="@+id/imgbtn_cancel"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="312dp"
-        android:layout_marginTop="57dp"
-        android:background="#ffffff"
-        android:src="@drawable/cancel_img" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie"

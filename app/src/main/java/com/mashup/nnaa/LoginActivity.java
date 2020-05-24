@@ -51,7 +51,6 @@ import java.util.Set;
 public class LoginActivity extends AppCompatActivity {
 
     private String TAG = "LoginActivity";
-    private SessionCallback callback; // 카카오 콜백
     private Button btn_facebook_login, btn_login;
     private CheckBox autoLogin;
     private EditText edit_email, edit_password;
@@ -129,9 +128,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //kakao login
-        kakaoData();
-
         //facebook login
         mCallbackManager = CallbackManager.Factory.create();
 
@@ -165,81 +161,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException error) {
                 Log.v(TAG, "facebook login error");
-            }
-        });
-    }
-
-    /**
-     * 카카오톡
-     **/
-    private void kakaoData() {
-        // 카카오 로그인 콜백받기
-        callback = new SessionCallback();
-        Session.getCurrentSession().addCallback(callback);
-
-/** 토큰 만료시 갱신을 시켜준다**/
-        if (Session.getCurrentSession().isOpenable()) {
-            Session.getCurrentSession().checkAndImplicitOpen();
-        }
-
-        Log.v(TAG, "토큰큰 : " + Session.getCurrentSession().getTokenInfo().getAccessToken());
-        Log.v(TAG, "토큰큰 리프레쉬토큰 : " + Session.getCurrentSession().getTokenInfo().getRefreshToken());
-        Log.v(TAG, "토큰큰 파이어데이트 : " + Session.getCurrentSession().getTokenInfo().getRemainingExpireTime());
-    }
-
-
-    private class SessionCallback implements ISessionCallback {
-
-        @Override
-        public void onSessionOpened() {
-            Log.v(TAG, "카카오 로그인 성공 ");
-            requestMe();
-        }
-
-        @Override
-        public void onSessionOpenFailed(KakaoException exception) {
-            if (exception != null) {
-                Log.e(TAG, "exception : " + exception);
-            }
-            setContentView(R.layout.activity_login);
-        }
-    }
-
-    // 카카오 유저의 정보 받아온다 (이메일 ,id, 이름)
-    private void requestMe() {
-
-        List<String> keys = new ArrayList<>();
-        keys.add("properties.nickname");
-        keys.add("properties.profile_image");
-        keys.add("kakao_account.email");
-
-        UserManagement.getInstance().me(keys, new MeV2ResponseCallback() {
-            @Override
-            public void onFailure(ErrorResult errorResult) {
-                super.onFailure(errorResult);
-                Log.e(TAG, "requestMe onFailure message : " + errorResult.getErrorMessage());
-            }
-
-            @Override
-            public void onFailureForUiThread(ErrorResult errorResult) {
-                super.onFailureForUiThread(errorResult);
-                Log.e(TAG, "requestMe onFailureForUiThread message : " + errorResult.getErrorMessage());
-            }
-
-            @Override
-            public void onSessionClosed(ErrorResult errorResult) {
-                Log.e(TAG, "requestMe onSessionClosed message : " + errorResult.getErrorMessage());
-            }
-
-            @Override
-            public void onSuccess(MeV2Response result) {
-                Log.e(TAG, "requestMe onSuccess message : " + "이메일:" + result.getKakaoAccount().getEmail() + "," + "id: " + result.getId() + "," + "이름:" + result.getNickname());
-                String name = result.getNickname();
-                Intent kakao_intent = new Intent(getBaseContext(), MainActivity.class);
-                kakao_intent.putExtra("kakao", name);
-                startActivity(kakao_intent);
-                //launchMainActivity();
-                finish();
             }
         });
     }

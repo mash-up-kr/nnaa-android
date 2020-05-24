@@ -4,12 +4,14 @@ import android.text.TextUtils;
 
 import com.kakao.usermgmt.response.model.User;
 import com.mashup.nnaa.BuildConfig;
+import com.mashup.nnaa.main.mylist.MainMyListDataAdapter;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
+import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.network.model.SharingDto;
 import com.mashup.nnaa.network.model.SignUpDto;
 import com.mashup.nnaa.network.model.bookmarkQuestionDto;
@@ -187,12 +189,21 @@ public class RetrofitHelper {
         userName.enqueue(callback);
     }
 
+    // 질문지 보기
+    public void showQuestionnaire(String id, String token, String questionnaireId, Callback<MainMyListDataAdapter.InOutBoxQuestionnaireItem> callback) {
+        QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
+        Call<MainMyListDataAdapter.InOutBoxQuestionnaireItem> showQuestionnaire = service.showQuestionnaire(id, token, questionnaireId);
+        showQuestionnaire.enqueue(callback);
+    }
+
+    // 받은 질문지 리스트
     public void getReceivedQuestionnaires(Callback<List<InboxQuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
         Call<List<InboxQuestionnaireDto>> receivedQuestionnaire = service.getReceiveQuestionnaires();
         receivedQuestionnaire.enqueue(callback);
     }
 
+    // 보낸 질문지 리스
     public void getSendQuestionnaires(Callback<List<OutboxQuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
         Call<List<OutboxQuestionnaireDto>> sendQuestionnaire = service.getSendQuestionnaires();

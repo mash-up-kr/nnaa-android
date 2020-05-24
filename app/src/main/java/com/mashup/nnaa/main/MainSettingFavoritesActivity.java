@@ -97,5 +97,4 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
             }
         });
     }
-
 }

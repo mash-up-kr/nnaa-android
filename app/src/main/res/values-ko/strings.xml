@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Common -->
     <string name="common_yes">네</string>
     <string name="common_no">아니오</string>
@@ -14,6 +14,7 @@
     <!-- Setting page -->
     <string name="setting_title">%s님의\n설정 페이지</string>
     <string name="setting_sign_out">로그아웃</string>
+    <string name="setting_how_use">마미북 대디북</string>
     <string name="setting_change_pw">비밀번호 변경</string>
     <string name="setting_del_account">탈퇴하기</string>
     <string name="setting_blocked_users">차단하기</string>
@@ -25,7 +26,7 @@
     <string name="mylist_friend_has_sent_a_new_q_to_you">%s님이 이 질문을 보냈어요.</string>
     <string name="mylist_you_have_sent_a_q_to_s">%s에게 새 질문지를 보냈습니다!</string>
 
-    <string name="app_name">NNAA</string>
+    <string name="app_name">너나알아</string>
     <string name="mother">엄마</string>
     <string name="younger">동생</string>
     <string name="vip">소중한 사람</string>
@@ -51,7 +52,7 @@
     <string name="created_q_questionnaire_id_c">"질문지 ID: "</string>
     <string name="created_q_copy_link">질문지 링크 복사</string>
     <string name="created_q_later">나중에</string>
-    <string name="mylist_sent_to_s">%s에게</string>
-    <string name="mylist_received_from_s">%s로부터</string>
+    <string name="mylist_sent_to_s">%s님에게</string>
+    <string name="mylist_received_from_s">%s님으로부터</string>
 
 </resources>

@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +60,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
         SecondEdit = findViewById(R.id.custom_choice_edit2);
         ThirdEdit = findViewById(R.id.custom_choice_edit3);
         ForthEdit = findViewById(R.id.custom_choice_edit4);
+
 
         Custom_J.setOnClickListener(view -> {
             Custom_J.setVisibility(View.INVISIBLE);
@@ -124,6 +127,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
             mk_intent.putExtra("type", "");
         });
 
+
         CustomDone.setOnClickListener(view -> {
 
             mk_intent.putExtra("content", Content_Edit.getText().toString());
@@ -140,3 +144,4 @@ public class MakeQuestionActivity extends AppCompatActivity {
         });
     }
 }
+

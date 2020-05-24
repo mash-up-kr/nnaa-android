@@ -86,7 +86,6 @@ public class SharingActivity extends AppCompatActivity {
                     }
                 });
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 

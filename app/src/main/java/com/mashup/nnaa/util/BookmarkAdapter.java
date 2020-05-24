@@ -18,17 +18,10 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
 
     private ArrayList<NewQuestionDto> fList;
     private Context fContext;
-    private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
-    private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
     public BookmarkAdapter(Context context, ArrayList<NewQuestionDto> list) {
         this.fList = list;
         this.fContext = context;
-    }
-
-    public void setFavoriteList(ArrayList<NewQuestionDto> fList) {
-        this.fList = fList;
-        notifyDataSetChanged();
     }
 
     @NonNull
