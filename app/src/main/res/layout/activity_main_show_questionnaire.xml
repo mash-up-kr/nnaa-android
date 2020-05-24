@@ -62,7 +62,7 @@
 
             <TextView
                 android:id="@+id/custom_first_edit"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="18dp"
@@ -78,7 +78,7 @@
 
             <TextView
                 android:id="@+id/custom_second_txt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
                 android:layout_marginTop="28dp"
@@ -91,7 +91,7 @@
 
             <TextView
                 android:id="@+id/show_type_txt"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="18dp"
@@ -134,10 +134,11 @@
 
             <TextView
                 android:id="@+id/custom_choice_edit1"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="18dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
                 android:textAlignment="center"
@@ -162,11 +163,11 @@
 
             <TextView
                 android:id="@+id/show_answer_text"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="18dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
                 android:textAlignment="center"
@@ -191,11 +192,11 @@
 
             <TextView
                 android:id="@+id/show_all_txt"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="18dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
                 android:textSize="12sp"
@@ -211,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:gravity="center"
-                android:text="질문지 확인 완료"
+                android:text="짝짝짝 질문지 확인 완료!"
                 android:textColor="#2d2e35"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -221,14 +222,14 @@
 
             <ImageView
                 android:id="@+id/custom_img"
-                android:layout_width="244dp"
-                android:layout_height="137dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/custom_forth_txt"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:contentDescription="@string/StringValue"
-                android:scaleType="fitCenter"
-                android:src="@drawable/img_background"
+                android:scaleType="fitXY"
+                android:src="@drawable/rectangle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/custom_forth_txt" />
