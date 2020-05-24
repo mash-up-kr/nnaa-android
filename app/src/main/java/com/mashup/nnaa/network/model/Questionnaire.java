@@ -1,6 +1,7 @@
 package com.mashup.nnaa.network.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -17,13 +18,13 @@ public class Questionnaire implements Serializable {
     private String createdAt;
     @SerializedName("questions")
     @Expose
-    private String questions;
+    private JsonObject questions;
 
-    public String getQuestions() {
+    public JsonObject getQuestions() {
         return questions;
     }
 
-    public void setQuestions(String questions) {
+    public void setQuestions(JsonObject questions) {
         this.questions = questions;
     }
 
@@ -40,7 +41,7 @@ public class Questionnaire implements Serializable {
     @Expose
     private String name;
 
-    public Questionnaire(String category, String createdAt, String questions, String receiverId) {
+    public Questionnaire(String category, String createdAt, JsonObject questions, String receiverId) {
         this.category = category;
         this.createdAt = createdAt;
         this.questions = questions;

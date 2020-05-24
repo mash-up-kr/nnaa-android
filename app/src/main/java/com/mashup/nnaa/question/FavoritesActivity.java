@@ -48,10 +48,9 @@ public class FavoritesActivity extends AppCompatActivity {
         img_recycler = findViewById(R.id.img_recycler);
 
 
-        imgbtn_past.setOnClickListener(view -> {
-            finish();
-        });
+        imgbtn_past.setOnClickListener(view -> finish());
 
+        btn_favorites.setOnClickListener(view -> finish());
 
         RecyclerView favorites_recycler = findViewById(R.id.favorites_recycler);
 

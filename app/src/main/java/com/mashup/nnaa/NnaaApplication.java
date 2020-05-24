@@ -12,7 +12,6 @@ public class NnaaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         appContext = getApplicationContext();
-        KakaoSDK.init(new KaKaoSDKAdapter());
 
     }
 

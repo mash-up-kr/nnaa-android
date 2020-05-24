@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
 
 import org.json.JSONException;
@@ -31,8 +32,12 @@ import retrofit2.Response;
 public class MainShowQuestionnaire extends AppCompatActivity {
 
     private Button btnComplete;
-    private TextView txtCategory, txtAnswer, txtQuestion, txtType, txtBookmark, showContent, showType, showChoice, showAnswer, showAll;
+    private TextView showContent, showType, showChoice, showAnswer, showAll;
     private ImageView showClose;
+    ArrayList<String> contentarray = new ArrayList<>();
+    ArrayList<String> typearray = new ArrayList<>();
+    ArrayList<String> choicearray = new ArrayList<>();
+    ArrayList<String> allarray = new ArrayList<>();
     String a = "";
     String b = "";
     String c = "";
@@ -56,84 +61,73 @@ public class MainShowQuestionnaire extends AppCompatActivity {
         showClose.setOnClickListener(view -> finish());
         btnComplete.setOnClickListener(view -> finish());
 
-        String category = intent.getStringExtra("category");
         String answer = intent.getStringExtra("answer");
         String question = intent.getStringExtra("questions");
         String test = intent.getStringExtra("test");
 
         ArrayList<String> key = new ArrayList<>();
         ArrayList<String> val = new ArrayList<>();
-        HashMap<String, String> hashMap = new HashMap<>();
-        JSONObject allshow = new JSONObject();
+        ArrayList<String> answerkey = new ArrayList<>();
+        ArrayList<String> answerval = new ArrayList<>();
+
         try {
             JSONObject object = new JSONObject(Objects.requireNonNull(test));
             JSONObject qobject = new JSONObject(Objects.requireNonNull(question));
+            JSONObject answerObject = new JSONObject(Objects.requireNonNull(answer));
+
+            String Answer = answerObject.getString("answers");
 
             String value = object.getString("questions");
-            Log.v("@@@@", test);
-
             JSONObject object1 = new JSONObject(value);
-
             Iterator j = object1.keys();
+
             while (j.hasNext()) {
                 String b = j.next().toString();
                 key.add(b);
-
             }
+            JSONObject object2 = new JSONObject(Answer);
+            Iterator iterator = object2.keys();
+
+            while (iterator.hasNext()) {
+                String a = iterator.next().toString();
+                answerkey.add(a);
+            }
+
             for (int k = 0; k < key.size(); k++) {
                 val.add(object1.getString(key.get(k)));
-                hashMap.put(key.get(k), val.get(k));
+                answerval.add(object2.getString(answerkey.get(k)));
             }
-            JSONObject object2 = new JSONObject(hashMap);
-
-            JSONObject all = new JSONObject();
 
             for (int i = 0; i < qobject.length(); i++) {
-                JSONObject jsonObject = qobject.getJSONObject("additionalProp1");
+                JSONObject jsonObject = qobject.getJSONObject(key.get(i));
 
                 String content = jsonObject.getString("content");
+                contentarray.add(i + 1 + ":" + content);
                 String type = jsonObject.getString("type");
-                boolean bookmark = jsonObject.getBoolean("isBookmarked");
+                typearray.add(i + 1 + ":" + type);
 
-                all.put("type",type);
-                all.put("content",content);
-                if (jsonObject.getJSONObject("choices").isNull("choices")) {
-                    String choice = jsonObject.getString("choices");
+                String choice = jsonObject.getString("choices");
 
-                    JSONObject c_object = new JSONObject(choice);
+                JSONObject c_object = new JSONObject(choice);
+                if (c_object.has("a") && c_object.has("b") && c_object.has("c") && c_object.has("d")) {
                     a = c_object.getString("a");
                     b = c_object.getString("b");
                     c = c_object.getString("c");
                     d = c_object.getString("d");
-
-                    all.put("choices",choice);
-
-                    showChoice.setText(String.format("a:%s,b:%s,c:%s,d:%s", a, b, c, d));
-
-                    if (Objects.equals(choice, "null")) {
-                       showChoice.setText("보기가 없습니다.");
-                    }
+                    choicearray.add("a:" + a);
+                    choicearray.add("b:" + b);
+                    choicearray.add("c:" + c);
+                    choicearray.add("d:" + d);
                 }
-                showContent.setText(content);
-                showType.setText(type);
-
-                if (answer == null) {
-                    showAnswer.setText("답변 없음");
-                } else {
-                    showAnswer.setText(answer);
-                }
-                Set set = hashMap.entrySet();
-                for (Object o : set) {
-                    Map.Entry entry = (Map.Entry) o;
-                    String df = (String) entry.getKey();
-                    String ff = (String) entry.getValue();
-
-                    allshow.put(df,all);
-                }
+                allarray.add(i + 1 + "번 " + "질문지 유형: " + type);
+                allarray.add(i + 1 + "번 " + "질문지 내용: " + content);
+                allarray.add(i + 1 + "번 " + "객관식 보기: " + choice);
             }
-
-
-            showAll.setText(hashMap.toString());
+            showChoice.setText(choicearray.toString());
+            showContent.setText(contentarray.toString());
+            showType.setText(typearray.toString());
+            showAnswer.setText(String.format("답변: %s", answerval.toString()));
+            showAll.setText(allarray.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -14,7 +14,7 @@
     <!-- Setting page -->
     <string name="setting_title">%s님의\n설정 페이지</string>
     <string name="setting_sign_out">로그아웃</string>
-    <string name="setting_how_use">사용법</string>
+    <string name="setting_how_use">마미북 대디북</string>
     <string name="setting_change_pw">비밀번호 변경</string>
     <string name="setting_del_account">탈퇴하기</string>
     <string name="setting_blocked_users">차단하기</string>
@@ -52,7 +52,7 @@
     <string name="created_q_questionnaire_id_c">"질문지 ID: "</string>
     <string name="created_q_copy_link">질문지 링크 복사</string>
     <string name="created_q_later">나중에</string>
-    <string name="mylist_sent_to_s">%s에게</string>
+    <string name="mylist_sent_to_s">%s님에게</string>
     <string name="mylist_received_from_s">%s님으로부터</string>
 
 </resources>

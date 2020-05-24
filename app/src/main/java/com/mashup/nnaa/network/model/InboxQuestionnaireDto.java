@@ -2,6 +2,10 @@ package com.mashup.nnaa.network.model;
 
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 public class InboxQuestionnaireDto {
     public String category;
     public String createdAt;

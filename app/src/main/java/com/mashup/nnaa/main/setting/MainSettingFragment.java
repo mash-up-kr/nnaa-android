@@ -27,11 +27,14 @@ public class MainSettingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_setting, container, false);
 
+        String userName = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
+
         TextView tvTitle = view.findViewById(R.id.tv_setting_title);
         tvTitle.setText(String.format(
                 getString(R.string.setting_title),
-                AccountManager.getInstance().getUserAuthHeaderInfo().getName()
+                userName
         ));
+
 
         initList(view.findViewById(R.id.rv_settings));
 

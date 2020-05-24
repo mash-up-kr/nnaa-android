@@ -2,6 +2,7 @@ package com.mashup.nnaa.main.setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,56 +24,39 @@ import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.main.MainActivity;
+import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 
 public class HowUseActivity extends AppCompatActivity {
 
-    private PlayerView exo;
     private ImageView img_close, img_pause;
     private Button btn_start;
-    SimpleExoPlayer player;
-    Uri videoUri = Uri.parse("android.resource://"+ "com.mashup.nnaa.main.setting" + "/"+ R.raw.description);
-  //  Uri videoUri = Uri.parse("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_use);
 
+        Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?time_continue=9&v=o0XffbT5V54&feature=emb_logo"));
 
-
-        exo = findViewById(R.id.exo);
+        if (intent1.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent1);
+        }
         img_close = findViewById(R.id.img_change_close);
         img_pause = findViewById(R.id.btn_cancel);
-        btn_start = findViewById(R.id.btn_start);
+        btn_start = findViewById(R.id.btn_next);
 
-        Log.d("PACKAGE", "p" + getPackageName());
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        RawResourceDataSource rawResourceDataSource = new RawResourceDataSource(this);
-
-        try {
-            rawResourceDataSource.open(new DataSpec(RawResourceDataSource.buildRawResourceUri(R.raw.description)));
-        } catch (RawResourceDataSource.RawResourceDataSourceException e) {
-            e.printStackTrace();
-        }
-        player = ExoPlayerFactory.newSimpleInstance(this, new DefaultTrackSelector());
-        exo.setPlayer(player);
-        DataSource.Factory factory = new DefaultDataSourceFactory(this, "Ex89VideoAndExoPlayer");
-        ProgressiveMediaSource mediaSource = new ProgressiveMediaSource.Factory(factory).createMediaSource(rawResourceDataSource.getUri());
-
-        player.prepare(mediaSource);
-
-        player.setPlayWhenReady(true);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        exo.setPlayer(null);
-        player.release();
-        player = null;
+        img_pause.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), MainActivity.class);
+            startActivity(intent);
+        });
+        img_close.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), MainActivity.class);
+            startActivity(intent);
+        });
+        btn_start.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), SetTypeOfFriendActivity.class);
+            startActivity(intent);
+        });
     }
 }

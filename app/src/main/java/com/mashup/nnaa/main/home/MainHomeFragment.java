@@ -54,19 +54,6 @@ public class MainHomeFragment extends Fragment {
 
         String userName = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
 
-        /*Bundle kakao_bundle = this.getArguments();
-        if (kakao_bundle != null) {
-            userName = kakao_bundle.getString("kakao");
-            String kakao_name = kakao_bundle.getString("kakao");
-            tvWelcome.setText(kakao_name);
-        }
-        Bundle facebook_bundle = this.getArguments();
-        if (facebook_bundle != null) {
-            String facebook_name = facebook_bundle.getString("facebook");
-            tvWelcome.setText(facebook_name);
-            userName = facebook_bundle.getString("facebook");
-        }*/
-
         tvWelcome.setText(Html.fromHtml(getString(R.string.main_welcome, userName)));
 
         return view;

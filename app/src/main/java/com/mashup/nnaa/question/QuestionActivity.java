@@ -106,7 +106,6 @@ public class QuestionActivity extends AppCompatActivity {
                                 jsonObject.put("isBookmarked", questionList.get(j).isBookmarked());
                                 jsonArray.put(jsonObject);
 
-                                Log.v("@@@@@",jsonObject.toString());
                             }
 
                             Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
@@ -114,9 +113,6 @@ public class QuestionActivity extends AppCompatActivity {
                             reply_intent.putExtra("category", category);
                             reply_intent.putExtra("list", jsonArray.toString());
                             startActivity(reply_intent);
-
-                            Log.d("@@@@@@",jsonArray.toString());
-
 
 
                         } catch (JSONException e) {
@@ -180,13 +176,6 @@ public class QuestionActivity extends AppCompatActivity {
 
                     questionAdapter.setQuestionList(questionList);
 
-//                    SharedPreferences pref = getPreferences(0);
-//                    Gson gson = new Gson();
-//                    String dto = pref.getString("local","");
-//                    NewQuestionDto questionDto = gson.fromJson(dto, NewQuestionDto.class);
-//                    questionList.add(questionDto);
-
-
                     if (getQuestion() != null) {
                         for (NewQuestionDto newQuestionDto : getQuestion()) {
                             questionList.add(newQuestionDto);
@@ -232,15 +221,6 @@ public class QuestionActivity extends AppCompatActivity {
                     setQuestion(questionList);
                     questionList.add(newQuestionDto);
 
-//                    SharedPreferences pref = getPreferences(0);
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    Gson gson = new Gson();
-//                    String dto = gson.toJson(newQuestionDto);
-//                    String json = gson.toJson(questionList);
-//                    editor.putString("local", dto);
-//                    editor.putString("list",json);
-//                    editor.apply();
-
                     questionAdapter.notifyDataSetChanged();
                 }
                 break;
@@ -256,19 +236,19 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void setQuestion(ArrayList<NewQuestionDto> localList) {
-        SharedPreferences prefs = getSharedPreferences("list", 0);
+        SharedPreferences prefs = getSharedPreferences("pref", 0);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(localList);
-        editor.putString("local_list", json);
+        editor.putString("qlist", json);
         editor.apply();
     }
 
 
     private ArrayList<NewQuestionDto> getQuestion() {
-        SharedPreferences prefs = getSharedPreferences("list", 0);
+        SharedPreferences prefs = getSharedPreferences("pref", 0);
         Gson gson = new Gson();
-        String json = prefs.getString("local_list", "");
+        String json = prefs.getString("qlist", "");
         Type type = new TypeToken<ArrayList<NewQuestionDto>>() {
         }.getType();
         ArrayList<NewQuestionDto> list = gson.fromJson(json, type);

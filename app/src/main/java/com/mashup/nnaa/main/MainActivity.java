@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,24 +39,6 @@ public class MainActivity extends AppCompatActivity {
         // Load HOME fragment page
         onMainTabClicked(Page.HOME);
 
-       /* Intent kakao = getIntent();
-        if (kakao != null) {
-            String kakao_name = kakao.getStringExtra("kakao");
-            MainHomeFragment mainHomeFragment = new MainHomeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, mainHomeFragment).commit();
-            Bundle kakao_bundle = new Bundle();
-            kakao_bundle.putString("kakao", kakao_name);
-            mainHomeFragment.setArguments(kakao_bundle);
-        }
-        Intent facebook = getIntent();
-        if (facebook != null) {
-            String text = facebook.getStringExtra("facebook");
-            MainHomeFragment mainHomeFragment = new MainHomeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, mainHomeFragment).commit();
-            Bundle facebook_bundle = new Bundle();
-            facebook_bundle.putString("facebook", text);
-            mainHomeFragment.setArguments(facebook_bundle);
-        }*/
     }
 
     private void setOnMainTabBtnsClicked() {
@@ -68,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         ivAlarm.setOnClickListener(v -> onMainTabClicked(Page.ALARM));
         ivMyList.setOnClickListener(v -> onMainTabClicked(Page.MY_LIST));
         ivSettings.setOnClickListener(v -> onMainTabClicked(Page.SETTINGS));
+
     }
 
     private void onMainTabClicked(Page page) {

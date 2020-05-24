@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="33dp"
             android:layout_marginTop="21dp"
-            android:text="pause"
+            android:text="cancel"
             android:textColor="#730d0d0d"
             android:textSize="14sp" />
 

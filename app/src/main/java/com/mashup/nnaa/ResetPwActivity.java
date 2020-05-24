@@ -15,6 +15,8 @@ import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.EncryptUtil;
 
+import java.util.Objects;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,8 +46,8 @@ public class ResetPwActivity extends AppCompatActivity {
         Intent deeplink = getIntent();
         if (Intent.ACTION_VIEW.equals(deeplink.getAction())) {
             Uri uri = deeplink.getData();
-            String user_id = uri.getQueryParameter("id");
-            String token = uri.getQueryParameter("token");
+            String user_id = Objects.requireNonNull(uri).getQueryParameter("id");
+            String token = Objects.requireNonNull(uri).getQueryParameter("token");
             Log.v("DEEPLINK", "id:" + user_id + "," + "token:" + token);
 
             btn_reset.setOnClickListener(view -> {

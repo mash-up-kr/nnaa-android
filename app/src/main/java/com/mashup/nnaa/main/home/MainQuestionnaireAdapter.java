@@ -104,12 +104,6 @@ public class MainQuestionnaireAdapter extends RecyclerView.Adapter<MainQuestionn
                             intent.putExtra("questions", response.body().questions.toString());
                             intent.putExtra("id", response.body().id);
                         }
-//                        String answer = response.body().answers.toString();
-//                        JsonParser parser = new JsonParser();
-//                        JsonElement element = parser.parse(answer);
-//                        if(element.getAsJsonObject().get("answers").isJsonNull()){
-//                            Toast.makeText(view.getContext(),"dd",Toast.LENGTH_SHORT).show();
-//                        }
 
                         mContext.startActivity(intent);
                     }

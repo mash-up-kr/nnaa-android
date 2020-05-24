@@ -17,32 +17,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.main.MainActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.AdditionalProp;
 import com.mashup.nnaa.network.model.Questionnaire;
-import com.mashup.nnaa.network.model.Questions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,8 +53,8 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
     private Date date = new Date(now);
     private SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.KOREA);
     private String time = simple.format(date);
-    ArrayList<String> keyList = new ArrayList<>();
-    ArrayList<String> valueList = new ArrayList<>();
+
+    private String KEY = "";
 
     public SharingAdapter(Context context, ArrayList<Questionnaire> list) {
         this.unFilterdList = list;
@@ -125,91 +115,65 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
         holder.txt_name.setText(filteredList.get(position).getName());
         holder.txt_email.setText(filteredList.get(position).getEmail());
 
-
         Bundle bundle = ((Activity) sContext).getIntent().getExtras();
         final String category = bundle.getString("category");
         final String list = bundle.getString("list");
 
-
         int pos = holder.getAdapterPosition();
 
         Questionnaire item = filteredList.get(pos);
-        JSONObject additionalObject = new JSONObject();
-        JSONObject choiceObject = new JSONObject();
-        JSONObject questionObject = new JSONObject();
-        JSONObject test = new JSONObject();
 
-        Questions questions = new Questions();
-        AdditionalProp additionalProp = new AdditionalProp();
-        Choices choices = new Choices();
-        ArrayList<String> key = new ArrayList<>();
-        ArrayList<String> val = new ArrayList<>();
-        HashMap<String, String> hashMap = new HashMap<>();
+        AtomicReference<String> a = new AtomicReference<>();
+        AtomicReference<String> b = new AtomicReference<>();
+        AtomicReference<String> c = new AtomicReference<>();
+        AtomicReference<String> d = new AtomicReference<>();
+        AtomicReference<String> content = new AtomicReference<>();
+        AtomicReference<String> type = new AtomicReference<>();
+        AtomicReference<String> choice = new AtomicReference<>();
+
+        JsonObject inputdata = new JsonObject();
+
 
         holder.userSelect.setOnClickListener(view -> {
-
             try {
                 JSONArray array = new JSONArray(list);
 
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
 
-                    test.put("additionalProp" + (i + 1), object);
-                    Log.v("테스트",test.toString());
+                    KEY = "additionalProp" + (i + 1);
 
-                    String choice = object.getString("choices");
-                    Log.v("초이스",choice);
-                    if (array.getJSONObject(i).isNull("choices")) {
-                        choice = null;
-                    }
-                    if (Objects.equals(choice, "null")) {
-                    //    choice = object.optString("null");
-                        Log.v("null초이스",choice);
-                    }
+                    content.set(object.getString("content"));
+                    type.set(object.getString("type"));
+                    choice.set(object.getString("choices"));
 
-                    String a = object.optString("a");
-                    String b = object.optString("b");
-                    String c = object.optString("c");
-                    String d = object.optString("d");
-                    String content = object.getString("content");
-                    String type = object.getString("type");
+                    JSONObject c_object = new JSONObject(String.valueOf(Objects.requireNonNull(choice)));
 
-                    choices.setA(a);
-                    choices.setB(b);
-                    choices.setC(c);
-                    choices.setD(d);
+                    a.set(c_object.optString("a", "보기가 없습니다."));
+                    b.set(c_object.optString("b", "보기가 없습니다."));
+                    c.set(c_object.optString("c", "보기가 없습니다."));
+                    d.set(c_object.optString("d", "보기가 없습니다."));
 
-                    choiceObject.put("choices", choice);
-                    additionalObject.put("additionalProp" + (i + 1), choiceObject);
-                    additionalObject.put("content", content);
-                    additionalObject.put("type", type);
+                    JsonObject middledata = new JsonObject();
+                    JsonObject choicedata = new JsonObject();
 
-                    test.put("additionalProp" + (i + 1), object);
+                    choicedata.addProperty("a", a.get());
+                    choicedata.addProperty("b", b.get());
+                    choicedata.addProperty("c", c.get());
+                    choicedata.addProperty("d", d.get());
 
+                    middledata.add("choices", choicedata);
+                    middledata.addProperty("content", content.get());
+                    middledata.addProperty("type", type.get());
+                    Log.v("미들데이타", middledata.toString());
+
+                    inputdata.add(KEY, middledata);
                 }
-
-                String json = test.toString();
-                Log.d(TAG, "제이슨 확인: json = " + json);
-                JSONObject object = new JSONObject();
-                object.put("questions",json);
-                String t = object.toString();
-                JSONObject object1 = new JSONObject(t);
-                String value = object1.getString("questions");
-                try {
-                    ObjectMapper mapper = new ObjectMapper();
-                    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-                    String test2= mapper.writeValueAsString(value);
-                    Log.v("deserial",test2);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                Questionnaire questionnaire = new Questionnaire(category, time, test.toString(), item.getId());
+                Questionnaire questionnaire = new Questionnaire(category, time, inputdata, item.getId());
 
                 RetrofitHelper.getInstance().postQuestionnaire(id, token, questionnaire, new Callback<Questionnaire>() {
                     @Override
                     public void onResponse(Call<Questionnaire> call, Response<Questionnaire> response) {
-
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(view.getContext(), MainActivity.class);

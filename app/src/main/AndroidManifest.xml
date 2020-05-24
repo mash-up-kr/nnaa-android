@@ -10,18 +10,15 @@
     <application
         android:name=".NnaaApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/splashlogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/splashlogo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".main.mylist.MainShowQuestionnaire"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".main.mylist.MainShowQuestionnaire" />
         <activity android:name=".main.setting.HowUseActivity" />
         <activity android:name=".question.SharingActivity" />
-        <activity android:name=".main.MainSettingMakeFavoritesActivity" />
         <activity android:name=".main.setting.ChangePwActivity" />
-        <activity android:name=".question.LocalQuestionActivity" />
         <activity
             android:name=".ResetPwActivity"
             android:launchMode="singleTask"
@@ -62,22 +59,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:name=".LoginActivity" />
         <activity android:name=".select.SelectFriendActivity" />
         <activity
             android:name=".main.MainActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
-        <activity android:name=".answer.AnswerMultipleChoiceActivity" />
         <activity android:name=".question.FavoritesActivity" />
         <activity android:name=".question.DeleteQuestionActivity" />
         <activity android:name=".question.QuestionActivity" />
         <activity android:name=".select.SetTypeOfFriendActivity" />
         <activity android:name=".main.MainSettingFavoritesActivity" />
-        <activity
-            android:name=".question.CustomQuestionActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".answer.AnswerOxChoiceActivity" />
     </application>
 
 </manifest>

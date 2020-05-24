@@ -43,11 +43,11 @@
 
             <EditText
                 android:id="@+id/custom_first_edit"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="18dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
                 android:focusableInTouchMode="true"
@@ -244,10 +244,11 @@
 
             <EditText
                 android:id="@+id/custom_choice_edit1"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="18dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
                 android:hint="너무 좋아!!"
@@ -264,10 +265,11 @@
 
             <EditText
                 android:id="@+id/custom_choice_edit2"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
                 android:hint="좋아!"
@@ -284,10 +286,11 @@
 
             <EditText
                 android:id="@+id/custom_choice_edit3"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
                 android:hint="그냥 그래.."
@@ -304,10 +307,11 @@
 
             <EditText
                 android:id="@+id/custom_choice_edit4"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="18dp"
                 android:layout_marginBottom="29dp"
                 android:background="@drawable/question_corner"
                 android:drawableStart="@drawable/edit_1482"
@@ -338,16 +342,14 @@
 
             <ImageView
                 android:id="@+id/custom_img"
-                android:layout_width="244dp"
-                android:layout_height="137dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/custom_forth_txt"
-                android:layout_marginStart="60dp"
                 android:layout_marginTop="29dp"
-                android:layout_marginEnd="87dp"
                 android:layout_marginBottom="10dp"
                 android:contentDescription="@string/StringValue"
-                android:scaleType="fitCenter"
-                android:src="@drawable/img_background"
+                android:scaleType="fitXY"
+                android:src="@drawable/rectangle"
                 ads:layout_constraintStart_toStartOf="parent"
                 ads:layout_constraintTop_toBottomOf="@id/custom_forth_txt" />
         </androidx.constraintlayout.widget.ConstraintLayout>

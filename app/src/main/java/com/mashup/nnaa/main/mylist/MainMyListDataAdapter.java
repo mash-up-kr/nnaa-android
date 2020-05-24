@@ -1,8 +1,6 @@
 package com.mashup.nnaa.main.mylist;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
@@ -27,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,38 +71,34 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
         holder.itemView.setOnClickListener(view -> RetrofitHelper.getInstance().showQuestionnaire(id, token, questionid, new Callback<InOutBoxQuestionnaireItem>() {
             @Override
             public void onResponse(Call<InOutBoxQuestionnaireItem> call, Response<InOutBoxQuestionnaireItem> response) {
+
                 if (response.body() != null && response.isSuccessful()) {
                     Intent intent = new Intent(view.getContext(), MainShowQuestionnaire.class);
-                    intent.putExtra("category", response.body().category);
-                    intent.putExtra("createAt", response.body().createdAt);
                     intent.putExtra("questions", response.body().questions.toString());
-                    intent.putExtra("answer", response.body().answers.toString());
 
-                    String te = response.body().answers.toString();
-                    try {
-                        JSONObject object1 = new JSONObject();
-                        object1.put("answers",te);
+                    String answer = response.body().answers.toString();
+                    String question = response.body().questions.toString();
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    JsonObject object = new JsonObject();
+                    object.addProperty("answers", answer);
+
+                    if (object.has("answers") && !object.isJsonNull()) {
+                        intent.putExtra("answer", object.toString());
                     }
-                    try {
-                        JSONObject object = new JSONObject();
-                        object.put("questions", response.body().questions.toString());
-                        intent.putExtra("test",object.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("questions", question);
+                    if (jsonObject.has("questions") && !jsonObject.isJsonNull()) {
+                        intent.putExtra("test", jsonObject.toString());
                     }
+
                     mContext.startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(Call<InOutBoxQuestionnaireItem> call, Throwable t) {
-                Log.v("@@@@@@@", t.getMessage());
+                Log.v("@@@@@@@", Objects.requireNonNull(t.getMessage()));
             }
-
-
         }));
     }
 
@@ -119,11 +116,9 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
         public String receiverName;
         public String senderId;
         public String senderName;
+        public boolean isBookmarked;
         public JsonObject answers;
         public JsonObject questions;
-        public boolean isBookmarked;
-//        public HashMap<String, String> answers;
-//        public HashMap<String, String> questions;
 
         public static InOutBoxQuestionnaireItem createFromInboxDto(InboxQuestionnaireDto dto) {
             InOutBoxQuestionnaireItem item = new InOutBoxQuestionnaireItem();
@@ -147,7 +142,7 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
             item.receiverId = dto.receiverId;
             item.receiverName = dto.receiverName;
             item.answers = dto.answers;
-            item.questions =dto.questions;
+            item.questions = dto.questions;
             return item;
         }
     }
@@ -165,30 +160,6 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
             tvTitle = itemView.findViewById(R.id.tv_mylist_title);
             tvCategory = itemView.findViewById(R.id.tv_mylist_category);
             tvDate = itemView.findViewById(R.id.tv_mylist_datetime);
-
-
-//            itemView.setOnClickListener(view -> {
-//
-//                int pos = getAdapterPosition();
-//                if (pos != RecyclerView.NO_POSITION) {
-//                    InOutBoxQuestionnaireItem item = items.get(pos);
-//
-//                    RetrofitHelper.getInstance().showQuestionnaire(id, token, item.id, new Callback<InOutBoxQuestionnaireItem>() {
-//                        @Override
-//                        public void onResponse(Call<InOutBoxQuestionnaireItem> call, Response<InOutBoxQuestionnaireItem> response) {
-//                            Toast.makeText(view.getContext(),"adsfasdf",Toast.LENGTH_SHORT).show();
-//
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<InOutBoxQuestionnaireItem> call, Throwable t) {
-//                            Log.v("@@@@@@@@@@@@@@", t.getMessage());
-//
-//                        }
-//                    });
-//                }
-//            });
-
         }
 
         public void bind(MainMyListDataAdapter.InOutBoxQuestionnaireItem item) {
@@ -208,9 +179,8 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
                     type == MainMyListPagerAdapter.MyListType.SENT ? R.string.mylist_sent_to_s : R.string.mylist_received_from_s);
 
             tvTitle.setText(String.format(contentText, friendName));
-            tvCategory.setText(item.category);
+            tvCategory.setText(String.format("%s인", item.category));
             tvDate.setText(item.createdAt);
         }
     }
-
 }

@@ -17,7 +17,8 @@
             android:paddingTop="100dp"
             android:paddingHorizontal="200dp"
             android:scaleType="center"
-            android:src="@drawable/splashlogo"/>
+            android:src="@drawable/splashlogo"
+            android:contentDescription="@string/StringValue" />
 
 
     </LinearLayout>
