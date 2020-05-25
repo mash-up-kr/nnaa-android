@@ -2,8 +2,16 @@ package com.mashup.nnaa.reply;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.TaskStackBuilder;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -487,6 +495,8 @@ public class MultiReplyActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Intent intent = new Intent(view1.getContext(), MainActivity.class);
                             startActivity(intent);
+
+                            showNotification();
                         }
                     }
 
@@ -500,6 +510,36 @@ public class MultiReplyActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void showNotification() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("fragment", "notification");
+
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MainActivity.class);
+
+        stackBuilder.addNextIntent(intent);
+
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Bitmap noti = BitmapFactory.decodeResource(getResources(), R.drawable.img_background);
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MultiReplyActivity.this)
+                .setSmallIcon(R.drawable.splashlogo)
+                .setContentTitle("NNAA")
+                .setContentText("답변이 도착했습니다.")
+                .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setLargeIcon(noti)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Objects.requireNonNull(notificationManager).notify(0, mBuilder.build());
+
     }
 
     private void subjectQuestion() {
