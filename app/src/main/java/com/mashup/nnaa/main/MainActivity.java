@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
@@ -39,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         // Load HOME fragment page
         onMainTabClicked(Page.HOME);
 
+        String str = getIntent().getStringExtra("fragment");
+
+        if (str != null) {
+            if (str.equals("notification")) {
+                onMainTabClicked(Page.MY_LIST);
+            }
+        }
     }
 
     private void setOnMainTabBtnsClicked() {
