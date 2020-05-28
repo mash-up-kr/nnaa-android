@@ -13,9 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.question.FavoritesActivity;
 import com.mashup.nnaa.question.QuestionActivity;
-import com.mashup.nnaa.util.AccountManager;
 
 import java.util.ArrayList;
 import java.util.Collections;

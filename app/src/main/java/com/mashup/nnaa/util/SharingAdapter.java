@@ -116,7 +116,7 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
         holder.txt_email.setText(filteredList.get(position).getEmail());
 
         Bundle bundle = ((Activity) sContext).getIntent().getExtras();
-        final String category = bundle.getString("category");
+        final String category = Objects.requireNonNull(bundle).getString("category");
         final String list = bundle.getString("list");
 
         int pos = holder.getAdapterPosition();

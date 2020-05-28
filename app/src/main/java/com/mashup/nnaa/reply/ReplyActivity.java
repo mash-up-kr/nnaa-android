@@ -1,17 +1,15 @@
 package com.mashup.nnaa.reply;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.question.QuestionActivity;
 import com.mashup.nnaa.util.AccountManager;
 
 public class ReplyActivity extends AppCompatActivity {

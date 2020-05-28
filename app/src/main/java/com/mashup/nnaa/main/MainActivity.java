@@ -1,25 +1,21 @@
 package com.mashup.nnaa.main;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.main.home.MainHomeFragment;
 import com.mashup.nnaa.main.mylist.MainMyListFragment;
 import com.mashup.nnaa.main.notifications.MainNotificationsFragment;
 import com.mashup.nnaa.main.setting.MainSettingFragment;
-import com.mashup.nnaa.util.AccountManager;
+import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 
 import java.util.HashMap;
 
@@ -40,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Load HOME fragment page
         onMainTabClicked(Page.HOME);
 
+        // Notification intent
         String str = getIntent().getStringExtra("fragment");
 
         if (str != null) {
@@ -59,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         ivAlarm.setOnClickListener(v -> onMainTabClicked(Page.ALARM));
         ivMyList.setOnClickListener(v -> onMainTabClicked(Page.MY_LIST));
         ivSettings.setOnClickListener(v -> onMainTabClicked(Page.SETTINGS));
-
     }
 
     private void onMainTabClicked(Page page) {

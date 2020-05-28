@@ -7,26 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.util.AccountManager;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -39,6 +31,7 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
     private MainMyListSubFragment mContext;
+    private String TAG = "MainMyListDataAdapter";
 
     public MainMyListDataAdapter(MainMyListPagerAdapter.MyListType type) {
         items = new ArrayList<>();
@@ -97,7 +90,7 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
 
             @Override
             public void onFailure(Call<InOutBoxQuestionnaireItem> call, Throwable t) {
-                Log.v("@@@@@@@", Objects.requireNonNull(t.getMessage()));
+                Log.v(TAG, Objects.requireNonNull(t.getMessage()));
             }
         }));
     }

@@ -25,6 +25,7 @@ import retrofit2.Response;
 
 public class ChangePwActivity extends AppCompatActivity {
 
+    private String TAG = "ChangePwActivity";
     private EditText currentPw, changePw, confirmPw;
     private ImageView img_close;
     private Button btn_change;
@@ -66,7 +67,7 @@ public class ChangePwActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
 
-                        Log.v("비번변경", "response:" + response.code() + changePw.getText().toString());
+                        Log.v(TAG, "response:" + response.code() + changePw.getText().toString());
                         finish();
                     }
                 }

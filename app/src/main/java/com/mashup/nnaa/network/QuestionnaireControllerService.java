@@ -5,9 +5,7 @@ import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
-import com.mashup.nnaa.network.model.QuestionnaireDto;
 
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;

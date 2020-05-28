@@ -2,7 +2,6 @@ package com.mashup.nnaa.main.home;
 
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.MainHomeQuestionnairesItem;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
-import com.mashup.nnaa.network.model.QuestionnaireDto;
 import com.mashup.nnaa.util.AccountManager;
 
 import java.util.ArrayList;

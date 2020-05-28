@@ -11,8 +11,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
 
-import java.util.ArrayList;
-
 public class MainMyListPagerAdapter extends FragmentStateAdapter {
     public MainMyListPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);

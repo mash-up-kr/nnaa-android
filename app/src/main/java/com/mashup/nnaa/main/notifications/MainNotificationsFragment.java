@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.main.setting.MainSettingAdapter;
 
 import java.util.ArrayList;
 

@@ -2,7 +2,6 @@ package com.mashup.nnaa.network;
 
 import android.text.TextUtils;
 
-import com.kakao.usermgmt.response.model.User;
 import com.mashup.nnaa.BuildConfig;
 import com.mashup.nnaa.main.mylist.MainMyListDataAdapter;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
@@ -11,10 +10,7 @@ import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.Questionnaire;
 import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
-import com.mashup.nnaa.network.model.QuestionnaireDto;
-import com.mashup.nnaa.network.model.SharingDto;
 import com.mashup.nnaa.network.model.SignUpDto;
-import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
 
 import java.util.ArrayList;
@@ -96,8 +92,6 @@ public class RetrofitHelper {
         userInfo.enqueue(callback);
     }
 
-    // 회원가입
-
     /**
      * Register new member with given information
      *
@@ -106,6 +100,8 @@ public class RetrofitHelper {
      * @param name
      * @param callback
      */
+
+    // 회원가입
     public void registerEmail(String email, String encPw, String name, Callback<SignUpDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
         Call<SignUpDto> signUpDtoCall = service.registerEmail(
@@ -203,7 +199,7 @@ public class RetrofitHelper {
         receivedQuestionnaire.enqueue(callback);
     }
 
-    // 보낸 질문지 리스
+    // 보낸 질문지 리스트
     public void getSendQuestionnaires(Callback<List<OutboxQuestionnaireDto>> callback) {
         QuestionnaireControllerService service = retrofit.create(QuestionnaireControllerService.class);
         Call<List<OutboxQuestionnaireDto>> sendQuestionnaire = service.getSendQuestionnaires();

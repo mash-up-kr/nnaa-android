@@ -1,16 +1,8 @@
 package com.mashup.nnaa.question;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,15 +10,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.Choices;
-import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.util.AccountManager;
+import androidx.appcompat.app.AppCompatActivity;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.mashup.nnaa.R;
 
 public class MakeQuestionActivity extends AppCompatActivity {
 

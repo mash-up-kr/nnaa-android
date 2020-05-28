@@ -1,11 +1,9 @@
 package com.mashup.nnaa.util;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.login.LoginManager;
-import com.mashup.nnaa.main.setting.ChangePwActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.UserAuthHeaderInfo;
 import com.mashup.nnaa.network.model.LoginDto;
@@ -18,7 +16,6 @@ import retrofit2.Response;
 public class AccountManager {
     public static final String SHARED_PREF_LAST_ACCOUNT_EMAIL = "last_account_email";
     public static final String SHARED_PREF_LAST_ACCOUNT_ENCRYPT_PW = "last_account_pw";
-    public static Object ISignInResultListener;
 
     private static AccountManager instance = new AccountManager();
 

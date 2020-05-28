@@ -1,7 +1,5 @@
 package com.mashup.nnaa;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,10 +7,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.EncryptUtil;
 
 import java.util.Objects;
@@ -27,6 +25,7 @@ public class ResetPwActivity extends AppCompatActivity {
     private ImageView resetClose;
     private EditText edit_reset_pw, edit_reset_pw_confirm;
     private Button btn_reset;
+    private String TAG = "ResetPwActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class ResetPwActivity extends AppCompatActivity {
             Uri uri = deeplink.getData();
             String user_id = Objects.requireNonNull(uri).getQueryParameter("id");
             String token = Objects.requireNonNull(uri).getQueryParameter("token");
-            Log.v("DEEPLINK", "id:" + user_id + "," + "token:" + token);
+            Log.v(TAG, "id:" + user_id + "," + "token:" + token);
 
             btn_reset.setOnClickListener(view -> {
                 String plainNewPw = edit_reset_pw.getText().toString();
@@ -64,14 +63,14 @@ public class ResetPwActivity extends AppCompatActivity {
                             Intent success = new Intent(NnaaApplication.getAppContext(), LoginActivity.class);
                             success.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             NnaaApplication.getAppContext().startActivity(success);
-                            Log.v("딥링크 비번 재설정", response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
+                            Log.v(TAG, response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
                             finish();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.v("딥링크 비번 재설정", t.getMessage());
+                        Log.v(TAG, t.getMessage());
                     }
                 });
             });

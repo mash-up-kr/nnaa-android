@@ -1,7 +1,6 @@
 package com.mashup.nnaa.main.setting;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,9 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mashup.nnaa.LoginActivity;
 import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;

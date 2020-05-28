@@ -3,7 +3,6 @@ package com.mashup.nnaa.question;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,15 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.Questionnaire;
-import com.mashup.nnaa.reply.MultiReplyActivity;
-import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.QuestionAdapter;
 
@@ -51,6 +46,7 @@ public class QuestionActivity extends AppCompatActivity {
     private ImageView btn_cancel;
     private QuestionAdapter questionAdapter;
     private ArrayList<NewQuestionDto> questionList;
+    private String TAG = "QuestionActivity";
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,9 +120,7 @@ public class QuestionActivity extends AppCompatActivity {
             builder.show();
         });
 
-        btn_cancel.setOnClickListener(view -> {
-            finish();
-        });
+        btn_cancel.setOnClickListener(view -> finish());
 
 
         RecyclerView recyclerQuestion = findViewById(R.id.recycler_question);
@@ -187,7 +181,7 @@ public class QuestionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<NewQuestionDto>> call, Throwable t) {
-                Log.v("QuestionRandom", "에러:" + t.getMessage());
+                Log.v(TAG, "에러:" + t.getMessage());
             }
         });
     }
@@ -201,7 +195,7 @@ public class QuestionActivity extends AppCompatActivity {
                 Intent intent1 = getIntent();
                 String category = intent1.getStringExtra("category");
 
-                String contents = data.getStringExtra("content");
+                String contents = Objects.requireNonNull(data).getStringExtra("content");
                 String type = data.getStringExtra("type");
                 String a = data.getStringExtra("setA");
                 String b = data.getStringExtra("setB");

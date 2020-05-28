@@ -1,17 +1,14 @@
 package com.mashup.nnaa;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.mashup.nnaa.main.MainActivity;
-import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.PermissionHelper;
 import com.mashup.nnaa.util.SharedPrefHelper;
@@ -26,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         checkLogin();
     }
 
+    // more than API 23 device check permission
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -1,12 +1,10 @@
 package com.mashup.nnaa.network.model;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.mashup.nnaa.data.Choices;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class NewQuestionDto implements Serializable {
 
