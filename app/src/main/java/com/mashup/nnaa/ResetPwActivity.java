@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,9 +38,7 @@ public class ResetPwActivity extends AppCompatActivity {
         resetClose = findViewById(R.id.img_reset_close);
         btn_reset = findViewById(R.id.btn_reset);
 
-        resetClose.setOnClickListener(view -> {
-            finish();
-        });
+        resetClose.setOnClickListener(view -> finish());
 
         // parameter 확인
         Intent deeplink = getIntent();
@@ -61,10 +60,14 @@ public class ResetPwActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             Intent success = new Intent(NnaaApplication.getAppContext(), LoginActivity.class);
+                            Toast.makeText(getApplicationContext(), "비밀번호가 재설정 되었습니다.",Toast.LENGTH_SHORT).show();
                             success.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             NnaaApplication.getAppContext().startActivity(success);
                             Log.v(TAG, response.code() + "새로운 비번:" + edit_reset_pw.getText().toString() + "," + "비번 확인:" + edit_reset_pw_confirm.getText().toString());
                             finish();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "기존 비밀번호와 새로운 비밀번호를 다르게 입력해주세요!.",Toast.LENGTH_SHORT).show();
                         }
                     }
 

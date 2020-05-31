@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onSignInFail() {
-                Toast.makeText(getBaseContext(), "Fail to auto sign in, please try again", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Fail to auto sign in, please try again", Toast.LENGTH_SHORT).show();
                 launchSignInActivity();
             }
         });

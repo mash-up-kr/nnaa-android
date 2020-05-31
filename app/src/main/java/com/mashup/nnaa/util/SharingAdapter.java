@@ -184,6 +184,7 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
                     @Override
                     public void onFailure(Call<Questionnaire> call, Throwable t) {
                         Log.d(TAG, t.getMessage());
+                        Toast.makeText(getApplicationContext(), "(질문지 보내기 오류)", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (JSONException e) {

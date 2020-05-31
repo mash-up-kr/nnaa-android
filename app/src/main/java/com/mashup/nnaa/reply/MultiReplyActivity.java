@@ -266,7 +266,6 @@ public class MultiReplyActivity extends AppCompatActivity {
 
             btn_next_question.setOnClickListener(view1 -> {
 
-
                 if (contentarray.size() != 1 && typearray.size() != 1) {
                     content_count++;
                     txtQuestion.setText(contentarray.get(content_count));
@@ -477,22 +476,23 @@ public class MultiReplyActivity extends AppCompatActivity {
                 lastQuestion();
 
                 QuestionnaireAnswerDto answerDto = new QuestionnaireAnswerDto(answers, time);
-                builder.setPositiveButton("확인", (dialogInterface, ii) -> RetrofitHelper.getInstance().answerQuestionnaire(id, token, q_id, answerDto, new Callback<QuestionnaireAnswerDto>() {
-                    @Override
-                    public void onResponse(Call<QuestionnaireAnswerDto> call, Response<QuestionnaireAnswerDto> response) {
-                        if (response.isSuccessful()) {
-                            Intent intent = new Intent(view1.getContext(), MainActivity.class);
-                            startActivity(intent);
+                builder.setPositiveButton("확인", (dialogInterface, ii) ->
+                        RetrofitHelper.getInstance().answerQuestionnaire(id, token, q_id, answerDto, new Callback<QuestionnaireAnswerDto>() {
+                            @Override
+                            public void onResponse(Call<QuestionnaireAnswerDto> call, Response<QuestionnaireAnswerDto> response) {
+                                if (response.isSuccessful()) {
+                                    Intent intent = new Intent(view1.getContext(), MainActivity.class);
+                                    startActivity(intent);
 
-                            showNotification();
-                        }
-                    }
+                                    showNotification();
+                                }
+                            }
 
-                    @Override
-                    public void onFailure(Call<QuestionnaireAnswerDto> call, Throwable t) {
-                        Log.v(TAG, Objects.requireNonNull(t.getMessage()));
-                    }
-                }));
+                            @Override
+                            public void onFailure(Call<QuestionnaireAnswerDto> call, Throwable t) {
+                                Log.v(TAG, Objects.requireNonNull(t.getMessage()));
+                            }
+                        }));
                 builder.show();
             });
         } catch (JSONException e) {

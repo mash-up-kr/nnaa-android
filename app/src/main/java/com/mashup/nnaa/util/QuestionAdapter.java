@@ -70,6 +70,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
                 NewQuestionDto newQuestionDto = new NewQuestionDto(item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
                 if (holder.qChoice.isChecked()) {
+                    // 즐겨찾기 등록
                     RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
