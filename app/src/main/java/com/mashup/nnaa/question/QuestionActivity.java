@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
+import com.mashup.nnaa.main.addfriends.SendFriendActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
@@ -80,7 +81,39 @@ public class QuestionActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("질문지 보내기");
             builder.setMessage("질문지를 보낼까요?");
-            builder.setPositiveButton("확인", (dialogInterface, i) -> {
+            builder.setPositiveButton("친구에게 보내기", (dialogInterface, i) -> {
+                try {
+                    JSONArray jsonArray = new JSONArray();
+
+                    for (int j = 0; j < questionList.size(); j++) {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("id", questionList.get(j).getId());
+                        jsonObject.put("type", questionList.get(j).getType());
+                        jsonObject.put("content", questionList.get(j).getContent());
+
+                        if (questionList.get(j).getChoices() != null) {
+                            JSONObject object = new JSONObject();
+                            object.put("a", questionList.get(j).getChoices().getA());
+                            object.put("b", questionList.get(j).getChoices().getB());
+                            object.put("c", questionList.get(j).getChoices().getC());
+                            object.put("d", questionList.get(j).getChoices().getD());
+                            jsonObject.put("choices", object);
+                        } else jsonObject.put("choices", "null");
+
+                        jsonObject.put("isBookmarked", questionList.get(j).isBookmarked());
+                        jsonArray.put(jsonObject);
+                    }
+                    Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(this, SendFriendActivity.class);
+                    intent1.putExtra("category", category);
+                    intent1.putExtra("list", jsonArray.toString());
+                    startActivity(intent1);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            });
+            builder.setNegativeButton("검색해서 보내기", (dialogInterface, i) -> {
                         try {
                             JSONArray jsonArray = new JSONArray();
 
@@ -101,9 +134,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                                 jsonObject.put("isBookmarked", questionList.get(j).isBookmarked());
                                 jsonArray.put(jsonObject);
-
                             }
-
                             Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
                             Intent reply_intent = new Intent(QuestionActivity.this, SharingActivity.class);
                             reply_intent.putExtra("category", category);
@@ -116,12 +147,11 @@ public class QuestionActivity extends AppCompatActivity {
                         }
                     }
             );
-            builder.setNegativeButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문지 보내기 취소", Toast.LENGTH_SHORT).show());
+            builder.setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "질문지 보내기 취소", Toast.LENGTH_SHORT).show());
             builder.show();
         });
 
         btn_cancel.setOnClickListener(view -> finish());
-
 
         RecyclerView recyclerQuestion = findViewById(R.id.recycler_question);
 
@@ -130,13 +160,17 @@ public class QuestionActivity extends AppCompatActivity {
         recyclerQuestion.setHasFixedSize(true);
 
         questionList = new ArrayList<>();
-        questionAdapter = new QuestionAdapter(this, questionList);
+        questionAdapter = new
+
+                QuestionAdapter(this, questionList);
         recyclerQuestion.setAdapter(questionAdapter);
 
 
         this.getQuestionRandom();
 
-        img_add.setOnClickListener(view -> {
+        img_add.setOnClickListener(view ->
+
+        {
             Toast.makeText(QuestionActivity.this, "즐겨찾기 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
             startActivity(bookmarkintent);
@@ -167,7 +201,6 @@ public class QuestionActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (questionList != null && response.body() != null) {
                     questionList = response.body();
-
                     questionAdapter.setQuestionList(questionList);
 
                     if (getQuestion() != null) {
@@ -209,7 +242,7 @@ public class QuestionActivity extends AppCompatActivity {
                 choices.setD(d);
 
                 if (contents != null && !contents.isEmpty()) {
-                    NewQuestionDto newQuestionDto = new NewQuestionDto(contents, category, type, choices, false);
+                    NewQuestionDto newQuestionDto = new NewQuestionDto(contents, category, type, choices);
 
                     // local 퀘션 추가
                     setQuestion(questionList);

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -96,11 +97,11 @@ public class MainQuestionnaireAdapter extends RecyclerView.Adapter<MainQuestionn
                         if (response.body() != null) {
                             intent.putExtra("questions", response.body().questions.toString());
                             intent.putExtra("id", response.body().id);
+                            Toast.makeText(view.getContext(),item.sender, Toast.LENGTH_SHORT).show();
                         }
 
                         mContext.startActivity(intent);
                     }
-
                     @Override
                     public void onFailure(Call<MainMyListDataAdapter.InOutBoxQuestionnaireItem> call, Throwable t) {
                             Log.v(TAG, t.getMessage());

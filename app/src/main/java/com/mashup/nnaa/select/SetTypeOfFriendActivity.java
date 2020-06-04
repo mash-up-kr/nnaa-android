@@ -43,10 +43,12 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         cancleBtn = findViewById(R.id.cancle_btn_in_type_of_friend);
         nextBtn = findViewById(R.id.next_btn_in_type_of_friend);
 
-        cancleBtn.setOnClickListener((view) -> {
-            finish();
-        });
+        cancleBtn.setOnClickListener((view) -> finish());
 
+        Intent intent1 = getIntent();
+        if(intent1!=null) {
+            etName.setText(intent1.getStringExtra("friend_name"));
+        }
         nextBtn.setOnClickListener(view -> {
             String name = etName.getText().toString().trim();
             String typename = friendType.getText().toString();

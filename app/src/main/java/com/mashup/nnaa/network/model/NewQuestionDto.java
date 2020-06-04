@@ -30,12 +30,11 @@ public class NewQuestionDto implements Serializable {
     @Expose
     private boolean isBookmarked;
 
-    public NewQuestionDto(String content, String category, String type, Choices choices, boolean isBookmarked) {
+    public NewQuestionDto(String content, String category, String type, Choices choices) {
         this.content = content;
         this.category = category;
         this.type = type;
         this.choices = choices;
-        this.isBookmarked = isBookmarked;
     }
 
     public NewQuestionDto() {

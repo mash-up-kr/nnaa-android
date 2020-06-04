@@ -1,7 +1,10 @@
 package com.mashup.nnaa.main.home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.main.setting.MyNnaaActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.util.AccountManager;
@@ -56,6 +60,7 @@ public class MainHomeFragment extends Fragment {
         return view;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -76,7 +81,7 @@ public class MainHomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<InboxQuestionnaireDto>> call, Throwable t) {
-                Toast.makeText(getContext(), "Fail to get data!\n" + t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "Fail to get data!\n" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -95,7 +100,6 @@ public class MainHomeFragment extends Fragment {
                 items.add(new InboxQuestionnaireDto(qId, qSender));
             }
         }
-
         adapter.setData(items, this);
     }
 }

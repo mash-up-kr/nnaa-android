@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.setting.MyNnaaActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_nnaa_done">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/nnaa_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="52dp"
+                android:lineSpacingExtra="7sp"
+                android:textColor="#2d2e35"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText"
+                tools:text="고승윤님의" />
+
+            <TextView
+                android:id="@+id/change_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:text="너나알아 보기"
+                android:textColor="#2d2e35"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nnaa_name"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/img_nnaa_close"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="33dp"
+                android:layout_marginEnd="18dp"
+                android:contentDescription="@string/StringValue"
+                android:src="@drawable/quiz_btn_close"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nnaa_pie_txt"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/nnaa_shape"
+                android:gravity="center"
+                android:lineSpacingExtra="12sp"
+                android:text="주고받은 너나알아"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/change_content"
+                tools:ignore="HardcodedText" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piechart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintEnd_toEndOf="@id/piechart"
+                app:layout_constraintStart_toStartOf="@id/piechart"
+                app:layout_constraintTop_toBottomOf="@id/nnaa_pie_txt" />
+
+            <TextView
+                android:id="@+id/nnaa_top_txt"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="23dp"
+                android:background="@drawable/nnaa_shape"
+                android:gravity="center"
+                android:lineSpacingExtra="12sp"
+                android:text="너나알아 TOP3"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/piechart"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/num_1"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_filter_1_black_24dp"
+                app:layout_constraintStart_toStartOf="@id/piechart"
+                app:layout_constraintTop_toBottomOf="@id/nnaa_top_txt" />
+
+            <TextView
+                android:id="@+id/txt_num_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/piechart"
+                app:layout_constraintTop_toBottomOf="@id/num_1"
+                tools:text="김김김님" />
+
+            <ImageView
+                android:id="@+id/num_2"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/ic_filter_2_black_24dp"
+                app:layout_constraintStart_toEndOf="@id/num_1"
+                app:layout_constraintTop_toBottomOf="@id/nnaa_top_txt" />
+
+            <TextView
+                android:id="@+id/txt_num_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="43dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/txt_num_1"
+                app:layout_constraintTop_toBottomOf="@id/num_2"
+                tools:text="김김김님" />
+
+
+            <ImageView
+                android:id="@+id/num_3"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/ic_filter_3_black_24dp"
+                app:layout_constraintStart_toEndOf="@id/num_2"
+                app:layout_constraintTop_toBottomOf="@id/nnaa_top_txt" />
+
+            <TextView
+                android:id="@+id/txt_num_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/txt_num_2"
+                app:layout_constraintTop_toBottomOf="@id/num_2"
+                tools:text="김김김김" />
+
+            <TextView
+                android:id="@+id/nnaa_no_txt"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/nnaa_shape"
+                android:lineSpacingExtra="12sp"
+                android:text="질문을 기다리는 친구들"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/num_1"
+                tools:ignore="HardcodedText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/nofriend_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nnaa_no_txt"
+                tools:listitem="@layout/nofriend_item" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_nnaa_done"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="#2d2e35"
+        android:lineSpacingExtra="13sp"
+        android:text="확인 완료"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="HardcodedText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

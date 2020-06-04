@@ -10,7 +10,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mashup.nnaa.LoginActivity;
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.main.addfriends.AddFriendActivity;
 import com.mashup.nnaa.main.home.MainHomeFragment;
 import com.mashup.nnaa.main.mylist.MainMyListFragment;
 import com.mashup.nnaa.main.notifications.MainNotificationsFragment;
@@ -53,7 +55,11 @@ public class MainActivity extends AppCompatActivity {
         ImageView ivSettings = findViewById(R.id.tv_tab_setting);
 
         ivHome.setOnClickListener(v -> onMainTabClicked(Page.HOME));
-        ivAlarm.setOnClickListener(v -> onMainTabClicked(Page.ALARM));
+       // ivAlarm.setOnClickListener(v -> onMainTabClicked(Page.ALARM));
+        ivAlarm.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddFriendActivity.class);
+            startActivity(intent);
+        });
         ivMyList.setOnClickListener(v -> onMainTabClicked(Page.MY_LIST));
         ivSettings.setOnClickListener(v -> onMainTabClicked(Page.SETTINGS));
     }
@@ -89,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
                     fragmentMap.put(Page.HOME, MainHomeFragment.newInstance());
                     break;
 
-                case ALARM:
+                /*case ALARM:
                     fragmentMap.put(Page.ALARM, MainNotificationsFragment.newInstance());
-                    break;
+                    break;*/
 
                 case MY_LIST:
                     fragmentMap.put(Page.MY_LIST, MainMyListFragment.newInstance());

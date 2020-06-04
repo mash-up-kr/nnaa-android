@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_register_close"
+            android:id="@+id/img_plus_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -27,7 +27,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="72dp"
             android:lineHeight="27sp"
-            android:text="회원가입"
+            android:text="친구추가 페이지"
             android:textColor="#2d2e35"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -36,10 +36,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="27dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="103dp"
             android:lineHeight="27sp"
-            android:text="회원가입 후 정확한 정보를 받아보세요!"
+            android:text="친구로 등록해보세요!"
             android:textColor="#2d2e35"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="169dp"
+            android:layout_marginTop="188dp"
             android:lineHeight="27sp"
             android:text="이름"
             android:textColor="#2d2e35"
@@ -58,11 +58,11 @@
             tools:ignore="HardcodedText,UnusedAttribute" />
 
         <EditText
-            android:id="@+id/edit_name"
+            android:id="@+id/edit_pluse_name"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginLeft="18dp"
-            android:layout_marginTop="203dp"
+            android:layout_marginTop="223dp"
             android:layout_marginRight="18dp"
             android:background="@drawable/login_shape"
             android:hint="이름을 알려주세요!"
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="272dp"
+            android:layout_marginTop="292dp"
             android:lineHeight="27sp"
             android:text="이메일"
             android:textColor="#2d2e35"
@@ -85,11 +85,11 @@
             tools:ignore="HardcodedText,UnusedAttribute" />
 
         <EditText
-            android:id="@+id/edit_email"
+            android:id="@+id/edit_pluse_email"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="306dp"
+            android:layout_marginTop="326dp"
             android:layout_marginEnd="18dp"
             android:background="@drawable/login_shape"
             android:hint="이메일 아이디@naver.com"
@@ -101,66 +101,35 @@
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="383dp"
+            android:layout_marginTop="403dp"
             android:lineHeight="27sp"
-            android:text="비밀번호"
+            android:text="카테고리"
             android:textColor="#2d2e35"
             android:textSize="15sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText,UnusedAttribute" />
 
-        <EditText
-            android:id="@+id/edit_password"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_plus"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginLeft="18dp"
-            android:layout_marginTop="417dp"
+            android:layout_marginTop="437dp"
             android:layout_marginRight="18dp"
+            android:textAlignment="center"
             android:background="@drawable/login_shape"
-            android:hint="영어,숫자,특수문자를 활용하여주세요!"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:maxLength="15"
-            android:textAlignment="center"
+            android:entries="@array/category_array"
             tools:ignore="HardcodedText" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="494dp"
-            android:lineHeight="27sp"
-            android:text="비밀번호 확인"
-            android:textColor="#2d2e35"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText,UnusedAttribute" />
-
-        <EditText
-            android:id="@+id/edit_password_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="528dp"
-            android:layout_marginRight="18dp"
-            android:background="@drawable/password_confirm_change"
-            android:hint="***"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:maxLength="15"
-            android:textAlignment="center"
-            tools:ignore="HardcodedText" />
-
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_plus"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:layout_gravity="bottom"
             android:layout_marginTop="658dp"
             android:background="#2a4bff"
             android:lineHeight="27sp"
-            android:text="회원 가입 완료"
+            android:text="친구 추가 완료"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="bold"
