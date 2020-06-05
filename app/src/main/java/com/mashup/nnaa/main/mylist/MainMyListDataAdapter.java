@@ -7,26 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.OutboxQuestionnaireDto;
 import com.mashup.nnaa.util.AccountManager;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -39,6 +31,7 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
     private MainMyListSubFragment mContext;
+    private String TAG = "MainMyListDataAdapter";
 
     public MainMyListDataAdapter(MainMyListPagerAdapter.MyListType type) {
         items = new ArrayList<>();
@@ -68,38 +61,40 @@ public class MainMyListDataAdapter extends RecyclerView.Adapter<MainMyListDataAd
         int pos = holder.getAdapterPosition();
         InOutBoxQuestionnaireItem item = items.get(pos);
         String questionid = item.id;
-        holder.itemView.setOnClickListener(view -> RetrofitHelper.getInstance().showQuestionnaire(id, token, questionid, new Callback<InOutBoxQuestionnaireItem>() {
-            @Override
-            public void onResponse(Call<InOutBoxQuestionnaireItem> call, Response<InOutBoxQuestionnaireItem> response) {
+        
+        holder.itemView.setOnClickListener(view ->
+                RetrofitHelper.getInstance().showQuestionnaire(id, token, questionid, new Callback<InOutBoxQuestionnaireItem>() {
+                    @Override
+                    public void onResponse(Call<InOutBoxQuestionnaireItem> call, Response<InOutBoxQuestionnaireItem> response) {
 
-                if (response.body() != null && response.isSuccessful()) {
-                    Intent intent = new Intent(view.getContext(), MainShowQuestionnaire.class);
-                    intent.putExtra("questions", response.body().questions.toString());
+                        if (response.body() != null && response.isSuccessful()) {
+                            Intent intent = new Intent(view.getContext(), MainShowQuestionnaire.class);
+                            intent.putExtra("questions", response.body().questions.toString());
 
-                    String answer = response.body().answers.toString();
-                    String question = response.body().questions.toString();
+                            String answer = response.body().answers.toString();
+                            String question = response.body().questions.toString();
 
-                    JsonObject object = new JsonObject();
-                    object.addProperty("answers", answer);
+                            JsonObject object = new JsonObject();
+                            object.addProperty("answers", answer);
 
-                    if (object.has("answers") && !object.isJsonNull()) {
-                        intent.putExtra("answer", object.toString());
+                            if (object.has("answers") && !object.isJsonNull()) {
+                                intent.putExtra("answer", object.toString());
+                            }
+                            JsonObject jsonObject = new JsonObject();
+                            jsonObject.addProperty("questions", question);
+                            if (jsonObject.has("questions") && !jsonObject.isJsonNull()) {
+                                intent.putExtra("test", jsonObject.toString());
+                            }
+
+                            mContext.startActivity(intent);
+                        }
                     }
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("questions", question);
-                    if (jsonObject.has("questions") && !jsonObject.isJsonNull()) {
-                        intent.putExtra("test", jsonObject.toString());
+
+                    @Override
+                    public void onFailure(Call<InOutBoxQuestionnaireItem> call, Throwable t) {
+                        Log.v(TAG, Objects.requireNonNull(t.getMessage()));
                     }
-
-                    mContext.startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<InOutBoxQuestionnaireItem> call, Throwable t) {
-                Log.v("@@@@@@@", Objects.requireNonNull(t.getMessage()));
-            }
-        }));
+                }));
     }
 
     @Override

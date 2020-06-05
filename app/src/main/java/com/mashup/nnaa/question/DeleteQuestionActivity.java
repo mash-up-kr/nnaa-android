@@ -2,14 +2,11 @@ package com.mashup.nnaa.question;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -17,23 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.Choices;
-import com.mashup.nnaa.network.QuestionControllerService;
-import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.Question;
-import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.DeleteAdapter;
 import com.mashup.nnaa.util.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DeleteQuestionActivity extends AppCompatActivity {
 
@@ -55,9 +40,7 @@ public class DeleteQuestionActivity extends AppCompatActivity {
         txt_delete_name = findViewById(R.id.txt_delete_name);
         txt_delete_type = findViewById(R.id.txt_delete_type);
 
-        btn_delete_cancel.setOnClickListener(view -> {
-            finish();
-        });
+        btn_delete_cancel.setOnClickListener(view -> finish());
 
         Intent intent = getIntent();
         String type = intent.getStringExtra("type");

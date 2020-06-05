@@ -53,6 +53,9 @@ public class FindPwActivity extends AppCompatActivity {
                             Toast.makeText(FindPwActivity.this, "이메일을 보냈습니다!", Toast.LENGTH_SHORT).show();
                             Log.v("재설정 이메일", "response:" + response.code() + editFind.getText().toString());
                         }
+                        else {
+                            Toast.makeText(FindPwActivity.this, "(회원정보 오류) 가입했던 이메일을 확인해주세요!", Toast.LENGTH_SHORT).show();
+                        }
                         progressDialog.dismiss();
                     }
 

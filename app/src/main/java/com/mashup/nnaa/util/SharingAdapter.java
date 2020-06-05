@@ -116,7 +116,7 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
         holder.txt_email.setText(filteredList.get(position).getEmail());
 
         Bundle bundle = ((Activity) sContext).getIntent().getExtras();
-        final String category = bundle.getString("category");
+        final String category = Objects.requireNonNull(bundle).getString("category");
         final String list = bundle.getString("list");
 
         int pos = holder.getAdapterPosition();
@@ -130,9 +130,7 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
         AtomicReference<String> content = new AtomicReference<>();
         AtomicReference<String> type = new AtomicReference<>();
         AtomicReference<String> choice = new AtomicReference<>();
-
         JsonObject inputdata = new JsonObject();
-
 
         holder.userSelect.setOnClickListener(view -> {
             try {
@@ -170,28 +168,26 @@ public class SharingAdapter extends RecyclerView.Adapter<SharingAdapter.ViewHold
                     inputdata.add(KEY, middledata);
                 }
                 Questionnaire questionnaire = new Questionnaire(category, time, inputdata, item.getId());
-
                 RetrofitHelper.getInstance().postQuestionnaire(id, token, questionnaire, new Callback<Questionnaire>() {
-                    @Override
-                    public void onResponse(Call<Questionnaire> call, Response<Questionnaire> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(view.getContext(), MainActivity.class);
-                            sContext.startActivity(intent);
+                        @Override
+                        public void onResponse(Call<Questionnaire> call, Response<Questionnaire> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                                sContext.startActivity(intent);
+                            }
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Questionnaire> call, Throwable t) {
-                        Log.d(TAG, t.getMessage());
-                    }
+                        @Override
+                        public void onFailure(Call<Questionnaire> call, Throwable t) {
+                            Log.d(TAG, t.getMessage());
+                            Toast.makeText(getApplicationContext(), "(질문지 보내기 오류)", Toast.LENGTH_SHORT).show();
+                        }
                 });
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

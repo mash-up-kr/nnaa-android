@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.MainHomeNotificationItem;
-import com.mashup.nnaa.data.MainHomeQuestionnairesItem;
 
 import java.util.ArrayList;
 

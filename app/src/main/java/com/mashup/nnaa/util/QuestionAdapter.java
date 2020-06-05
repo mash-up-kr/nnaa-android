@@ -2,32 +2,22 @@ package com.mashup.nnaa.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.bookmarkQuestionDto;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +29,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     private ArrayList<NewQuestionDto> questionList;
     private Context Qcontext;
+    private String TAG = "QuestionAdatper";
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
 
@@ -67,32 +58,33 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
         Bundle bundle = ((Activity) Qcontext).getIntent().getExtras();
 
-        final String category = bundle.getString("category");
+        final String category = Objects.requireNonNull(bundle).getString("category");
 
         holder.qChoice.setOnCheckedChangeListener(null);
 
         holder.qChoice.setOnCheckedChangeListener((buttonView, isChekced) -> {
-
             int pos = holder.getAdapterPosition();
             if (pos != RecyclerView.NO_POSITION) {
                 NewQuestionDto item = questionList.get(pos);
 
-                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
+                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getContent(), category, item.getType(), item.getChoices());
                 if (holder.qChoice.isChecked()) {
+                    // 즐겨찾기 등록
                     RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                             newQuestionDto.setBookmarked(true);
-
                             holder.qChoice.setChecked(newQuestionDto.isBookmarked());
                             holder.qChoice.setChecked(isChekced);
+
+
                             SharedPrefHelper.getInstance().put("check", holder.qChoice.isChecked());
 
                         }
 
                         @Override
                         public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                            Log.v("즐찾 등록", t.getMessage());
+                            Log.v(TAG, t.getMessage());
                         }
                     });
                 } else {
@@ -109,7 +101,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
                         @Override
                         public void onFailure(Call<NewQuestionDto> call, Throwable t) {
-                            Log.v("즐찾 해제", t.getMessage());
+                            Log.v(TAG, t.getMessage());
                         }
                     });
                 }

@@ -1,11 +1,5 @@
 package com.mashup.nnaa.reply;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.app.TaskStackBuilder;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,33 +19,28 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
+
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.main.MainActivity;
-import com.mashup.nnaa.main.mylist.MainMyListDataAdapter;
 import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.Answers;
-import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
 import com.mashup.nnaa.util.AccountManager;
-import com.mashup.nnaa.util.ReplyAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -158,7 +146,6 @@ public class MultiReplyActivity extends AppCompatActivity {
         String question = intent.getStringExtra("list");
         String q_id = intent.getStringExtra("id");
         reply_number.setText(String.valueOf(count));
-
 
         try {
             JSONObject object = new JSONObject(Objects.requireNonNull(question));
@@ -277,7 +264,6 @@ public class MultiReplyActivity extends AppCompatActivity {
             }
 
             btn_next_question.setOnClickListener(view1 -> {
-
 
                 if (contentarray.size() != 1 && typearray.size() != 1) {
                     content_count++;
@@ -489,22 +475,23 @@ public class MultiReplyActivity extends AppCompatActivity {
                 lastQuestion();
 
                 QuestionnaireAnswerDto answerDto = new QuestionnaireAnswerDto(answers, time);
-                builder.setPositiveButton("확인", (dialogInterface, ii) -> RetrofitHelper.getInstance().answerQuestionnaire(id, token, q_id, answerDto, new Callback<QuestionnaireAnswerDto>() {
-                    @Override
-                    public void onResponse(Call<QuestionnaireAnswerDto> call, Response<QuestionnaireAnswerDto> response) {
-                        if (response.isSuccessful()) {
-                            Intent intent = new Intent(view1.getContext(), MainActivity.class);
-                            startActivity(intent);
+                builder.setPositiveButton("확인", (dialogInterface, ii) ->
+                        RetrofitHelper.getInstance().answerQuestionnaire(id, token, q_id, answerDto, new Callback<QuestionnaireAnswerDto>() {
+                            @Override
+                            public void onResponse(Call<QuestionnaireAnswerDto> call, Response<QuestionnaireAnswerDto> response) {
+                                if (response.isSuccessful()) {
+                                    Intent intent = new Intent(view1.getContext(), MainActivity.class);
+                                    startActivity(intent);
 
-                            showNotification();
-                        }
-                    }
+                                    showNotification();
+                                }
+                            }
 
-                    @Override
-                    public void onFailure(Call<QuestionnaireAnswerDto> call, Throwable t) {
-                        Log.v("@@@@@", Objects.requireNonNull(t.getMessage()));
-                    }
-                }));
+                            @Override
+                            public void onFailure(Call<QuestionnaireAnswerDto> call, Throwable t) {
+                                Log.v(TAG, Objects.requireNonNull(t.getMessage()));
+                            }
+                        }));
                 builder.show();
             });
         } catch (JSONException e) {
@@ -531,7 +518,7 @@ public class MultiReplyActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.splashlogo)
                 .setContentTitle("NNAA")
                 .setContentText("답변이 도착했습니다.")
-                .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setDefaults(Notification.DEFAULT_SOUND)
                 .setLargeIcon(noti)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true)

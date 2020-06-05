@@ -1,12 +1,10 @@
 package com.mashup.nnaa.network.model;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.mashup.nnaa.data.Choices;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class NewQuestionDto implements Serializable {
 
@@ -32,12 +30,11 @@ public class NewQuestionDto implements Serializable {
     @Expose
     private boolean isBookmarked;
 
-    public NewQuestionDto(String content, String category, String type, Choices choices, boolean isBookmarked) {
+    public NewQuestionDto(String content, String category, String type, Choices choices) {
         this.content = content;
         this.category = category;
         this.type = type;
         this.choices = choices;
-        this.isBookmarked = isBookmarked;
     }
 
     public NewQuestionDto() {

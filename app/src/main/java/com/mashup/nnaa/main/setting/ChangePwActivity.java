@@ -25,6 +25,7 @@ import retrofit2.Response;
 
 public class ChangePwActivity extends AppCompatActivity {
 
+    private String TAG = "ChangePwActivity";
     private EditText currentPw, changePw, confirmPw;
     private ImageView img_close;
     private Button btn_change;
@@ -47,14 +48,15 @@ public class ChangePwActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btn_change.setOnClickListener(view -> {
-            String plainOldPw = currentPw.getText().toString();
-            String plainNewPw = changePw.getText().toString();
-            String plainNewPwConfirm = confirmPw.getText().toString();
+        String plainOldPw = currentPw.getText().toString();
+        String plainNewPw = changePw.getText().toString();
+        String plainNewPwConfirm = confirmPw.getText().toString();
 
-            String encryptOldPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainOldPw);
-            String encryptNewPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPw);
-            String encryptNewPwConfirm = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPwConfirm);
+        String encryptOldPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainOldPw);
+        String encryptNewPw = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPw);
+        String encryptNewPwConfirm = EncryptUtil.encryptPasswordFromPlaintextToSignIn(plainNewPwConfirm);
+
+        btn_change.setOnClickListener(view -> {
 
             RetrofitHelper.getInstance().changePw(id, token, encryptOldPw, encryptNewPw, encryptNewPwConfirm, new Callback<ResponseBody>() {
                 @Override
@@ -66,7 +68,7 @@ public class ChangePwActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
 
-                        Log.v("비번변경", "response:" + response.code() + changePw.getText().toString());
+                        Log.v(TAG, "response:" + response.code() + changePw.getText().toString());
                         finish();
                     }
                 }

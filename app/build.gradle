@@ -24,6 +24,9 @@ android {
         targetCompatibility = 1.8
         sourceCompatibility = 1.8
     }
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
 
 }
 
@@ -37,22 +40,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0' //recyclerview
+    implementation 'androidx.viewpager2:viewpager2:1.0.0' // viewpager
     implementation 'androidx.viewpager:viewpager:1.0.0'
-    implementation 'com.facebook.android:facebook-android-sdk:4.+'
+    implementation 'com.facebook.android:facebook-android-sdk:4.+' //facebook sdk
     implementation 'com.googlecode.android-query:android-query:0.25.9' //AQuery
     implementation 'de.hdodenhof:circleimageview:1.2.1' // CircleImageView
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt',
-            version: project.KAKAO_SDK_VERSION
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
-    implementation 'com.google.code.gson:gson:2.8.1'
-    implementation "com.airbnb.android:lottie:3.3.1"
-
-    implementation 'com.google.android.exoplayer:exoplayer:2.10.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0' // retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0' // gson
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1' // okhhtp logging
+    implementation 'com.google.code.gson:gson:2.8.1' // gson
+    implementation "com.airbnb.android:lottie:3.3.1" // lottie
+    implementation 'com.github.PhilJay:MpAndroidChart:v3.0.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.10.6' // video
 
 
 }

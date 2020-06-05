@@ -13,9 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.question.FavoritesActivity;
 import com.mashup.nnaa.question.QuestionActivity;
-import com.mashup.nnaa.util.AccountManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +43,12 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         cancleBtn = findViewById(R.id.cancle_btn_in_type_of_friend);
         nextBtn = findViewById(R.id.next_btn_in_type_of_friend);
 
+        cancleBtn.setOnClickListener((view) -> finish());
+
+        Intent intent1 = getIntent();
+        if(intent1!=null) {
+            etName.setText(intent1.getStringExtra("friend_name"));
+        }
         nextBtn.setOnClickListener(view -> {
             String name = etName.getText().toString().trim();
             String typename = friendType.getText().toString();
@@ -65,9 +69,6 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         String[] type_str = getResources().getStringArray(R.array.questionlist);
         Collections.addAll(type, type_str);
 
-        cancleBtn.setOnClickListener((view) -> {
-            finish();
-        });
     }
 
     @Override

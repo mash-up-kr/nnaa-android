@@ -12,14 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.network.RetrofitHelper;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 import com.mashup.nnaa.util.AccountManager;
-import com.mashup.nnaa.util.BookmarkAdapter;
-import com.mashup.nnaa.util.FavoritesAdapter;
 
 import java.util.ArrayList;
 
@@ -35,6 +32,7 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
     private RecyclerView favorites_recycler;
     private MainSettingFavoritesAdapter adapter;
     private ArrayList<NewQuestionDto> fList;
+    private String TAG = "MainSettingFavoritesActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +45,7 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
 
         txt_manage_favorites.setText(R.string.setting_manage_favorites);
 
-        cancel.setOnClickListener(view -> {
-            finish();
-        });
+        cancel.setOnClickListener(view -> finish());
 
         btn_next.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), SetTypeOfFriendActivity.class);
@@ -81,19 +77,19 @@ public class MainSettingFavoritesActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (response.isSuccessful()) {
                     fList = response.body();
-                    Log.v("즐겨찾기 api", "Response = " + response.code());
+                    Log.v(TAG, "Response = " + response.code());
                     adapter.setFavoritList(fList);
                 } else if (response.code() == 400) {
                     Toast.makeText(MainSettingFavoritesActivity.this, "즐겨찾기 한 질문이 없습니다.", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Log.v("즐겨찾기 api", response.message());
+                    Log.v(TAG, response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<NewQuestionDto>> call, Throwable t) {
-                Log.v("즐겨찾기 api", "에러:" + t.getMessage());
+                Log.v(TAG, "에러:" + t.getMessage());
             }
         });
     }

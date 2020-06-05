@@ -1,33 +1,21 @@
 package com.mashup.nnaa.main.mylist;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.network.RetrofitHelper;
-import com.mashup.nnaa.network.model.Questionnaire;
-import com.mashup.nnaa.network.model.QuestionnaireAnswerDto;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainShowQuestionnaire extends AppCompatActivity {
 

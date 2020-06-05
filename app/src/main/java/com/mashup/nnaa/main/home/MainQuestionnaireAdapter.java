@@ -14,9 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import com.mashup.nnaa.R;
 import com.mashup.nnaa.main.mylist.MainMyListDataAdapter;
 import com.mashup.nnaa.network.RetrofitHelper;
@@ -24,11 +21,7 @@ import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.reply.ReplyActivity;
 import com.mashup.nnaa.util.AccountManager;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +32,7 @@ public class MainQuestionnaireAdapter extends RecyclerView.Adapter<MainQuestionn
     private MainHomeFragment mContext;
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
     private String token = AccountManager.getInstance().getUserAuthHeaderInfo().getToken();
+    private String TAG = "MainQuestionnarieAdapter";
 
     public MainQuestionnaireAdapter() {
         // set an item that indicate 'empty'
@@ -103,14 +97,14 @@ public class MainQuestionnaireAdapter extends RecyclerView.Adapter<MainQuestionn
                         if (response.body() != null) {
                             intent.putExtra("questions", response.body().questions.toString());
                             intent.putExtra("id", response.body().id);
+                            Toast.makeText(view.getContext(),item.sender, Toast.LENGTH_SHORT).show();
                         }
 
                         mContext.startActivity(intent);
                     }
-
                     @Override
                     public void onFailure(Call<MainMyListDataAdapter.InOutBoxQuestionnaireItem> call, Throwable t) {
-                            Log.v("@@@@@@@@", t.getMessage());
+                            Log.v(TAG, t.getMessage());
                     }
                 });
 

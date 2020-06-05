@@ -3,8 +3,6 @@ package com.mashup.nnaa;
 import android.app.Application;
 import android.content.Context;
 
-import com.kakao.auth.KakaoSDK;
-
 public class NnaaApplication extends Application {
     private static Context appContext;
 

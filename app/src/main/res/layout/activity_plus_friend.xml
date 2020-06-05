@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegisterActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_plus_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/quiz_btn_close"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="72dp"
+            android:lineHeight="27sp"
+            android:text="친구추가 페이지"
+            android:textColor="#2d2e35"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="103dp"
+            android:lineHeight="27sp"
+            android:text="친구로 등록해보세요!"
+            android:textColor="#2d2e35"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="188dp"
+            android:lineHeight="27sp"
+            android:text="이름"
+            android:textColor="#2d2e35"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+        <EditText
+            android:id="@+id/edit_pluse_name"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="223dp"
+            android:layout_marginRight="18dp"
+            android:background="@drawable/login_shape"
+            android:hint="이름을 알려주세요!"
+            android:inputType="textPersonName"
+            android:maxLength="10"
+            android:textAlignment="center"
+            tools:ignore="Autofill,HardcodedText" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="292dp"
+            android:lineHeight="27sp"
+            android:text="이메일"
+            android:textColor="#2d2e35"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+        <EditText
+            android:id="@+id/edit_pluse_email"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="326dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/login_shape"
+            android:hint="이메일 아이디@naver.com"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            tools:ignore="Autofill,HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="403dp"
+            android:lineHeight="27sp"
+            android:text="카테고리"
+            android:textColor="#2d2e35"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_plus"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="437dp"
+            android:layout_marginRight="18dp"
+            android:textAlignment="center"
+            android:background="@drawable/login_shape"
+            android:entries="@array/category_array"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btn_plus"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="658dp"
+            android:background="#2a4bff"
+            android:lineHeight="27sp"
+            android:text="친구 추가 완료"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+
+    </FrameLayout>
+</ScrollView>

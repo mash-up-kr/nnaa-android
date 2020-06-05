@@ -1,27 +1,18 @@
 package com.mashup.nnaa.util;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.mashup.nnaa.R;
-import com.mashup.nnaa.data.DeleteQuestionItem;
-import com.mashup.nnaa.data.QuestionItem;
 import com.mashup.nnaa.network.model.NewQuestionDto;
-import com.mashup.nnaa.network.model.Question;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.DeleteViewHolder> implements ItemTouchHelperListener {
 

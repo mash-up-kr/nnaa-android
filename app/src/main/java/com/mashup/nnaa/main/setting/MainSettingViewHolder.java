@@ -1,7 +1,6 @@
 package com.mashup.nnaa.main.setting;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,9 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.mashup.nnaa.LoginActivity;
 import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
@@ -50,6 +46,9 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
             case MANAGE_FAVORITES:
                 callFavoritesManagement();
                 break;
+            case MY_NNAA:
+                callMyNnaa();
+                break;
             case CHANGE_PW:
                 callChagnePw();
                 break;
@@ -71,6 +70,7 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
                 .setNegativeButton(R.string.common_no, null)
                 .show();
     }
+
     private void callHowtoUse() {
         Intent intent = new Intent(NnaaApplication.getAppContext(), HowUseActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -79,6 +79,12 @@ public class MainSettingViewHolder extends RecyclerView.ViewHolder {
 
     private void callFavoritesManagement() {
         Intent intent = new Intent(NnaaApplication.getAppContext(), MainSettingFavoritesActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        NnaaApplication.getAppContext().startActivity(intent);
+    }
+
+    private void callMyNnaa() {
+        Intent intent =new Intent(NnaaApplication.getAppContext(), MyNnaaActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         NnaaApplication.getAppContext().startActivity(intent);
     }
