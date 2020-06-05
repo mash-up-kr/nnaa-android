@@ -24,6 +24,9 @@ android {
         targetCompatibility = 1.8
         sourceCompatibility = 1.8
     }
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
 
 }
 
@@ -49,7 +52,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1' // okhhtp logging
     implementation 'com.google.code.gson:gson:2.8.1' // gson
     implementation "com.airbnb.android:lottie:3.3.1" // lottie
-
+    implementation 'com.github.PhilJay:MpAndroidChart:v3.0.2'
     implementation 'com.google.android.exoplayer:exoplayer:2.10.6' // video
 
 

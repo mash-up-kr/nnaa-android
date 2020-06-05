@@ -147,7 +147,6 @@ public class MultiReplyActivity extends AppCompatActivity {
         String q_id = intent.getStringExtra("id");
         reply_number.setText(String.valueOf(count));
 
-
         try {
             JSONObject object = new JSONObject(Objects.requireNonNull(question));
             Iterator j = object.keys();

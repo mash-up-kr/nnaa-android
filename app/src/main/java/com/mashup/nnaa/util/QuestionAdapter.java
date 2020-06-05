@@ -63,21 +63,21 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         holder.qChoice.setOnCheckedChangeListener(null);
 
         holder.qChoice.setOnCheckedChangeListener((buttonView, isChekced) -> {
-
             int pos = holder.getAdapterPosition();
             if (pos != RecyclerView.NO_POSITION) {
                 NewQuestionDto item = questionList.get(pos);
 
-                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getContent(), category, item.getType(), item.getChoices(), item.isBookmarked());
+                NewQuestionDto newQuestionDto = new NewQuestionDto(item.getContent(), category, item.getType(), item.getChoices());
                 if (holder.qChoice.isChecked()) {
                     // 즐겨찾기 등록
                     RetrofitHelper.getInstance().favoriteEnroll(id, token, newQuestionDto, new Callback<NewQuestionDto>() {
                         @Override
                         public void onResponse(Call<NewQuestionDto> call, Response<NewQuestionDto> response) {
                             newQuestionDto.setBookmarked(true);
-
                             holder.qChoice.setChecked(newQuestionDto.isBookmarked());
                             holder.qChoice.setChecked(isChekced);
+
+
                             SharedPrefHelper.getInstance().put("check", holder.qChoice.isChecked());
 
                         }

@@ -18,6 +18,7 @@ public class MainSettingAdapter extends RecyclerView.Adapter<MainSettingViewHold
         SIGN_OUT(R.string.setting_sign_out),
         HOW_USE(R.string.setting_how_use),
         MANAGE_FAVORITES(R.string.setting_manage_favorites),
+        MY_NNAA(R.string.setting_my_nnaa),
         CHANGE_PW(R.string.setting_change_pw);
 
         private int textResId;

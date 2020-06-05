@@ -15,6 +15,12 @@
         android:roundIcon="@drawable/splashlogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".main.setting.MyNnaaActivity"></activity>
+        <activity android:name=".graph.GraphActivity" />
+        <activity android:name=".main.addfriends.SendFriendActivity" />
+        <activity android:name=".main.addfriends.PlusFriendActivity" />
+        <activity android:name=".main.addfriends.DeleteFriendActivity" />
+        <activity android:name=".main.addfriends.AddFriendActivity" />
         <activity android:name=".main.mylist.MainShowQuestionnaire" />
         <activity android:name=".main.setting.HowUseActivity" />
         <activity android:name=".question.SharingActivity" />

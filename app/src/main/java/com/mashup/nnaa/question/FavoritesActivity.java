@@ -73,7 +73,6 @@ public class FavoritesActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<NewQuestionDto>> call, Response<ArrayList<NewQuestionDto>> response) {
                 if (response.isSuccessful()) {
                     fList = response.body();
-                    Log.v(TAG, "Response = " + response.code());
                     favoritesAdapter.setFavoritList(fList);
                 } else if (response.code() == 400) {
                     Toast.makeText(FavoritesActivity.this, "즐겨찾기 한 질문이 없습니다.", Toast.LENGTH_SHORT).show();

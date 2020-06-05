@@ -15,6 +15,7 @@
     <string name="setting_title">%s님의\n설정 페이지</string>
     <string name="setting_sign_out">로그아웃</string>
     <string name="setting_how_use">마미북 대디북</string>
+    <string name="setting_my_nnaa">나의 너나알아</string>
     <string name="setting_change_pw">비밀번호 변경</string>
     <string name="setting_del_account">탈퇴하기</string>
     <string name="setting_blocked_users">차단하기</string>

@@ -51,9 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.v("RegisterSuccess", "Success");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
-
                         Toast.makeText(RegisterActivity.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override

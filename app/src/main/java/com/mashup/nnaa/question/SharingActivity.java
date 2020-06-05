@@ -41,10 +41,9 @@ public class SharingActivity extends AppCompatActivity {
         imgCancel = findViewById(R.id.img_sharing_close);
 
         Intent intent = getIntent();
+
         String cateogry = intent.getStringExtra("category");
-
         String json = intent.getStringExtra("list");
-
         Intent intent1 = new Intent(SharingActivity.this, SharingAdapter.class);
         intent1.putExtra("category", cateogry);
         intent1.putExtra("list", json);
@@ -62,13 +61,11 @@ public class SharingActivity extends AppCompatActivity {
         adapter = new SharingAdapter(this, list);
         sharing_recyclerview.setAdapter(adapter);
 
-
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
                 RetrofitHelper.getInstance().userName(charSequence.toString(), new Callback<ArrayList<Questionnaire>>() {
@@ -77,14 +74,12 @@ public class SharingActivity extends AppCompatActivity {
                         list = response.body();
                         adapter.setSharinglist(list);
                     }
-
                     @Override
                     public void onFailure(Call<ArrayList<Questionnaire>> call, Throwable t) {
                         Log.v(TAG, t.getMessage());
                     }
                 });
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 

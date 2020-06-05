@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2d2e35"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/addfriend_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_friend"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="승윤님의 " />
+
+    <TextView
+        android:id="@+id/addfriend_title"
+        android:layout_width="136dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="28dp"
+        android:text="친구 목록이에요"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addfriend_type"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/addfriend_close"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="18dp"
+        android:background="@android:color/white"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/quiz_btn_close"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_friend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/corner_shape"
+        android:keepScreenOn="true"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/addfriend_item" />
+
+    <TextView
+        android:id="@+id/txt_nofriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="친구를 추가해주세요!"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_sub1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_sub2"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/ic_person_add_black_24dp"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@id/fab_sub2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_sub2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_main"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/delete_1487"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@id/fab_main"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorBlue"
+        android:src="@drawable/float_add"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_addfriend_cancel"
+            android:layout_width="163dp"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            android:background="#fefefe"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="21dp"
+            android:text="@string/cancle"
+            android:textColor="#730d0d0d"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_addfriend_next"
+            android:layout_width="240dp"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_shape"
+            android:text="next"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

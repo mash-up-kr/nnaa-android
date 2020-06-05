@@ -30,6 +30,7 @@
     <string name="setting_title">Setting page\nfor %s</string>
     <string name="setting_sign_out">Sign out</string>
     <string name="setting_how_use">How Use</string>
+    <string name="setting_my_nnaa">My Nnaaa</string>
     <string name="setting_change_pw">Change Pw</string>
     <string name="setting_del_account">Delete account</string>
     <string name="setting_blocked_users">Blocked users</string>
