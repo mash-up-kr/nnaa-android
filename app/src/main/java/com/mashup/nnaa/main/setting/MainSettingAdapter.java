@@ -1,19 +1,31 @@
 package com.mashup.nnaa.main.setting;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mashup.nnaa.LoginActivity;
 import com.mashup.nnaa.NnaaApplication;
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.main.MainSettingFavoritesActivity;
+import com.mashup.nnaa.util.AccountManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MainSettingAdapter extends RecyclerView.Adapter<MainSettingViewHolder> {
+
     public enum SettingList {
         SIGN_OUT(R.string.setting_sign_out),
         HOW_USE(R.string.setting_how_use),
@@ -54,4 +66,6 @@ public class MainSettingAdapter extends RecyclerView.Adapter<MainSettingViewHold
     public int getItemCount() {
         return items.size();
     }
+
+
 }

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.mashup.nnaa.BuildConfig;
 import com.mashup.nnaa.main.mylist.MainMyListDataAdapter;
+import com.mashup.nnaa.network.model.FriendDto;
 import com.mashup.nnaa.network.model.InboxQuestionnaireDto;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
@@ -184,6 +185,14 @@ public class RetrofitHelper {
         Call<ArrayList<Questionnaire>> userName = service.userName(name);
         userName.enqueue(callback);
     }
+
+    // 친구 이름 찾기
+    public void friendName(String name, Callback<ArrayList<FriendDto>> callback) {
+        UserControllerService service = retrofit.create(UserControllerService.class);
+        Call<ArrayList<FriendDto>> friendName = service.friendName(name);
+        friendName.enqueue(callback);
+    }
+
 
     // 질문지 보기
     public void showQuestionnaire(String id, String token, String questionnaireId, Callback<MainMyListDataAdapter.InOutBoxQuestionnaireItem> callback) {

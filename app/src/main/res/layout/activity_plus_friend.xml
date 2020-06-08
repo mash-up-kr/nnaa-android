@@ -127,7 +127,7 @@
             android:layout_height="72dp"
             android:layout_gravity="bottom"
             android:layout_marginTop="658dp"
-            android:background="#2a4bff"
+            android:background="@color/colorBlack"
             android:lineHeight="27sp"
             android:text="친구 추가 완료"
             android:textColor="#ffffff"

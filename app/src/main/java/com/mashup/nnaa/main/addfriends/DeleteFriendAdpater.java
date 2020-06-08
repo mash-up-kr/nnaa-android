@@ -39,7 +39,7 @@ public class DeleteFriendAdpater extends RecyclerView.Adapter<DeleteFriendAdpate
 
     @Override
     public void onBindViewHolder(@NonNull DeleteFriendAdpater.ViewHolder holder, int position) {
-        holder.txtCategory.setText(deleteList.get(position).getCategory());
+        holder.txtCategory.setText(deleteList.get(position).getType());
         holder.txtName.setText(deleteList.get(position).getName());
         holder.txtEmail.setText(deleteList.get(position).getEmail());
     }

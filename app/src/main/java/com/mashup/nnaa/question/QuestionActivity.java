@@ -22,6 +22,7 @@ import com.mashup.nnaa.R;
 import com.mashup.nnaa.data.Choices;
 import com.mashup.nnaa.main.addfriends.SendFriendActivity;
 import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.FriendDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.util.AccountManager;
 import com.mashup.nnaa.util.QuestionAdapter;
@@ -47,6 +48,7 @@ public class QuestionActivity extends AppCompatActivity {
     private ImageView btn_cancel;
     private QuestionAdapter questionAdapter;
     private ArrayList<NewQuestionDto> questionList;
+    ArrayList<FriendDto> list = new ArrayList<>();
     private String TAG = "QuestionActivity";
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class QuestionActivity extends AppCompatActivity {
         String category = intent.getStringExtra("category");
         String type = intent.getStringExtra("type");
         String name = intent.getStringExtra("name");
+        list = (ArrayList<FriendDto>) intent.getSerializableExtra("friend_list");
 
         txt_name = findViewById(R.id.txt_name);
         txt_type = findViewById(R.id.txt_type);
@@ -73,7 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
         makeQuestion.setOnClickListener(view -> {
             Toast.makeText(QuestionActivity.this, "질문생성 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent bookmarkintent = new Intent(QuestionActivity.this, MakeQuestionActivity.class);
-            startActivityForResult(bookmarkintent, 0);
+            startActivityForResult(bookmarkintent, 10000);
         });
 
         btn_next.setOnClickListener(view -> {
@@ -106,6 +109,8 @@ public class QuestionActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(this, SendFriendActivity.class);
                     intent1.putExtra("category", category);
                     intent1.putExtra("list", jsonArray.toString());
+                    intent1.putExtra("friend_list", list);
+
                     startActivity(intent1);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -157,16 +162,12 @@ public class QuestionActivity extends AppCompatActivity {
         recyclerQuestion.setHasFixedSize(true);
 
         questionList = new ArrayList<>();
-        questionAdapter = new
-
-                QuestionAdapter(this, questionList);
+        questionAdapter = new QuestionAdapter(this, questionList);
         recyclerQuestion.setAdapter(questionAdapter);
-
 
         this.getQuestionRandom();
 
         img_add.setOnClickListener(view ->
-
         {
             Toast.makeText(QuestionActivity.this, "즐겨찾기 페이지로 넘어가겠습니다!", Toast.LENGTH_SHORT).show();
             Intent bookmarkintent = new Intent(QuestionActivity.this, FavoritesActivity.class);
@@ -242,7 +243,6 @@ public class QuestionActivity extends AppCompatActivity {
                     NewQuestionDto newQuestionDto = new NewQuestionDto(contents, category, type, choices);
 
                     // local 퀘션 추가
-                    setQuestion(questionList);
                     questionList.add(newQuestionDto);
 
                     questionAdapter.notifyDataSetChanged();
@@ -277,5 +277,10 @@ public class QuestionActivity extends AppCompatActivity {
         }.getType();
         ArrayList<NewQuestionDto> list = gson.fromJson(json, type);
         return list;
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setQuestion(questionList);
     }
 }

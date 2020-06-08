@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,10 +45,10 @@ import retrofit2.Response;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.ViewHolder> {
+public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.ViewHolder> implements Filterable {
 
-    private ArrayList<Questionnaire> unFilterdList;
-    private ArrayList<Questionnaire> filteredList;
+    private ArrayList<FriendDto> unFilterdList;
+    private ArrayList<FriendDto> filteredList;
     private Context sContext;
 
     private String id = AccountManager.getInstance().getUserAuthHeaderInfo().getUserId();
@@ -56,12 +59,13 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
     private String time = simple.format(date);
     private String KEY = "";
 
-    public SendFriendAdapter(Context context, ArrayList<Questionnaire> sendList) {
+    public SendFriendAdapter(Context context, ArrayList<FriendDto> sendList) {
         this.sContext = context;
+        this.unFilterdList = sendList;
         this.filteredList = sendList;
     }
 
-    public void setSendList(ArrayList<Questionnaire> list) {
+    public void setSendList(ArrayList<FriendDto> list) {
         this.filteredList = list;
         notifyDataSetChanged();
     }
@@ -69,15 +73,14 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
     @NonNull
     @Override
     public SendFriendAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addfriend_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sendfriend_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SendFriendAdapter.ViewHolder holder, int position) {
-        holder.txtCategory.setText(filteredList.get(position).getCategory());
-        holder.txtName.setText(filteredList.get(position).getName());
-        holder.txtEmail.setText(filteredList.get(position).getEmail());
+        holder.send_name.setText(filteredList.get(position).getName());
+        holder.send_email.setText(filteredList.get(position).getEmail());
 
         Bundle bundle = ((Activity) sContext).getIntent().getExtras();
         final String category = Objects.requireNonNull(bundle).getString("category");
@@ -85,7 +88,7 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
 
         int pos = holder.getAdapterPosition();
 
-        Questionnaire item = filteredList.get(pos);
+        FriendDto item = filteredList.get(pos);
 
         AtomicReference<String> a = new AtomicReference<>();
         AtomicReference<String> b = new AtomicReference<>();
@@ -96,8 +99,7 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
         AtomicReference<String> choice = new AtomicReference<>();
         JsonObject inputdata = new JsonObject();
 
-        holder.itemView.setOnLongClickListener(view -> {
-            holder.itemView.setBackgroundColor(Color.BLUE);
+        holder.friendSelect.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
             builder.setTitle("친구에게 질문 보내기").setMessage("질문지를 보낼까요?");
             builder.setPositiveButton("보내기", (dialog, which) -> {
@@ -107,9 +109,7 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
 
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
-
                         KEY = "additionalProp" + (i + 1);
-
                         content.set(object.getString("content"));
                         type.set(object.getString("type"));
                         choice.set(object.getString("choices"));
@@ -136,6 +136,7 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
 
                         inputdata.add(KEY, middledata);
                     }
+
                     Questionnaire questionnaire = new Questionnaire(category, time, inputdata, item.getId());
                     RetrofitHelper.getInstance().postQuestionnaire(id, token, questionnaire, new Callback<Questionnaire>() {
                         @Override
@@ -144,6 +145,8 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
                                 Toast.makeText(getApplicationContext(), "질문지를 보내겠습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                                 sContext.startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "친구 등록 오류", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -159,7 +162,6 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
             builder.setNegativeButton("취소", (dialog, which) -> Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show());
             builder.show();
 
-            return true;
         });
     }
 
@@ -171,15 +173,46 @@ public class SendFriendAdapter extends RecyclerView.Adapter<SendFriendAdapter.Vi
         return 0;
     }
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    filteredList = unFilterdList;
+                } else {
+                    ArrayList<FriendDto> filteringList = new ArrayList<>();
+                    for (FriendDto friendDto : unFilterdList) {
+                        if (friendDto.getName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteringList.add(friendDto);
+                        }
+                    }
+                    filteredList = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredList = (ArrayList<FriendDto>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtCategory, txtName, txtEmail;
+        TextView send_name, send_email;
+        Button friendSelect;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            txtCategory = itemView.findViewById(R.id.txt_category);
-            txtName = itemView.findViewById(R.id.addfriend_username);
-            txtEmail = itemView.findViewById(R.id.addfriend_email);
+            send_name = itemView.findViewById(R.id.send_txt_name);
+            send_email = itemView.findViewById(R.id.send_txt_email);
+            friendSelect = itemView.findViewById(R.id.friend_select);
         }
     }
 }

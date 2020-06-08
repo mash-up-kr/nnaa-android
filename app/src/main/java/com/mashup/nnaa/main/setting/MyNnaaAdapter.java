@@ -34,27 +34,17 @@ public class MyNnaaAdapter extends RecyclerView.Adapter<MyNnaaAdapter.ViewHolder
     @NonNull
     @Override
     public MyNnaaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nofriend_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.well_item, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyNnaaAdapter.ViewHolder holder, int position) {
-        holder.txtCategory.setText(list.get(position).getCategory());
         holder.txtName.setText(list.get(position).getName());
-        holder.txtEmail.setText(list.get(position).getEmail());
 
-        int pos = holder.getAdapterPosition();
-
-        FriendDto item = list.get(pos);
-
-        holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), SetTypeOfFriendActivity.class);
-            intent.putExtra("friend_name",item.getName());
-            mContext.startActivity(intent);
-        });
-
-
+    }
+    void addItem(FriendDto friendDto) {
+        list.add(friendDto);
     }
 
     @Override
@@ -66,13 +56,11 @@ public class MyNnaaAdapter extends RecyclerView.Adapter<MyNnaaAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtCategory, txtName, txtEmail;
+        private TextView txtName;
 
         ViewHolder(View itemView) {
             super(itemView);
-            txtCategory = itemView.findViewById(R.id.txt_category);
-            txtName = itemView.findViewById(R.id.addfriend_username);
-            txtEmail = itemView.findViewById(R.id.addfriend_email);
+            txtName = itemView.findViewById(R.id.txt_well_name);
         }
     }
 }

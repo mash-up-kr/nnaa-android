@@ -2,6 +2,7 @@ package com.mashup.nnaa.select;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.network.model.FriendDto;
 import com.mashup.nnaa.question.QuestionActivity;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
     TextView friendType;
     ImageButton selectBtnLeft, selectBtnRight;
     ArrayList<String> type = new ArrayList<>();
+    ArrayList<FriendDto> list = new ArrayList<>();
     Button nextBtn;
     ImageView cancleBtn;
 
@@ -46,9 +49,9 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
         cancleBtn.setOnClickListener((view) -> finish());
 
         Intent intent1 = getIntent();
-        if(intent1!=null) {
-            etName.setText(intent1.getStringExtra("friend_name"));
-        }
+
+        etName.setText(intent1.getStringExtra("friend_name"));
+
         nextBtn.setOnClickListener(view -> {
             String name = etName.getText().toString().trim();
             String typename = friendType.getText().toString();
@@ -57,10 +60,13 @@ public class SetTypeOfFriendActivity extends AppCompatActivity implements View.O
                 return;
             }
 
+            list = (ArrayList<FriendDto>) intent1.getSerializableExtra("friend_list");
+
             Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
             intent.putExtra("name", name + "님");
             intent.putExtra("type", typename);
             intent.putExtra("category", typename);
+            intent.putExtra("friend_list", list);
 
             startActivity(intent);
 
