@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import retrofit2.Call;
@@ -62,18 +64,23 @@ public class MyNnaaActivity extends AppCompatActivity {
     PieChart pieChart;
     Button btnDone;
     String name = AccountManager.getInstance().getUserAuthHeaderInfo().getName();
-    ArrayList<String> sender = new ArrayList<>();
-    ArrayList<String> reciever = new ArrayList<>();
+    ArrayList<String> sender = new ArrayList<>();       // 나에게 질문 보낸사람
+    ArrayList<String> reciever = new ArrayList<>();     // 내가 질문 보낸사람
     Map<String, Integer> count = new HashMap<>();
     Map<String, Integer> sendcount = new HashMap<>();
     ArrayList<PieEntry> yValues = new ArrayList<>();
     ArrayList<String> top = new ArrayList<>();
     ArrayList<Integer> topval = new ArrayList<>();
+    HashMap<String, Integer> topmap = new HashMap<>();
     ArrayList<String> topsend = new ArrayList<>();
     ArrayList<Integer> topsendval = new ArrayList<>();
     Map<String, Integer> totalcount = new HashMap<>();
     private MyNnaaAdapter myNnaaAdapter;
     private ArrayList<FriendDto> list;
+    int maxValue = 10;
+    ArrayList<String> maxSender = new ArrayList<>();
+    ArrayList<String> maxReceiver = new ArrayList<>();
+    ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +107,6 @@ public class MyNnaaActivity extends AppCompatActivity {
         nnaaClose.setOnClickListener(v -> finish());
         btnDone.setOnClickListener(v -> finish());
 
-
         RecyclerView recyclerView = findViewById(R.id.nofriend_recyclerview);
         LinearLayoutManager linearLayout = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayout);
@@ -110,6 +116,7 @@ public class MyNnaaActivity extends AppCompatActivity {
         myNnaaAdapter = new MyNnaaAdapter(this, list);
         recyclerView.setAdapter(myNnaaAdapter);
 
+
         this.showMyNnaa();
     }
 
@@ -118,9 +125,11 @@ public class MyNnaaActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<OutboxQuestionnaireDto>> call, Response<List<OutboxQuestionnaireDto>> response) {
                 List<OutboxQuestionnaireDto> questionnaireDtos = response.body();
-                for (int i = 0; i < questionnaireDtos.size(); i++) {
+                // 보낸 질문
+                for (int i = 0; i < Objects.requireNonNull(questionnaireDtos).size(); i++) {
                     reciever.add(questionnaireDtos.get(i).receiverName);
                 }
+                Log.v("@@@@@@",reciever.toString());
 
                 for (int i = 0; i < reciever.size(); i++) {
                     if (sendcount.containsKey(reciever.get(i))) {
@@ -129,6 +138,9 @@ public class MyNnaaActivity extends AppCompatActivity {
                         sendcount.put(reciever.get(i), 1);
                     }
                 }
+                Log.v("@@@@@@@",sendcount.toString());
+
+                // 오름차순
                 List<Map.Entry<String, Integer>> sendlist = new ArrayList<>(sendcount.entrySet());
                 Collections.sort(sendlist, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
@@ -136,6 +148,7 @@ public class MyNnaaActivity extends AppCompatActivity {
                     topsend.add(entry.getKey());
                     topsendval.add(entry.getValue());
                 }
+                Log.v("@@@@@",topsend.toString() +"," + topsendval.toString());
 
                 RetrofitHelper.getInstance().getReceivedQuestionnaires(new Callback<List<InboxQuestionnaireDto>>() {
                     @Override
@@ -144,8 +157,7 @@ public class MyNnaaActivity extends AppCompatActivity {
                         for (int i = 0; i < questionnaires.size(); i++) {
                             sender.add(questionnaires.get(i).senderName);
                         }
-
-                        // friend activity -> friend name except firend
+                        // 받은 질문 목록
 
                         for (int i = 0; i < sender.size(); i++) {
                             if (count.containsKey(sender.get(i))) {
@@ -154,6 +166,39 @@ public class MyNnaaActivity extends AppCompatActivity {
                                 count.put(sender.get(i), 1);
                             }
                         }
+                        // 받은 질문 키, 벨류 중복일시 + 1
+
+                        // 주고받은 10개이상
+                        for (Map.Entry<String, Integer> entry : count.entrySet()) {
+                            if (entry.getValue() >= maxValue) {
+                                maxSender.add(entry.getKey());
+                            }
+                        }
+
+                        for (Map.Entry<String, Integer> entry : sendcount.entrySet()) {
+                            if (entry.getValue() >= maxValue) {
+                                maxReceiver.add(entry.getKey());
+                            }
+                        }
+                        // 주고받은 10개이상 겹치는 사람
+                        for (String str : maxSender) {
+                            if (maxReceiver.contains(str)) {
+                                arrayList.add(str);
+                            }
+                        }
+                        Log.v("@@@@@",maxSender.toString());
+                        Log.v("@@@@@",maxReceiver.toString());
+                        Log.v("@@@@", arrayList.toString());
+
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            FriendDto friendDto = new FriendDto();
+                            friendDto.setName(arrayList.get(i));
+
+                            myNnaaAdapter.addItem(friendDto);
+                        }
+                        myNnaaAdapter.notifyDataSetChanged();
+
+
                         totalcount.putAll(sendcount);
                         totalcount.putAll(count);
 
@@ -161,8 +206,6 @@ public class MyNnaaActivity extends AppCompatActivity {
                             int memcount = totalcount.get(member);
                             yValues.add(new PieEntry(memcount, member));
                         }
-                        Log.v("@@@@@@@", totalcount.toString());
-
 
                         List<Map.Entry<String, Integer>> list = new ArrayList<>(count.entrySet());
                         Collections.sort(list, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
@@ -172,18 +215,20 @@ public class MyNnaaActivity extends AppCompatActivity {
                             topval.add(entry.getValue());
                         }
 
+                        if (top.size() > 3 && topval.size() > 3) {
+                            topmap.put(top.get(0), topval.get(0));
+                            topmap.put(top.get(1), topval.get(1));
+                            topmap.put(top.get(2), topval.get(2));
 
-                        HashMap<String, Integer> topmap = new HashMap<>();
-                        topmap.put(top.get(0), topval.get(0));
-                        topmap.put(top.get(1), topval.get(1));
-                        topmap.put(top.get(2), topval.get(2));
-
-                        num1.setText(String.format("%s님", top.get(0)));
-                        num2.setText(String.format("%s님", top.get(1)));
-                        num3.setText(String.format("%s님", top.get(2)));
-                        firstPer.setText(String.format("%d회", topval.get(0)));
-                        secondPer.setText(String.format("%d회", topval.get(1)));
-                        thirdPer.setText(String.format("%d회", topval.get(2)));
+                            num1.setText(String.format("%s님", top.get(0)));
+                            num2.setText(String.format("%s님", top.get(1)));
+                            num3.setText(String.format("%s님", top.get(2)));
+                            firstPer.setText(String.format("%d회", topval.get(0)));
+                            secondPer.setText(String.format("%d회", topval.get(1)));
+                            thirdPer.setText(String.format("%d회", topval.get(2)));
+                        } else {
+                            firstPer.setText(String.format("질문을 더 보내주세요!"));
+                        }
 
                         List<String> keyList = new ArrayList<>(topmap.keySet());
                         Collections.sort(keyList, ((o1, o2) -> (topmap.get(o2).compareTo(topmap.get(o1)))));
@@ -228,12 +273,16 @@ public class MyNnaaActivity extends AppCompatActivity {
                     }
                 });
 
-                rec1.setText(String.format("%s님", topsend.get(0)));
-                rec2.setText(String.format("%s님", topsend.get(1)));
-                rec3.setText(String.format("%s님", topsend.get(2)));
-                firstRP.setText(String.format("%d회", topsendval.get(0)));
-                secondRP.setText(String.format("%d회", topsendval.get(1)));
-                thirdRP.setText(String.format("%d회", topsendval.get(2)));
+                if (topsend.size() > 3) {
+                    rec1.setText(String.format("%s님", topsend.get(0)));
+                    rec2.setText(String.format("%s님", topsend.get(1)));
+                    rec3.setText(String.format("%s님", topsend.get(2)));
+                    firstRP.setText(String.format("%d회", topsendval.get(0)));
+                    secondRP.setText(String.format("%d회", topsendval.get(1)));
+                    thirdRP.setText(String.format("%d회", topsendval.get(2)));
+                } else {
+                    firstRP.setText(String.format("질문을 더 보내주세요!"));
+                }
             }
 
             @Override

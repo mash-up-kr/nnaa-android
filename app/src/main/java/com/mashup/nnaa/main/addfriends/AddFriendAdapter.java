@@ -38,7 +38,7 @@ public class AddFriendAdapter extends RecyclerView.Adapter<AddFriendAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull AddFriendAdapter.ViewHolder holder, int position) {
-        holder.txtCategory.setText(friendList.get(position).getCategory());
+        holder.txtCategory.setText(friendList.get(position).getType());
         holder.txtName.setText(friendList.get(position).getName());
         holder.txtEmail.setText(friendList.get(position).getEmail());
     }

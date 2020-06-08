@@ -1,5 +1,6 @@
 package com.mashup.nnaa.network;
 
+import com.mashup.nnaa.network.model.FriendDto;
 import com.mashup.nnaa.network.model.LoginDto;
 import com.mashup.nnaa.network.model.NewQuestionDto;
 import com.mashup.nnaa.network.model.Questionnaire;
@@ -72,4 +73,8 @@ public interface UserControllerService {
     // 이름으로 유저찾기
     @GET("user")
     Call<ArrayList<Questionnaire>> userName(@Query("name") String name);
+
+    // 친구찾기
+    @GET("user")
+    Call<ArrayList<FriendDto>> friendName(@Query("name") String name);
 }

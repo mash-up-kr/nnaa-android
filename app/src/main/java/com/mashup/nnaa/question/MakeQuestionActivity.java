@@ -126,7 +126,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
             finish();
             CustomDone.setBackgroundColor(Color.BLUE);
             Toast.makeText(MakeQuestionActivity.this, "질문 작성 완료!", Toast.LENGTH_SHORT).show();
-
         });
     }
 }

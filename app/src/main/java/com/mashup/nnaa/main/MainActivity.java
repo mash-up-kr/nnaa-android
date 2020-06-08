@@ -2,6 +2,8 @@ package com.mashup.nnaa.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,15 +18,22 @@ import com.mashup.nnaa.main.addfriends.AddFriendActivity;
 import com.mashup.nnaa.main.home.MainHomeFragment;
 import com.mashup.nnaa.main.mylist.MainMyListFragment;
 import com.mashup.nnaa.main.notifications.MainNotificationsFragment;
+import com.mashup.nnaa.main.setting.MainSettingAdapter;
 import com.mashup.nnaa.main.setting.MainSettingFragment;
+import com.mashup.nnaa.network.model.FriendDto;
 import com.mashup.nnaa.select.SetTypeOfFriendActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     enum Page {HOME, ALARM, MY_LIST, SETTINGS}
 
     HashMap<Page, Fragment> fragmentMap = new HashMap<>();
+
+    ArrayList<FriendDto> list = new ArrayList<>();
+    MainSettingFragment fragment;
 
 
     @Override
@@ -55,13 +64,27 @@ public class MainActivity extends AppCompatActivity {
         ImageView ivSettings = findViewById(R.id.tv_tab_setting);
 
         ivHome.setOnClickListener(v -> onMainTabClicked(Page.HOME));
-       // ivAlarm.setOnClickListener(v -> onMainTabClicked(Page.ALARM));
+
         ivAlarm.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddFriendActivity.class);
             startActivity(intent);
         });
         ivMyList.setOnClickListener(v -> onMainTabClicked(Page.MY_LIST));
-        ivSettings.setOnClickListener(v -> onMainTabClicked(Page.SETTINGS));
+
+        fragment = new MainSettingFragment();
+
+        Intent intent = getIntent();
+        if(list!=null) {
+            list = (ArrayList<FriendDto>) intent.getSerializableExtra("friend_list");
+        }
+
+        ivSettings.setOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction().replace(R.id.layout_main, fragment).commit();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("friend_list", list);
+            fragment.setArguments(bundle);
+           // onMainTabClicked(Page.SETTINGS);
+        });
     }
 
     private void onMainTabClicked(Page page) {

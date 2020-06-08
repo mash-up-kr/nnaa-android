@@ -2,7 +2,10 @@ package com.mashup.nnaa.main.addfriends;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -19,6 +22,7 @@ public class PlusFriendActivity extends AppCompatActivity {
     EditText editName, editEmail;
     Button btnPlus;
     Spinner spinnerPlus;
+    public static final int FRIEND_UPDATE_OK = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +35,23 @@ public class PlusFriendActivity extends AppCompatActivity {
         spinnerPlus = findViewById(R.id.spinner_plus);
         btnPlus = findViewById(R.id.btn_plus);
 
-        imgClose.setOnClickListener(v->finish());
+        imgClose.setOnClickListener(v -> finish());
 
+        btnPlus.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            String name = editName.getText().toString();
+            String email = editEmail.getText().toString();
+            String category = spinnerPlus.getSelectedItem().toString();
 
-        btnPlus.setOnClickListener(view-> {
-            Toast.makeText(this,"spiner:" + spinnerPlus.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+            intent.putExtra("name", name);
+            intent.putExtra("email", email);
+            intent.putExtra("category", category);
+
+            setResult(RESULT_OK, intent);
+            finish();
+
+            btnPlus.setBackgroundColor(Color.BLUE);
+            Toast.makeText(this, "친구 추가 완료!", Toast.LENGTH_SHORT).show();
         });
     }
 }

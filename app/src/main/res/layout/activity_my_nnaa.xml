@@ -155,8 +155,8 @@
                 android:layout_marginStart="78dp"
                 android:textColor="@color/colorBlue"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/txt_num_2"
                 app:layout_constraintStart_toEndOf="@id/num_1_per"
+                app:layout_constraintTop_toBottomOf="@id/txt_num_2"
                 tools:text="16회" />
 
 
@@ -188,8 +188,8 @@
                 android:layout_marginStart="85dp"
                 android:textColor="@color/colorBlue"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/txt_num_2"
                 app:layout_constraintStart_toEndOf="@id/num_2_per"
+                app:layout_constraintTop_toBottomOf="@id/txt_num_2"
                 tools:text="16회" />
 
             <TextView
@@ -268,8 +268,8 @@
                 android:layout_marginStart="78dp"
                 android:textColor="@color/colorBlue"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/rec_num_2"
                 app:layout_constraintStart_toEndOf="@id/rec_1_per"
+                app:layout_constraintTop_toBottomOf="@id/rec_num_2"
                 tools:text="16회" />
 
 
@@ -301,8 +301,8 @@
                 android:layout_marginStart="85dp"
                 android:textColor="@color/colorBlue"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/rec_num_2"
                 app:layout_constraintStart_toEndOf="@id/rec_2_per"
+                app:layout_constraintTop_toBottomOf="@id/rec_num_2"
                 tools:text="16회" />
 
             <TextView
@@ -313,7 +313,7 @@
                 android:layout_marginTop="60dp"
                 android:background="@drawable/nnaa_shape"
                 android:lineSpacingExtra="12sp"
-                android:text="질문을 기다리는 친구들"
+                android:text="서로에 대해 잘아는 사이"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp"
@@ -321,16 +321,28 @@
                 app:layout_constraintTop_toBottomOf="@id/rec_1_per"
                 tools:ignore="HardcodedText" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="62dp"
+                android:layout_marginEnd="10dp"
+                android:text="(주고받은 질문 10개이상)"
+                android:textColor="@color/colorBlue"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rec_1_per" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/nofriend_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="7dp"
+                android:layout_marginBottom="100dp"
+                android:clipToPadding="false"
                 android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nnaa_no_txt"
-                tools:listitem="@layout/nofriend_item" />
-
+                tools:listitem="@layout/well_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -338,7 +350,7 @@
     <Button
         android:id="@+id/btn_nnaa_done"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="52dp"
         android:background="#2d2e35"
         android:lineSpacingExtra="13sp"
         android:text="확인 완료"
