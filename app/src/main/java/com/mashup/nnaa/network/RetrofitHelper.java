@@ -186,11 +186,11 @@ public class RetrofitHelper {
         userName.enqueue(callback);
     }
 
-    // 친구 이름 찾기
-    public void friendName(String name, Callback<ArrayList<FriendDto>> callback) {
+    // 친구 등록
+    public void friendEnroll(String name, Callback<FriendDto> callback) {
         UserControllerService service = retrofit.create(UserControllerService.class);
-        Call<ArrayList<FriendDto>> friendName = service.friendName(name);
-        friendName.enqueue(callback);
+        Call<FriendDto> friendEnroll = service.friendEnroll(name);
+        friendEnroll.enqueue(callback);
     }
 
 

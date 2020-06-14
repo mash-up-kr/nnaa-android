@@ -74,7 +74,7 @@ public interface UserControllerService {
     @GET("user")
     Call<ArrayList<Questionnaire>> userName(@Query("name") String name);
 
-    // 친구찾기
-    @GET("user")
-    Call<ArrayList<FriendDto>> friendName(@Query("name") String name);
+    // 친구등록
+    @POST("user/friend/{id}")
+    Call<FriendDto> friendEnroll(@Path("id") String id);
 }

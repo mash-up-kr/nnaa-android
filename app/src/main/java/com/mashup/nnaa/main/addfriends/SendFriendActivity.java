@@ -72,47 +72,6 @@ public class SendFriendActivity extends AppCompatActivity {
         sendFriendAdapter = new SendFriendAdapter(this, sList);
         recyclerView.setAdapter(sendFriendAdapter);
 
-       /* for (int i = 0; i < sList.size(); i++) {
-            name_list.add(sList.get(i).getEmail());
-            hashMap.put(sList.get(i).getName(), sList.get(i).getEmail());
-        }
-        Log.v("@@@@@", hashMap.toString());
-*/
-
-  /*      searchImg.setOnClickListener(view -> {
-            RetrofitHelper.getInstance().friendName(searchView.getText().toString(), new Callback<ArrayList<FriendDto>>() {
-                @Override
-                public void onResponse(Call<ArrayList<FriendDto>> call, Response<ArrayList<FriendDto>> response) {
-                    list = response.body();
-                    if (list != null) {
-                        for (int i = 0; i < list.size(); i++) {
-                            body_list.add(list.get(i).getEmail());
-                            hashMap1.put(list.get(i).getId(), list.get(i).getEmail());
-                        }
-                    }
-
-                    Log.v("@@@@@@",hashMap1.toString());
-                    Log.v("@@@@@", body_list.toString());
-
-                    // sendFriendAdapter.getFilter().filter(charSequence);
-                     *//*   sList = response.body();
-
-                        for (int i = 0; i < Objects.requireNonNull(sList).size(); i++) {
-                           *//**//* if(Objects.requireNonNull(list).get(i).getName().equals(sList.get(i).getName()) && list.get(i).getEmail().equals(sList.get(i).getEmail())) {
-                                sendFriendAdapter.setSendList(list);
-                            }*//**//*
-
-                            sendFriendAdapter.setSendList(list);
-
-                        }*//*
-                }
-
-                @Override
-                public void onFailure(Call<ArrayList<FriendDto>> call, Throwable t) {
-
-                }
-            });
-        });*/
         searchView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
