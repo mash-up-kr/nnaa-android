@@ -15,6 +15,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.mashup.nnaa.R;
+import com.mashup.nnaa.network.RetrofitHelper;
+import com.mashup.nnaa.network.model.FriendDto;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlusFriendActivity extends AppCompatActivity {
 
@@ -38,6 +44,7 @@ public class PlusFriendActivity extends AppCompatActivity {
         imgClose.setOnClickListener(v -> finish());
 
         btnPlus.setOnClickListener(view -> {
+
             Intent intent = new Intent();
             String name = editName.getText().toString();
             String email = editEmail.getText().toString();
